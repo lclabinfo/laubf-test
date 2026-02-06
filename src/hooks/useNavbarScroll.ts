@@ -15,10 +15,10 @@ export function useNavbarScroll() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // When hero is less than 50% visible, show scrolled nav
+        // When hero is less than ~10% visible, show scrolled nav
         setIsScrolled(!entry.isIntersecting);
       },
-      { threshold: 0.5 },
+      { threshold: 0.9 }, // triggers when less than 90% visible (i.e., much sooner)
     );
 
     observer.observe(heroEl);

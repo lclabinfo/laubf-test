@@ -8,7 +8,8 @@
  */
 "use client";
 
-import { useSectionTheme } from "@/lib/theme";
+import { useResolvedTheme } from "@/lib/theme";
+import type { SectionTheme } from "@/lib/theme";
 import type { CTAButtonProps } from "@/lib/types/shared";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -22,10 +23,11 @@ export default function CTAButton({
   onClick,
   variant = "primary",
   size = "default",
+  theme,
   className,
   icon,
 }: CTAButtonProps) {
-  const tokens = useSectionTheme();
+  const tokens = useResolvedTheme(theme);
 
   const base =
     "inline-flex items-center justify-center rounded-full transition-colors ease-smooth duration-300";

@@ -172,7 +172,7 @@ export const dropdowns: NavDropdown[] = [
         ],
         footerLink: {
           label: "View all campus ministries",
-          href: "/ministries/campus",
+          href: "/ministries#campus-ministry",
         },
       },
     ],

@@ -50,13 +50,15 @@
 
 /* ---- Theme Tokens ---- */
 @theme {
-  /* Neutrals (black scale) */
+  /* Neutrals (black scale) — dark-scheme surfaces & borders */
   --color-black-1: #0D0D0D;
+  --color-black-1-5: #181818;
   --color-black-2: #313131;
+  --color-black-2-5: #4C4C4C;
   --color-black-3: #676767;
   --color-black-gradient: #262626;
 
-  /* Neutrals (white scale) */
+  /* Neutrals (white scale) — light-scheme surfaces & borders */
   --color-white-0: #FFFFFF;
   --color-white-1: #FAFAFA;
   --color-white-1-5: #F2F2F2;

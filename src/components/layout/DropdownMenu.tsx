@@ -19,7 +19,7 @@ function SectionColumn({
   onClose: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-1.5 w-60 shrink-0">
+    <div className="flex flex-col gap-1.5 w-56 shrink-0">
       {/* Section title */}
       <div className="px-1.5">
         <p className="text-base font-medium leading-none text-black-3 tracking-[-0.03em]">
@@ -86,9 +86,8 @@ function SectionColumn({
 
 export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
   return (
-    <div className="absolute top-full left-0 pt-2 z-50">
-      <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 animate-dropdown-in">
-        <div className="flex gap-5 items-stretch">
+    <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 animate-dropdown-in">
+      <div className="flex gap-5 items-stretch">
           {dropdown.sections.map((section, i) => (
             <Fragment key={section.title}>
               {i > 0 && (
@@ -105,7 +104,7 @@ export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
               <Link
                 href={dropdown.featuredCard.href}
                 onClick={onClose}
-                className="relative flex flex-col items-start justify-end w-[280px] shrink-0 px-6 py-7 rounded-xl overflow-hidden group"
+                className="relative flex flex-col items-start justify-end w-[260px] shrink-0 px-6 py-7 rounded-xl overflow-hidden group"
               >
                 <Image
                   src={dropdown.featuredCard.image}
@@ -133,6 +132,5 @@ export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
           )}
         </div>
       </div>
-    </div>
   );
 }

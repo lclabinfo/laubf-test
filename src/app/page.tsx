@@ -8,7 +8,6 @@ import DirectoryListSection from "@/components/sections/DirectoryListSection";
 import SpotlightMediaSection from "@/components/sections/SpotlightMediaSection";
 import MediaGridSection from "@/components/sections/MediaGridSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
-import FooterSection from "@/components/sections/FooterSection";
 
 import type {
   HeroBannerSectionProps,
@@ -21,7 +20,6 @@ import type {
   SpotlightMediaSectionProps,
   MediaGridSectionProps,
   CTABannerSectionProps,
-  FooterSectionProps,
 } from "@/lib/types/sections";
 
 /* ================================================================
@@ -352,70 +350,6 @@ const ctaBannerData: CTABannerSectionProps = {
   },
 };
 
-const footerData: FooterSectionProps = {
-  id: "footer",
-  visible: true,
-  colorScheme: "dark",
-  content: {
-    description:
-      "A Bible-centered community raising lifelong disciples on campus and beyond.",
-    socialLinks: [
-      { platform: "instagram", href: "https://instagram.com/laubf" },
-      { platform: "facebook", href: "https://facebook.com/laubf" },
-      { platform: "youtube", href: "https://youtube.com/@laubf" },
-    ],
-    columns: [
-      {
-        heading: "EXPLORE",
-        links: [
-          { label: "About Us", href: "/about" },
-          { label: "I'm New", href: "/im-new" },
-          { label: "Ministries", href: "/ministries" },
-          { label: "Events", href: "/events" },
-          { label: "Messages", href: "/messages" },
-          { label: "Giving", href: "/giving" },
-        ],
-      },
-      {
-        heading: "RESOURCES",
-        links: [
-          {
-            label: "Daily Bread YouTube",
-            href: "https://youtube.com/@dailybread",
-            external: true,
-          },
-          {
-            label: "UBF HQ YouTube",
-            href: "https://youtube.com/@ubfhq",
-            external: true,
-          },
-          {
-            label: "UBF TV YouTube",
-            href: "https://youtube.com/@ubftv",
-            external: true,
-          },
-          { label: "UBF HQ", href: "https://ubf.org", external: true },
-          {
-            label: "Chicago UBF",
-            href: "https://chicagoubf.org",
-            external: true,
-          },
-          {
-            label: "Korea UBF",
-            href: "https://koreaubf.org",
-            external: true,
-          },
-        ],
-      },
-    ],
-    contactInfo: {
-      address: ["11625 Paramount Blvd", "Downey, CA 90241"],
-      phone: "(562) 396-6350",
-      email: "laubf.downey@gmail.com",
-    },
-  },
-};
-
 /* ================================================================
  * HOMEPAGE
  * Section order: Dark→Dark→Light→Dark→Light→Light→Light→Dark→Dark
@@ -434,7 +368,6 @@ export default function HomePage() {
       <SpotlightMediaSection settings={spotlightMediaData} />
       <MediaGridSection settings={mediaGridData} />
       <CTABannerSection settings={ctaBannerData} />
-      <FooterSection settings={footerData} />
     </main>
   );
 }
