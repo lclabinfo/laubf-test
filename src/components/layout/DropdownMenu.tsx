@@ -1,67 +1,135 @@
 "use client";
 
+import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import type { NavDropdown } from "./nav-data";
-import { IconExternalLink } from "./icons";
+import { SquareArrowOutUpRight, ArrowUpRight } from "lucide-react";
+import type { NavDropdown, NavSection } from "./nav-data";
 
 interface DropdownMenuProps {
   dropdown: NavDropdown;
   onClose: () => void;
 }
 
+function SectionColumn({
+  section,
+  onClose,
+}: {
+  section: NavSection;
+  onClose: () => void;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5 w-60 shrink-0">
+      {/* Section title */}
+      <div className="px-1.5">
+        <p className="text-base font-medium leading-none text-black-3 tracking-[-0.03em]">
+          {section.title}
+        </p>
+      </div>
+
+      {/* Items */}
+      <div className="flex flex-col">
+        {section.items.map((item) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              onClick={onClose}
+              className="flex items-center gap-4 px-4 py-3.5 rounded-lg transition-colors hover:bg-white-1-5 group/item"
+            >
+              <Icon
+                className="size-6 text-black-1 shrink-0"
+                strokeWidth={1.5}
+              />
+              <div className="flex flex-col gap-1.5 min-w-0">
+                <span className="text-base font-medium leading-none text-black-1 tracking-[-0.03em]">
+                  {item.label}
+                </span>
+                {item.description && (
+                  <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em]">
+                    {item.description}
+                  </span>
+                )}
+              </div>
+              {item.external && (
+                <SquareArrowOutUpRight
+                  className="size-[18px] text-black-3 shrink-0 ml-auto"
+                  strokeWidth={1.5}
+                />
+              )}
+            </Link>
+          );
+        })}
+      </div>
+
+      {/* Footer link */}
+      {section.footerLink && (
+        <Link
+          href={section.footerLink.href}
+          onClick={onClose}
+          className="flex items-center justify-between px-6 py-5 mt-3 bg-white-1-5 border border-white-2-5 rounded-lg transition-colors hover:bg-white-2"
+        >
+          <span className="text-base font-medium leading-none text-black-2 tracking-[-0.03em]">
+            {section.footerLink.label}
+          </span>
+          <div className="border border-black-3 rounded-full p-2">
+            <ArrowUpRight className="size-3 text-black-3" strokeWidth={2} />
+          </div>
+        </Link>
+      )}
+    </div>
+  );
+}
+
 export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
   return (
-    <div
-      className="absolute top-full left-0 right-0 bg-white-0 border-t border-white-2 shadow-[0_4px_12px_rgba(0,0,0,0.08)] animate-dropdown-in"
-      onMouseLeave={onClose}
-    >
-      <div className="container-nav py-8">
-        <div className="grid grid-cols-2 gap-12">
-          {/* Links column */}
-          <div className="flex flex-col gap-1">
-            {dropdown.links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                target={link.external ? "_blank" : undefined}
-                rel={link.external ? "noopener noreferrer" : undefined}
-                onClick={onClose}
-                className="flex items-center gap-2 px-4 py-3 rounded-lg text-body-1 text-black-1 transition-colors duration-150 hover:bg-white-1-5"
-              >
-                {link.label}
-                {link.external && (
-                  <IconExternalLink width={16} height={16} className="text-black-3" />
-                )}
-              </Link>
-            ))}
-          </div>
+    <div className="absolute top-full left-0 pt-2 z-50">
+      <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 animate-dropdown-in">
+        <div className="flex gap-5 items-stretch">
+          {dropdown.sections.map((section, i) => (
+            <Fragment key={section.title}>
+              {i > 0 && (
+                <div className="w-0.5 self-stretch bg-white-2 rounded-full shrink-0" />
+              )}
+              <SectionColumn section={section} onClose={onClose} />
+            </Fragment>
+          ))}
 
-          {/* Featured card (only Ministries) */}
+          {/* Featured card */}
           {dropdown.featuredCard && (
-            <Link
-              href={dropdown.featuredCard.href}
-              onClick={onClose}
-              className="group block overflow-hidden rounded-xl"
-            >
-              <div className="relative h-48 w-full overflow-hidden rounded-xl">
+            <>
+              <div className="w-0.5 self-stretch bg-white-2 rounded-full shrink-0" />
+              <Link
+                href={dropdown.featuredCard.href}
+                onClick={onClose}
+                className="relative flex flex-col items-start justify-end w-[280px] shrink-0 px-6 py-7 rounded-xl overflow-hidden group"
+              >
                 <Image
                   src={dropdown.featuredCard.image}
                   alt={dropdown.featuredCard.imageAlt}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black-1/60 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-body-2 font-medium text-white-1">
-                    {dropdown.featuredCard.title}
-                  </p>
-                  <p className="text-body-3 text-white-2 mt-1">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent from-[44%] to-black-1/70 to-[69%]" />
+                <div className="relative flex flex-col gap-2 min-w-[200px]">
+                  <div className="flex items-end gap-1.5">
+                    <p className="text-2xl font-medium text-white-1 tracking-[-0.03em] leading-[1.2] whitespace-pre-line">
+                      {dropdown.featuredCard.title}
+                    </p>
+                    <ArrowUpRight
+                      className="size-7 text-white-1"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                  <p className="text-base font-normal text-white-2 tracking-[-0.02em] leading-[1.4]">
                     {dropdown.featuredCard.description}
                   </p>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </>
           )}
         </div>
       </div>

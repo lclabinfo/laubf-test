@@ -6,18 +6,29 @@ import type {
   VideoThumbnailData,
 } from "./shared";
 
+/* ---- Navbar ---- */
+export interface NavbarContent {
+  logo: { lightSrc: string; darkSrc: string; alt: string };
+  ctaButton: { label: string; href: string; visible: boolean };
+  memberLogin: { label: string; href: string; visible: boolean };
+}
+
+export interface NavbarSettings extends BaseSectionSettings {
+  content: NavbarContent;
+}
+
 /* ---- Section Type Registry ---- */
 export type SectionType =
-  | "hero"
-  | "who-we-are"
-  | "featured-events"
-  | "schedule"
-  | "spiritual-direction"
-  | "next-steps"
-  | "campus-ministries"
-  | "this-weeks-message"
-  | "featured-videos"
-  | "visit-us-banner"
+  | "hero-banner"
+  | "media-text"
+  | "highlight-cards"
+  | "event-calendar"
+  | "quote-banner"
+  | "action-card-grid"
+  | "directory-list"
+  | "spotlight-media"
+  | "media-grid"
+  | "cta-banner"
   | "footer";
 
 /* ---- Base Settings ---- */
@@ -30,8 +41,8 @@ export interface BaseSectionSettings {
   enableAnimations?: boolean;
 }
 
-/* ---- Hero ---- */
-export interface HeroContent {
+/* ---- Hero Banner ---- */
+export interface HeroBannerContent {
   heading: { line1: string; line2: string };
   subheading: string;
   primaryButton: { label: string; href: string; visible: boolean };
@@ -39,13 +50,13 @@ export interface HeroContent {
   backgroundImage: { src: string; alt: string };
 }
 
-export interface HeroSectionProps extends BaseSectionSettings {
-  content: HeroContent;
+export interface HeroBannerSectionProps extends BaseSectionSettings {
+  content: HeroBannerContent;
   showSubheading: boolean;
 }
 
-/* ---- Who We Are ---- */
-export interface WhoWeAreContent {
+/* ---- Media Text ---- */
+export interface MediaTextContent {
   overline: string;
   heading: string;
   body: string;
@@ -53,12 +64,12 @@ export interface WhoWeAreContent {
   images: { src: string; alt: string }[];
 }
 
-export interface WhoWeAreSectionProps extends BaseSectionSettings {
-  content: WhoWeAreContent;
+export interface MediaTextSectionProps extends BaseSectionSettings {
+  content: MediaTextContent;
 }
 
-/* ---- Featured Events ---- */
-export interface FeaturedEventsContent {
+/* ---- Highlight Cards ---- */
+export interface HighlightCardsContent {
   heading: string;
   subheading?: string;
   ctaLabel: string;
@@ -66,12 +77,12 @@ export interface FeaturedEventsContent {
   featuredEvents: EventCardData[];
 }
 
-export interface FeaturedEventsSectionProps extends BaseSectionSettings {
-  content: FeaturedEventsContent;
+export interface HighlightCardsSectionProps extends BaseSectionSettings {
+  content: HighlightCardsContent;
 }
 
-/* ---- Schedule ---- */
-export interface ScheduleContent {
+/* ---- Event Calendar ---- */
+export interface EventCalendarContent {
   heading: string;
   currentMonth: string;
   filters: string[];
@@ -79,54 +90,54 @@ export interface ScheduleContent {
   ctaButtons: { label: string; href: string; icon?: boolean }[];
 }
 
-export interface ScheduleSectionProps extends BaseSectionSettings {
-  content: ScheduleContent;
+export interface EventCalendarSectionProps extends BaseSectionSettings {
+  content: EventCalendarContent;
 }
 
-/* ---- Spiritual Direction ---- */
-export interface SpiritualDirectionContent {
+/* ---- Quote Banner ---- */
+export interface QuoteBannerContent {
   overline: string;
   heading: string;
   verse: { text: string; reference: string };
 }
 
-export interface SpiritualDirectionSectionProps extends BaseSectionSettings {
-  content: SpiritualDirectionContent;
+export interface QuoteBannerSectionProps extends BaseSectionSettings {
+  content: QuoteBannerContent;
 }
 
-/* ---- Next Steps ---- */
-export interface NextStepsContent {
+/* ---- Action Card Grid ---- */
+export interface ActionCardGridContent {
   heading: { line1: string; line2: string; line3: string };
   subheading: string;
   cards: ImageCardData[];
 }
 
-export interface NextStepsSectionProps extends BaseSectionSettings {
-  content: NextStepsContent;
+export interface ActionCardGridSectionProps extends BaseSectionSettings {
+  content: ActionCardGridContent;
 }
 
-/* ---- Campus Ministries ---- */
-export interface CampusData {
+/* ---- Directory List ---- */
+export interface DirectoryItemData {
   id: string;
   name: string;
   active?: boolean;
   href?: string;
 }
 
-export interface CampusMinistriesContent {
+export interface DirectoryListContent {
   heading: string;
-  campuses: CampusData[];
+  items: DirectoryItemData[];
   image: { src: string; alt: string };
   ctaHeading: string;
   ctaButton: { label: string; href: string };
 }
 
-export interface CampusMinistriesSectionProps extends BaseSectionSettings {
-  content: CampusMinistriesContent;
+export interface DirectoryListSectionProps extends BaseSectionSettings {
+  content: DirectoryListContent;
 }
 
-/* ---- This Week's Message ---- */
-export interface ThisWeeksMessageContent {
+/* ---- Spotlight Media ---- */
+export interface SpotlightMediaContent {
   sectionHeading: string;
   sermon: {
     title: string;
@@ -138,24 +149,24 @@ export interface ThisWeeksMessageContent {
   };
 }
 
-export interface ThisWeeksMessageSectionProps extends BaseSectionSettings {
-  content: ThisWeeksMessageContent;
+export interface SpotlightMediaSectionProps extends BaseSectionSettings {
+  content: SpotlightMediaContent;
 }
 
-/* ---- Featured Videos ---- */
-export interface FeaturedVideosContent {
+/* ---- Media Grid ---- */
+export interface MediaGridContent {
   heading: string;
   ctaLabel: string;
   ctaHref: string;
   videos: VideoThumbnailData[];
 }
 
-export interface FeaturedVideosSectionProps extends BaseSectionSettings {
-  content: FeaturedVideosContent;
+export interface MediaGridSectionProps extends BaseSectionSettings {
+  content: MediaGridContent;
 }
 
-/* ---- Visit Us Banner ---- */
-export interface VisitUsBannerContent {
+/* ---- CTA Banner ---- */
+export interface CTABannerContent {
   overline: string;
   heading: string;
   body: string;
@@ -164,8 +175,8 @@ export interface VisitUsBannerContent {
   backgroundImage?: { src: string; alt: string };
 }
 
-export interface VisitUsBannerSectionProps extends BaseSectionSettings {
-  content: VisitUsBannerContent;
+export interface CTABannerSectionProps extends BaseSectionSettings {
+  content: CTABannerContent;
 }
 
 /* ---- Footer ---- */

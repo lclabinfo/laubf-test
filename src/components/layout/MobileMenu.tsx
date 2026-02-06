@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { ChevronDown, SquareArrowOutUpRight } from "lucide-react";
 import { dropdowns, directLinks } from "./nav-data";
-import { IconClose, IconChevronDown, IconExternalLink } from "./icons";
+import { IconClose } from "./icons";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -85,13 +86,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 className="flex items-center justify-between w-full px-4 py-4 rounded-lg text-nav text-black-1 transition-colors duration-150 hover:bg-white-1-5"
               >
                 {dropdown.label}
-                <IconChevronDown
-                  width={20}
-                  height={20}
+                <ChevronDown
                   className={cn(
-                    "transition-transform duration-200",
+                    "size-5 transition-transform duration-200",
                     expanded === dropdown.id && "rotate-180",
                   )}
+                  strokeWidth={2}
                 />
               </button>
 
@@ -106,27 +106,35 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               >
                 <div className="overflow-hidden">
                   <div className="pl-4 flex flex-col gap-0.5 pb-2">
-                    {dropdown.links.map((link) => (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        target={link.external ? "_blank" : undefined}
-                        rel={
-                          link.external ? "noopener noreferrer" : undefined
-                        }
-                        onClick={onClose}
-                        className="flex items-center gap-2 px-4 py-3 rounded-lg text-body-1 text-black-2 transition-colors duration-150 hover:bg-white-1-5"
-                      >
-                        {link.label}
-                        {link.external && (
-                          <IconExternalLink
-                            width={14}
-                            height={14}
-                            className="text-black-3"
-                          />
-                        )}
-                      </Link>
-                    ))}
+                    {dropdown.sections.map((section) =>
+                      section.items.map((item) => {
+                        const Icon = item.icon;
+                        return (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            target={item.external ? "_blank" : undefined}
+                            rel={
+                              item.external ? "noopener noreferrer" : undefined
+                            }
+                            onClick={onClose}
+                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-body-1 text-black-2 transition-colors duration-150 hover:bg-white-1-5"
+                          >
+                            <Icon
+                              className="size-5 text-black-3 shrink-0"
+                              strokeWidth={1.5}
+                            />
+                            {item.label}
+                            {item.external && (
+                              <SquareArrowOutUpRight
+                                className="size-3.5 text-black-3 ml-auto shrink-0"
+                                strokeWidth={1.5}
+                              />
+                            )}
+                          </Link>
+                        );
+                      }),
+                    )}
                   </div>
                 </div>
               </div>
@@ -145,6 +153,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </Link>
           ))}
 
+          {/* Member Login — hidden for now
           <Link
             href="/member-login"
             onClick={onClose}
@@ -152,6 +161,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             Member Login
           </Link>
+          */}
         </div>
 
         {/* Bottom CTA */}

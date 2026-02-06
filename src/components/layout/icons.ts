@@ -31,9 +31,3 @@ function icon(
 export const IconHamburger = icon("M3 12h18M3 6h18M3 18h18");
 
 export const IconClose = icon("M18 6L6 18M6 6l12 12");
-
-export const IconChevronDown = icon("M6 9l6 6 6-6");
-
-export const IconExternalLink = icon(
-  "M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3",
-);

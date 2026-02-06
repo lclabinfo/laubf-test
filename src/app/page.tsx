@@ -1,33 +1,35 @@
-import HeroSection from "@/components/sections/HeroSection";
-import WhoWeAreSection from "@/components/sections/WhoWeAreSection";
-import FeaturedEventsSection from "@/components/sections/FeaturedEventsSection";
-import ScheduleSection from "@/components/sections/ScheduleSection";
-import SpiritualDirectionSection from "@/components/sections/SpiritualDirectionSection";
-import NextStepsSection from "@/components/sections/NextStepsSection";
-import CampusMinistriesSection from "@/components/sections/CampusMinistriesSection";
-import ThisWeeksMessageSection from "@/components/sections/ThisWeeksMessageSection";
-import FeaturedVideosSection from "@/components/sections/FeaturedVideosSection";
-import VisitUsBannerSection from "@/components/sections/VisitUsBannerSection";
+import HeroBannerSection from "@/components/sections/HeroBannerSection";
+import MediaTextSection from "@/components/sections/MediaTextSection";
+import HighlightCardsSection from "@/components/sections/HighlightCardsSection";
+import EventCalendarSection from "@/components/sections/EventCalendarSection";
+import QuoteBannerSection from "@/components/sections/QuoteBannerSection";
+import ActionCardGridSection from "@/components/sections/ActionCardGridSection";
+import DirectoryListSection from "@/components/sections/DirectoryListSection";
+import SpotlightMediaSection from "@/components/sections/SpotlightMediaSection";
+import MediaGridSection from "@/components/sections/MediaGridSection";
+import CTABannerSection from "@/components/sections/CTABannerSection";
 import FooterSection from "@/components/sections/FooterSection";
 
-import type { HeroSectionProps } from "@/lib/types/sections";
-import type { WhoWeAreSectionProps } from "@/lib/types/sections";
-import type { FeaturedEventsSectionProps } from "@/lib/types/sections";
-import type { ScheduleSectionProps } from "@/lib/types/sections";
-import type { SpiritualDirectionSectionProps } from "@/lib/types/sections";
-import type { NextStepsSectionProps } from "@/lib/types/sections";
-import type { CampusMinistriesSectionProps } from "@/lib/types/sections";
-import type { ThisWeeksMessageSectionProps } from "@/lib/types/sections";
-import type { FeaturedVideosSectionProps } from "@/lib/types/sections";
-import type { VisitUsBannerSectionProps } from "@/lib/types/sections";
-import type { FooterSectionProps } from "@/lib/types/sections";
+import type {
+  HeroBannerSectionProps,
+  MediaTextSectionProps,
+  HighlightCardsSectionProps,
+  EventCalendarSectionProps,
+  QuoteBannerSectionProps,
+  ActionCardGridSectionProps,
+  DirectoryListSectionProps,
+  SpotlightMediaSectionProps,
+  MediaGridSectionProps,
+  CTABannerSectionProps,
+  FooterSectionProps,
+} from "@/lib/types/sections";
 
 /* ================================================================
  * SAMPLE DATA — Exact content from Figma design
  * In production, this data comes from PostgreSQL via CMS API.
  * ================================================================ */
 
-const heroData: HeroSectionProps = {
+const heroBannerData: HeroBannerSectionProps = {
   id: "hero",
   visible: true,
   colorScheme: "dark",
@@ -49,7 +51,7 @@ const heroData: HeroSectionProps = {
   showSubheading: true,
 };
 
-const whoWeAreData: WhoWeAreSectionProps = {
+const mediaTextData: MediaTextSectionProps = {
   id: "who-we-are",
   visible: true,
   colorScheme: "dark",
@@ -66,7 +68,7 @@ const whoWeAreData: WhoWeAreSectionProps = {
   },
 };
 
-const featuredEventsData: FeaturedEventsSectionProps = {
+const highlightCardsData: HighlightCardsSectionProps = {
   id: "featured-events",
   visible: true,
   colorScheme: "light",
@@ -109,7 +111,7 @@ const featuredEventsData: FeaturedEventsSectionProps = {
   },
 };
 
-const scheduleData: ScheduleSectionProps = {
+const eventCalendarData: EventCalendarSectionProps = {
   id: "schedule",
   visible: true,
   colorScheme: "light",
@@ -172,7 +174,7 @@ const scheduleData: ScheduleSectionProps = {
   },
 };
 
-const spiritualDirectionData: SpiritualDirectionSectionProps = {
+const quoteBannerData: QuoteBannerSectionProps = {
   id: "spiritual-direction",
   visible: true,
   colorScheme: "dark",
@@ -186,7 +188,7 @@ const spiritualDirectionData: SpiritualDirectionSectionProps = {
   },
 };
 
-const nextStepsData: NextStepsSectionProps = {
+const actionCardGridData: ActionCardGridSectionProps = {
   id: "next-steps",
   visible: true,
   colorScheme: "light",
@@ -235,13 +237,13 @@ const nextStepsData: NextStepsSectionProps = {
   },
 };
 
-const campusMinistriesData: CampusMinistriesSectionProps = {
+const directoryListData: DirectoryListSectionProps = {
   id: "campus-ministries",
   visible: true,
   colorScheme: "light",
   content: {
     heading: "Our Campus Ministries",
-    campuses: [
+    items: [
       { id: "lbcc", name: "LBCC", active: true, href: "/campus/lbcc" },
       { id: "csulb", name: "CSULB", href: "/campus/csulb" },
       { id: "csuf", name: "CSUF", href: "/campus/csuf" },
@@ -274,7 +276,7 @@ const campusMinistriesData: CampusMinistriesSectionProps = {
   },
 };
 
-const thisWeeksMessageData: ThisWeeksMessageSectionProps = {
+const spotlightMediaData: SpotlightMediaSectionProps = {
   id: "this-weeks-message",
   visible: true,
   colorScheme: "light",
@@ -291,7 +293,7 @@ const thisWeeksMessageData: ThisWeeksMessageSectionProps = {
   },
 };
 
-const featuredVideosData: FeaturedVideosSectionProps = {
+const mediaGridData: MediaGridSectionProps = {
   id: "featured-videos",
   visible: true,
   colorScheme: "light",
@@ -325,7 +327,7 @@ const featuredVideosData: FeaturedVideosSectionProps = {
   },
 };
 
-const visitUsBannerData: VisitUsBannerSectionProps = {
+const ctaBannerData: CTABannerSectionProps = {
   id: "visit-us-banner",
   visible: true,
   colorScheme: "dark",
@@ -422,16 +424,16 @@ const footerData: FooterSectionProps = {
 export default function HomePage() {
   return (
     <main>
-      <HeroSection settings={heroData} />
-      <WhoWeAreSection settings={whoWeAreData} />
-      <FeaturedEventsSection settings={featuredEventsData} />
-      <ScheduleSection settings={scheduleData} />
-      <SpiritualDirectionSection settings={spiritualDirectionData} />
-      <NextStepsSection settings={nextStepsData} />
-      <CampusMinistriesSection settings={campusMinistriesData} />
-      <ThisWeeksMessageSection settings={thisWeeksMessageData} />
-      <FeaturedVideosSection settings={featuredVideosData} />
-      <VisitUsBannerSection settings={visitUsBannerData} />
+      <HeroBannerSection settings={heroBannerData} />
+      <MediaTextSection settings={mediaTextData} />
+      <HighlightCardsSection settings={highlightCardsData} />
+      <EventCalendarSection settings={eventCalendarData} />
+      <QuoteBannerSection settings={quoteBannerData} />
+      <ActionCardGridSection settings={actionCardGridData} />
+      <DirectoryListSection settings={directoryListData} />
+      <SpotlightMediaSection settings={spotlightMediaData} />
+      <MediaGridSection settings={mediaGridData} />
+      <CTABannerSection settings={ctaBannerData} />
       <FooterSection settings={footerData} />
     </main>
   );
