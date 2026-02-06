@@ -1,0 +1,18 @@
+[     300ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[     300ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[     301ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[    1319ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[    1320ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[    1321ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[   12329ms] [WARNING] Image with src "/images/sermon-thumbnail.jpg" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  125564ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[  125565ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[  125567ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[  129605ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[  129606ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[  129607ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[  145518ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=i3-wY7zkXHTLXE1VBwE15' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  148524ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[  148524ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[  148524ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0

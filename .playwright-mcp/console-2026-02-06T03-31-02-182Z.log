@@ -1,0 +1,12 @@
+[     302ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[     302ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[     302ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[    1318ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[    1319ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[    1320ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[ 2313690ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[ 2313691ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[ 2313691ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
+[ 2314560ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifText-Regular.woff2:0
+[ 2314560ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/strude-regular.woff2:0
+[ 2314560ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/fonts/DMSerifDisplay-Italic.woff2:0
