@@ -9,6 +9,9 @@ import SpotlightMediaSection from "@/components/sections/SpotlightMediaSection";
 import MediaGridSection from "@/components/sections/MediaGridSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 
+import { FEATURED_EVENTS, MOCK_EVENTS } from "@/lib/mock-data/events";
+import { toEventCardData, toEventListItemData } from "@/lib/types/events";
+
 import type {
   HeroBannerSectionProps,
   MediaTextSectionProps,
@@ -75,37 +78,7 @@ const highlightCardsData: HighlightCardsSectionProps = {
     subheading: "Highlights of what's happening in our community.",
     ctaLabel: "View All Events",
     ctaHref: "/events",
-    featuredEvents: [
-      {
-        id: "evt-1",
-        title: "New Year's Fellowship",
-        date: "JAN 1, 2026",
-        location: "LA UBF Center",
-        imageUrl: "/images/event-1.jpg",
-        imageAlt: "New Year fellowship gathering",
-        badge: "UPCOMING",
-        href: "/events/new-years-fellowship",
-      },
-      {
-        id: "evt-2",
-        title: "Winter Bible Conference",
-        date: "JAN 15-17, 2026",
-        location: "Thousand Oaks, CA",
-        imageUrl: "/images/event-2.jpg",
-        imageAlt: "Winter Bible conference",
-        badge: "UPCOMING",
-        href: "/events/winter-bible-conference",
-      },
-      {
-        id: "evt-3",
-        title: "Super Bowl Fellowship",
-        date: "FEB 8, 2026",
-        location: "LA UBF Center",
-        imageUrl: "/images/event-3.jpg",
-        imageAlt: "Super Bowl fellowship",
-        href: "/events/super-bowl-fellowship",
-      },
-    ],
+    featuredEvents: FEATURED_EVENTS.slice(0, 3).map(toEventCardData),
   },
 };
 
@@ -115,56 +88,9 @@ const eventCalendarData: EventCalendarSectionProps = {
   colorScheme: "light",
   content: {
     heading: "Schedule",
-    currentMonth: "JANUARY 2026",
+    currentMonth: "FEBRUARY 2026",
     filters: ["ALL", "Events", "Meetings", "Programs"],
-    events: [
-      {
-        id: "sch-1",
-        title: "New Year's Fellowship",
-        dateStart: new Date("2026-01-01"),
-        time: "11:00 AM – 2:00 PM",
-        type: "event",
-        location: "LA UBF Center",
-        href: "/events/new-years-fellowship",
-      },
-      {
-        id: "sch-2",
-        title: "Sunday Worship Service",
-        dateStart: new Date("2026-01-04"),
-        time: "10:30 AM – 12:30 PM",
-        type: "meeting",
-        location: "LA UBF Center",
-        href: "/events/sunday-worship",
-      },
-      {
-        id: "sch-3",
-        title: "Friday Bible Study",
-        dateStart: new Date("2026-01-09"),
-        time: "7:00 PM – 9:00 PM",
-        type: "meeting",
-        location: "Online",
-        href: "/events/friday-bible-study",
-      },
-      {
-        id: "sch-4",
-        title: "Winter Bible Conference",
-        dateStart: new Date("2026-01-15"),
-        dateEnd: new Date("2026-01-17"),
-        time: "All Day",
-        type: "event",
-        location: "Thousand Oaks, CA",
-        href: "/events/winter-bible-conference",
-      },
-      {
-        id: "sch-5",
-        title: "Campus Outreach Program",
-        dateStart: new Date("2026-01-20"),
-        time: "3:00 PM – 5:00 PM",
-        type: "program",
-        location: "CSULB",
-        href: "/events/campus-outreach",
-      },
-    ],
+    events: MOCK_EVENTS.slice(0, 5).map(toEventListItemData),
     ctaButtons: [
       { label: "Google Calendar", href: "/calendar", icon: true },
       { label: "View all events", href: "/events" },
@@ -361,7 +287,7 @@ export default function HomePage() {
       <HeroBannerSection settings={heroBannerData} />
       <MediaTextSection settings={mediaTextData} />
       <HighlightCardsSection settings={highlightCardsData} />
-      <EventCalendarSection settings={eventCalendarData} />
+      <EventCalendarSection settings={eventCalendarData} events={MOCK_EVENTS} />
       <QuoteBannerSection settings={quoteBannerData} />
       <ActionCardGridSection settings={actionCardGridData} />
       <DirectoryListSection settings={directoryListData} />

@@ -41,7 +41,16 @@ export type SectionType =
   | "text-image-hero"
   | "about-description"
   | "pillars"
-  | "statement";
+  | "statement"
+  | "ministry-hero"
+  | "ministry-intro"
+  | "ministry-schedule"
+  | "meet-team"
+  | "photo-gallery"
+  | "upcoming-events"
+  | "events-hero"
+  | "quick-links"
+  | "all-events";
 
 /* ---- Base Settings ---- */
 export interface BaseSectionSettings {
@@ -305,16 +314,17 @@ export interface CampusCardItem {
   id: string;
   abbreviation: string;
   fullName: string;
+  href?: string;
 }
 
 export interface CampusCardGridContent {
-  overline: string;
+  overline?: string;
   heading: string;
-  description: string;
-  decorativeImages: { src: string; alt: string; rotation: number }[];
+  description?: string;
+  decorativeImages?: { src: string; alt: string; rotation: number }[];
   campuses: CampusCardItem[];
-  ctaHeading: string;
-  ctaButton: { label: string; href: string };
+  ctaHeading?: string;
+  ctaButton?: { label: string; href: string };
 }
 
 export interface CampusCardGridSectionProps extends BaseSectionSettings {
@@ -419,4 +429,134 @@ export interface StatementContent {
 
 export interface StatementSectionProps extends BaseSectionSettings {
   content: StatementContent;
+}
+
+/* ---- Ministry Hero (ministry subpages) ---- */
+export interface MinistryHeroContent {
+  overline?: string;
+  heading: string;
+  headingStyle?: "display" | "sans";
+  ctaButton?: { label: string; href: string; visible: boolean };
+  socialLinks?: { platform: string; href: string }[];
+  heroImage?: { src: string; alt: string };
+}
+
+export interface MinistryHeroSectionProps extends BaseSectionSettings {
+  content: MinistryHeroContent;
+}
+
+/* ---- Ministry Intro ---- */
+export interface MinistryIntroContent {
+  overline: string;
+  heading: string;
+  description: string;
+  image?: { src: string; alt: string };
+}
+
+export interface MinistryIntroSectionProps extends BaseSectionSettings {
+  content: MinistryIntroContent;
+}
+
+/* ---- Ministry Schedule ---- */
+export interface ScheduleEntry {
+  day: string;
+  time: string;
+  location: string;
+}
+
+export interface MinistryScheduleContent {
+  heading: string;
+  headingStyle?: "sans" | "script";
+  description?: string;
+  scheduleLabel?: string;
+  scheduleEntries?: ScheduleEntry[];
+  timeValue?: string;
+  address?: string[];
+  directionsUrl?: string;
+  buttons?: { label: string; href: string; variant: "primary" | "secondary" }[];
+  image?: { src: string; alt: string };
+  logo?: { src: string; alt: string };
+}
+
+export interface MinistryScheduleSectionProps extends BaseSectionSettings {
+  content: MinistryScheduleContent;
+}
+
+/* ---- Meet Team ---- */
+export interface TeamMember {
+  name: string;
+  role: string;
+  image: { src: string; alt: string };
+}
+
+export interface MeetTeamContent {
+  overline?: string;
+  heading: string;
+  members: TeamMember[];
+}
+
+export interface MeetTeamSectionProps extends BaseSectionSettings {
+  content: MeetTeamContent;
+}
+
+/* ---- Photo Gallery ---- */
+export interface PhotoGalleryContent {
+  heading: string;
+  images: { src: string; alt: string }[];
+}
+
+export interface PhotoGallerySectionProps extends BaseSectionSettings {
+  content: PhotoGalleryContent;
+}
+
+/* ---- Upcoming Events ---- */
+export interface UpcomingEventItem {
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  image: { src: string; alt: string };
+  eventType?: string;
+  badge?: string;
+  tags?: string[];
+}
+
+export interface UpcomingEventsContent {
+  overline?: string;
+  heading: string;
+  events: UpcomingEventItem[];
+  ctaButton?: { label: string; href: string };
+}
+
+export interface UpcomingEventsSectionProps extends BaseSectionSettings {
+  content: UpcomingEventsContent;
+}
+
+/* ---- Events Hero (events listing page) ---- */
+export interface EventsHeroContent {
+  heading: string;
+  subtitle: string;
+}
+
+export interface EventsHeroSectionProps extends BaseSectionSettings {
+  content: EventsHeroContent;
+}
+
+/* ---- Quick Links (recurring meetings) ---- */
+export interface QuickLinksContent {
+  heading: string;
+  subtitle?: string;
+}
+
+export interface QuickLinksSectionProps extends BaseSectionSettings {
+  content: QuickLinksContent;
+}
+
+/* ---- All Events (filterable grid) ---- */
+export interface AllEventsContent {
+  heading: string;
+}
+
+export interface AllEventsSectionProps extends BaseSectionSettings {
+  content: AllEventsContent;
 }

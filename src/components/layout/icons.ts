@@ -144,3 +144,71 @@ export const IconExternalLink = multiIcon([
 export const IconPlay = icon(
   "M5 3l14 9-14 9V3z",
 );
+
+/** Mail envelope icon - for email social link */
+export const IconMail = multiIcon([
+  createElement("rect", { key: "1", x: "2", y: "4", width: "20", height: "16", rx: "2" }),
+  createElement("path", { key: "2", d: "m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" }),
+]);
+
+/** Instagram icon - for social link */
+export const IconInstagram = multiIcon([
+  createElement("rect", { key: "1", x: "2", y: "2", width: "20", height: "20", rx: "5", ry: "5" }),
+  createElement("path", { key: "2", d: "M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" }),
+  createElement("line", { key: "3", x1: "17.5", y1: "6.5", x2: "17.51", y2: "6.5" }),
+]);
+
+/** Facebook icon - for social link */
+export const IconFacebook = icon(
+  "M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z",
+);
+
+/** Clock icon - for event time display */
+export const IconClock = multiIcon([
+  createElement("circle", { key: "1", cx: "12", cy: "12", r: "10" }),
+  createElement("polyline", { key: "2", points: "12 6 12 12 16 14" }),
+]);
+
+/** Search/magnifying glass icon - for events search input */
+export const IconSearch = multiIcon([
+  createElement("circle", { key: "1", cx: "11", cy: "11", r: "8" }),
+  createElement("line", { key: "2", x1: "21", y1: "21", x2: "16.65", y2: "16.65" }),
+]);
+
+/** Share icon - for event detail share button */
+export const IconShare = multiIcon([
+  createElement("circle", { key: "1", cx: "18", cy: "5", r: "3" }),
+  createElement("circle", { key: "2", cx: "6", cy: "12", r: "3" }),
+  createElement("circle", { key: "3", cx: "18", cy: "19", r: "3" }),
+  createElement("line", { key: "4", x1: "8.59", y1: "13.51", x2: "15.42", y2: "17.49" }),
+  createElement("line", { key: "5", x1: "15.41", y1: "6.51", x2: "8.59", y2: "10.49" }),
+]);
+
+/** Grid icon - for card view toggle */
+export const IconGrid = multiIcon([
+  createElement("rect", { key: "1", x: "3", y: "3", width: "7", height: "7" }),
+  createElement("rect", { key: "2", x: "14", y: "3", width: "7", height: "7" }),
+  createElement("rect", { key: "3", x: "3", y: "14", width: "7", height: "7" }),
+  createElement("rect", { key: "4", x: "14", y: "14", width: "7", height: "7" }),
+]);
+
+/** List icon - for list view toggle */
+export const IconListView = icon("M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01");
+
+/** Chevron left - for calendar navigation */
+export const IconChevronLeft = icon("M15 18l-6-6 6-6");
+
+/** Chevron right - for breadcrumb separators */
+export const IconChevronRight = icon("M9 18l6-6-6-6");
+
+/** Link/chain icon - for online meeting button */
+export const IconLink = multiIcon([
+  createElement("path", {
+    key: "1",
+    d: "M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71",
+  }),
+  createElement("path", {
+    key: "2",
+    d: "M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71",
+  }),
+]);

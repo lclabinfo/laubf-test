@@ -20,6 +20,7 @@
 import { SectionThemeContext } from "@/lib/theme";
 import type { FooterSectionProps } from "@/lib/types/sections";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function FooterSection(props: {
   settings: FooterSectionProps;
@@ -37,11 +38,14 @@ export default function FooterSection(props: {
             {/* Brand column */}
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-3">
-                {/* Logo placeholder */}
-                <svg width="120" height="100" viewBox="0 0 120 100" fill="none" className="text-white-1">
-                  <rect width="120" height="100" rx="4" fill="currentColor" fillOpacity="0.15" />
-                  <text x="60" y="55" textAnchor="middle" fill="currentColor" fontSize="16" fontWeight="500">LA UBF</text>
-                </svg>
+                <Image
+                  src="/logo/laubf-logo.svg"
+                  alt="LA UBF"
+                  width={80}
+                  height={66}
+                  unoptimized
+                  className="object-contain brightness-0 invert"
+                />
                 <p className="text-body-2 text-white-3 max-w-[240px]">
                   {content.description}
                 </p>

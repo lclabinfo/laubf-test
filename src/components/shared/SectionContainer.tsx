@@ -45,7 +45,7 @@ export default function SectionContainer({
 
   return (
     <SectionThemeContext.Provider value={theme}>
-      <Tag className={cn(bgClass, paddingClass, className)}>
+      <Tag id={settings.id} className={cn(bgClass, paddingClass, className)}>
         {noContainer ? (
           children
         ) : (

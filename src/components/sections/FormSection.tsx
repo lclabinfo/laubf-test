@@ -23,7 +23,6 @@
 
 import { useState } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
-import OverlineLabel from "@/components/shared/OverlineLabel";
 import { themeTokens } from "@/lib/theme";
 import type { FormSectionProps } from "@/lib/types/sections";
 import { IconChevronDown, IconCheck } from "@/components/layout/icons";
@@ -70,8 +69,10 @@ export default function FormSection(props: {
     <SectionContainer settings={settings}>
       {/* Header area -- centered text */}
       <div className="flex flex-col items-center text-center mb-12">
-        <OverlineLabel text={content.overline} className="mb-4" />
-        <h2 className={`font-[var(--font-dm-serif-display)] italic text-h2 ${t.textPrimary} text-center`}>
+        <p className={`text-h4 font-normal ${t.textMuted} mb-4`}>
+          {content.overline}
+        </p>
+        <h2 className={`text-h2 ${t.textPrimary} text-center`}>
           {content.heading}
         </h2>
         <p className={`text-body-1 ${t.textSecondary} text-center max-w-2xl mx-auto mt-4`}>

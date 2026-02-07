@@ -9,7 +9,7 @@ import {
   GraduationCap,
   Users,
   Landmark,
-  School,
+
   Baby,
   Video,
   BookOpen,
@@ -126,14 +126,9 @@ export const dropdowns: NavDropdown[] = [
             icon: Users,
           },
           {
-            label: "High School (HBF)",
+            label: "Middle & High School (JBF / HBF)",
             href: "/ministries/high-school",
             icon: Landmark,
-          },
-          {
-            label: "Junior High (JBF)",
-            href: "/ministries/junior-high",
-            icon: School,
           },
           {
             label: "Children (BBF /CBF)",

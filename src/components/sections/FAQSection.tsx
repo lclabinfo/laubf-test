@@ -47,48 +47,58 @@ export default function FAQSection(props: {
       )}
 
       {/* Centered heading */}
-      <h2 className={`font-[var(--font-dm-serif-display)] italic text-h2 ${t.textPrimary} text-center mb-12`}>
+      <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
         {content.heading}
       </h2>
 
       {/* Accordion items */}
       <div className="flex flex-col gap-3">
-        {content.items.map((item, i) => (
-          <div
-            key={i}
-            className={cn(
-              `border ${t.borderSubtle} rounded-[16px] overflow-hidden transition-colors`,
-              openIndex === i && t.surfaceBg
-            )}
-          >
-            {/* Question button */}
-            <button
-              type="button"
-              onClick={() => toggleItem(i)}
-              className="w-full flex items-center justify-between px-8 py-5 text-left"
-              aria-expanded={openIndex === i}
+        {content.items.map((item, i) => {
+          const isOpen = openIndex === i;
+          return (
+            <div
+              key={i}
+              className={cn(
+                `border ${t.borderSubtle} rounded-[16px] overflow-hidden transition-colors`,
+                isOpen && t.surfaceBg
+              )}
             >
-              <span className={`text-body-1 font-medium ${t.textPrimary} pr-4`}>
-                {item.question}
-              </span>
-              <IconChevronDown
-                className={cn(
-                  `size-5 ${t.textMuted} shrink-0 transition-transform duration-200`,
-                  openIndex === i && "rotate-180"
-                )}
-              />
-            </button>
+              {/* Question button */}
+              <button
+                type="button"
+                onClick={() => toggleItem(i)}
+                className="w-full flex items-center justify-between px-8 py-5 text-left"
+                aria-expanded={isOpen}
+              >
+                <span className={`text-body-1 font-medium ${t.textPrimary} pr-4`}>
+                  {item.question}
+                </span>
+                <IconChevronDown
+                  className={cn(
+                    `size-5 ${t.textMuted} shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]`,
+                    isOpen && "rotate-180"
+                  )}
+                />
+              </button>
 
-            {/* Answer */}
-            {openIndex === i && (
-              <div className="px-8 pb-5">
-                <p className={`text-body-2 ${t.textSecondary} leading-relaxed`}>
-                  {item.answer}
-                </p>
+              {/* Answer — animated with CSS grid */}
+              <div
+                className="grid transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                style={{
+                  gridTemplateRows: isOpen ? "1fr" : "0fr",
+                }}
+              >
+                <div className="overflow-hidden">
+                  <div className="px-8 pb-5">
+                    <p className={`text-body-2 ${t.textSecondary} leading-relaxed`}>
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
               </div>
-            )}
-          </div>
-        ))}
+            </div>
+          );
+        })}
       </div>
     </SectionContainer>
   );

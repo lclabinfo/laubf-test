@@ -1,15 +1,58 @@
-import Link from "next/link";
+import EventsHeroSection from "@/components/sections/EventsHeroSection";
+import QuickLinksSection from "@/components/sections/QuickLinksSection";
+import AllEventsSection from "@/components/sections/AllEventsSection";
 
-export default function Page() {
+import type {
+  EventsHeroSectionProps,
+  QuickLinksSectionProps,
+  AllEventsSectionProps,
+} from "@/lib/types/sections";
+
+import { MOCK_EVENTS, RECURRING_MEETINGS } from "@/lib/mock-data/events";
+
+/* ================================================================
+ * SAMPLE DATA — Content from Figma design
+ * In production, this data comes from PostgreSQL via CMS API.
+ * ================================================================ */
+
+const heroData: EventsHeroSectionProps = {
+  id: "events-hero",
+  visible: true,
+  colorScheme: "dark",
+  paddingY: "compact",
+  content: {
+    heading: "Events",
+    subtitle:
+      "Stay connected with what's happening at LA UBF. From weekly gatherings to special events, there's always something for you.",
+  },
+};
+
+const quickLinksData: QuickLinksSectionProps = {
+  id: "quick-links",
+  visible: true,
+  colorScheme: "light",
+  content: {
+    heading: "Quick Links",
+    subtitle:
+      "Jump to our recurring weekly meetings and find the one that fits you.",
+  },
+};
+
+const allEventsData: AllEventsSectionProps = {
+  id: "all-events",
+  visible: true,
+  colorScheme: "light",
+  content: {
+    heading: "All Events",
+  },
+};
+
+export default function EventsPage() {
   return (
-    <main className="min-h-screen bg-white-1 pt-32 pb-20">
-      <div className="container-standard">
-        <h1 className="text-h2 text-black-1 mb-6">Events</h1>
-        <p className="text-body-1 text-black-3 mb-8">This page is coming soon.</p>
-        <Link href="/" className="text-body-1 text-brand-1 hover:underline">
-          &larr; Back to home
-        </Link>
-      </div>
+    <main>
+      <EventsHeroSection settings={heroData} />
+      <QuickLinksSection settings={quickLinksData} meetings={RECURRING_MEETINGS} />
+      <AllEventsSection settings={allEventsData} events={MOCK_EVENTS} />
     </main>
   );
 }

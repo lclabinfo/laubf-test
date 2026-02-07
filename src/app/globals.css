@@ -359,4 +359,12 @@
   .animate-dropdown-in {
     animation: dropdown-in 200ms var(--ease-smooth) both;
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }

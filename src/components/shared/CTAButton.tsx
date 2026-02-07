@@ -47,6 +47,25 @@ export default function CTAButton({
 
   const classes = cn(base, sizeClass, variantClass, className);
 
+  // Anchor links: smooth scroll instead of navigation
+  if (href && href.startsWith("#")) {
+    return (
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          const target = document.getElementById(href.slice(1));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }}
+        className={classes}
+      >
+        {label}
+        {icon}
+      </button>
+    );
+  }
+
   if (href) {
     return (
       <Link href={href} className={classes}>
