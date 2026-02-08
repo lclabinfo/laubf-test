@@ -136,32 +136,29 @@ export default function PageHeroSection(props: {
 
         {/* Center content */}
         <div className="relative z-10 flex flex-col items-center justify-center text-center px-4">
-          {/* Radial glow behind text */}
-          <div
-            className="absolute pointer-events-none overflow-visible"
-            style={{
-              left: "-700px",
-              right: "-700px",
-              top: "-500px",
-              bottom: "-500px",
-              background: `radial-gradient(ellipse 600px 340px at center, ${gradientColor}1) 0%, ${gradientColor}0.99) 50%, ${gradientColor}0.95) 60%, ${gradientColor}0.8) 70%, ${gradientColor}0.5) 80%, ${gradientColor}0.15) 90%, transparent 100%)`,
-            }}
-          />
+          <div className="relative flex flex-col items-center">
+            {/* Radial glow — sized relative to this content block via inset stretch */}
+            <div
+              className="absolute pointer-events-none z-0"
+              style={{
+                inset: "-80% -120%",
+                background: `radial-gradient(ellipse 50% 50% at center, ${gradientColor}1) 0%, ${gradientColor}0.98) 40%, ${gradientColor}0.9) 55%, ${gradientColor}0.7) 68%, ${gradientColor}0.4) 80%, ${gradientColor}0.1) 92%, transparent 100%)`,
+              }}
+            />
 
-          <div className="relative z-10 flex flex-col items-center">
             {content.overline && (
-              <p className={`text-h4 ${t.textPrimary} mb-3`}>
+              <p className={`relative z-10 text-h4 ${t.textPrimary} mb-3`}>
                 {content.overline}
               </p>
             )}
 
             <h1
-              className={`text-h1 ${t.textPrimary} mb-12`}
+              className={`relative z-10 text-h1 ${t.textPrimary} mb-12`}
             >
               {content.heading}
             </h1>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-3">
               {content.primaryButton.visible && (
                 <CTAButton
                   label={content.primaryButton.label}

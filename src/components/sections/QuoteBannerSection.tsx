@@ -36,18 +36,18 @@ export default function QuoteBannerSection(props: {
       bgOverride="bg-gradient-to-b from-black-gradient to-black-1 to-[67%]"
     >
       <div className="relative flex flex-col items-center gap-10 text-center">
-        {/* Decorative vector */}
-        <svg
-          className="absolute top-[-40px] left-1/2 -translate-x-1/2 w-[600px] lg:w-[926px] h-auto opacity-10 pointer-events-none"
-          viewBox="0 0 926 383"
-          fill="none"
-        >
-          <path
-            d="M0 383C0 171.4 207.5 0 463 0s463 171.4 463 383"
-            stroke="#FAFAFA"
-            strokeWidth="1"
-          />
-        </svg>
+        {/* Spotlight beam from top center */}
+        <div
+          className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[926px] h-[500px] pointer-events-none"
+          style={{
+            background:
+              "conic-gradient(from 180deg at 50% 0%, transparent 135deg, rgba(250,250,250,0.06) 160deg, rgba(250,250,250,0.12) 175deg, rgba(250,250,250,0.18) 180deg, rgba(250,250,250,0.12) 185deg, rgba(250,250,250,0.06) 200deg, transparent 225deg)",
+            maskImage:
+              "radial-gradient(ellipse 60% 80% at 50% 0%, black 0%, transparent 100%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 60% 80% at 50% 0%, black 0%, transparent 100%)",
+          }}
+        />
 
         {/* Content */}
         <div className="relative flex flex-col items-center gap-4 lg:gap-6">

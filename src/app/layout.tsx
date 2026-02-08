@@ -52,7 +52,7 @@ const footerData: FooterSectionProps = {
       "A Bible-centered community raising lifelong disciples on campus and beyond.",
     socialLinks: [
       { platform: "instagram", href: "https://instagram.com/laubf" },
-      { platform: "facebook", href: "https://facebook.com/laubf" },
+      { platform: "facebook", href: "https://facebook.com/losangelesubf" },
       { platform: "youtube", href: "https://youtube.com/@laubf" },
     ],
     columns: [
@@ -114,7 +114,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSerifDisplay.variable}>
-      <body className="bg-white-1 text-black-1 font-sans antialiased">
+      <body className="bg-white-1 text-black-1 font-sans antialiased overflow-x-hidden">
         <Navbar settings={navbarSettings} />
         {children}
         <FooterSection settings={footerData} />
