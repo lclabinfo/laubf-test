@@ -23,7 +23,7 @@ const heroData: EventsHeroSectionProps = {
   content: {
     heading: "Events",
     subtitle:
-      "Stay connected with what's happening at LA UBF. From weekly gatherings to special events, there's always something for you.",
+      "Join us on our next gathering — whether it be bible study, conference, or fellowship.",
   },
 };
 
@@ -34,7 +34,7 @@ const quickLinksData: QuickLinksSectionProps = {
   content: {
     heading: "Quick Links",
     subtitle:
-      "Jump to our recurring weekly meetings and find the one that fits you.",
+      "Online meeting links for our recurring meetings & programs.",
   },
 };
 

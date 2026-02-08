@@ -27,7 +27,7 @@ const heroData: MinistryHeroSectionProps = {
   colorScheme: "light",
   content: {
     overline: "CAMPUS MINISTRY",
-    heading: "Cerritos College\nCornerstone Club",
+    heading: "Cerritos College",
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
@@ -41,7 +41,7 @@ const heroData: MinistryHeroSectionProps = {
     ],
     heroImage: {
       src: "/pics-temp/csulb/IMG_1408.JPG",
-      alt: "Cerritos College Cornerstone Club campus ministry",
+      alt: "Cerritos College campus ministry",
     },
   },
 };
@@ -95,7 +95,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "CERRITOS CORNERSTONE CLUB",
+    overline: "CERRITOS COLLEGE",
     heading: "Meet Our Team",
     members: [
       {
@@ -216,7 +216,7 @@ const campusGridData: CampusCardGridSectionProps = {
 };
 
 /* ================================================================
- * CERRITOS COLLEGE CORNERSTONE CLUB CAMPUS MINISTRY PAGE
+ * CERRITOS COLLEGE CAMPUS MINISTRY PAGE
  * Section order: Light → Light → Dark → Light → Light → Light → Light
  * ================================================================ */
 

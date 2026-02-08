@@ -23,6 +23,7 @@
 
 import { useState } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import OverlineLabel from "@/components/shared/OverlineLabel";
 import { themeTokens } from "@/lib/theme";
 import type { FormSectionProps } from "@/lib/types/sections";
 import { IconChevronDown, IconCheck } from "@/components/layout/icons";

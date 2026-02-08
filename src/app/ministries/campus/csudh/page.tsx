@@ -27,7 +27,7 @@ const heroData: MinistryHeroSectionProps = {
   colorScheme: "light",
   content: {
     overline: "CAMPUS MINISTRY",
-    heading: "CSUDH\nGood Shepherd Club",
+    heading: "CSUDH",
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
@@ -41,7 +41,7 @@ const heroData: MinistryHeroSectionProps = {
     ],
     heroImage: {
       src: "/pics-temp/csulb/IMG_1408.JPG",
-      alt: "CSUDH Good Shepherd Club campus ministry",
+      alt: "CSUDH campus ministry",
     },
   },
 };
@@ -95,7 +95,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "CSUDH GOOD SHEPHERD CLUB",
+    overline: "CSUDH",
     heading: "Meet Our Team",
     members: [
       {
@@ -216,7 +216,7 @@ const campusGridData: CampusCardGridSectionProps = {
 };
 
 /* ================================================================
- * CSUDH GOOD SHEPHERD CLUB CAMPUS MINISTRY PAGE
+ * CSUDH CAMPUS MINISTRY PAGE
  * Section order: Light → Light → Dark → Light → Light → Light → Light
  * ================================================================ */
 

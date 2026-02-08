@@ -23,7 +23,7 @@ export default function EventsHeroSection(props: {
 
   return (
     <SectionContainer settings={settings}>
-      <div className="flex flex-col items-center text-center">
+      <div className="flex flex-col items-start">
         <h1 className={`text-h1 ${t.textPrimary}`}>{content.heading}</h1>
         <p className={`text-body-1 ${t.textSecondary} mt-4 max-w-[600px]`}>
           {content.subtitle}

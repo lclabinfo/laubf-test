@@ -27,7 +27,7 @@ const heroData: MinistryHeroSectionProps = {
   colorScheme: "light",
   content: {
     overline: "CAMPUS MINISTRY",
-    heading: "UCLA\nLiving Water Club",
+    heading: "UCLA",
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
@@ -41,7 +41,7 @@ const heroData: MinistryHeroSectionProps = {
     ],
     heroImage: {
       src: "/pics-temp/csulb/IMG_1408.JPG",
-      alt: "UCLA Living Water Club campus ministry",
+      alt: "UCLA campus ministry",
     },
   },
 };
@@ -95,7 +95,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "UCLA LIVING WATER CLUB",
+    overline: "UCLA",
     heading: "Meet Our Team",
     members: [
       {
@@ -216,7 +216,7 @@ const campusGridData: CampusCardGridSectionProps = {
 };
 
 /* ================================================================
- * UCLA LIVING WATER CLUB CAMPUS MINISTRY PAGE
+ * UCLA CAMPUS MINISTRY PAGE
  * Section order: Light → Light → Dark → Light → Light → Light → Light
  * ================================================================ */
 

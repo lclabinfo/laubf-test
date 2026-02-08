@@ -27,7 +27,7 @@ const heroData: MinistryHeroSectionProps = {
   colorScheme: "light",
   content: {
     overline: "CAMPUS MINISTRY",
-    heading: "CSUF\nBerean Club",
+    heading: "CSUF",
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
@@ -41,7 +41,7 @@ const heroData: MinistryHeroSectionProps = {
     ],
     heroImage: {
       src: "/pics-temp/csulb/IMG_1408.JPG",
-      alt: "CSUF Berean Club campus ministry",
+      alt: "CSUF campus ministry",
     },
   },
 };
@@ -95,7 +95,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "CSUF BEREAN CLUB",
+    overline: "CSUF",
     heading: "Meet Our Team",
     members: [
       {
@@ -216,7 +216,7 @@ const campusGridData: CampusCardGridSectionProps = {
 };
 
 /* ================================================================
- * CSUF BEREAN CLUB CAMPUS MINISTRY PAGE
+ * CSUF CAMPUS MINISTRY PAGE
  * Section order: Light → Light → Dark → Light → Light → Light → Light
  * ================================================================ */
 

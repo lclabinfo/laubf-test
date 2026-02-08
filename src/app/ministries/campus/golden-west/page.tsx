@@ -27,7 +27,7 @@ const heroData: MinistryHeroSectionProps = {
   colorScheme: "light",
   content: {
     overline: "CAMPUS MINISTRY",
-    heading: "Golden West\nNew Creation Club",
+    heading: "Golden West",
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
@@ -41,7 +41,7 @@ const heroData: MinistryHeroSectionProps = {
     ],
     heroImage: {
       src: "/pics-temp/csulb/IMG_1408.JPG",
-      alt: "Golden West New Creation Club campus ministry",
+      alt: "Golden West College campus ministry",
     },
   },
 };
@@ -95,7 +95,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "GWC NEW CREATION CLUB",
+    overline: "GOLDEN WEST COLLEGE",
     heading: "Meet Our Team",
     members: [
       {
@@ -216,7 +216,7 @@ const campusGridData: CampusCardGridSectionProps = {
 };
 
 /* ================================================================
- * GOLDEN WEST NEW CREATION CLUB CAMPUS MINISTRY PAGE
+ * GOLDEN WEST COLLEGE CAMPUS MINISTRY PAGE
  * Section order: Light → Light → Dark → Light → Light → Light → Light
  * ================================================================ */
 

@@ -86,9 +86,9 @@ function DirectoryParallaxBlock({
     const sectionH = el.offsetHeight;
 
     // Progress 0 → 1 (moves WITH scroll):
-    //   0 = 50% of section is visible (section top at viewH - sectionH*0.5)
+    //   0 = ~85% of section is visible (delays start until CYPRESS text is on screen)
     //   1 = section top has reached viewport top
-    const startTrigger = viewH - sectionH * 0.5;
+    const startTrigger = viewH - sectionH * 0.85;
     const endTrigger = 0;
 
     const raw = (startTrigger - rect.top) / (startTrigger - endTrigger);

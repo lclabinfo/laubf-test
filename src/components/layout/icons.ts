@@ -201,6 +201,11 @@ export const IconChevronLeft = icon("M15 18l-6-6 6-6");
 /** Chevron right - for breadcrumb separators */
 export const IconChevronRight = icon("M9 18l6-6-6-6");
 
+/** Filter/funnel icon - for filter toolbar disclosure button */
+export const IconFilter = multiIcon([
+  createElement("polygon", { key: "1", points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" }),
+]);
+
 /** Link/chain icon - for online meeting button */
 export const IconLink = multiIcon([
   createElement("path", {

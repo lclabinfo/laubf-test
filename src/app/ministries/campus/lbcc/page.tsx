@@ -79,7 +79,18 @@ const scheduleData: MinistryScheduleSectionProps = {
         location: "College Center",
       },
     ],
-    logo: { src: "/logo/laubf-logo.svg", alt: "LA UBF" },
+    buttons: [
+      {
+        label: "Start Bible Study",
+        href: "https://startbiblestudy.org/lbcc",
+        variant: "primary" as const,
+      },
+      {
+        label: "Visit our website",
+        href: "https://lbcc.ubf.org",
+        variant: "secondary" as const,
+      },
+    ],
   },
 };
 

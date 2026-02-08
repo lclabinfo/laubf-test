@@ -66,7 +66,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-smooth",
+          "sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-smooth",
           isScrolled
             ? "bg-white-1 border-b border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)]"
             : "",

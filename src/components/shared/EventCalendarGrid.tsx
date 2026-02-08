@@ -1,10 +1,11 @@
 /*
- * EventCalendarGrid — Interactive month calendar with event dots and popover
+ * EventCalendarGrid — Interactive month calendar with Google-Calendar-style event blocks
  *
  * Features:
  * - Full month grid (Sun–Sat) with prev/next navigation
- * - Colored dots on dates that have events (green=meeting, blue=event, gray=program)
- * - Click a date to see events; click an event to open a popover with quick info
+ * - Events rendered as colored rectangular blocks that span across multi-day ranges
+ * - Collision detection & vertical stacking for overlapping events
+ * - Click an event block to open a popover with quick info
  * - "View Full Details" CTA in popover links to /events/[slug]
  *
  * Used by: AllEventsSection (calendar view toggle), EventCalendarSection (home page)
@@ -25,10 +26,11 @@ import Link from "next/link";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const TYPE_DOT_COLORS: Record<string, string> = {
-  meeting: "bg-accent-green",
-  event: "bg-accent-blue",
-  program: "bg-black-3",
+/* Color tokens per event type */
+const TYPE_BLOCK_COLORS: Record<string, string> = {
+  meeting: "bg-accent-green text-white-0",
+  event: "bg-accent-blue text-white-0",
+  program: "bg-black-3 text-white-0",
 };
 
 const TYPE_PILL_COLORS: Record<string, string> = {
@@ -36,6 +38,30 @@ const TYPE_PILL_COLORS: Record<string, string> = {
   event: "bg-accent-blue",
   program: "bg-black-3",
 };
+
+/* ---- Types ---- */
+
+interface CalendarDay {
+  date: number;
+  key: string; // YYYY-MM-DD
+  isCurrentMonth: boolean;
+  isToday: boolean;
+  dayOfWeek: number; // 0=Sun
+}
+
+interface EventSpan {
+  event: Event;
+  startCol: number; // 0–6 within the week
+  span: number; // columns to occupy
+  row: number; // stacking row
+  isContinuation: boolean; // starts from a prior week
+  isContinued: boolean; // extends into next week
+}
+
+/* Max event rows visible per week before "+N more" */
+const MAX_VISIBLE_ROWS = 3;
+
+/* ---- Component ---- */
 
 interface EventCalendarGridProps {
   events: Event[];
@@ -47,7 +73,6 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
 
   const [currentMonth, setCurrentMonth] = useState(today.getMonth());
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -64,41 +89,14 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
     }
   }, [selectedEvent]);
 
-  // Group events by date key (YYYY-MM-DD)
-  const eventsByDate = useMemo(() => {
-    const map = new Map<string, Event[]>();
-    for (const event of events) {
-      const key = event.dateStart;
-      if (!map.has(key)) map.set(key, []);
-      map.get(key)!.push(event);
-
-      // Multi-day events: add dots for each day in range
-      if (event.dateEnd) {
-        const start = new Date(event.dateStart + "T00:00:00");
-        const end = new Date(event.dateEnd + "T00:00:00");
-        const cursor = new Date(start);
-        cursor.setDate(cursor.getDate() + 1);
-        while (cursor <= end) {
-          const dayKey = cursor.toISOString().slice(0, 10);
-          if (!map.has(dayKey)) map.set(dayKey, []);
-          if (!map.get(dayKey)!.find((e) => e.slug === event.slug)) {
-            map.get(dayKey)!.push(event);
-          }
-          cursor.setDate(cursor.getDate() + 1);
-        }
-      }
-    }
-    return map;
-  }, [events]);
-
-  // Calendar grid computation
+  /* ---- Calendar grid computation ---- */
   const calendarDays = useMemo(() => {
     const firstDay = new Date(currentYear, currentMonth, 1);
     const lastDay = new Date(currentYear, currentMonth + 1, 0);
-    const startWeekday = firstDay.getDay(); // 0=Sun
+    const startWeekday = firstDay.getDay();
     const daysInMonth = lastDay.getDate();
 
-    const days: { date: number; key: string; isCurrentMonth: boolean; isToday: boolean }[] = [];
+    const days: CalendarDay[] = [];
 
     // Previous month padding
     const prevMonthLast = new Date(currentYear, currentMonth, 0).getDate();
@@ -107,32 +105,118 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
       const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
       const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
       const key = `${prevYear}-${String(prevMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      days.push({ date: d, key, isCurrentMonth: false, isToday: false });
+      days.push({ date: d, key, isCurrentMonth: false, isToday: false, dayOfWeek: days.length % 7 });
     }
 
     // Current month days
     for (let d = 1; d <= daysInMonth; d++) {
       const key = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-      const isToday =
+      const isToday2 =
         d === today.getDate() &&
         currentMonth === today.getMonth() &&
         currentYear === today.getFullYear();
-      days.push({ date: d, key, isCurrentMonth: true, isToday });
+      days.push({ date: d, key, isCurrentMonth: true, isToday: isToday2, dayOfWeek: days.length % 7 });
     }
 
-    // Next month padding (fill to complete weeks)
+    // Next month padding
     const remaining = 7 - (days.length % 7);
     if (remaining < 7) {
       for (let d = 1; d <= remaining; d++) {
         const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
         const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
         const key = `${nextYear}-${String(nextMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
-        days.push({ date: d, key, isCurrentMonth: false, isToday: false });
+        days.push({ date: d, key, isCurrentMonth: false, isToday: false, dayOfWeek: days.length % 7 });
       }
     }
 
     return days;
   }, [currentMonth, currentYear, today]);
+
+  // Chunk into weeks
+  const weeks = useMemo(() => {
+    const result: CalendarDay[][] = [];
+    for (let i = 0; i < calendarDays.length; i += 7) {
+      result.push(calendarDays.slice(i, i + 7));
+    }
+    return result;
+  }, [calendarDays]);
+
+  /* ---- Build event spans per week ---- */
+  const weekEventSpans = useMemo(() => {
+    return weeks.map((week) => {
+      const weekStartKey = week[0].key;
+      const weekEndKey = week[6].key;
+
+      // Find all events that overlap this week
+      const overlapping = events.filter((evt) => {
+        const evtStart = evt.dateStart;
+        const evtEnd = evt.dateEnd || evt.dateStart;
+        return evtStart <= weekEndKey && evtEnd >= weekStartKey;
+      });
+
+      // Build span objects
+      const spans: Omit<EventSpan, "row">[] = overlapping.map((evt) => {
+        const evtStart = evt.dateStart;
+        const evtEnd = evt.dateEnd || evt.dateStart;
+
+        // Clamp to this week
+        const clampedStart = evtStart < weekStartKey ? weekStartKey : evtStart;
+        const clampedEnd = evtEnd > weekEndKey ? weekEndKey : evtEnd;
+
+        // Find column indices
+        const startCol = week.findIndex((d) => d.key === clampedStart);
+        const endCol = week.findIndex((d) => d.key === clampedEnd);
+        const span = endCol - startCol + 1;
+
+        return {
+          event: evt,
+          startCol: startCol === -1 ? 0 : startCol,
+          span: span < 1 ? 1 : span,
+          isContinuation: evtStart < weekStartKey,
+          isContinued: evtEnd > weekEndKey,
+        };
+      });
+
+      // Sort: longer spans first, then earlier start
+      spans.sort((a, b) => {
+        if (a.startCol !== b.startCol) return a.startCol - b.startCol;
+        return b.span - a.span;
+      });
+
+      // Assign rows via greedy packing
+      const rows: boolean[][] = [];
+      const placed: EventSpan[] = [];
+
+      for (const s of spans) {
+        let rowIndex = 0;
+        let isPlaced = false;
+
+        while (!isPlaced) {
+          if (!rows[rowIndex]) rows[rowIndex] = new Array(7).fill(false);
+
+          let collision = false;
+          for (let c = s.startCol; c < s.startCol + s.span; c++) {
+            if (rows[rowIndex][c]) {
+              collision = true;
+              break;
+            }
+          }
+
+          if (!collision) {
+            for (let c = s.startCol; c < s.startCol + s.span; c++) {
+              rows[rowIndex][c] = true;
+            }
+            placed.push({ ...s, row: rowIndex });
+            isPlaced = true;
+          } else {
+            rowIndex++;
+          }
+        }
+      }
+
+      return { spans: placed, maxRows: rows.length };
+    });
+  }, [weeks, events]);
 
   const monthLabel = new Date(currentYear, currentMonth, 1).toLocaleDateString(
     "en-US",
@@ -140,7 +224,6 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
   );
 
   function goToPrevMonth() {
-    setSelectedDate(null);
     setSelectedEvent(null);
     if (currentMonth === 0) {
       setCurrentMonth(11);
@@ -151,7 +234,6 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
   }
 
   function goToNextMonth() {
-    setSelectedDate(null);
     setSelectedEvent(null);
     if (currentMonth === 11) {
       setCurrentMonth(0);
@@ -162,14 +244,10 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
   }
 
   function goToToday() {
-    setSelectedDate(null);
     setSelectedEvent(null);
     setCurrentMonth(today.getMonth());
     setCurrentYear(today.getFullYear());
   }
-
-  // Events for the selected date
-  const selectedDateEvents = selectedDate ? (eventsByDate.get(selectedDate) ?? []) : [];
 
   return (
     <div className="flex flex-col gap-4">
@@ -216,106 +294,95 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
           ))}
         </div>
 
-        {/* Day cells */}
-        <div className="grid grid-cols-7">
-          {calendarDays.map((day, i) => {
-            const dayEvents = eventsByDate.get(day.key) ?? [];
-            const hasEvents = dayEvents.length > 0;
-            const isSelected = selectedDate === day.key;
+        {/* Week rows */}
+        {weeks.map((week, weekIndex) => {
+          const { spans, maxRows } = weekEventSpans[weekIndex];
+          const visibleSpans = spans.filter((s) => s.row < MAX_VISIBLE_ROWS);
+          const hiddenCount = spans.length - visibleSpans.length;
+          const eventAreaHeight = Math.min(maxRows, MAX_VISIBLE_ROWS) * 26 + (hiddenCount > 0 ? 18 : 0);
 
-            return (
-              <button
-                key={`${day.key}-${i}`}
-                onClick={() => {
-                  if (hasEvents) {
-                    setSelectedDate(isSelected ? null : day.key);
-                    setSelectedEvent(null);
-                  }
-                }}
-                className={`relative flex flex-col items-center gap-1 py-2 min-h-[72px] lg:min-h-[80px] border-b border-r border-white-2/50 transition-colors ${
-                  !day.isCurrentMonth
-                    ? "bg-white-1-5 text-black-3/40"
-                    : isSelected
-                      ? "bg-accent-blue/5"
-                      : hasEvents
-                        ? "hover:bg-white-1-5 cursor-pointer"
-                        : ""
-                }`}
-              >
-                {/* Date number */}
-                <span
-                  className={`flex size-7 items-center justify-center rounded-full text-[14px] ${
-                    day.isToday
-                      ? "bg-black-1 text-white-0 font-medium"
-                      : day.isCurrentMonth
-                        ? "text-black-1"
-                        : "text-black-3/40"
-                  }`}
-                >
-                  {day.date}
-                </span>
+          return (
+            <div
+              key={weekIndex}
+              className="relative border-b border-white-2/50 last:border-b-0"
+              style={{ minHeight: `${44 + eventAreaHeight}px` }}
+            >
+              {/* Day numbers row */}
+              <div className="grid grid-cols-7">
+                {week.map((day) => (
+                  <div
+                    key={day.key}
+                    className={`px-2 pt-2 pb-1 border-r border-white-2/50 last:border-r-0 ${
+                      !day.isCurrentMonth ? "bg-white-1-5" : ""
+                    }`}
+                  >
+                    <span
+                      className={`flex size-7 items-center justify-center rounded-full text-[14px] ${
+                        day.isToday
+                          ? "bg-black-1 text-white-0 font-medium"
+                          : day.isCurrentMonth
+                            ? "text-black-1"
+                            : "text-black-3/40"
+                      }`}
+                    >
+                      {day.date}
+                    </span>
+                  </div>
+                ))}
+              </div>
 
-                {/* Event dots */}
-                {hasEvents && day.isCurrentMonth && (
-                  <div className="flex gap-0.5 flex-wrap justify-center max-w-[40px]">
-                    {dayEvents.slice(0, 4).map((evt) => (
-                      <span
-                        key={evt.slug}
-                        className={`size-[6px] rounded-full ${TYPE_DOT_COLORS[evt.type] ?? "bg-black-3"}`}
-                      />
-                    ))}
-                    {dayEvents.length > 4 && (
-                      <span className="text-[9px] text-black-3 leading-none">
-                        +{dayEvents.length - 4}
-                      </span>
+              {/* Event blocks layer */}
+              <div className="relative w-full" style={{ height: `${eventAreaHeight}px` }}>
+                {/* Background column separators (so blocks line up visually) */}
+                <div className="absolute inset-0 grid grid-cols-7 pointer-events-none">
+                  {week.map((day) => (
+                    <div
+                      key={day.key}
+                      className={`border-r border-white-2/50 last:border-r-0 ${
+                        !day.isCurrentMonth ? "bg-white-1-5" : ""
+                      }`}
+                    />
+                  ))}
+                </div>
+
+                {/* Positioned event spans */}
+                {visibleSpans.map((s, i) => (
+                  <button
+                    key={`${s.event.slug}-${weekIndex}-${i}`}
+                    onClick={() => setSelectedEvent(s.event)}
+                    className={`absolute h-[22px] rounded px-2 text-[11px] font-medium leading-[22px] truncate cursor-pointer transition-all hover:brightness-90 z-10 ${
+                      TYPE_BLOCK_COLORS[s.event.type] ?? "bg-black-3 text-white-0"
+                    } ${s.isContinuation ? "rounded-l-none" : ""} ${s.isContinued ? "rounded-r-none" : ""}`}
+                    style={{
+                      top: `${s.row * 26 + 2}px`,
+                      left: `calc(${(s.startCol / 7) * 100}% + 2px)`,
+                      width: `calc(${(s.span / 7) * 100}% - 4px)`,
+                    }}
+                  >
+                    {!s.isContinuation && (
+                      <>
+                        <span className="opacity-75">{s.event.time.split(" - ")[0]}</span>{" "}
+                        {s.event.title}
+                      </>
                     )}
+                    {s.isContinuation && s.event.title}
+                  </button>
+                ))}
+
+                {/* Overflow indicator */}
+                {hiddenCount > 0 && (
+                  <div
+                    className="absolute left-2 text-[11px] font-medium text-black-3"
+                    style={{ top: `${MAX_VISIBLE_ROWS * 26 + 2}px` }}
+                  >
+                    +{hiddenCount} more
                   </div>
                 )}
-              </button>
-            );
-          })}
-        </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
-
-      {/* Selected date events panel */}
-      {selectedDate && selectedDateEvents.length > 0 && (
-        <div className="rounded-[16px] border border-white-2-5 bg-white-0 p-5">
-          <div className="flex items-center justify-between mb-4">
-            <h4 className="text-[16px] font-medium text-black-1">
-              {new Date(selectedDate + "T00:00:00").toLocaleDateString("en-US", {
-                weekday: "long",
-                month: "long",
-                day: "numeric",
-              })}
-            </h4>
-            <span className="text-[13px] text-black-3">
-              {selectedDateEvents.length} event{selectedDateEvents.length !== 1 ? "s" : ""}
-            </span>
-          </div>
-          <div className="flex flex-col gap-2">
-            {selectedDateEvents.map((evt) => (
-              <button
-                key={evt.slug}
-                onClick={() => setSelectedEvent(evt)}
-                className="flex items-center gap-3 rounded-[12px] p-3 text-left transition-colors hover:bg-white-1-5"
-              >
-                <span
-                  className={`size-2.5 rounded-full shrink-0 ${TYPE_DOT_COLORS[evt.type] ?? "bg-black-3"}`}
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="text-[15px] font-medium text-black-1 truncate">
-                    {evt.title}
-                  </p>
-                  <p className="text-[13px] text-black-3">
-                    {evt.time} &middot; {evt.location}
-                  </p>
-                </div>
-                <IconChevronRight className="size-4 text-black-3 shrink-0" />
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
 
       {/* Event detail popover/modal */}
       {selectedEvent && (

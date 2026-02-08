@@ -31,7 +31,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
 
   return (
     <SectionThemeContext.Provider value="dark">
-      <section id="hero-section" className="relative flex min-h-screen items-end overflow-hidden bg-black-1">
+      <section id="hero-section" className="relative flex min-h-screen items-end overflow-hidden bg-black-1 -mt-[76px]">
         {/* Background media */}
         {content.backgroundImage.src.endsWith(".mp4") ? (
           <video

@@ -25,24 +25,6 @@ import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { StatementSectionProps } from "@/lib/types/sections";
 
-/* ---- Cross icon ---- */
-
-function CrossIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      width="67"
-      height="92"
-      viewBox="0 0 67 92"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      <rect x="25" y="0" width="17" height="92" rx="2" fill="currentColor" />
-      <rect x="0" y="25" width="67" height="17" rx="2" fill="currentColor" />
-    </svg>
-  );
-}
-
 /* ---- Scroll-tracked statement content ---- */
 
 const STICKY_TOP = 180; // px from viewport top where the sticky lead-in sits
@@ -140,7 +122,21 @@ export default function StatementSection(props: {
       {/* Header — centered */}
       <div className="flex flex-col items-center text-center mb-16 lg:mb-20">
         {content.showIcon && (
-          <CrossIcon className={`${t.textMuted} opacity-85 mb-6`} />
+          <div
+            className="mb-6 w-[67px] h-[92px] bg-black-3 opacity-85"
+            role="img"
+            aria-hidden="true"
+            style={{
+              maskImage: "url(/images/cross.svg)",
+              maskSize: "contain",
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              WebkitMaskImage: "url(/images/cross.svg)",
+              WebkitMaskSize: "contain",
+              WebkitMaskRepeat: "no-repeat",
+              WebkitMaskPosition: "center",
+            }}
+          />
         )}
         <p className={`text-h4 ${t.textMuted} mb-2`}>{content.overline}</p>
         <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>

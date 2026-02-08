@@ -13,11 +13,18 @@
  */
 "use client";
 
+import { useRef } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { QuickLinksSectionProps } from "@/lib/types/sections";
 import type { Event } from "@/lib/types/events";
-import { IconClock, IconLink, IconArrowRight } from "@/components/layout/icons";
+import {
+  IconClock,
+  IconLink,
+  IconArrowRight,
+  IconChevronLeft,
+  IconChevronRight,
+} from "@/components/layout/icons";
 import Link from "next/link";
 
 const TYPE_COLORS: Record<string, string> = {
@@ -33,45 +40,78 @@ export default function QuickLinksSection(props: {
   const { settings, meetings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  function scrollBy(direction: "left" | "right") {
+    if (!scrollRef.current) return;
+    const amount = 320;
+    scrollRef.current.scrollBy({
+      left: direction === "left" ? -amount : amount,
+      behavior: "smooth",
+    });
+  }
 
   return (
     <SectionContainer settings={settings}>
-      {/* Header */}
-      <div className="flex flex-col items-center text-center mb-12">
-        <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
-        {content.subtitle && (
-          <p className={`text-body-1 ${t.textSecondary} mt-3 max-w-[600px]`}>
-            {content.subtitle}
-          </p>
-        )}
+      {/* Header — left aligned with nav arrows */}
+      <div className="flex items-end justify-between mb-8">
+        <div>
+          <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
+          {content.subtitle && (
+            <p className={`text-body-1 ${t.textSecondary} mt-2 max-w-[600px]`}>
+              {content.subtitle}
+            </p>
+          )}
+        </div>
+
+        {/* Carousel nav arrows */}
+        <div className="hidden sm:flex items-center gap-2">
+          <button
+            onClick={() => scrollBy("left")}
+            className="flex size-10 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
+            aria-label="Scroll left"
+          >
+            <IconChevronLeft className="size-4" />
+          </button>
+          <button
+            onClick={() => scrollBy("right")}
+            className="flex size-10 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
+            aria-label="Scroll right"
+          >
+            <IconChevronRight className="size-4" />
+          </button>
+        </div>
       </div>
 
-      {/* Quick links grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* Horizontal scrolling carousel — single row */}
+      <div
+        ref={scrollRef}
+        className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory -mx-4 px-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:px-0 pb-2"
+      >
         {meetings.map((meeting) => (
           <div
             key={meeting.slug}
-            className="bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] p-6 flex flex-col"
+            className="min-w-[280px] max-w-[300px] shrink-0 snap-start bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] p-6 flex flex-col"
           >
-            {/* Type pill */}
-            <span
-              className={`inline-block w-fit text-white-0 text-[12px] tracking-[0.24px] font-medium px-3 py-1 rounded-full uppercase mb-4 ${TYPE_COLORS[meeting.type] ?? "bg-black-2"}`}
-            >
-              {meeting.type}
-            </span>
-
-            {/* Title */}
-            <h3 className="text-[18px] font-medium text-black-1 mb-3 leading-snug">
-              {meeting.title}
-            </h3>
+            {/* Type pill + title row */}
+            <div className="flex items-start justify-between gap-3 mb-3">
+              <h3 className="text-[18px] font-medium text-black-1 leading-snug">
+                {meeting.title}
+              </h3>
+              <span
+                className={`shrink-0 text-white-0 text-[11px] tracking-[0.24px] font-medium px-2.5 py-0.5 rounded-full uppercase ${TYPE_COLORS[meeting.type] ?? "bg-black-2"}`}
+              >
+                {meeting.type}
+              </span>
+            </div>
 
             {/* Time */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-5">
               <IconClock className="size-4 text-black-3 shrink-0" />
               <span className="text-[14px] text-black-2">{meeting.time}</span>
             </div>
 
-            {/* Spacer */}
+            {/* Spacer + actions */}
             <div className="mt-auto flex flex-col gap-2">
               {/* Online meeting link */}
               {meeting.meetingUrl && (
@@ -79,7 +119,7 @@ export default function QuickLinksSection(props: {
                   href={meeting.meetingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 rounded-full border border-accent-blue/30 px-4 py-2.5 text-[14px] font-medium text-accent-blue transition-colors hover:bg-accent-blue/5"
+                  className="flex items-center justify-center gap-2 rounded-full bg-black-1 px-4 py-2.5 text-[14px] font-medium text-white-0 transition-colors hover:bg-black-2"
                 >
                   <IconLink className="size-4" />
                   Join online meeting
