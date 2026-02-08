@@ -214,9 +214,6 @@ export interface FloatingImage {
   alt: string;
   width: number;
   height: number;
-  top: string;
-  left: string;
-  rotation: number;
 }
 
 export interface PageHeroContent {

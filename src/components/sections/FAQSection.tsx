@@ -1,7 +1,7 @@
 /*
  * CMS SETTINGS:
  * -- Content (BASIC) --
- *   heading: string -- section heading in serif italic
+ *   heading: string -- section heading (Helvetica Neue Medium)
  *   showIcon: boolean -- toggles question mark icon circle above heading
  * -- FAQ Items (BASIC) --
  *   items[]: { question, answer }
@@ -47,7 +47,7 @@ export default function FAQSection(props: {
       )}
 
       {/* Centered heading */}
-      <h2 className={`font-[var(--font-dm-serif-display)] italic text-h2 ${t.textPrimary} text-center mb-12`}>
+      <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
         {content.heading}
       </h2>
 

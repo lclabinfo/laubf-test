@@ -2,7 +2,7 @@
  * CMS SETTINGS:
  * -- Content (BASIC) --
  *   overline: string -- label above heading (e.g. "PLAN YOUR VISIT")
- *   heading: string -- section heading in serif italic
+ *   heading: string -- section heading (Helvetica Neue Medium)
  *   description: string -- intro paragraph below heading
  * -- Interest Options (BASIC) --
  *   interestOptions[]: { label, value } -- checkbox grid items
@@ -71,7 +71,7 @@ export default function FormSection(props: {
       {/* Header area -- centered text */}
       <div className="flex flex-col items-center text-center mb-12">
         <OverlineLabel text={content.overline} className="mb-4" />
-        <h2 className={`font-[var(--font-dm-serif-display)] italic text-h2 ${t.textPrimary} text-center`}>
+        <h2 className={`text-h2 ${t.textPrimary} text-center`}>
           {content.heading}
         </h2>
         <p className={`text-body-1 ${t.textSecondary} text-center max-w-2xl mx-auto mt-4`}>
