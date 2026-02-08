@@ -559,3 +559,22 @@ export interface AllEventsContent {
 export interface AllEventsSectionProps extends BaseSectionSettings {
   content: AllEventsContent;
 }
+
+/* ---- Bible Study Hero ---- */
+export interface BibleStudyHeroContent {
+  heading: string;
+  subtitle: string;
+}
+
+export interface BibleStudyHeroSectionProps extends BaseSectionSettings {
+  content: BibleStudyHeroContent;
+}
+
+/* ---- All Bible Studies (filterable grid with tabs) ---- */
+export interface AllBibleStudiesContent {
+  heading: string;
+}
+
+export interface AllBibleStudiesSectionProps extends BaseSectionSettings {
+  content: AllBibleStudiesContent;
+}

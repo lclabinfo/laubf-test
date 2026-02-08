@@ -1,15 +1,44 @@
-import Link from "next/link";
+import EventsHeroSection from "@/components/sections/EventsHeroSection";
+import AllBibleStudiesSection from "@/components/sections/AllBibleStudiesSection";
 
-export default function Page() {
+import type {
+  EventsHeroSectionProps,
+  AllBibleStudiesSectionProps,
+} from "@/lib/types/sections";
+
+import { MOCK_BIBLE_STUDIES } from "@/lib/mock-data/bible-studies";
+
+/* ================================================================
+ * SAMPLE DATA — Content from Figma design
+ * In production, this data comes from PostgreSQL via CMS API.
+ * ================================================================ */
+
+const heroData: EventsHeroSectionProps = {
+  id: "bible-study-hero",
+  visible: true,
+  colorScheme: "dark",
+  paddingY: "compact",
+  content: {
+    heading: "Bible Study Resources",
+    subtitle:
+      "Deep dive into the Word of God with our weekly bible study materials and questions.",
+  },
+};
+
+const allStudiesData: AllBibleStudiesSectionProps = {
+  id: "all-bible-studies",
+  visible: true,
+  colorScheme: "light",
+  content: {
+    heading: "All Bible studies",
+  },
+};
+
+export default function BibleStudyPage() {
   return (
-    <main className="min-h-screen bg-white-1 pt-32 pb-20">
-      <div className="container-standard">
-        <h1 className="text-h2 text-black-1 mb-6">Bible Study</h1>
-        <p className="text-body-1 text-black-3 mb-8">This page is coming soon.</p>
-        <Link href="/" className="text-body-1 text-brand-1 hover:underline">
-          &larr; Back to home
-        </Link>
-      </div>
+    <main>
+      <EventsHeroSection settings={heroData} />
+      <AllBibleStudiesSection settings={allStudiesData} studies={MOCK_BIBLE_STUDIES} />
     </main>
   );
 }

@@ -201,6 +201,39 @@ export const IconChevronLeft = icon("M15 18l-6-6 6-6");
 /** Chevron right - for breadcrumb separators */
 export const IconChevronRight = icon("M9 18l6-6-6-6");
 
+/** File/document icon - for bible study questions indicator */
+export const IconFileText = multiIcon([
+  createElement("path", { key: "1", d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" }),
+  createElement("polyline", { key: "2", points: "14 2 14 8 20 8" }),
+  createElement("line", { key: "3", x1: "16", y1: "13", x2: "8", y2: "13" }),
+  createElement("line", { key: "4", x1: "16", y1: "17", x2: "8", y2: "17" }),
+  createElement("polyline", { key: "5", points: "10 9 9 9 8 9" }),
+]);
+
+/** Help/question circle icon - for bible study answers indicator */
+export const IconHelpCircle = multiIcon([
+  createElement("circle", { key: "1", cx: "12", cy: "12", r: "10" }),
+  createElement("path", { key: "2", d: "M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" }),
+  createElement("line", { key: "3", x1: "12", y1: "17", x2: "12.01", y2: "17" }),
+]);
+
+/** Video icon - for bible study transcript indicator */
+export const IconVideo = multiIcon([
+  createElement("polygon", { key: "1", points: "23 7 16 12 23 17 23 7" }),
+  createElement("rect", { key: "2", x: "1", y: "5", width: "15", height: "14", rx: "2", ry: "2" }),
+]);
+
+/** Arrow up-right icon - for bible study card link */
+export const IconArrowUpRight = multiIcon([
+  createElement("line", { key: "1", x1: "7", y1: "17", x2: "17", y2: "7" }),
+  createElement("polyline", { key: "2", points: "7 7 17 7 17 17" }),
+]);
+
+/** Folder icon - for series cards */
+export const IconFolder = multiIcon([
+  createElement("path", { key: "1", d: "M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" }),
+]);
+
 /** Filter/funnel icon - for filter toolbar disclosure button */
 export const IconFilter = multiIcon([
   createElement("polygon", { key: "1", points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" }),
