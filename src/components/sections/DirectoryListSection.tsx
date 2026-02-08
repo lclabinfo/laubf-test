@@ -17,6 +17,7 @@
 "use client";
 
 import { useRef, useEffect, useCallback } from "react";
+import { useMotionValue, useSpring, motion } from "motion/react";
 import { SectionThemeContext } from "@/lib/theme";
 import CTAButton from "@/components/shared/CTAButton";
 import type { DirectoryListSectionProps } from "@/lib/types/sections";
@@ -59,6 +60,8 @@ export default function DirectoryListSection(props: {
 /*  Parallax block — directory list (left) + heading & image (right)  */
 /* ------------------------------------------------------------------ */
 
+const PARALLAX_TRAVEL = 235;
+
 function DirectoryParallaxBlock({
   heading,
   items,
@@ -69,32 +72,34 @@ function DirectoryParallaxBlock({
   image: DirectoryListSectionProps["content"]["image"];
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const parallaxRef = useRef<HTMLDivElement>(null);
+
+  // Motion value driven by scroll, spring smooths it with a slight lag
+  const rawY = useMotionValue(0);
+  const smoothY = useSpring(rawY, { stiffness: 150, damping: 30, mass: 0.5 });
 
   const handleScroll = useCallback(() => {
     const el = containerRef.current;
-    const parallaxEl = parallaxRef.current;
-    if (!el || !parallaxEl) return;
+    if (!el) return;
 
     const rect = el.getBoundingClientRect();
     const viewH = window.innerHeight;
+    const sectionH = el.offsetHeight;
 
-    // Progress: 0 when top of section is 25% down viewport, 1 when section top reaches viewport top
-    const start = viewH * 0.25;
-    const end = 0;
-    const raw = 1 - (rect.top - end) / (start - end);
+    // Progress 0 → 1 (moves WITH scroll):
+    //   0 = 50% of section is visible (section top at viewH - sectionH*0.5)
+    //   1 = section top has reached viewport top
+    const startTrigger = viewH - sectionH * 0.5;
+    const endTrigger = 0;
+
+    const raw = (startTrigger - rect.top) / (startTrigger - endTrigger);
     const clamped = Math.max(0, Math.min(1, raw));
 
-    // Ease out (circOut): fast start, slow end
-    const eased = Math.sqrt(1 - Math.pow(clamped - 1, 2));
-
-    // Direct DOM update — no React re-render, no hover state interruption
-    parallaxEl.style.transform = `translateY(${eased * 235}px)`;
-  }, []);
+    rawY.set(clamped * PARALLAX_TRAVEL);
+  }, [rawY]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // initial position
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
@@ -117,9 +122,9 @@ function DirectoryParallaxBlock({
 
           {/* Right column: heading + image — sticky with parallax */}
           <div className="sticky top-30 w-full max-w-[480px] self-start">
-            <div
-              ref={parallaxRef}
+            <motion.div
               className="flex flex-col gap-6 will-change-transform"
+              style={{ y: smoothY }}
             >
               <h2 className="text-h2 max-w-[280px] text-black-1">
                 {heading}
@@ -132,7 +137,7 @@ function DirectoryParallaxBlock({
                   className="object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -146,34 +151,32 @@ function DirectoryParallaxBlock({
 
 function DirectoryLink({ name, href }: { name: string; href: string }) {
   return (
-    <div className="group w-full">
-      <Link
-        href={href}
-        className="relative flex h-12 items-center justify-end"
-      >
-        {/* Text — shifts left via transform (no layout reflow) */}
-        <span className="text-h2 font-medium leading-none text-white-3 transition-[color,translate] duration-300 ease-[cubic-bezier(0,0.55,0.45,1)] group-hover:-translate-x-[60px] group-hover:text-black-1">
-          {name}
-        </span>
-        {/* Arrow — slides in from right via transform + opacity (no layout reflow) */}
-        <span className="absolute right-0 flex h-full w-[60px] items-center justify-center opacity-0 translate-x-full transition-[translate,opacity] duration-300 ease-[cubic-bezier(0,0.55,0.45,1)] group-hover:translate-x-0 group-hover:opacity-100">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 48 48"
-            fill="none"
-            className="text-black-1"
-          >
-            <path
-              d="M14 34L34 14M34 14H14M34 14V34"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-      </Link>
-    </div>
+    <Link
+      href={href}
+      className="group relative flex h-12 w-full items-center justify-end"
+    >
+      {/* Text — shifts left via transform (no layout reflow) */}
+      <span className="text-h2 font-medium leading-none text-white-3 transition-[color,translate] duration-300 ease-[cubic-bezier(0,0.55,0.45,1)] group-hover:-translate-x-[60px] group-hover:text-black-1">
+        {name}
+      </span>
+      {/* Arrow — always positioned in place, only fades in (no translate shift = no jitter) */}
+      <span className="absolute right-0 flex h-full w-[60px] items-center justify-center opacity-0 transition-opacity duration-300 ease-[cubic-bezier(0,0.55,0.45,1)] group-hover:opacity-100 pointer-events-none">
+        <svg
+          width="48"
+          height="48"
+          viewBox="0 0 48 48"
+          fill="none"
+          className="text-black-1"
+        >
+          <path
+            d="M14 34L34 14M34 14H14M34 14V34"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </span>
+    </Link>
   );
 }

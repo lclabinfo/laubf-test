@@ -83,6 +83,8 @@ export interface MediaTextContent {
   body: string;
   button: { label: string; href: string; visible: boolean };
   images: { src: string; alt: string }[];
+  /** Seconds for one full rotation (desktop wheel). Default 40. */
+  rotationSpeed?: number;
 }
 
 export interface MediaTextSectionProps extends BaseSectionSettings {
@@ -223,9 +225,6 @@ export interface FloatingImage {
   alt: string;
   width: number;
   height: number;
-  top: string;
-  left: string;
-  rotation: number;
 }
 
 export interface PageHeroContent {

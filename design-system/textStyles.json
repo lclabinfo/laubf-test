@@ -154,6 +154,28 @@
         "value": -2
       },
       "textCase": "ORIGINAL"
+    },
+    {
+      "name": "card-title 1 - desktop",
+      "fontFamily": "Helvetica Neue",
+      "fontWeight": "Medium",
+      "fontSize": 20,
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": -2
+      },
+      "textCase": "ORIGINAL"
+    },
+    {
+      "name": "card title 0 - desktop",
+      "fontFamily": "Helvetica Neue",
+      "fontWeight": "Medium",
+      "fontSize": 24,
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": -3
+      },
+      "textCase": "ORIGINAL"
     }
   ]
 }

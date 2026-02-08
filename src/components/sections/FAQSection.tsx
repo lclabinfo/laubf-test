@@ -1,7 +1,7 @@
 /*
  * CMS SETTINGS:
  * -- Content (BASIC) --
- *   heading: string -- section heading in serif italic
+ *   heading: string -- section heading (Helvetica Neue Medium)
  *   showIcon: boolean -- toggles question mark icon circle above heading
  * -- FAQ Items (BASIC) --
  *   items[]: { question, answer }
