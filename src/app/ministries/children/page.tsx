@@ -50,7 +50,7 @@ const introData: MinistryIntroSectionProps = {
     description:
       "CBF (Children\u2019s Bible Fellowship) is our ministry for children, where they can learn about God\u2019s Word in a safe, engaging, and age-appropriate environment while building friendships and growing in faith.",
     image: {
-      src: "/pics-temp/DSC01636.JPG",
+      src: "/images/ministries/children/introduction.png",
       alt: "Children bible fellowship",
     },
   },
@@ -68,7 +68,7 @@ const scheduleData: MinistryScheduleSectionProps = {
     directionsUrl:
       "https://maps.google.com/?q=11625+Paramount+Blvd+Downey+CA+90241",
     image: {
-      src: "/pics-temp/DSC00412.JPG",
+      src: "/images/ministries/children/service.png",
       alt: "Children sunday service",
     },
   },
@@ -87,7 +87,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "Singspiration is a time for children to sing, dance, and share music\u2019s simple joy. It helps them learn about God\u2019s love through song, building worship skills early on.",
         images: [
-          { src: "/pics-temp/DSC05222.jpg", alt: "Children singspiration" },
+          { src: "/images/ministries/children/singspiration.JPG", alt: "Children singspiration" },
         ],
       },
       {
@@ -95,7 +95,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "In Children\u2019s Bible Class, kids learn about the Bible through lessons designed to be fun, interactive, and easy to understand for their age.",
         images: [
-          { src: "/pics-temp/DSC05299.jpg", alt: "Children bible class" },
+          { src: "/images/ministries/children/class.JPG", alt: "Children bible class" },
         ],
       },
       {
@@ -103,7 +103,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "We also offer child care during the Sunday worship service, providing a safe and engaging space for children so parents can attend the adult service with peace of mind.",
         images: [
-          { src: "/pics-temp/DSC01272.jpg", alt: "Child care during service" },
+          { src: "/images/ministries/children/child%20care.JPG", alt: "Child care during service" },
         ],
       },
     ],

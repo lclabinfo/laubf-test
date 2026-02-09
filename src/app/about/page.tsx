@@ -28,7 +28,7 @@ const textImageHeroData: TextImageHeroSectionProps = {
     description:
       "Our main focus is to study the Bible and grow in the grace and knowledge of Jesus Christ as his disciples.",
     image: {
-      src: "/pics-temp/DSC01654.JPG",
+      src: "/images/who%20we%20are/header.jpg",
       alt: "LA UBF community gathering",
     },
   },
@@ -61,9 +61,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
         images: [
-          { src: "/pics-temp/DSC01636.JPG", alt: "Bible study session" },
-          { src: "/pics-temp/DSC05299.jpg", alt: "Group Bible study" },
-          { src: "/pics-temp/DSC01272.jpg", alt: "One-on-one study" },
+          { src: "/images/who%20we%20are/bible%20study.jpg", alt: "Bible study session" },
         ],
       },
       {
@@ -71,9 +69,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "We walk with students as they grow as disciples of Jesus through shared life and discipleship training. Our goal is to equip students to mature in faith and become disciple makers who help others follow Christ.",
         images: [
-          { src: "/pics-temp/DSC01622.JPG", alt: "Discipleship gathering" },
-          { src: "/pics-temp/DSC01644.JPG", alt: "Prayer meeting" },
-          { src: "/pics-temp/DSC01713.JPG", alt: "Mentorship session" },
+          { src: "/images/who%20we%20are/discipleship.jpg", alt: "Discipleship gathering" },
         ],
       },
       {
@@ -81,9 +77,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "Fellowship is an essential part of our faith as we support and encourage one another in community. We share fellowship through Sunday worship, activities, and retreats as we grow together in Christ.",
         images: [
-          { src: "/pics-temp/DSC05222.jpg", alt: "Fellowship meal" },
-          { src: "/pics-temp/DSC01195.jpg", alt: "Community event" },
-          { src: "/pics-temp/DSC01610.JPG", alt: "Group outing" },
+          { src: "/images/who%20we%20are/fellowship.jpg", alt: "Fellowship meal" },
         ],
       },
     ],

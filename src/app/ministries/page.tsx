@@ -44,7 +44,7 @@ const ageGroupsData: PillarsSectionProps = {
         title: "Young Adults",
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
-        images: [{ src: "/yam/college.png", alt: "Young adults Bible study" }],
+        images: [{ src: "/images/ministries/young%20adults.jpg", alt: "Young adults Bible study" }],
         button: { label: "Learn more", href: "/ministries/college" },
       },
       {
@@ -52,9 +52,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
         images: [
-          { src: "/pics-temp/DSC05222.jpg", alt: "Adult fellowship" },
-          { src: "/pics-temp/DSC05299.jpg", alt: "Adult Bible study" },
-          { src: "/pics-temp/DSC01195.jpg", alt: "Adult community" },
+          { src: "/images/ministries/adults/introduction.jpg", alt: "Adult fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/adults" },
       },
@@ -63,7 +61,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
         images: [
-          { src: "/jbf/hbf.png", alt: "HBF JBF students" },
+          { src: "/images/ministries/middle%20n%20high.JPG", alt: "HBF JBF students" },
         ],
         button: { label: "Learn more", href: "/ministries/high-school" },
       },
@@ -72,7 +70,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
         images: [
-          { src: "/pics-temp/cbf.jpeg", alt: "Children Bible fellowship" },
+          { src: "/images/ministries/children/introduction.png", alt: "Children Bible fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/children" },
       },
@@ -91,17 +89,17 @@ const campusCardGridData: CampusCardGridSectionProps = {
       "We have bible study clubs all across different college campuses. Join us for weekly group bible studies and get to know each other through fellowship.",
     decorativeImages: [
       {
-        src: "/pics-temp/csulb/IMG_1408.JPG",
+        src: "/images/ministries/join-campus-ministry-section/1.JPG",
         alt: "Campus group photo",
         rotation: -8,
       },
       {
-        src: "/pics-temp/csulb/IMG_1410.JPG",
+        src: "/images/ministries/join-campus-ministry-section/2.jpg",
         alt: "Bible study outdoors",
         rotation: 3,
       },
       {
-        src: "/pics-temp/csulb/IMG_1407.JPG",
+        src: "/images/ministries/join-campus-ministry-section/3.png",
         alt: "Fellowship event",
         rotation: -5,
       },

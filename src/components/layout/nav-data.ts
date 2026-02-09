@@ -187,7 +187,7 @@ export const dropdowns: NavDropdown[] = [
         title: "The Word",
         items: [
           {
-            label: "Sunday Messages",
+            label: "Messages",
             description: "Sermon Videos",
             href: "/messages",
             icon: Video,

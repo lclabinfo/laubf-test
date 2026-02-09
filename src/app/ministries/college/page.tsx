@@ -36,7 +36,7 @@ const heroData: MinistryHeroSectionProps = {
     heading: "Young Adult / College",
     headingStyle: "sans",
     heroImage: {
-      src: "/pics-temp/csulb/IMG_1408.JPG",
+      src: "/images/ministries/young%20adults.jpg",
       alt: "Young adult and college ministry group",
     },
   },
@@ -52,7 +52,7 @@ const introData: MinistryIntroSectionProps = {
     description:
       "The Young Adult Ministry (YAM) at LA UBF is a vibrant community of college students and young professionals growing together in faith. Through campus Bible study groups, fellowship activities, and shared worship, we create a space where young adults can explore God\u2019s Word, build meaningful friendships, and discover their calling. Whether you\u2019re on campus or in the workforce, you\u2019ll find a welcoming community here.",
     image: {
-      src: "/pics-temp/csulb/waving.JPG",
+      src: "/images/ministries/young%20adults/yam.png",
       alt: "Young adult ministry fellowship",
     },
   },
@@ -71,7 +71,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "Our young adult fellowship is a space to build authentic friendships and grow together. From shared meals to group outings, we create opportunities for meaningful connection and community among college students and young professionals.",
         images: [
-          { src: "/pics-temp/DSC05222.jpg", alt: "Young adult fellowship" },
+          { src: "/images/ministries/young%20adults/fellowship.png", alt: "Young adult fellowship" },
         ],
       },
       {
@@ -87,7 +87,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "We believe in learning by serving. Young adults have the opportunity to serve through campus outreach, community events, conferences, and supporting the church\u2019s mission locally and beyond.",
         images: [
-          { src: "/pics-temp/DSC01272.jpg", alt: "Serving opportunities" },
+          { src: "/images/ministries/young%20adults/serving.JPG", alt: "Serving opportunities" },
         ],
       },
     ],
@@ -101,14 +101,16 @@ const galleryData: PhotoGallerySectionProps = {
   content: {
     heading: "Snippets from the Ministry",
     images: [
-      { src: "/pics-temp/csulb/IMG_1408.JPG", alt: "YAM moment 1" },
-      { src: "/pics-temp/csulb/waving.JPG", alt: "YAM moment 2" },
-      { src: "/pics-temp/DSC05222.jpg", alt: "YAM moment 3" },
-      { src: "/pics-temp/DSC05299.jpg", alt: "YAM moment 4" },
-      { src: "/pics-temp/DSC01272.jpg", alt: "YAM moment 5" },
-      { src: "/pics-temp/DSC01654.JPG", alt: "YAM moment 6" },
-      { src: "/pics-temp/DSC01636.JPG", alt: "YAM moment 7" },
-      { src: "/pics-temp/DSC01195.jpg", alt: "YAM moment 8" },
+      { src: "/images/ministries/young%20adults/carousel/1.jpg", alt: "YAM moment 1" },
+      { src: "/images/ministries/young%20adults/carousel/2.jpg", alt: "YAM moment 2" },
+      { src: "/images/ministries/young%20adults/carousel/3.JPG", alt: "YAM moment 3" },
+      { src: "/images/ministries/young%20adults/carousel/4.jpg", alt: "YAM moment 4" },
+      { src: "/images/ministries/young%20adults/carousel/5.jpg", alt: "YAM moment 5" },
+      { src: "/images/ministries/young%20adults/carousel/6.jpg", alt: "YAM moment 6" },
+      { src: "/images/ministries/young%20adults/carousel/7.jpg", alt: "YAM moment 7" },
+      { src: "/images/ministries/young%20adults/carousel/8.jpg", alt: "YAM moment 8" },
+      { src: "/images/ministries/young%20adults/carousel/9.jpg", alt: "YAM moment 9" },
+      { src: "/images/ministries/young%20adults/carousel/10.JPG", alt: "YAM moment 10" },
     ],
   },
 };
@@ -119,9 +121,9 @@ const campusGridData: CampusCardGridSectionProps = {
   colorScheme: "light",
   content: {
     decorativeImages: [
-      { src: "/pics-temp/csulb/IMG_1408.JPG", alt: "Campus group photo", rotation: -8 },
-      { src: "/pics-temp/csulb/IMG_1410.JPG", alt: "Bible study outdoors", rotation: 3 },
-      { src: "/pics-temp/csulb/IMG_1407.JPG", alt: "Fellowship event", rotation: -5 },
+      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo", rotation: -8 },
+      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors", rotation: 3 },
+      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event", rotation: -5 },
     ],
     heading: "Join a Campus Ministry",
     description:

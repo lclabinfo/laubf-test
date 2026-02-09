@@ -21,8 +21,8 @@ const spotlightData: SpotlightMediaSectionProps = {
   content: {
     sectionHeading: "This Week\u2019s Message",
     sermon: {
-      slug: "as-the-spirit-gave-them-utterance",
-      title: "As The Spirit Gave Them Utterance",
+      slug: "the-day-of-pentecost",
+      title: "The Day of Pentecost",
       speaker: "P. William",
       date: "FEB 8",
       series: "SUNDAY MESSAGE",

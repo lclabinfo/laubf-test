@@ -815,7 +815,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Christmas feast and gift exchange</li>
 </ul>
 <p>For the gift exchange, please bring a wrapped gift valued at $15 or less. Invite your friends and loved ones to experience the joy and peace of Christmas in a warm church family setting.</p>`,
-    image: { src: "/pics-temp/DSC05299.jpg", alt: "Church choir performing Christmas cantata" },
+    image: { src: "/images/home/event-christmas.png", alt: "Church choir performing Christmas cantata" },
 
     tags: ["#CHURCH-WIDE", "#WORSHIP", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "church-wide",

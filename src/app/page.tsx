@@ -46,7 +46,7 @@ const heroBannerData: HeroBannerSectionProps = {
       visible: true,
     },
     backgroundImage: {
-      src: "/pics-temp/hero_video.mp4",
+      src: "/images/home/hero-vid.mp4",
       alt: "LA UBF community gathering",
     },
   },
@@ -127,7 +127,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Sunday Worship",
         description:
           "Join us every Sunday for worship, teaching, and fellowship with believers.",
-        imageUrl: "/images/next-step-1.jpg",
+        imageUrl: "/images/home/sunday-worship.jpg",
         imageAlt: "Sunday worship service",
         href: "/sunday-worship",
       },
@@ -136,7 +136,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "College Campus Ministries",
         description:
           "Connect with other students on your campus for Bible study and community.",
-        imageUrl: "/images/next-step-2.jpg",
+        imageUrl: "/images/home/campus-ministry.JPG",
         imageAlt: "Campus ministry gathering",
         href: "/campus-ministries",
       },
@@ -145,7 +145,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Personal Bible Studies",
         description:
           "Study the Bible one-on-one with a mentor at a time that works for you.",
-        imageUrl: "/images/next-step-3.jpg",
+        imageUrl: "/images/home/bible-study.png",
         imageAlt: "One-on-one Bible study",
         href: "/bible-studies",
       },
@@ -154,7 +154,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Fellowship",
         description:
           "Build lasting friendships through shared meals, activities, and life together.",
-        imageUrl: "/images/next-step-4.jpg",
+        imageUrl: "/images/home/fellowship.jpg",
         imageAlt: "Fellowship dinner",
         href: "/fellowship",
       },
@@ -190,7 +190,7 @@ const directoryListData: DirectoryListSectionProps = {
       },
     ],
     image: {
-      src: "/images/campus-ministry.jpg",
+      src: "/images/home/campus-ministry-list.png",
       alt: "Campus ministry students",
     },
     ctaHeading: "Don't see your campus?",
@@ -208,8 +208,8 @@ const spotlightMediaData: SpotlightMediaSectionProps = {
   content: {
     sectionHeading: "This Week\u2019s Message",
     sermon: {
-      slug: "as-the-spirit-gave-them-utterance",
-      title: "As The Spirit Gave Them Utterance",
+      slug: "the-day-of-pentecost",
+      title: "The Day of Pentecost",
       speaker: "P. William",
       date: "FEB 8",
       series: "SUNDAY MESSAGE",

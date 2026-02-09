@@ -41,12 +41,12 @@ const pageHeroData: PageHeroSectionProps = {
       visible: true,
     },
     floatingImages: [
-      { src: "/pics-temp/DSC01654.JPG", alt: "Community gathering", width: 219, height: 146 },
-      { src: "/pics-temp/DSC01636.JPG", alt: "Worship service", width: 186, height: 133 },
-      { src: "/pics-temp/DSC01272.jpg", alt: "Bible study group", width: 311, height: 249 },
-      { src: "/pics-temp/DSC01195.jpg", alt: "Fellowship meal", width: 133, height: 106 },
-      { src: "/pics-temp/DSC05299.jpg", alt: "Campus outreach", width: 216, height: 144 },
-      { src: "/pics-temp/DSC05222.jpg", alt: "Community worship", width: 288, height: 199 },
+      { src: "/images/i'm%20new/header%20photos/baptism.JPG", alt: "Baptism", width: 219, height: 146 },
+      { src: "/images/i'm%20new/header%20photos/beach%20camp.jpg", alt: "Beach camp", width: 186, height: 133 },
+      { src: "/images/i'm%20new/header%20photos/face%20paint.JPG", alt: "Community event", width: 311, height: 249 },
+      { src: "/images/i'm%20new/header%20photos/josh.jpg", alt: "Fellowship", width: 133, height: 106 },
+      { src: "/images/i'm%20new/header%20photos/sports.jpg", alt: "Sports fellowship", width: 216, height: 144 },
+      { src: "/images/i'm%20new/header%20photos/worship.JPG", alt: "Worship service", width: 288, height: 199 },
     ],
   },
 };
@@ -150,7 +150,7 @@ const locationDetailData: LocationDetailSectionProps = {
       "https://maps.google.com/?q=11625+Paramount+Blvd+Downey+CA+90241",
     directionsLabel: "Get Directions",
     images: [
-      { src: "/pics-temp/DSC00446.jpg", alt: "LA UBF building exterior" },
+      { src: "/images/i'm%20new/laubf-location.png", alt: "LA UBF building exterior" },
     ],
   },
 };
@@ -166,17 +166,17 @@ const campusCardGridData: CampusCardGridSectionProps = {
       "We have bible study clubs all across different college campuses. Join us for weekly group bible studies and get to know each other through fellowship.",
     decorativeImages: [
       {
-        src: "/pics-temp/csulb/IMG_1408.JPG",
+        src: "/images/ministries/join-campus-ministry-section/1.JPG",
         alt: "Campus group photo",
         rotation: -8,
       },
       {
-        src: "/pics-temp/csulb/IMG_1410.JPG",
+        src: "/images/ministries/join-campus-ministry-section/2.jpg",
         alt: "Bible study outdoors",
         rotation: 3,
       },
       {
-        src: "/pics-temp/csulb/IMG_1407.JPG",
+        src: "/images/ministries/join-campus-ministry-section/3.png",
         alt: "Fellowship event",
         rotation: -5,
       },

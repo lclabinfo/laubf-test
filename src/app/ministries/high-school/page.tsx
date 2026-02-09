@@ -34,7 +34,7 @@ const heroData: MinistryHeroSectionProps = {
     heading: "Middle & High School",
     headingStyle: "sans",
     heroImage: {
-      src: "/pics-temp/DSC01654.JPG",
+      src: "/images/ministries/middle%20n%20high/header.JPG",
       alt: "Middle and high school ministry group photo",
     },
   },
@@ -50,7 +50,7 @@ const introData: MinistryIntroSectionProps = {
     description:
       "JBF (Junior Bible Fellowship) and HBF (High School Bible Fellowship) are our youth ministries for middle school and high school students. Through engaging Bible studies, fun fellowship activities, and a supportive community, we help young people build a strong foundation of faith during these formative years.",
     image: {
-      src: "/pics-temp/DSC01636.JPG",
+      src: "/images/ministries/middle%20n%20high/introduction.jpg",
       alt: "JBF and HBF youth ministry",
     },
   },
@@ -69,7 +69,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "Praise Night is a time for our youth to come together in worship through music, prayer, and fellowship. It\u2019s an uplifting experience where students can express their faith and grow closer to God and each other.",
         images: [
-          { src: "/pics-temp/DSC05222.jpg", alt: "Youth praise night" },
+          { src: "/images/ministries/middle%20n%20high/praise%20night.jpg", alt: "Youth praise night" },
         ],
       },
       {
@@ -77,7 +77,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "Fellowship activities give our youth the opportunity to build friendships, have fun, and strengthen their bonds within the church community through games, outings, and shared experiences.",
         images: [
-          { src: "/pics-temp/DSC05299.jpg", alt: "Youth fellowship" },
+          { src: "/images/ministries/middle%20n%20high/fellowship.JPG", alt: "Youth fellowship" },
         ],
       },
       {
@@ -85,7 +85,7 @@ const whatWeDoData: PillarsSectionProps = {
         description:
           "Our annual Youth Conference brings together students for an immersive experience of worship, Bible study, and community. It\u2019s a highlight of the year where young people are inspired and challenged in their faith.",
         images: [
-          { src: "/pics-temp/DSC01272.jpg", alt: "Youth conference" },
+          { src: "/images/ministries/middle%20n%20high/jbfhbf%20conference.jpg", alt: "Youth conference" },
         ],
       },
     ],
@@ -99,12 +99,11 @@ const galleryData: PhotoGallerySectionProps = {
   content: {
     heading: "Snippets from the Ministry",
     images: [
-      { src: "/pics-temp/DSC01654.JPG", alt: "Youth ministry moment 1" },
-      { src: "/pics-temp/DSC01636.JPG", alt: "Youth ministry moment 2" },
-      { src: "/pics-temp/DSC05222.jpg", alt: "Youth ministry moment 3" },
-      { src: "/pics-temp/DSC05299.jpg", alt: "Youth ministry moment 4" },
-      { src: "/pics-temp/DSC01272.jpg", alt: "Youth ministry moment 5" },
-      { src: "/pics-temp/DSC01195.jpg", alt: "Youth ministry moment 6" },
+      { src: "/images/ministries/middle%20n%20high/header.JPG", alt: "Youth ministry moment 1" },
+      { src: "/images/ministries/middle%20n%20high/introduction.jpg", alt: "Youth ministry moment 2" },
+      { src: "/images/ministries/middle%20n%20high/praise%20night.jpg", alt: "Youth ministry moment 3" },
+      { src: "/images/ministries/middle%20n%20high/fellowship.JPG", alt: "Youth ministry moment 4" },
+      { src: "/images/ministries/middle%20n%20high/jbfhbf%20conference.jpg", alt: "Youth ministry moment 5" },
     ],
   },
 };

@@ -48,7 +48,7 @@ const introData: MinistryIntroSectionProps = {
     description:
       "Our adult ministry brings together people from many walks of life, including campus leaders, Bible teachers, parents, missionaries, and members growing in faith. Within the adult ministry, there are opportunities for personal and group Bible study, special conferences, campus outreach, and opportunities to support the church\u2019s mission in various mission fields and beyond. Join us for Sunday worship to learn more about how you can find your place at LA UBF.",
     image: {
-      src: "/pics-temp/DSC01636.JPG",
+      src: "/images/ministries/adults/introduction.jpg",
       alt: "Adult ministry group photo",
     },
   },
@@ -66,19 +66,19 @@ const whatWeDoData: PillarsSectionProps = {
         title: "Growing in Faith",
         description:
           "Adult ministry includes opportunities for Bible study, prayer, and spiritual growth to be built up and be established in God\u2019s grace, devotionals, and shared learning, adults grow together in the Word.",
-        images: [{ src: "/pics-temp/DSC05222.jpg", alt: "Growing in faith" }],
+        images: [{ src: "/images/ministries/adults/growing.jpg", alt: "Growing in faith" }],
       },
       {
         title: "Raising Disciples",
         description:
           "Many adults learn to grow in leadership, mentoring, teaching personal Bible studies, or guiding others in faith. Teaching helps to grow in understanding by sharing God\u2019s Word with others. Key to our ministry is raising others as lifelong disciples of Christ.",
-        images: [{ src: "/pics-temp/DSC05299.jpg", alt: "Raising disciples" }],
+        images: [{ src: "/images/ministries/adults/disciples.jpg", alt: "Raising disciples" }],
       },
       {
         title: "Serving & Mission",
         description:
           "Adults take part and serve together through short-term and long-term service opportunities, seasonal conferences, campus outreach, and opportunities to support the church\u2019s mission in various mission fields and beyond.",
-        images: [{ src: "/pics-temp/DSC01272.jpg", alt: "Serving and mission" }],
+        images: [{ src: "/images/ministries/adults/serving.JPG", alt: "Serving and mission" }],
       },
       {
         title: "Community & Fellowship",
