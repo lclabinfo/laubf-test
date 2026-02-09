@@ -146,7 +146,7 @@ export default function FilterToolbar({
                   placeholder={search.placeholder ?? "Search..."}
                   value={search.value}
                   onChange={(e) => search.onChange(e.target.value)}
-                  className="w-full rounded-full border border-white-2 bg-white-1-5 py-2.5 pl-10 pr-4 text-[14px] text-black-1 placeholder:text-black-3 outline-none transition-colors focus:border-black-2"
+                  className="w-full rounded-full border border-white-2 bg-white-1-5 py-3 pl-10 pr-4 text-[14px] text-black-1 placeholder:text-black-3 outline-none transition-colors focus:border-black-2"
                 />
               </div>
             )}
@@ -253,16 +253,18 @@ export default function FilterToolbar({
 /* ── Sub-components ── */
 
 function FilterDropdown({ config }: { config: FilterDropdownConfig }) {
+  const selectId = `filter-${config.id}`;
   return (
     <div className="flex flex-col gap-1 min-w-[180px]">
-      <label className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
+      <label htmlFor={selectId} className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
         {config.label}
       </label>
       <div className="relative">
         <select
+          id={selectId}
           value={config.value}
           onChange={(e) => config.onChange(e.target.value)}
-          className="w-full appearance-none rounded-[10px] border border-white-2 bg-white-0 py-2 pl-3.5 pr-10 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
+          className="w-full appearance-none rounded-[10px] border border-white-2 bg-white-0 py-2.5 pl-3.5 pr-10 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
         >
           {config.options.map((opt) => (
             <option key={opt.value} value={opt.value}>
@@ -285,18 +287,20 @@ function DatePickerField({
   value: string;
   onChange: (value: string) => void;
 }) {
+  const inputId = `date-${label.toLowerCase().replace(/\s+/g, "-")}`;
   return (
     <div className="flex flex-col gap-1 min-w-[180px]">
-      <label className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
+      <label htmlFor={inputId} className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
         {label}
       </label>
       <div className="relative">
         <IconCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-black-3 pointer-events-none" />
         <input
+          id={inputId}
           type="date"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-[10px] border border-white-2 bg-white-0 py-2 pl-10 pr-4 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
+          className="w-full rounded-[10px] border border-white-2 bg-white-0 py-2.5 pl-10 pr-4 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
           placeholder="Pick a date"
         />
       </div>

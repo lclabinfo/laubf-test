@@ -46,7 +46,7 @@ export default function FooterSection(props: {
                   unoptimized
                   className="object-contain brightness-0 invert"
                 />
-                <p className="text-body-2 text-white-3 max-w-[240px]">
+                <p className="text-body-2 text-white-2-5 max-w-[240px]">
                   {content.description}
                 </p>
               </div>
@@ -70,7 +70,7 @@ export default function FooterSection(props: {
             {/* Nav columns */}
             {content.columns.map((col) => (
               <div key={col.heading} className="flex flex-col gap-3">
-                <h4 className="text-button-2 text-white-3 uppercase">
+                <h4 className="text-button-2 text-white-2-5 uppercase">
                   {col.heading}
                 </h4>
                 <nav className="flex flex-col">
@@ -92,7 +92,7 @@ export default function FooterSection(props: {
 
             {/* Contact column */}
             <div className="flex flex-col gap-3">
-              <h4 className="text-button-2 text-white-3 uppercase">
+              <h4 className="text-button-2 text-white-2-5 uppercase">
                 VISIT US
               </h4>
               <div className="flex flex-col gap-4">

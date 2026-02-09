@@ -115,6 +115,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Focus-visible ring for keyboard navigation (WCAG AA) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent-blue);
+    outline-offset: 2px;
+  }
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-accent-blue);
+  }
 }
 
 /* ---- Typography Utilities ---- */
@@ -301,7 +313,7 @@
     width: 100%;
     max-width: 1200px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
   @media (width >= 30rem) {
     .container-standard { padding-inline: 1.5rem; }
@@ -317,7 +329,7 @@
     width: 100%;
     max-width: 960px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
   @media (width >= 30rem) {
     .container-narrow { padding-inline: 1.5rem; }
@@ -333,7 +345,7 @@
     width: 100%;
     max-width: 1140px;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
   @media (width >= 30rem) {
     .container-nav { padding-inline: 1.5rem; }
