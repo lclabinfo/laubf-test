@@ -31,6 +31,7 @@ export default function EventCard({ data, size, className }: EventCardProps) {
         alt={data.imageAlt ?? data.title}
         fill
         className="object-cover transition-transform duration-500 ease-smooth group-hover:scale-105"
+        style={{ objectPosition: data.imageObjectPosition }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
       <div

@@ -25,6 +25,7 @@ import { themeTokens } from "@/lib/theme";
 import type { MinistryHeroSectionProps } from "@/lib/types/sections";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { IconExternalLink, IconMail, IconInstagram, IconFacebook } from "@/components/layout/icons";
 
 function getSocialIcon(platform: string) {
@@ -108,15 +109,13 @@ export default function MinistryHeroSection(props: {
       {content.heroImage && (
         <div className={cn("container-standard pb-0", animate && "animate-hero-fade-up-delayed")}>
           <div className={`relative w-full ${isSans ? "h-[320px] lg:h-[480px] rounded-xl" : "aspect-[16/7] rounded-2xl"} overflow-hidden bg-gradient-to-br from-white-2 to-white-1-5`}>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="size-20 rounded-full bg-white-2-5/60 flex items-center justify-center">
-                <svg className="size-9 text-black-3/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <circle cx="8.5" cy="8.5" r="1.5" />
-                  <polyline points="21 15 16 10 5 21" />
-                </svg>
-              </div>
-            </div>
+            <Image
+              src={content.heroImage.src}
+              alt={content.heroImage.alt}
+              fill
+              className="object-cover"
+              style={{ objectPosition: content.heroImage?.objectPosition }}
+            />
           </div>
         </div>
       )}

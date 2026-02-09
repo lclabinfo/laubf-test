@@ -5,7 +5,7 @@
  *   heading: string -- section heading (e.g. "Join a Campus Ministry")
  *   description: string -- paragraph below heading
  * -- Decorative (BASIC) --
- *   decorativeImages[]: { src, alt, rotation } -- overlapping tilted photos
+ *   decorativeImages[]: { src, alt } -- overlapping tilted photos (rotations hardcoded)
  * -- Campuses (BASIC) --
  *   campuses[]: { id, abbreviation, fullName }
  * -- CTA (BASIC) --
@@ -44,26 +44,27 @@ export default function CampusCardGridSection(props: {
     <SectionContainer settings={settings}>
       {/* Decorative overlapping photos */}
       {content.decorativeImages && content.decorativeImages.length > 0 && (
-        <AnimateOnScroll animation="scale-up" enabled={animate} className="flex items-center justify-center mb-12 overflow-hidden">
-          <div className="relative w-[300px] h-[200px] md:w-[400px] md:h-[250px]">
+        <AnimateOnScroll animation="scale-up" enabled={animate} className="flex items-center justify-center mb-6 md:mb-12 overflow-hidden">
+          <div className="relative w-[300px] h-[180px] md:w-[400px] md:h-[200px] overflow-hidden">
             {content.decorativeImages.map((img, i) => {
-              /* Stack images with overlapping positions */
+              /* Stack images with overlapping positions — sized to fit container */
               const positions = [
-                { top: "30%", left: "0%", zIndex: 1 },
+                { top: "28%", left: "12%", zIndex: 1 },
                 { top: "0%", left: "25%", zIndex: 3 },
-                { top: "25%", left: "55%", zIndex: 2 },
+                { top: "20%", left: "46%", zIndex: 2 },
               ];
+              const rotations = [-13, -2, 15];
               const pos = positions[i % positions.length];
 
               return (
                 <div
                   key={i}
-                  className="absolute w-[160px] h-[120px] md:w-[200px] md:h-[150px] rounded-2xl overflow-hidden shadow-lg border-[3px] border-white-0"
+                  className="absolute w-[130px] h-[100px] md:w-[160px] md:h-[120px] rounded-2xl overflow-hidden shadow-lg border-[3px] border-white-0"
                   style={{
                     top: pos.top,
                     left: pos.left,
                     zIndex: pos.zIndex,
-                    transform: `rotate(${img.rotation}deg)`,
+                    transform: `rotate(${rotations[i % rotations.length]}deg)`,
                   }}
                 >
                   <Image
@@ -71,6 +72,7 @@ export default function CampusCardGridSection(props: {
                     alt={img.alt}
                     fill
                     className="object-cover"
+                    style={{ objectPosition: img.objectPosition }}
                   />
                 </div>
               );
@@ -99,7 +101,7 @@ export default function CampusCardGridSection(props: {
       {/* Campus cards grid — rectangular cards matching Figma */}
       <div className="flex flex-wrap justify-center gap-5 max-w-4xl mx-auto">
         {content.campuses.map((campus) => {
-          const cardClasses = `rounded-2xl border ${t.cardBorder} ${t.cardBg} min-h-[80px] px-7 py-5 flex flex-col items-center justify-center gap-2 text-center transition-colors hover:bg-white-2`;
+          const cardClasses = `rounded-2xl border ${t.cardBorder} ${t.cardBg} px-7 py-3 flex flex-col items-center justify-center gap-1 text-center transition-colors hover:bg-white-2`;
           const cardContent = (
             <>
               {campus.abbreviation && (

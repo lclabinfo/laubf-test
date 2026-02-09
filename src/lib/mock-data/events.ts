@@ -17,7 +17,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>What to Expect</h3>
 <p>Each session opens with a time of worship and prayer, followed by inductive Bible study in small groups. We are currently working through the <strong>Gospel of Mark</strong>, exploring how Jesus called His disciples and revealed the Kingdom of God.</p>
 <p>After the study we share fellowship over snacks and drinks. Whether you have been walking with God for years or are exploring faith for the first time, you are welcome here.</p>`,
-    image: { src: "/images/home/bible-study.png", alt: "Friday night Bible study group discussion" },
+    image: { src: "", alt: "Friday night Bible study group discussion" },
     tags: ["#YAM", "#RECURRING", "#BIBLE STUDY", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "all",
@@ -47,7 +47,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Responsive prayer and benediction</li>
 </ul>
 <p>Communion is observed on the first Sunday of each month. Childcare and a children's program are available during the service. We look forward to welcoming you this Sunday.</p>`,
-    image: { src: "/images/home/sunday-worship.jpg", alt: "Sunday worship service congregation" },
+    image: { src: "", alt: "Sunday worship service congregation" },
     tags: ["#CHURCH-WIDE", "#RECURRING", "#WORSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
     campus: "all",
@@ -76,7 +76,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Our local community and the nation</li>
 </ul>
 <p>Light refreshments will be served. This is a wonderful way to commit 2026 to the Lord from the very first day.</p>`,
-    image: { src: "/pics-temp/DSC05222.jpg", alt: "New Year prayer meeting" },
+    image: { src: "", alt: "New Year prayer meeting" },
 
     tags: ["#CHURCH-WIDE", "#WORSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
@@ -100,7 +100,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>Activities</h3>
 <p>We will have lawn games, a photo booth, and short testimonies from students about how campus Bible study has impacted their college experience. Sign up for a one-to-one Bible study and receive a free study Bible.</p>
 <p>Bring your friends and come hungry. We cannot wait to meet you!</p>`,
-    image: { src: "/pics-temp/csulb/waving.JPG", alt: "Students at CSULB welcome week outreach table" },
+    image: { src: "", alt: "Students at CSULB welcome week outreach table" },
 
     tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#OPEN EVENT"],
     ministry: "young-adult",
@@ -125,7 +125,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>Current Study</h3>
 <p>We are studying the <strong>Book of Genesis</strong>, discovering how God created the world, called Abraham, and began His redemptive work in history. No prior Bible knowledge is needed.</p>
 <p>Bring your lunch and a curious heart. Bibles and study materials are provided. Contact us if you need help finding the room.</p>`,
-    image: { src: "/pics-temp/csulb/IMG_1408.JPG", alt: "CSULB campus Bible study group" },
+    image: { src: "", alt: "CSULB campus Bible study group" },
     tags: ["#YAM", "#CAMPUS", "#RECURRING", "#BIBLE STUDY"],
     ministry: "young-adult",
     campus: "csulb",
@@ -155,7 +155,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Sunday: Closing worship and commissioning prayer</li>
 </ul>
 <p>Registration includes lodging, meals, and transportation from LA UBF center. Space is limited to 40 participants, so register early. Financial assistance is available upon request.</p>`,
-    image: { src: "/pics-temp/DSC05299.jpg", alt: "Young adults at winter retreat in the mountains" },
+    image: { src: "", alt: "Young adults at winter retreat in the mountains" },
 
     tags: ["#YAM", "#FELLOWSHIP", "#CONFERENCE"],
     ministry: "young-adult",
@@ -186,7 +186,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Keeping Christ at the center of your marriage</li>
 </ul>
 <p>Lunch will be provided. Childcare is available for children ages 2-10. Please register so we can prepare adequate materials and meals.</p>`,
-    image: { src: "/pics-temp/DSC01654.JPG", alt: "Couples at the marriage and family seminar" },
+    image: { src: "", alt: "Couples at the marriage and family seminar" },
     tags: ["#ADULT", "#HBF", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "adult",
     isRecurring: false,
@@ -213,7 +213,7 @@ const MOCK_EVENTS: Event[] = [
 <li><strong>Young Disciples (ages 10-12)</strong>: Discussion-based Bible study with application activities</li>
 </ul>
 <p>All teachers have completed background checks and are trained in child safety. Snacks are provided each week. Please let us know about any allergies when you register your child.</p>`,
-    image: { src: "/pics-temp/DSC01636.JPG", alt: "Children participating in Sunday school activities" },
+    image: { src: "", alt: "Children participating in Sunday school activities" },
     tags: ["#CHILDREN", "#RECURRING", "#BIBLE STUDY", "#OPEN EVENT"],
     ministry: "children",
     isRecurring: true,
@@ -237,7 +237,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>What We Offer</h3>
 <p>Free pour-over coffee from a local roaster, copies of the Gospel of John, and genuine conversation. No pressure, no gimmicks, just students who want to share what God has done in their lives.</p>
 <p>If you are a UCLA student interested in volunteering at the outreach table, contact our campus coordinator. Training will be provided the week before the event.</p>`,
-    image: { src: "/pics-temp/DSC01272.jpg", alt: "Students at UCLA campus outreach table" },
+    image: { src: "", alt: "Students at UCLA campus outreach table" },
     tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "ucla",
@@ -265,7 +265,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Shared Easter meal following the service</li>
 </ul>
 <p>Invite your friends, family, and neighbors. This is a wonderful opportunity to introduce someone to the hope of the Gospel. A special children's Easter program with an egg hunt will take place simultaneously.</p>`,
-    image: { src: "/pics-temp/Easter_10.jpeg", alt: "Easter celebration worship service" },
+    image: { src: "", alt: "Easter celebration worship service" },
 
     tags: ["#CHURCH-WIDE", "#WORSHIP", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
@@ -296,7 +296,7 @@ const MOCK_EVENTS: Event[] = [
 </ul>
 <h3>Who Should Attend</h3>
 <p>This training is open to all members who feel called to serve. Whether you are already leading a group or simply exploring what leadership might look like, you will gain practical skills and spiritual encouragement. Lunch is provided both days.</p>`,
-    image: { src: "/pics-temp/DSC01195.jpg", alt: "Leadership training workshop in session" },
+    image: { src: "", alt: "Leadership training workshop in session" },
     tags: ["#CHURCH-WIDE", "#CONFERENCE"],
     ministry: "church-wide",
     isRecurring: false,
@@ -324,7 +324,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Closing with the Lord's Prayer</li>
 </ul>
 <p>Coffee is always ready by 5:45 AM. Whether you are a morning person or making a sacrifice to be here, God honors the commitment. Join us in person or via Zoom.</p>`,
-    image: { src: "/images/home/fellowship.jpg", alt: "Early morning prayer meeting" },
+    image: { src: "", alt: "Early morning prayer meeting" },
     tags: ["#CHURCH-WIDE", "#RECURRING", "#WORSHIP"],
     ministry: "church-wide",
     isRecurring: true,
@@ -347,7 +347,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>About the Study</h3>
 <p>We will be working through the <strong>Gospel of John</strong>, one of the most beloved books of the Bible. John presents Jesus as the Son of God who came to give us eternal life. Each week's study is self-contained, so you can jump in at any point.</p>
 <p>Whether you are a committed Christian or have never opened a Bible, this study is for you. Come with questions. Leave with hope.</p>`,
-    image: { src: "/pics-temp/DSC05090.jpg", alt: "Students at CSUF Bible study kickoff event" },
+    image: { src: "", alt: "Students at CSUF Bible study kickoff event" },
 
     tags: ["#YAM", "#CAMPUS", "#BIBLE STUDY", "#OPEN EVENT"],
     ministry: "young-adult",
@@ -371,7 +371,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>Study Format</h3>
 <p>Each session includes a short lecture from one of our senior leaders, followed by group discussion and personal application. Homework questions are provided for those who want to dig deeper during the week.</p>
 <p>This study is geared toward adults of all ages who want a more in-depth engagement with Scripture. Childcare is available with advance notice. Coffee and tea are always on hand.</p>`,
-    image: { src: "/pics-temp/DSC05138.jpg", alt: "Adult Bible study group discussing Romans" },
+    image: { src: "", alt: "Adult Bible study group discussing Romans" },
     tags: ["#ADULT", "#HBF", "#RECURRING", "#BIBLE STUDY"],
     ministry: "adult",
     isRecurring: true,
@@ -399,7 +399,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Gift bags for all mothers in attendance</li>
 </ul>
 <p>Children are encouraged to prepare a card or letter for their mothers. All women in the church are invited, whether you are a mother or a spiritual mother to someone in the congregation.</p>`,
-    image: { src: "/pics-temp/DSC05182.jpg", alt: "Mothers being honored at appreciation brunch" },
+    image: { src: "", alt: "Mothers being honored at appreciation brunch" },
     tags: ["#CHURCH-WIDE", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
     isRecurring: false,
@@ -428,7 +428,7 @@ const MOCK_EVENTS: Event[] = [
 </ul>
 <h3>Mentoring Component</h3>
 <p>Each student will be paired with a college-age mentor who will walk alongside them throughout the week and continue meeting monthly after the academy ends. This mentoring relationship has been one of the most impactful parts of the program for past participants.</p>`,
-    image: { src: "/pics-temp/DSC00928.jpg", alt: "High school students at summer Bible academy" },
+    image: { src: "", alt: "High school students at summer Bible academy" },
     tags: ["#JBF", "#BIBLE STUDY", "#FELLOWSHIP"],
     ministry: "high-school",
     isRecurring: false,
@@ -457,7 +457,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Watermelon-eating contest</li>
 </ul>
 <p>Each family is asked to bring one side dish or dessert to share. The church will provide meat, drinks, and supplies. Wear comfortable clothes and bring sunscreen. Rain date is May 30th.</p>`,
-    image: { src: "/pics-temp/DSC00446.jpg", alt: "Church families enjoying outdoor picnic and sports" },
+    image: { src: "", alt: "Church families enjoying outdoor picnic and sports" },
     tags: ["#CHURCH-WIDE", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
     isRecurring: false,
@@ -479,7 +479,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>First Meeting Details</h3>
 <p>Our inaugural meeting will feature free pizza, introductions, and a short preview study from the <strong>Book of Acts</strong>. We will discuss what the early church looked like and how those same principles apply to our lives as students today.</p>
 <p>If you are a USC student, graduate student, or faculty member looking for meaningful community on campus, this is your invitation. Help us build something lasting at USC for God's glory.</p>`,
-    image: { src: "/images/event-1.jpg", alt: "Students gathering for USC Bible study launch" },
+    image: { src: "", alt: "Students gathering for USC Bible study launch" },
 
     tags: ["#YAM", "#CAMPUS", "#BIBLE STUDY", "#OPEN EVENT"],
     ministry: "young-adult",
@@ -511,7 +511,7 @@ const MOCK_EVENTS: Event[] = [
 </ul>
 <h3>What Children Will Experience</h3>
 <p>Each day includes Bible stories with dramatic presentations, worship songs with motions, hands-on crafts, science experiments that illustrate biblical truths, and outdoor games. A closing celebration on Friday evening will showcase what the children have learned, and families are invited to attend.</p>`,
-    image: { src: "/images/event-2.jpg", alt: "Children at Vacation Bible School activities" },
+    image: { src: "", alt: "Children at Vacation Bible School activities" },
 
     tags: ["#CHILDREN", "#BIBLE STUDY", "#OUTREACH", "#OPEN EVENT"],
     ministry: "children",
@@ -543,7 +543,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Sunday: Closing message, commissioning prayer, group lunch</li>
 </ul>
 <p>Registration includes lodging, meals, and conference materials. Early bird pricing is available through June 1st. Group discounts for 5+ from the same church.</p>`,
-    image: { src: "/images/event-3.jpg", alt: "Worship at summer mission conference" },
+    image: { src: "", alt: "Worship at summer mission conference" },
     tags: ["#CHURCH-WIDE", "#CONFERENCE", "#WORSHIP", "#OUTREACH"],
     ministry: "church-wide",
     isRecurring: false,
@@ -567,7 +567,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>What to Expect</h3>
 <p>Stop by for free snacks, cold drinks, and a chance to meet other students who are exploring faith. We will have information about our weekly Bible study, one-to-one study opportunities, and upcoming events.</p>
 <p>Volunteers from LA UBF will be available to share their testimonies and answer questions about Christianity in a friendly, no-pressure environment. If you are a Golden West student interested in helping with outreach, reach out to our campus coordinator.</p>`,
-    image: { src: "/pics-temp/DSC05090.jpg", alt: "Outreach table at Golden West College" },
+    image: { src: "", alt: "Outreach table at Golden West College" },
     tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "golden-west",
@@ -596,7 +596,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Specific campuses: CSULB, UCLA, USC, CSUF, and community colleges</li>
 </ul>
 <p>We will pray in small groups organized by campus. Even if you are not a student, your prayers make a difference. Light refreshments will be available.</p>`,
-    image: { src: "/pics-temp/DSC05138.jpg", alt: "Church members praying together" },
+    image: { src: "", alt: "Church members praying together" },
     tags: ["#CHURCH-WIDE", "#WORSHIP", "#CAMPUS"],
     ministry: "church-wide",
     isRecurring: false,
@@ -619,7 +619,7 @@ const MOCK_EVENTS: Event[] = [
 <p>Burgers, hot dogs, veggie options, Korean side dishes, chips, drinks, and dessert. We go all out because we believe great food brings people together.</p>
 <h3>Why Come?</h3>
 <p>College is better with community. Come meet other Christian students, learn about our weekly Bible study on campus, and enjoy a relaxing evening before classes ramp up. We will also have a sign-up sheet for our small group Bible studies that meet throughout the week at various times to fit your schedule.</p>`,
-    image: { src: "/pics-temp/DSC05182.jpg", alt: "Students enjoying BBQ at Cal Poly Pomona" },
+    image: { src: "", alt: "Students enjoying BBQ at Cal Poly Pomona" },
     tags: ["#YAM", "#CAMPUS", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "cal-poly-pomona",
@@ -647,7 +647,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Q&A and sign-up for weekly studies</li>
 </ul>
 <p>Free boxed lunches will be provided. No commitment required. Just come, eat, listen, and decide if this is something you want to explore further.</p>`,
-    image: { src: "/pics-temp/DSC01272.jpg", alt: "Students at CSUDH campus ministry info session" },
+    image: { src: "", alt: "Students at CSUDH campus ministry info session" },
     tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "csudh",
@@ -678,7 +678,7 @@ const MOCK_EVENTS: Event[] = [
 </ul>
 <h3>Practical Information</h3>
 <p>Registration covers lodging (shared cabins), all meals, and conference materials. Transportation will be arranged from LA UBF center. The conference is open to all members and regular attendees. Financial assistance is available; please speak with a pastor confidentially.</p>`,
-    image: { src: "/pics-temp/DSC05222.jpg", alt: "Worship at fall Bible conference in the mountains" },
+    image: { src: "", alt: "Worship at fall Bible conference in the mountains" },
     tags: ["#CHURCH-WIDE", "#CONFERENCE", "#WORSHIP", "#BIBLE STUDY"],
     ministry: "church-wide",
     isRecurring: false,
@@ -707,7 +707,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Live music and a short Gospel message</li>
 </ul>
 <p>We need 30+ volunteers to make this event a success. Sign up to decorate a trunk, run a game booth, or help with setup and cleanup. This is our chance to be a light in the community and show the love of Christ to our neighbors.</p>`,
-    image: { src: "/pics-temp/DSC00928.jpg", alt: "Families enjoying the harvest festival" },
+    image: { src: "", alt: "Families enjoying the harvest festival" },
     tags: ["#CHURCH-WIDE", "#OUTREACH", "#FELLOWSHIP", "#CHILDREN", "#OPEN EVENT"],
     ministry: "church-wide",
     isRecurring: false,
@@ -730,7 +730,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>Outreach Activities</h3>
 <p>We will have a welcoming table near the Student Life Center with free coffee, baked goods, and conversation. Our team members will share their personal stories of how God has worked in their lives and invite students to explore faith through a no-pressure Bible study.</p>
 <p>If you are a Mt. SAC student or know someone who attends, please pray for open hearts and meaningful conversations during this outreach. Volunteer sign-ups are available through the link below.</p>`,
-    image: { src: "/pics-temp/DSC01654.JPG", alt: "Outreach table at Mt. SAC campus" },
+    image: { src: "", alt: "Outreach table at Mt. SAC campus" },
     tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "mt-sac",
@@ -759,7 +759,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Last names Q-Z: Desserts and drinks</li>
 </ul>
 <p>Turkey and ham will be provided by the church. This is a wonderful time to invite friends and neighbors who may be spending the holiday alone. Everyone deserves a seat at the table.</p>`,
-    image: { src: "/pics-temp/DSC01636.JPG", alt: "Church family sharing Thanksgiving meal" },
+    image: { src: "", alt: "Church family sharing Thanksgiving meal" },
     tags: ["#CHURCH-WIDE", "#FELLOWSHIP", "#WORSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
     isRecurring: false,
@@ -786,7 +786,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Worship and prayer time</li>
 </ul>
 <p>Whether you are a culinary expert or can barely boil water, your presence is what matters most. Sign up in the group chat and let us know what you are bringing so we do not end up with 20 mac-and-cheese dishes.</p>`,
-    image: { src: "/images/home/fellowship.jpg", alt: "Young adults at Friendsgiving dinner" },
+    image: { src: "", alt: "Young adults at Friendsgiving dinner" },
     tags: ["#YAM", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "all",
@@ -815,7 +815,7 @@ const MOCK_EVENTS: Event[] = [
 <li>Christmas feast and gift exchange</li>
 </ul>
 <p>For the gift exchange, please bring a wrapped gift valued at $15 or less. Invite your friends and loved ones to experience the joy and peace of Christmas in a warm church family setting.</p>`,
-    image: { src: "/images/home/event-christmas.png", alt: "Church choir performing Christmas cantata" },
+    image: { src: "", alt: "Church choir performing Christmas cantata" },
 
     tags: ["#CHURCH-WIDE", "#WORSHIP", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
@@ -844,7 +844,7 @@ const MOCK_EVENTS: Event[] = [
 <li><strong>New believer testimonies</strong>: Those who came to faith this year share their journey</li>
 </ul>
 <p>If you would like to share a testimony, please submit a written draft to your fellowship leader by December 20th. Testimonies should be 5-7 minutes in length. Dessert and coffee will be served throughout the evening.</p>`,
-    image: { src: "/pics-temp/DSC01195.jpg", alt: "Member sharing testimony at year-end gathering" },
+    image: { src: "", alt: "Member sharing testimony at year-end gathering" },
     tags: ["#CHURCH-WIDE", "#FELLOWSHIP", "#WORSHIP"],
     ministry: "church-wide",
     isRecurring: false,
@@ -866,7 +866,7 @@ const MOCK_EVENTS: Event[] = [
 <h3>What We Are About</h3>
 <p>LA UBF's Cypress College ministry exists to help students encounter Jesus through the Bible. We believe that studying God's word together in community is one of the most transformative things a college student can do.</p>
 <p>No experience with the Bible is needed. No church background required. Just bring your appetite and your questions. We will bring the tacos and the answers (or at least the honest conversation). Hope to see you there!</p>`,
-    image: { src: "/pics-temp/DSC00446.jpg", alt: "Students at Cypress College lunch fellowship" },
+    image: { src: "", alt: "Students at Cypress College lunch fellowship" },
     tags: ["#YAM", "#CAMPUS", "#FELLOWSHIP", "#OPEN EVENT"],
     ministry: "young-adult",
     campus: "cypress",

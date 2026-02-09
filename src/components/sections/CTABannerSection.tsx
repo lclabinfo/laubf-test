@@ -46,6 +46,7 @@ export default function CTABannerSection(props: {
             alt={content.backgroundImage.alt ?? ""}
             fill
             className="object-cover opacity-10 pointer-events-none"
+            style={{ objectPosition: content.backgroundImage?.objectPosition }}
           />
         )}
 

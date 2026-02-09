@@ -7,7 +7,6 @@ import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import FormSection from "@/components/sections/FormSection";
 import PathwayCardSection from "@/components/sections/PathwayCardSection";
 import { getEventsByMinistry } from "@/lib/mock-data/events";
-import { toUpcomingEventItem } from "@/lib/types/events";
 
 import type {
   MinistryHeroSectionProps,
@@ -135,6 +134,8 @@ const teamData: MeetTeamSectionProps = {
   },
 };
 
+const highSchoolEvents = getEventsByMinistry("high-school").slice(0, 3);
+
 const eventsData: UpcomingEventsSectionProps = {
   id: "high-school-events",
   visible: true,
@@ -142,7 +143,6 @@ const eventsData: UpcomingEventsSectionProps = {
   content: {
     overline: "YOUTH MINISTRY",
     heading: "Upcoming Events",
-    events: getEventsByMinistry("high-school").slice(0, 3).map(toUpcomingEventItem),
     ctaButton: { label: "View all events", href: "/events" },
   },
 };
@@ -238,7 +238,7 @@ export default function HighSchoolPage() {
       <PillarsSection settings={whatWeDoData} />
       <PhotoGallerySection settings={galleryData} />
       <MeetTeamSection settings={teamData} />
-      <UpcomingEventsSection settings={eventsData} />
+      <UpcomingEventsSection settings={eventsData} events={highSchoolEvents} />
       <FormSection settings={formData} />
       <PathwayCardSection settings={pathwayData} />
     </main>

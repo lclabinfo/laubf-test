@@ -63,9 +63,12 @@ const mediaTextData: MediaTextSectionProps = {
     body: "UBF is an international, non-denominational evangelical church. We serve college students from diverse backgrounds, helping them to grow in faith, build community, and find purpose through the Word of God.",
     button: { label: "More about us", href: "/about", visible: true },
     images: [
-      { src: "/images/who-we-are-1.jpg", alt: "Bible study session" },
-      { src: "/images/who-we-are-2.jpg", alt: "Community gathering" },
-      { src: "/images/who-we-are-3.jpg", alt: "Worship service" },
+      { src: "/images/home/rotatingwheel/bible-study.png", alt: "Bible study" },
+      { src: "/images/home/rotatingwheel/campus-ministry-list.png", alt: "Campus ministry" },
+      { src: "/images/home/rotatingwheel/campus-ministry.JPG", alt: "Campus ministry" },
+      { src: "/images/home/rotatingwheel/event-christmas.png", alt: "Christmas event" },
+      { src: "/images/home/rotatingwheel/fellowship.jpg", alt: "Fellowship" },
+      { src: "/images/home/rotatingwheel/sunday-worship.jpg", alt: "Sunday worship" },
     ],
   },
 };

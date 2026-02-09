@@ -22,6 +22,7 @@ export interface EventCardData {
   location?: string;
   imageUrl: string;
   imageAlt?: string;
+  imageObjectPosition?: string;
   badge?: string;
   href?: string;
 }
@@ -39,6 +40,7 @@ export interface ImageCardData {
   description: string;
   imageUrl: string;
   imageAlt?: string;
+  imageObjectPosition?: string;
   href?: string;
 }
 

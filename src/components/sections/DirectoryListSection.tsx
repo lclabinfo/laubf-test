@@ -91,6 +91,7 @@ function DirectoryMobileBlock({
               alt={image.alt}
               fill
               className="object-cover"
+              style={{ objectPosition: image.objectPosition }}
             />
           </div>
           <h2 className="text-h2 text-black-1 text-center">{heading}</h2>
@@ -213,6 +214,7 @@ function DirectoryParallaxBlock({
                   alt={image.alt}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: image.objectPosition }}
                 />
               </div>
             </motion.div>

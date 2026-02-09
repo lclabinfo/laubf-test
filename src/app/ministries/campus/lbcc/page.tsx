@@ -203,9 +203,9 @@ const campusGridData: CampusCardGridSectionProps = {
   colorScheme: "light",
   content: {
     decorativeImages: [
-      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo", rotation: -8 },
-      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors", rotation: 3 },
-      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event", rotation: -5 },
+      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo" },
+      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors" },
+      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event" },
     ],
     heading: "Check out other campuses",
     campuses: [

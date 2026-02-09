@@ -20,6 +20,7 @@ import SectionContainer from "@/components/shared/SectionContainer";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { MeetTeamSectionProps } from "@/lib/types/sections";
+import { Mail } from "lucide-react";
 
 export default function MeetTeamSection(props: {
   settings: MeetTeamSectionProps;
@@ -66,6 +67,17 @@ export default function MeetTeamSection(props: {
             <p className={`text-h4 font-normal ${t.textMuted} mt-1`}>
               {member.role}
             </p>
+
+            {/* Email */}
+            {member.email && (
+              <a
+                href={`mailto:${member.email}`}
+                className={`inline-flex items-center gap-1.5 mt-2 text-body-2 ${t.textMuted} hover:${t.textSecondary} transition-colors`}
+              >
+                <Mail className="size-3.5 shrink-0" strokeWidth={1.5} />
+                {member.email}
+              </a>
+            )}
           </AnimateOnScroll>
         ))}
       </div>

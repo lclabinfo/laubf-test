@@ -47,11 +47,9 @@ const MOBILE_SCROLL_DURATION = 30;
 function RotatingWheel({
   images,
   speed,
-  vignetteGradient,
 }: {
   images: { src: string; alt: string }[];
   speed: number;
-  vignetteGradient: string;
 }) {
   const [isPaused, setIsPaused] = useState(false);
   const controls = useAnimationControls();
@@ -100,7 +98,7 @@ function RotatingWheel({
 
   return (
     <div
-      className="h-[573px] relative shrink-0 w-[600px]"
+      className="h-[573px] relative w-[600px] max-w-full shrink-0"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -134,18 +132,13 @@ function RotatingWheel({
                   alt={img.alt}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: img.objectPosition }}
                 />
               </div>
             </div>
           );
         })}
       </motion.div>
-
-      {/* Vignette overlay — fades top/bottom edges for endless feel */}
-      <div
-        className="absolute inset-0 pointer-events-none z-10"
-        style={{ backgroundImage: vignetteGradient }}
-      />
     </div>
   );
 }
@@ -198,6 +191,7 @@ function MobileCarousel({
               width={MOBILE_ITEM_W}
               height={MOBILE_ITEM_H}
               className="w-full h-full object-cover"
+              style={{ objectPosition: img.objectPosition }}
             />
           </div>
         ))}
@@ -214,7 +208,7 @@ export default function MediaTextSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
-  const speed = content.rotationSpeed ?? 40;
+  const speed = content.rotationSpeed ?? 50;
 
   const themeColor =
     settings.colorScheme === "dark"
@@ -228,17 +222,26 @@ export default function MediaTextSection(props: {
 
   return (
     <SectionContainer settings={settings} className="!py-0" noContainer>
-      {/* Desktop layout: wheel flush-left, text right */}
-      <div className="hidden md:flex items-center overflow-hidden">
-        {/* Rotating wheel — images overflow vertically, clipped by section */}
-        <RotatingWheel
-          images={content.images}
-          speed={speed}
-          vignetteGradient={vignetteGradient}
-        />
+      {/* Desktop layout: wheel flush-left, text right — 0.8:1 ratio */}
+      <div className="hidden md:grid grid-cols-[4fr_5fr] w-full overflow-hidden">
+        {/* Carousel column — clips the fixed-size wheel */}
+        <div className="relative overflow-hidden">
+          <RotatingWheel
+            images={content.images}
+            speed={speed}
+          />
+          {/* Vignette overlay — fades top/bottom edges for endless feel */}
+          <div
+            className="absolute inset-0 pointer-events-none z-10"
+            style={{ backgroundImage: vignetteGradient }}
+          />
+        </div>
 
-        {/* Text content — vertically centered, with gap and right padding */}
-        <div className="flex flex-col justify-center gap-8 lg:gap-10 pl-16 pr-8 lg:pr-[120px] py-24">
+        {/* Text content — vertically centered, right edge aligns with container */}
+        <div
+          className="flex flex-col justify-center gap-8 pl-10 py-24"
+          style={{ paddingRight: "max(2rem, calc((100vw - 1200px) / 2))" }}
+        >
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <OverlineLabel text={content.overline} />

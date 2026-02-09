@@ -128,6 +128,7 @@ export default function PageHeroSection(props: {
               width={img.width}
               height={img.height}
               className="w-full h-full object-cover rounded-xl"
+              style={{ objectPosition: img.objectPosition }}
             />
           </motion.div>
         ))}

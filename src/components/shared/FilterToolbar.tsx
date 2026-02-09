@@ -117,7 +117,7 @@ export default function FilterToolbar({
   return (
     <div
       className={cn(
-        "relative z-30 pt-4",
+        "relative z-30 pt-4 pb-6",
         sticky && "sticky",
         className,
       )}

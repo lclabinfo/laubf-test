@@ -26,7 +26,7 @@ const textImageHeroData: TextImageHeroSectionProps = {
     description:
       "At LA UBF, we believe that spiritual growth happens best in community. Whether you are a student, a working professional, or a parent, there is a place for you here.",
     image: {
-      src: "/pics-temp/DSC01654.JPG",
+      src: "/images/ministries/congregation.jpg",
       alt: "LA UBF community gathering",
     },
   },
@@ -88,21 +88,9 @@ const campusCardGridData: CampusCardGridSectionProps = {
     description:
       "We have bible study clubs all across different college campuses. Join us for weekly group bible studies and get to know each other through fellowship.",
     decorativeImages: [
-      {
-        src: "/images/ministries/join-campus-ministry-section/1.JPG",
-        alt: "Campus group photo",
-        rotation: -8,
-      },
-      {
-        src: "/images/ministries/join-campus-ministry-section/2.jpg",
-        alt: "Bible study outdoors",
-        rotation: 3,
-      },
-      {
-        src: "/images/ministries/join-campus-ministry-section/3.png",
-        alt: "Fellowship event",
-        rotation: -5,
-      },
+      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo" },
+      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors" },
+      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event" },
     ],
     campuses: [
       { id: "lbcc", abbreviation: "LBCC", fullName: "Long Beach City College", href: "/ministries/campus/lbcc" },

@@ -68,6 +68,7 @@ export default function PhotoGallerySection(props: {
                   alt={img.alt}
                   fill
                   className="object-cover"
+                  style={{ objectPosition: img.objectPosition }}
                 />
               </div>
             ))}

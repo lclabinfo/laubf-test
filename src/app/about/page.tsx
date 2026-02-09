@@ -39,7 +39,7 @@ const aboutDescriptionData: AboutDescriptionSectionProps = {
   visible: true,
   colorScheme: "dark",
   content: {
-    logoSrc: "/logo/laubf-logo-colored.png",
+    logoSrc: "/logo/laubf-logo-blue.svg",
     heading: "About UBF",
     description:
       "University Bible Fellowship (UBF) is an international evangelical church (non-denominational) dedicated to Christ and his kingdom. Our main focus is to study the Bible, grow in the grace and knowledge of our Lord and Savior Jesus Christ, and live according to his teachings as his disciples. We especially pray to reach college students and help them grow as his lifelong disciples. Our goal is to obey our Lord\u2019s commands to love one another and to go and make disciples of all nations (Jn 13:34; Mt 28:18-20). We pray that God may continue to call and raise lay missionaries through us and send them to the ends of the earth (Ac 1:8).",

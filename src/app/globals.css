@@ -73,6 +73,7 @@
   /* Accent */
   --color-accent-green: #009966;
   --color-accent-blue: #155DFC;
+  --color-accent-orange: #FF6900;
   --color-campus-active: #2F3689;
   --color-campus-inactive: #9EA4AF;
 
@@ -280,7 +281,7 @@
     letter-spacing: -0.04em;
   }
   @media (width >= 64rem) {
-    .text-hero-accent { font-size: 10rem; }
+    .text-hero-accent { font-size: 9rem; }
   }
 
   .text-display-heading {

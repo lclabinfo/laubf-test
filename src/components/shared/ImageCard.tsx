@@ -25,6 +25,7 @@ export default function ImageCard({ data, className }: ImageCardProps) {
         alt={data.imageAlt ?? data.title}
         fill
         className="object-cover transition-transform duration-500 ease-smooth group-hover:scale-105"
+        style={{ objectPosition: data.imageObjectPosition }}
       />
       <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-transparent from-[44%] to-[rgba(0,0,0,0.71)] to-[69%]" />
       <div className="relative flex w-full items-end justify-between gap-4">

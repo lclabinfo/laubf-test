@@ -8,7 +8,6 @@ import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import FormSection from "@/components/sections/FormSection";
 import PathwayCardSection from "@/components/sections/PathwayCardSection";
 import { getEventsByMinistry } from "@/lib/mock-data/events";
-import { toUpcomingEventItem } from "@/lib/types/events";
 
 import type {
   MinistryHeroSectionProps,
@@ -121,9 +120,9 @@ const campusGridData: CampusCardGridSectionProps = {
   colorScheme: "light",
   content: {
     decorativeImages: [
-      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo", rotation: -8 },
-      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors", rotation: 3 },
-      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event", rotation: -5 },
+      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo" },
+      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors" },
+      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event" },
     ],
     heading: "Join a Campus Ministry",
     description:
@@ -173,6 +172,8 @@ const teamData: MeetTeamSectionProps = {
   },
 };
 
+const collegeEvents = getEventsByMinistry("young-adult").slice(0, 3);
+
 const eventsData: UpcomingEventsSectionProps = {
   id: "college-events",
   visible: true,
@@ -180,7 +181,6 @@ const eventsData: UpcomingEventsSectionProps = {
   content: {
     overline: "YOUNG ADULT MINISTRY",
     heading: "Upcoming Events",
-    events: getEventsByMinistry("young-adult").slice(0, 3).map(toUpcomingEventItem),
     ctaButton: { label: "View all events", href: "/events" },
   },
 };
@@ -277,7 +277,7 @@ export default function CollegePage() {
       <PhotoGallerySection settings={galleryData} />
       <CampusCardGridSection settings={campusGridData} />
       <MeetTeamSection settings={teamData} />
-      <UpcomingEventsSection settings={eventsData} />
+      <UpcomingEventsSection settings={eventsData} events={collegeEvents} />
       <FormSection settings={formData} />
       <PathwayCardSection settings={pathwayData} />
     </main>

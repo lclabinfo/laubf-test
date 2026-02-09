@@ -113,6 +113,17 @@ export const themeTokens: Record<SectionTheme, ThemeTokens> = {
   },
 };
 
+/* ── Event Type Tag Colors ── */
+/* CMS: These map event types to their pill/badge colors.
+ * To change a tag color globally, update the value here. */
+export const eventTypeColors: Record<string, string> = {
+  meeting: "bg-accent-green",
+  event: "bg-accent-blue",
+  program: "bg-accent-orange",
+};
+
+export const EVENT_TYPE_FALLBACK_COLOR = "bg-black-3";
+
 /* ── React Context ── */
 
 export const SectionThemeContext = createContext<SectionTheme>("light");

@@ -62,15 +62,25 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
     <>
       <header
         className={cn(
-          "sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-smooth",
+          "sticky top-0 left-0 right-0 z-50 transition-all duration-300 ease-smooth relative overflow-y-visible",
           isScrolled
             ? "bg-white-1 border-b border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)]"
             : "",
         )}
       >
+        {/* Top gradient overlay when over hero — darkens area so nav text is readable */}
+        {!isScrolled && (
+          <div
+            className="absolute inset-x-0 top-0 z-0 h-[200px] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.2) 60%, transparent 100%)",
+            }}
+          />
+        )}
         <div
           className={cn(
-            "container-nav flex items-center justify-between transition-[padding] duration-300 ease-smooth py-2",
+            "container-nav relative z-10 flex items-center justify-between transition-[padding] duration-300 ease-smooth py-2",
           )}
         >
           {/* Logo */}
@@ -79,8 +89,8 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
               <Image
                 src={content.logo.darkSrc}
                 alt={content.logo.alt}
-                width={62}
-                height={52}
+                width={57}
+                height={48}
                 unoptimized
                 className="object-contain"
               />
@@ -88,8 +98,8 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
               <Image
                 src={content.logo.lightSrc}
                 alt={content.logo.alt}
-                width={62}
-                height={52}
+                width={57}
+                height={48}
                 unoptimized
                 className="brightness-0 invert"
               />
@@ -180,7 +190,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
               <Link
                 href={content.ctaButton.href}
                 className={cn(
-                  "rounded-full px-8 py-4 text-nav transition-opacity hover:opacity-90",
+                  "rounded-full px-7 py-3.5 text-button-1 transition-opacity hover:opacity-90",
                   isScrolled
                     ? "bg-black-1 text-white-1"
                     : "bg-white-1 text-black-1",

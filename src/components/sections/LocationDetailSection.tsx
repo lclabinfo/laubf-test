@@ -92,6 +92,7 @@ export default function LocationDetailSection(props: {
                 alt={content.images[0].alt}
                 fill
                 className="object-cover"
+                style={{ objectPosition: content.images[0]?.objectPosition }}
               />
             </div>
           )}

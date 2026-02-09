@@ -46,6 +46,7 @@ export default function FormSection(props: { settings: FormSectionProps }) {
   const [otherSpecify, setOtherSpecify] = useState("");
   const [bibleTeacher, setBibleTeacher] = useState(false);
   const [selectedCampus, setSelectedCampus] = useState("");
+  const [otherCampus, setOtherCampus] = useState("");
 
   const showOtherField = checkedInterests.has("other");
 
@@ -231,9 +232,20 @@ export default function FormSection(props: { settings: FormSectionProps }) {
                       {opt.label}
                     </option>
                   ))}
+                  <option value="other">Other</option>
                 </select>
                 <IconChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 size-5 text-black-3 pointer-events-none" />
               </div>
+              {selectedCampus === "other" && (
+                <input
+                  type="text"
+                  name="otherCampus"
+                  placeholder="Enter your college name"
+                  value={otherCampus}
+                  onChange={(e) => setOtherCampus(e.target.value)}
+                  className={cn(inputStyles, "mt-3")}
+                />
+              )}
             </div>
 
             {/* Questions or comments textarea */}

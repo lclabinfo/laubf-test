@@ -76,6 +76,7 @@ export default function TextImageHeroSection(props: {
           fill
           className="object-cover"
           priority
+          style={{ objectPosition: content.image.objectPosition }}
         />
       </div>
     </SectionContainer>

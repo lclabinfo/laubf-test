@@ -19,7 +19,7 @@
 import { useRef } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
-import { themeTokens } from "@/lib/theme";
+import { themeTokens, eventTypeColors, EVENT_TYPE_FALLBACK_COLOR } from "@/lib/theme";
 import type { QuickLinksSectionProps } from "@/lib/types/sections";
 import type { Event } from "@/lib/types/events";
 import {
@@ -31,11 +31,6 @@ import {
 } from "@/components/layout/icons";
 import Link from "next/link";
 
-const TYPE_COLORS: Record<string, string> = {
-  meeting: "bg-accent-blue",
-  event: "bg-accent-green",
-  program: "bg-brand-1",
-};
 
 export default function QuickLinksSection(props: {
   settings: QuickLinksSectionProps;
@@ -104,7 +99,7 @@ export default function QuickLinksSection(props: {
                 {meeting.title}
               </h3>
               <span
-                className={`shrink-0 text-white-0 text-[11px] tracking-[0.24px] font-medium px-2.5 py-0.5 rounded-full uppercase ${TYPE_COLORS[meeting.type] ?? "bg-black-2"}`}
+                className={`shrink-0 text-white-0 text-[11px] tracking-[0.24px] font-medium px-2.5 py-0.5 rounded-full uppercase ${eventTypeColors[meeting.type] ?? EVENT_TYPE_FALLBACK_COLOR}`}
               >
                 {meeting.type}
               </span>

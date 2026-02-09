@@ -43,6 +43,7 @@ export default function MinistryIntroSection(props: {
                 alt={content.image!.alt}
                 fill
                 className="object-cover"
+                style={{ objectPosition: content.image?.objectPosition }}
               />
             </div>
           </AnimateOnScroll>

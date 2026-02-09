@@ -54,10 +54,10 @@ export default async function MessageDetailPage({
   if (!message) notFound();
 
   return (
-    <main className="bg-white-1 min-h-screen -mt-[76px] pt-[76px]">
+    <main className="bg-white-1 min-h-screen">
       {/* Sub-navigation bar */}
-      <div className="sticky top-[76px] z-30 bg-white-0/95 backdrop-blur-sm border-b border-white-2">
-        <div className="container-standard flex items-center justify-between h-16">
+      <div className="py-4">
+        <div className="container-standard flex items-center justify-between">
           <Link
             href="/messages"
             className="flex items-center gap-2 text-[14px] font-bold text-black-3 uppercase tracking-wide hover:text-black-1 transition-colors"
@@ -75,7 +75,7 @@ export default async function MessageDetailPage({
       </div>
 
       {/* Content */}
-      <div className="container-standard pt-10 pb-20 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10">
+      <div className="container-standard pt-2 pb-20 grid grid-cols-1 lg:grid-cols-[1fr_420px] gap-10">
         {/* ── Left column: Video + Metadata ── */}
         <div>
           {/* YouTube Embed */}
@@ -134,7 +134,7 @@ export default async function MessageDetailPage({
         </div>
 
         {/* ── Right column: Transcript + Study Guide ── */}
-        <aside className="flex flex-col gap-6 lg:sticky lg:top-36 h-fit">
+        <aside className="flex flex-col gap-6 lg:sticky lg:top-[96px] h-fit">
           <TranscriptPanel
             liveTranscript={message.liveTranscript}
             rawTranscript={message.rawTranscript}

@@ -47,7 +47,7 @@ export interface Event {
   /** Rich text body content for detail page (HTML) */
   body: string;
   /** Hero/card image */
-  image: { src: string; alt: string };
+  image: { src: string; alt: string; objectPosition?: string };
   /** Optional badge overlay: "UPCOMING", "FEATURED", "NEW" */
   badge?: string;
   /** Admin metadata tags */

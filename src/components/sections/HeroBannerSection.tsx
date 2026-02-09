@@ -56,33 +56,25 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
             fill
             priority
             className={cn("object-cover", animate && "animate-hero-fade-in-slow")}
+            style={{ objectPosition: content.backgroundImage.objectPosition }}
           />
         )}
-
-        {/* Top navbar overlay — darkens top so nav text is readable */}
-        <div
-          className="absolute inset-x-0 top-0 z-1 h-[200px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.3) 50%, transparent 100%)",
-          }}
-        />
 
         {/* Bottom gradient overlay */}
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(196deg, rgba(13,13,13,0) 50%, rgba(13,13,13,0.5) 64%, rgb(13,13,13) 86%)",
+              "linear-gradient(195deg, rgba(13,13,13,0) 50%, rgba(13,13,13,0.5) 65%, rgb(13,13,13) 100%)",
           }}
         />
 
         {/* Hero content */}
-        <div className="relative z-1 w-full pb-20 lg:pb-28">
+        <div className="relative z-1 w-full pb-10 lg:pb-14">
           <div className="container-standard lg:px-0 lg:ml-20 lg:max-w-none">
-            <div className="flex flex-col gap-10 max-w-[500px]">
+            <div className="flex flex-col gap-8 max-w-[500px]">
               {/* Heading */}
-              <div className={cn("flex flex-col gap-6", animate && "animate-hero-fade-up")}>
+              <div className={cn("flex flex-col gap-4", animate && "animate-hero-fade-up")}>
                 <div className="flex flex-col leading-[0.8] text-white-1 drop-shadow-lg">
                   <span className="text-h1">{content.heading.line1}</span>
                   <span className="text-hero-accent">
@@ -92,7 +84,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
 
                 {/* Subheading */}
                 {settings.showSubheading && content.subheading && (
-                  <div className={cn("text-[20px] lg:text-[32px] leading-[1.2] tracking-[-0.04em]", animate && "animate-hero-fade-up-delayed")}>
+                  <div className={cn("text-[20px] lg:text-[24px] leading-[1.2] tracking-[-0.04em]", animate && "animate-hero-fade-up-delayed")}>
                     {content.subheading.split("\n").map((line, i) => {
                       const parts = line.split(
                         /(\b(?:people find their community|disciples are raised|the Word of God is lived)\b)/,

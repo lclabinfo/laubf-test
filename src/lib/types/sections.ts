@@ -6,6 +6,14 @@ import type {
   VideoThumbnailData,
 } from "./shared";
 
+/* ---- Shared Image (all section image props) ---- */
+export interface SectionImage {
+  src: string;
+  alt: string;
+  /** CSS object-position for focal point adjustment (e.g. "center 30%", "top"). Defaults to "center". */
+  objectPosition?: string;
+}
+
 /* ---- Navbar ---- */
 export interface NavbarContent {
   logo: { lightSrc: string; darkSrc: string; alt: string };
@@ -70,7 +78,7 @@ export interface HeroBannerContent {
   subheading: string;
   primaryButton: { label: string; href: string; visible: boolean };
   secondaryButton: { label: string; href: string; visible: boolean };
-  backgroundImage: { src: string; alt: string };
+  backgroundImage: SectionImage;
 }
 
 export interface HeroBannerSectionProps extends BaseSectionSettings {
@@ -84,7 +92,7 @@ export interface MediaTextContent {
   heading: string;
   body: string;
   button: { label: string; href: string; visible: boolean };
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
   /** Seconds for one full rotation (desktop wheel). Default 40. */
   rotationSpeed?: number;
 }
@@ -152,7 +160,7 @@ export interface DirectoryItemData {
 export interface DirectoryListContent {
   heading: string;
   items: DirectoryItemData[];
-  image: { src: string; alt: string };
+  image: SectionImage;
   ctaHeading: string;
   ctaButton: { label: string; href: string };
 }
@@ -198,7 +206,7 @@ export interface CTABannerContent {
   body: string;
   primaryButton: { label: string; href: string; visible: boolean };
   secondaryButton: { label: string; href: string; visible: boolean };
-  backgroundImage?: { src: string; alt: string };
+  backgroundImage?: SectionImage;
 }
 
 export interface CTABannerSectionProps extends BaseSectionSettings {
@@ -223,9 +231,7 @@ export interface FooterSectionProps extends BaseSectionSettings {
 }
 
 /* ---- Page Hero (inner pages) ---- */
-export interface FloatingImage {
-  src: string;
-  alt: string;
+export interface FloatingImage extends SectionImage {
   width: number;
   height: number;
 }
@@ -304,7 +310,7 @@ export interface LocationDetailContent {
   address: string[];
   directionsUrl: string;
   directionsLabel: string;
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
 }
 
 export interface LocationDetailSectionProps extends BaseSectionSettings {
@@ -323,7 +329,7 @@ export interface CampusCardGridContent {
   overline?: string;
   heading: string;
   description?: string;
-  decorativeImages?: { src: string; alt: string; rotation: number }[];
+  decorativeImages?: SectionImage[];
   campuses: CampusCardItem[];
   ctaHeading?: string;
   ctaButton?: { label: string; href: string };
@@ -376,7 +382,7 @@ export interface TextImageHeroContent {
   headingLine1: string;
   headingAccent?: string;
   description: string;
-  image: { src: string; alt: string };
+  image: SectionImage;
 }
 
 export interface TextImageHeroSectionProps extends BaseSectionSettings {
@@ -401,7 +407,7 @@ export interface AboutDescriptionSectionProps extends BaseSectionSettings {
 export interface PillarItem {
   title: string;
   description: string;
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
   button?: { label: string; href: string };
 }
 
@@ -440,7 +446,7 @@ export interface MinistryHeroContent {
   headingStyle?: "display" | "sans";
   ctaButton?: { label: string; href: string; visible: boolean };
   socialLinks?: { platform: string; href: string }[];
-  heroImage?: { src: string; alt: string };
+  heroImage?: SectionImage;
 }
 
 export interface MinistryHeroSectionProps extends BaseSectionSettings {
@@ -452,7 +458,7 @@ export interface MinistryIntroContent {
   overline: string;
   heading: string;
   description: string;
-  image?: { src: string; alt: string };
+  image?: SectionImage;
 }
 
 export interface MinistryIntroSectionProps extends BaseSectionSettings {
@@ -476,8 +482,8 @@ export interface MinistryScheduleContent {
   address?: string[];
   directionsUrl?: string;
   buttons?: { label: string; href: string; variant: "primary" | "secondary" }[];
-  image?: { src: string; alt: string };
-  logo?: { src: string; alt: string };
+  image?: SectionImage;
+  logo?: SectionImage;
 }
 
 export interface MinistryScheduleSectionProps extends BaseSectionSettings {
@@ -488,7 +494,8 @@ export interface MinistryScheduleSectionProps extends BaseSectionSettings {
 export interface TeamMember {
   name: string;
   role: string;
-  image: { src: string; alt: string };
+  email?: string;
+  image: SectionImage;
 }
 
 export interface MeetTeamContent {
@@ -504,7 +511,7 @@ export interface MeetTeamSectionProps extends BaseSectionSettings {
 /* ---- Photo Gallery ---- */
 export interface PhotoGalleryContent {
   heading: string;
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
 }
 
 export interface PhotoGallerySectionProps extends BaseSectionSettings {
@@ -517,7 +524,7 @@ export interface UpcomingEventItem {
   date: string;
   time: string;
   location: string;
-  image: { src: string; alt: string };
+  image: SectionImage;
   eventType?: string;
   badge?: string;
   tags?: string[];
@@ -526,7 +533,6 @@ export interface UpcomingEventItem {
 export interface UpcomingEventsContent {
   overline?: string;
   heading: string;
-  events: UpcomingEventItem[];
   ctaButton?: { label: string; href: string };
 }
 

@@ -27,7 +27,7 @@ const navbarSettings: NavbarSettings = {
   content: {
     logo: {
       lightSrc: "/logo/laubf-logo.svg",
-      darkSrc: "/logo/laubf-logo-colored.png",
+      darkSrc: "/logo/laubf-logo-blue.svg",
       alt: "LA UBF",
     },
     ctaButton: {

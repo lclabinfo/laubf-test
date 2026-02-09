@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronDown, SquareArrowOutUpRight } from "lucide-react";
 import { dropdowns, directLinks } from "./nav-data";
 import { IconClose } from "./icons";
@@ -54,38 +55,21 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div
         ref={drawerRef}
         className={cn(
-          "fixed inset-y-0 right-0 z-[9999] w-full max-w-sm bg-white-0 transition-transform duration-300 ease-smooth overflow-y-auto",
+          "fixed inset-y-0 right-0 z-[9999] w-full max-w-sm bg-white-0 transition-transform duration-300 ease-smooth h-[100svh] flex flex-col",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-white-2">
-          <Link href="/" onClick={onClose} className="text-h4 font-medium text-black-1">
-            <svg
-              width="50"
-              height="42"
-              viewBox="0 0 62 52"
-              fill="none"
-              className="text-black-1"
-            >
-              <rect
-                width="62"
-                height="52"
-                rx="4"
-                fill="currentColor"
-                fillOpacity="0.15"
-              />
-              <text
-                x="31"
-                y="30"
-                textAnchor="middle"
-                fill="currentColor"
-                fontSize="12"
-                fontWeight="500"
-              >
-                UBF
-              </text>
-            </svg>
+          <Link href="/" onClick={onClose}>
+            <Image
+              src="/logo/laubf-logo-blue.svg"
+              alt="LA UBF"
+              width={50}
+              height={42}
+              unoptimized
+              className="object-contain"
+            />
           </Link>
           <button
             onClick={onClose}
@@ -97,7 +81,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
 
         {/* Nav sections */}
-        <div className="p-4 flex flex-col gap-1">
+        <div className="p-4 flex flex-col gap-1 flex-1 overflow-y-auto">
           {dropdowns.map((dropdown) => (
             <div key={dropdown.id}>
               {/* Accordion header */}
@@ -200,7 +184,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         </div>
 
         {/* Bottom CTA */}
-        <div className="p-4 mt-auto border-t border-white-2">
+        <div className="p-4 shrink-0 border-t border-white-2">
           <Link
             href="/im-new"
             onClick={onClose}

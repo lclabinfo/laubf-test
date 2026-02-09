@@ -7,7 +7,6 @@ import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import FormSection from "@/components/sections/FormSection";
 import PathwayCardSection from "@/components/sections/PathwayCardSection";
 import { getEventsByMinistry } from "@/lib/mock-data/events";
-import { toUpcomingEventItem } from "@/lib/types/events";
 
 import type {
   MinistryHeroSectionProps,
@@ -34,7 +33,7 @@ const heroData: MinistryHeroSectionProps = {
     heading: "Children",
     headingStyle: "sans",
     heroImage: {
-      src: "/pics-temp/DSC01654.JPG",
+      src: "/images/ministries/children/introduction.png",
       alt: "Children ministry group photo",
     },
   },
@@ -137,14 +136,15 @@ const teamData: MeetTeamSectionProps = {
   },
 };
 
+const childrenEvents = getEventsByMinistry("children").slice(0, 3);
+
 const eventsData: UpcomingEventsSectionProps = {
   id: "children-events",
   visible: true,
   colorScheme: "dark",
   content: {
-    overline: "YOUNG ADULT MINISTRY",
+    overline: "CHILDREN'S MINISTRY",
     heading: "Upcoming Events",
-    events: getEventsByMinistry("children").slice(0, 3).map(toUpcomingEventItem),
     ctaButton: { label: "View all events", href: "/events" },
   },
 };
@@ -240,7 +240,7 @@ export default function ChildrenPage() {
       <MinistryScheduleSection settings={scheduleData} />
       <PillarsSection settings={whatWeDoData} />
       <MeetTeamSection settings={teamData} />
-      <UpcomingEventsSection settings={eventsData} />
+      <UpcomingEventsSection settings={eventsData} events={childrenEvents} />
       <FormSection settings={formData} />
       <PathwayCardSection settings={pathwayData} />
     </main>

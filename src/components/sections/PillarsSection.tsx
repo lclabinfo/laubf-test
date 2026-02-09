@@ -34,7 +34,7 @@ function PillarImageCollage({ images }: { images: PillarItem["images"] }) {
   if (images.length === 1) {
     return (
       <div className="relative w-full aspect-[672/400] rounded-2xl overflow-hidden">
-        <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" />
+        <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" style={{ objectPosition: images[0].objectPosition }} />
       </div>
     );
   }
@@ -45,20 +45,20 @@ function PillarImageCollage({ images }: { images: PillarItem["images"] }) {
       <div className="absolute inset-0 grid grid-cols-5 grid-rows-2 gap-1.5">
         {/* Main image — spans left 3 cols and full height */}
         <div className="col-span-3 row-span-2 relative">
-          <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" />
+          <Image src={images[0].src} alt={images[0].alt} fill className="object-cover" style={{ objectPosition: images[0].objectPosition }} />
         </div>
 
         {/* Top-right image */}
         {images[1] && (
           <div className="col-span-2 relative">
-            <Image src={images[1].src} alt={images[1].alt} fill className="object-cover" />
+            <Image src={images[1].src} alt={images[1].alt} fill className="object-cover" style={{ objectPosition: images[1].objectPosition }} />
           </div>
         )}
 
         {/* Bottom-right image */}
         {images[2] && (
           <div className="col-span-2 relative">
-            <Image src={images[2].src} alt={images[2].alt} fill className="object-cover" />
+            <Image src={images[2].src} alt={images[2].alt} fill className="object-cover" style={{ objectPosition: images[2].objectPosition }} />
           </div>
         )}
       </div>
