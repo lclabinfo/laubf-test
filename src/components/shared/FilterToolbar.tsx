@@ -127,28 +127,22 @@ export default function FilterToolbar({
               disclosure && filtersOpen && hasFiltersRow && "border-b border-white-2/50",
             )}
           >
-            <div className="flex items-center gap-3">
-              {/* View toggle */}
-              {viewModes && (
-                <div className="flex rounded-[14px] bg-white-1-5 p-1">
-                  {viewModes.options.map((mode) => (
-                    <button
-                      key={mode.value}
-                      onClick={() => viewModes.onChange(mode.value)}
-                      className={cn(
-                        "flex items-center gap-1.5 rounded-[10px] px-4 py-2 text-[14px] font-medium transition-colors",
-                        viewModes.active === mode.value
-                          ? "bg-white-0 text-black-1 shadow-sm"
-                          : "text-black-3 hover:text-black-2",
-                      )}
-                    >
-                      {mode.icon}
-                      <span className="hidden sm:inline">{mode.label}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
+            {/* Search — left side */}
+            {search && (
+              <div className="relative w-full sm:w-[400px]">
+                <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-black-3" />
+                <input
+                  type="text"
+                  placeholder={search.placeholder ?? "Search..."}
+                  value={search.value}
+                  onChange={(e) => search.onChange(e.target.value)}
+                  className="w-full rounded-full border border-white-2 bg-white-1-5 py-2.5 pl-10 pr-4 text-[14px] text-black-1 placeholder:text-black-3 outline-none transition-colors focus:border-black-2"
+                />
+              </div>
+            )}
 
+            {/* Right side — filter toggle + view modes */}
+            <div className="flex items-center gap-3">
               {/* Filter toggle button (disclosure mode only) */}
               {disclosure && hasFiltersRow && (
                 <button
@@ -169,21 +163,28 @@ export default function FilterToolbar({
                   )}
                 </button>
               )}
-            </div>
 
-            {/* Search */}
-            {search && (
-              <div className="relative w-full sm:w-[400px]">
-                <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-black-3" />
-                <input
-                  type="text"
-                  placeholder={search.placeholder ?? "Search..."}
-                  value={search.value}
-                  onChange={(e) => search.onChange(e.target.value)}
-                  className="w-full rounded-full border border-white-2 bg-white-1-5 py-2.5 pl-10 pr-4 text-[14px] text-black-1 placeholder:text-black-3 outline-none transition-colors focus:border-black-2"
-                />
-              </div>
-            )}
+              {/* View toggle */}
+              {viewModes && (
+                <div className="flex rounded-[14px] bg-white-1-5 p-1">
+                  {viewModes.options.map((mode) => (
+                    <button
+                      key={mode.value}
+                      onClick={() => viewModes.onChange(mode.value)}
+                      className={cn(
+                        "flex items-center gap-1.5 rounded-[10px] px-4 py-2 text-[14px] font-medium transition-colors",
+                        viewModes.active === mode.value
+                          ? "bg-white-0 text-black-1 shadow-sm"
+                          : "text-black-3 hover:text-black-2",
+                      )}
+                    >
+                      {mode.icon}
+                      <span className="hidden sm:inline">{mode.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
 

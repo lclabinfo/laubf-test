@@ -50,7 +50,8 @@ export type SectionType =
   | "upcoming-events"
   | "events-hero"
   | "quick-links"
-  | "all-events";
+  | "all-events"
+  | "all-messages";
 
 /* ---- Base Settings ---- */
 export interface BaseSectionSettings {
@@ -577,4 +578,13 @@ export interface AllBibleStudiesContent {
 
 export interface AllBibleStudiesSectionProps extends BaseSectionSettings {
   content: AllBibleStudiesContent;
+}
+
+/* ---- All Messages (filterable grid with tabs) ---- */
+export interface AllMessagesContent {
+  heading: string;
+}
+
+export interface AllMessagesSectionProps extends BaseSectionSettings {
+  content: AllMessagesContent;
 }

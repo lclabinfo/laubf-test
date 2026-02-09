@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "laubf-figma", "design-system", "rotating-img-section", "rotation-section"]
+  "exclude": ["node_modules", "laubf-figma", "design-system", "rotating-img-section", "rotation-section", "bible study v1", "updated-laubf-figma"]
 }

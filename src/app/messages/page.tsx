@@ -1,15 +1,44 @@
-import Link from "next/link";
+import EventsHeroSection from "@/components/sections/EventsHeroSection";
+import AllMessagesSection from "@/components/sections/AllMessagesSection";
 
-export default function Page() {
+import type {
+  EventsHeroSectionProps,
+  AllMessagesSectionProps,
+} from "@/lib/types/sections";
+
+import { MOCK_MESSAGES } from "@/lib/mock-data/messages";
+
+/* ================================================================
+ * SAMPLE DATA — Content from Figma design
+ * In production, this data comes from PostgreSQL via CMS API.
+ * ================================================================ */
+
+const heroData: EventsHeroSectionProps = {
+  id: "messages-hero",
+  visible: true,
+  colorScheme: "dark",
+  paddingY: "compact",
+  content: {
+    heading: "Sunday Messages",
+    subtitle:
+      "Watch and listen to sermons from our Sunday worship services and special events.",
+  },
+};
+
+const allMessagesData: AllMessagesSectionProps = {
+  id: "all-messages",
+  visible: true,
+  colorScheme: "light",
+  content: {
+    heading: "All Messages",
+  },
+};
+
+export default function MessagesPage() {
   return (
-    <main className="min-h-screen bg-white-1 pt-32 pb-20">
-      <div className="container-standard">
-        <h1 className="text-h2 text-black-1 mb-6">Messages</h1>
-        <p className="text-body-1 text-black-3 mb-8">This page is coming soon.</p>
-        <Link href="/" className="text-body-1 text-brand-1 hover:underline">
-          &larr; Back to home
-        </Link>
-      </div>
+    <main>
+      <EventsHeroSection settings={heroData} />
+      <AllMessagesSection settings={allMessagesData} messages={MOCK_MESSAGES} />
     </main>
   );
 }

@@ -60,7 +60,7 @@ export default function DirectoryListSection(props: {
 /*  Parallax block — directory list (left) + heading & image (right)  */
 /* ------------------------------------------------------------------ */
 
-const PARALLAX_TRAVEL = 235;
+const PARALLAX_TRAVEL = 320;
 
 function DirectoryParallaxBlock({
   heading,
@@ -82,19 +82,23 @@ function DirectoryParallaxBlock({
     if (!el) return;
 
     const rect = el.getBoundingClientRect();
-    const viewH = window.innerHeight;
-    const sectionH = el.offsetHeight;
 
-    // Progress 0 → 1 (moves WITH scroll):
-    //   0 = ~85% of section is visible (delays start until CYPRESS text is on screen)
-    //   1 = section top has reached viewport top
-    const startTrigger = viewH - sectionH * 0.85;
-    const endTrigger = 0;
+    // How far the section top has scrolled past the viewport top (px).
+    // Positive = section top is above the viewport.
+    const scrollPast = Math.max(0, -rect.top);
 
-    const raw = (startTrigger - rect.top) / (startTrigger - endTrigger);
-    const clamped = Math.max(0, Math.min(1, raw));
+    // Keep right column aligned (y=0) for the first 100px of scroll,
+    // then smoothly ramp up to full travel by 350px. This keeps the
+    // heading aligned with the top of the list when the section first
+    // appears, then gradually moves it as the user scrolls deeper.
+    const startPx = 0;
+    const endPx = 100;
+    const parallaxProgress = Math.max(
+      0,
+      Math.min(1, (scrollPast - startPx) / (endPx - startPx)),
+    );
 
-    rawY.set(clamped * PARALLAX_TRAVEL);
+    rawY.set(parallaxProgress * PARALLAX_TRAVEL);
   }, [rawY]);
 
   useEffect(() => {
@@ -121,7 +125,7 @@ function DirectoryParallaxBlock({
           </div>
 
           {/* Right column: heading + image — sticky with parallax */}
-          <div className="sticky top-30 w-full max-w-[480px] self-start">
+          <div className="sticky top-0 w-full max-w-[480px] self-start">
             <motion.div
               className="flex flex-col gap-6 will-change-transform"
               style={{ y: smoothY }}
@@ -129,7 +133,7 @@ function DirectoryParallaxBlock({
               <h2 className="text-h2 max-w-[280px] text-black-1">
                 {heading}
               </h2>
-              <div className="relative h-[381px] w-[480px] overflow-hidden rounded-xl">
+              <div className="relative h-[240px] w-[400px] overflow-hidden rounded-xl">
                 <Image
                   src={image.src}
                   alt={image.alt}

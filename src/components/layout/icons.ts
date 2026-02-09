@@ -239,6 +239,12 @@ export const IconFilter = multiIcon([
   createElement("polygon", { key: "1", points: "22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" }),
 ]);
 
+/** User/person icon - for message speaker display */
+export const IconUser = multiIcon([
+  createElement("path", { key: "1", d: "M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" }),
+  createElement("circle", { key: "2", cx: "12", cy: "7", r: "4" }),
+]);
+
 /** Link/chain icon - for online meeting button */
 export const IconLink = multiIcon([
   createElement("path", {

@@ -32,7 +32,6 @@ import {
   IconListView,
   IconFolder,
   IconBookOpen,
-  IconArrowUpRight,
   IconFileText,
   IconHelpCircle,
   IconVideo,
@@ -70,11 +69,11 @@ export default function AllBibleStudiesSection(props: {
     [seriesList],
   );
 
+  // All 66 books with study counts
   const bookOptions = useMemo(() => {
-    const booksWithStudies = BIBLE_BOOKS.filter((b) => bookCounts.has(b.name));
-    return booksWithStudies.map((b) => ({
+    return BIBLE_BOOKS.map((b) => ({
       value: b.name,
-      label: `${b.name} (${bookCounts.get(b.name)})`,
+      label: `${b.name} (${bookCounts.get(b.name) ?? 0})`,
     }));
   }, [bookCounts]);
 
@@ -95,28 +94,38 @@ export default function AllBibleStudiesSection(props: {
     setDisplayCount(INITIAL_COUNT);
   }
 
+  /** Switch to "all" tab with a specific filter pre-applied */
+  function switchToAllWithFilter(key: keyof BibleStudyFilters, value: string) {
+    setTab("all");
+    setFilters({ [key]: value });
+    setSearch("");
+    setDisplayCount(INITIAL_COUNT);
+  }
+
   const tabs: { key: TabView; label: string }[] = [
-    { key: "all", label: "ALL STUDIES" },
-    { key: "series", label: "SERIES" },
-    { key: "books", label: "BOOKS" },
+    { key: "all", label: "All Studies" },
+    { key: "series", label: "Series" },
+    { key: "books", label: "Books" },
   ];
 
   return (
     <SectionContainer settings={settings}>
-      {/* Tab Navigation */}
-      <div className="flex gap-1 mb-10">
+      {/* Tab Navigation — matches events page view toggle style */}
+      <div className="flex rounded-[14px] bg-white-1-5 p-1 w-fit mb-10">
         {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => {
               setTab(t.key);
+              setFilters({});
+              setSearch("");
               setDisplayCount(INITIAL_COUNT);
             }}
             className={cn(
-              "rounded-full px-5 py-2 text-[13px] font-medium tracking-[0.26px] transition-colors",
+              "flex items-center gap-1.5 rounded-[10px] px-5 py-2.5 text-[14px] font-medium transition-colors",
               tab === t.key
-                ? "bg-black-1 text-white-0"
-                : "text-black-3 hover:text-black-1",
+                ? "bg-white-0 text-black-1 shadow-sm"
+                : "text-black-3 hover:text-black-2",
             )}
           >
             {t.label}
@@ -127,7 +136,7 @@ export default function AllBibleStudiesSection(props: {
       {/* ── All Studies Tab ── */}
       {tab === "all" && (
         <>
-          <h2 className={`text-h2 ${themeTokens[settings.colorScheme].textPrimary} mb-8`}>
+          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>
             All Bible studies
           </h2>
 
@@ -187,14 +196,14 @@ export default function AllBibleStudiesSection(props: {
           />
 
           {/* Results count */}
-          <p className={`text-body-3 ${themeTokens[settings.colorScheme].textMuted} mb-6`}>
+          <p className={`text-body-3 ${t.textMuted} mb-6`}>
             Showing {visibleStudies.length} of {filteredStudies.length} studies
           </p>
 
           {/* Studies display */}
           {filteredStudies.length === 0 ? (
             <div className="flex flex-col items-center py-20">
-              <p className={`text-body-1 ${themeTokens[settings.colorScheme].textSecondary}`}>
+              <p className={`text-body-1 ${t.textSecondary}`}>
                 No studies found matching your criteria.
               </p>
               <button
@@ -231,20 +240,22 @@ export default function AllBibleStudiesSection(props: {
       {/* ── Series Tab ── */}
       {tab === "series" && (
         <>
-          <h2 className={`text-h2 ${themeTokens[settings.colorScheme].textPrimary} mb-8`}>
-            Series
-          </h2>
-          <SeriesGrid series={seriesList} />
+          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Series</h2>
+          <SeriesGrid
+            series={seriesList}
+            onSeriesClick={(name) => switchToAllWithFilter("series", name)}
+          />
         </>
       )}
 
       {/* ── Books Tab ── */}
       {tab === "books" && (
         <>
-          <h2 className={`text-h2 ${themeTokens[settings.colorScheme].textPrimary} mb-8`}>
-            Books
-          </h2>
-          <BooksView bookCounts={bookCounts} />
+          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Books</h2>
+          <BooksView
+            bookCounts={bookCounts}
+            onBookClick={(name) => switchToAllWithFilter("book", name)}
+          />
         </>
       )}
     </SectionContainer>
@@ -276,10 +287,10 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
         >
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 mb-1">
-              <span className="bg-[#e8e8e8] px-[8px] py-[4px] rounded-[6px] text-[11px] font-medium text-[#676767] tracking-[0.22px] shrink-0">
+              <span className="bg-white-2 px-[8px] py-[4px] rounded-[6px] text-[11px] font-medium text-black-3 tracking-[0.22px] shrink-0">
                 {study.series}
               </span>
-              <span className="text-[13px] text-[#676767]">
+              <span className="text-[13px] text-black-3">
                 {new Date(study.dateFor + "T00:00:00").toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -291,8 +302,8 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
               {study.title}
             </h3>
             <div className="flex items-center gap-2">
-              <IconBookOpen className="size-[14px] text-[#676767] shrink-0" />
-              <span className="text-[14px] text-[#676767]">{study.passage}</span>
+              <IconBookOpen className="size-[14px] text-black-3 shrink-0" />
+              <span className="text-[14px] text-black-3">{study.passage}</span>
             </div>
           </div>
 
@@ -300,22 +311,22 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
             {/* Resource indicators */}
             <div className="flex gap-1.5">
               {study.hasQuestions && (
-                <div className="bg-[#f2f2f2] p-[6px] rounded-[6px]">
-                  <IconFileText className="size-[14px] text-[#313131]" />
+                <div className="bg-white-1-5 p-[6px] rounded-[6px]">
+                  <IconFileText className="size-[14px] text-black-2" />
                 </div>
               )}
               {study.hasAnswers && (
-                <div className="bg-[#f2f2f2] p-[6px] rounded-[6px]">
-                  <IconHelpCircle className="size-[14px] text-[#313131]" />
+                <div className="bg-white-1-5 p-[6px] rounded-[6px]">
+                  <IconHelpCircle className="size-[14px] text-black-2" />
                 </div>
               )}
               {study.hasTranscript && (
-                <div className="bg-[#f2f2f2] p-[6px] rounded-[6px]">
-                  <IconVideo className="size-[14px] text-[#313131]" />
+                <div className="bg-white-1-5 p-[6px] rounded-[6px]">
+                  <IconVideo className="size-[14px] text-black-2" />
                 </div>
               )}
             </div>
-            <IconChevronRight className="size-5 text-[#676767] transition-transform group-hover:translate-x-1" />
+            <IconChevronRight className="size-5 text-black-3 transition-transform group-hover:translate-x-1" />
           </div>
         </Link>
       ))}
@@ -327,13 +338,15 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
 
 function SeriesGrid({
   series,
+  onSeriesClick,
 }: {
   series: { name: string; slug: string; studyCount: number; lastUpdated: string }[];
+  onSeriesClick: (name: string) => void;
 }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
       {series.map((s) => (
-        <SeriesCard key={s.slug} series={s} />
+        <SeriesCard key={s.slug} series={s} onClick={() => onSeriesClick(s.name)} />
       ))}
     </div>
   );
@@ -341,15 +354,20 @@ function SeriesGrid({
 
 function SeriesCard({
   series,
+  onClick,
 }: {
   series: { name: string; slug: string; studyCount: number; lastUpdated: string };
+  onClick: () => void;
 }) {
   return (
-    <div className="group relative rounded-[20px] bg-white-0 p-7 min-h-[180px] flex flex-col cursor-pointer transition-all hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]">
+    <button
+      onClick={onClick}
+      className="group relative rounded-[20px] bg-white-0 p-7 min-h-[180px] flex flex-col text-left cursor-pointer transition-all hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
+    >
       {/* Folder icon */}
       <div className="mb-4">
-        <div className="bg-[#f2f2f2] inline-flex items-center p-[8px] rounded-[8px]">
-          <IconFolder className="size-[16px] text-[#313131]" />
+        <div className="bg-white-1-5 inline-flex items-center p-[8px] rounded-[8px]">
+          <IconFolder className="size-[16px] text-black-2" />
         </div>
       </div>
 
@@ -359,7 +377,7 @@ function SeriesCard({
       </h3>
 
       {/* Meta */}
-      <p className="text-[13px] text-[#676767] mb-4">
+      <p className="text-[13px] text-black-3 mb-4">
         {series.studyCount} {series.studyCount === 1 ? "Study" : "Studies"} · Last
         updated {series.lastUpdated}
       </p>
@@ -372,15 +390,21 @@ function SeriesCard({
       {/* Border overlay */}
       <div
         aria-hidden="true"
-        className="absolute border border-[#dcdcdc] inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)] transition-shadow group-hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
+        className="absolute border border-white-2-5 inset-0 pointer-events-none rounded-[20px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)] transition-shadow group-hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
       />
-    </div>
+    </button>
   );
 }
 
 /* ── Books View ── */
 
-function BooksView({ bookCounts }: { bookCounts: Map<string, number> }) {
+function BooksView({
+  bookCounts,
+  onBookClick,
+}: {
+  bookCounts: Map<string, number>;
+  onBookClick: (name: string) => void;
+}) {
   const otBooks = BIBLE_BOOKS.filter((b) => b.testament === "old");
   const ntBooks = BIBLE_BOOKS.filter((b) => b.testament === "new");
 
@@ -391,7 +415,7 @@ function BooksView({ bookCounts }: { bookCounts: Map<string, number> }) {
         <h3 className="text-[22px] font-semibold text-black-1 tracking-[-0.44px] mb-1">
           Old Testament
         </h3>
-        <p className="text-[13px] text-[#676767] mb-6">
+        <p className="text-[13px] text-black-3 mb-6">
           39 Books · Genesis through Malachi
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-0">
@@ -401,6 +425,7 @@ function BooksView({ bookCounts }: { bookCounts: Map<string, number> }) {
               name={book.name}
               chapters={book.chapters}
               studyCount={bookCounts.get(book.name) ?? 0}
+              onClick={() => onBookClick(book.name)}
             />
           ))}
         </div>
@@ -411,7 +436,7 @@ function BooksView({ bookCounts }: { bookCounts: Map<string, number> }) {
         <h3 className="text-[22px] font-semibold text-black-1 tracking-[-0.44px] mb-1">
           New Testament
         </h3>
-        <p className="text-[13px] text-[#676767] mb-6">
+        <p className="text-[13px] text-black-3 mb-6">
           27 Books · Matthew through Revelation
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-0">
@@ -421,6 +446,7 @@ function BooksView({ bookCounts }: { bookCounts: Map<string, number> }) {
               name={book.name}
               chapters={book.chapters}
               studyCount={bookCounts.get(book.name) ?? 0}
+              onClick={() => onBookClick(book.name)}
             />
           ))}
         </div>
@@ -433,27 +459,32 @@ function BookRow({
   name,
   chapters,
   studyCount,
+  onClick,
 }: {
   name: string;
   chapters: number;
   studyCount: number;
+  onClick: () => void;
 }) {
   return (
-    <div
+    <button
+      onClick={onClick}
       className={cn(
-        "flex items-center gap-3 py-3 border-b border-white-2/30",
-        studyCount > 0 && "cursor-pointer hover:bg-white-1-5 -mx-2 px-2 rounded-[8px]",
+        "flex items-center gap-3 py-3 border-b border-white-2-5 w-full text-left",
+        studyCount > 0
+          ? "cursor-pointer hover:bg-white-1-5 -mx-2 px-2 rounded-[8px]"
+          : "opacity-50",
       )}
     >
       {/* Book icon */}
-      <div className="bg-[#f2f2f2] flex items-center p-[6px] rounded-[6px] shrink-0">
-        <IconBookOpen className="size-[14px] text-[#676767]" />
+      <div className="bg-white-1-5 flex items-center p-[6px] rounded-[6px] shrink-0">
+        <IconBookOpen className="size-[14px] text-black-3" />
       </div>
 
       {/* Name and chapters */}
       <div className="flex-1 min-w-0">
         <p className="text-[14px] font-medium text-black-1 truncate">{name}</p>
-        <p className="text-[12px] text-[#9e9e9e]">
+        <p className="text-[12px] text-white-3">
           {chapters} {chapters === 1 ? "chapter" : "chapters"}
         </p>
       </div>
@@ -464,6 +495,6 @@ function BookRow({
           {studyCount}
         </span>
       )}
-    </div>
+    </button>
   );
 }

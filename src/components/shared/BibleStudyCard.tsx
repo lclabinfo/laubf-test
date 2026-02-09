@@ -36,12 +36,12 @@ export default function BibleStudyCard({ study }: { study: BibleStudy }) {
         <div className="flex flex-col gap-[12px] items-start w-full mb-[20px]">
           {/* Series and Date Row */}
           <div className="flex items-center justify-between w-full">
-            <div className="bg-[#e8e8e8] flex flex-col items-start px-[8px] py-[6px] rounded-[8px] shrink-0">
-              <p className="font-medium leading-none text-[#676767] text-[12px] text-center tracking-[0.24px]">
+            <div className="bg-white-2 flex flex-col items-start px-[8px] py-[6px] rounded-[8px] shrink-0">
+              <p className="font-medium leading-none text-black-3 text-[12px] text-center tracking-[0.24px]">
                 {study.series}
               </p>
             </div>
-            <p className="font-medium leading-none text-[#676767] text-[14px] tracking-[-0.42px]">
+            <p className="font-medium leading-none text-black-3 text-[14px] tracking-[-0.42px]">
               {formatDate(study.dateFor)}
             </p>
           </div>
@@ -49,12 +49,12 @@ export default function BibleStudyCard({ study }: { study: BibleStudy }) {
           {/* Title and Passage */}
           <div className="w-full">
             <div className="flex flex-col gap-[8px] items-start px-[8px] w-full">
-              <p className="font-medium leading-[1.2] text-[#0d0d0d] text-[24px] tracking-[-0.72px] w-full">
+              <p className="font-medium leading-[1.2] text-black-1 text-[24px] tracking-[-0.72px] w-full">
                 {study.title}
               </p>
               <div className="flex gap-[8px] items-center w-full">
-                <IconBookOpen className="shrink-0 size-[16px] text-[#676767]" />
-                <p className="flex-1 leading-[1.4] text-[#676767] text-[16px] tracking-[-0.32px]">
+                <IconBookOpen className="shrink-0 size-[16px] text-black-3" />
+                <p className="flex-1 leading-[1.4] text-black-3 text-[16px] tracking-[-0.32px]">
                   {study.passage}
                 </p>
               </div>
@@ -67,31 +67,31 @@ export default function BibleStudyCard({ study }: { study: BibleStudy }) {
           {/* Resource Indicators */}
           <div className="flex gap-[8px] items-center">
             {study.hasQuestions && (
-              <div className="bg-[#f2f2f2] flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
-                <IconFileText className="shrink-0 size-[16px] text-[#313131]" />
+              <div className="bg-white-1-5 flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
+                <IconFileText className="shrink-0 size-[16px] text-black-2" />
               </div>
             )}
             {study.hasAnswers && (
-              <div className="bg-[#f2f2f2] flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
-                <IconHelpCircle className="shrink-0 size-[16px] text-[#313131]" />
+              <div className="bg-white-1-5 flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
+                <IconHelpCircle className="shrink-0 size-[16px] text-black-2" />
               </div>
             )}
             {study.hasTranscript && (
-              <div className="bg-[#f2f2f2] flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
-                <IconVideo className="shrink-0 size-[16px] text-[#313131]" />
+              <div className="bg-white-1-5 flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
+                <IconVideo className="shrink-0 size-[16px] text-black-2" />
               </div>
             )}
           </div>
 
           {/* Arrow Icon */}
-          <IconArrowUpRight className="shrink-0 size-[24px] text-[#676767] transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+          <IconArrowUpRight className="shrink-0 size-[24px] text-black-3 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
         </div>
       </div>
 
       {/* Border and Shadow overlay */}
       <div
         aria-hidden="true"
-        className="absolute border border-[#dcdcdc] inset-0 pointer-events-none rounded-[24px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)] transition-shadow group-hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
+        className="absolute border border-white-2-5 inset-0 pointer-events-none rounded-[24px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)] transition-shadow group-hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
       />
     </Link>
   );
