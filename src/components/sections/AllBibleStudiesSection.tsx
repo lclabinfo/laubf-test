@@ -4,6 +4,9 @@
  *   heading: string -- section heading (e.g. "All Bible studies")
  * -- Data --
  *   studies: BibleStudy[] -- all bible studies from database
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up on scroll.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -16,6 +19,7 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import FilterToolbar from "@/components/shared/FilterToolbar";
 import BibleStudyCard from "@/components/shared/BibleStudyCard";
 import { themeTokens } from "@/lib/theme";
@@ -52,6 +56,7 @@ export default function AllBibleStudiesSection(props: {
 }) {
   const { settings, studies } = props;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   /* ── State ── */
   const [tab, setTab] = useState<TabView>("all");
@@ -136,9 +141,11 @@ export default function AllBibleStudiesSection(props: {
       {/* ── All Studies Tab ── */}
       {tab === "all" && (
         <>
-          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>
-            All Bible studies
-          </h2>
+          <AnimateOnScroll animation="fade-up" enabled={animate}>
+            <h2 className={`text-h2 ${t.textPrimary} mb-8`}>
+              All Bible studies
+            </h2>
+          </AnimateOnScroll>
 
           <FilterToolbar
             disclosure
@@ -245,7 +252,9 @@ export default function AllBibleStudiesSection(props: {
       {/* ── Series Tab ── */}
       {tab === "series" && (
         <>
-          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Series</h2>
+          <AnimateOnScroll animation="fade-up" enabled={animate}>
+            <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Series</h2>
+          </AnimateOnScroll>
           <SeriesGrid
             series={seriesList}
             onSeriesClick={(name) => switchToAllWithFilter("series", name)}
@@ -256,7 +265,9 @@ export default function AllBibleStudiesSection(props: {
       {/* ── Books Tab ── */}
       {tab === "books" && (
         <>
-          <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Books</h2>
+          <AnimateOnScroll animation="fade-up" enabled={animate}>
+            <h2 className={`text-h2 ${t.textPrimary} mb-8`}>Books</h2>
+          </AnimateOnScroll>
           <BooksView
             bookCounts={bookCounts}
             onBookClick={(name) => switchToAllWithFilter("book", name)}

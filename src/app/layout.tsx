@@ -117,8 +117,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={dmSerifDisplay.variable}>
-      <body className="bg-white-1 text-black-1 font-sans antialiased overflow-x-hidden">
+    <html lang="en" className={`${dmSerifDisplay.variable} overflow-x-clip`}>
+      <body className="bg-white-1 text-black-1 font-sans antialiased">
         <Navbar settings={navbarSettings} />
         {children}
         <FooterSection settings={footerData} />

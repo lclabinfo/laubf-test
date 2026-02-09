@@ -7,6 +7,9 @@
  *   events[]: { title, date, time, location, image, eventType?, badge?, tags? }
  * -- CTA (BASIC) --
  *   ctaButton?: { label, href }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, event cards stagger in from right.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -19,6 +22,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { UpcomingEventsSectionProps } from "@/lib/types/sections";
 import { IconCalendar, IconMapPin, IconArrowRight } from "@/components/layout/icons";
@@ -30,16 +34,17 @@ export default function UpcomingEventsSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       {/* Header — centered */}
-      <div className="flex flex-col items-center text-center mb-12 lg:mb-16">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="flex flex-col items-center text-center mb-12 lg:mb-16">
         {content.overline && (
           <OverlineLabel text={content.overline} className="mb-3" />
         )}
         <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
-      </div>
+      </AnimateOnScroll>
 
       {/* Event cards — horizontal scrollable row */}
       <div className="flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory lg:snap-none pb-2">

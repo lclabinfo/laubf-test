@@ -9,6 +9,9 @@
  *   socialLinks?: { platform, href }[] -- social media icon links
  * -- Media (BASIC) --
  *   heroImage?: { src, alt } -- full-width landscape image below heading
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle entry animations
+ *     Animations: heading + CTA fade up on page load, hero image scales in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -20,6 +23,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { MinistryHeroSectionProps } from "@/lib/types/sections";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { IconExternalLink, IconMail, IconInstagram, IconFacebook } from "@/components/layout/icons";
 
@@ -37,12 +41,13 @@ export default function MinistryHeroSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
   const isSans = content.headingStyle === "sans";
 
   return (
     <SectionContainer settings={settings} className="pt-[104px] !pb-0">
       {/* Centered text content */}
-      <div className="container-standard flex flex-col items-center text-center mb-10 lg:mb-14">
+      <div className={cn("container-standard flex flex-col items-center text-center mb-10 lg:mb-14", animate && "animate-hero-fade-up")}>
         {content.overline && (
           <p className={`${isSans ? "text-h4 font-normal" : "text-overline"} ${t.textMuted} mb-4`}>
             {content.overline}
@@ -101,7 +106,7 @@ export default function MinistryHeroSection(props: {
 
       {/* Full-width hero image placeholder */}
       {content.heroImage && (
-        <div className="container-standard pb-0">
+        <div className={cn("container-standard pb-0", animate && "animate-hero-fade-up-delayed")}>
           <div className={`relative w-full ${isSans ? "h-[320px] lg:h-[480px] rounded-xl" : "aspect-[16/7] rounded-2xl"} overflow-hidden bg-gradient-to-br from-white-2 to-white-1-5`}>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="size-20 rounded-full bg-white-2-5/60 flex items-center justify-center">

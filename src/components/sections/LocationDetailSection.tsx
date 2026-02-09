@@ -10,6 +10,9 @@
  *   directionsLabel: string -- button text for directions CTA
  * -- Media (BASIC) --
  *   images[]: { src, alt } -- location photos
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: info column slides in from left, image slides in from right.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -22,6 +25,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import { IconExternalLink } from "@/components/layout/icons";
 import type { LocationDetailSectionProps } from "@/lib/types/sections";
@@ -33,12 +37,13 @@ export default function LocationDetailSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
         {/* Left column -- info */}
-        <div className="lg:w-[40%]">
+        <AnimateOnScroll animation="fade-left" enabled={animate} className="lg:w-[40%]">
           <OverlineLabel text={content.overline} />
 
           {/* Time block */}
@@ -76,10 +81,10 @@ export default function LocationDetailSection(props: {
               icon={<IconExternalLink className="ml-2 size-4" />}
             />
           </div>
-        </div>
+        </AnimateOnScroll>
 
         {/* Right column -- single image */}
-        <div className="lg:w-[60%]">
+        <AnimateOnScroll animation="fade-right" staggerIndex={1} staggerBaseMs={150} enabled={animate} className="lg:w-[60%]">
           {content.images[0] && (
             <div className="rounded-2xl overflow-hidden relative aspect-[16/10]">
               <Image
@@ -90,7 +95,7 @@ export default function LocationDetailSection(props: {
               />
             </div>
           )}
-        </div>
+        </AnimateOnScroll>
       </div>
     </SectionContainer>
   );

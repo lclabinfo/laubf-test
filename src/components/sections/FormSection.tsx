@@ -12,6 +12,9 @@
  *   bibleTeacherLabel: string -- standalone checkbox label
  *   submitLabel: string -- submit button text
  *   successMessage: string -- message shown on submit
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, form card scales in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -24,6 +27,7 @@
 import { useState } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { FormSectionProps } from "@/lib/types/sections";
 import { IconChevronDown, IconCheck } from "@/components/layout/icons";
@@ -33,6 +37,7 @@ export default function FormSection(props: { settings: FormSectionProps }) {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   const [submitted, setSubmitted] = useState(false);
   const [checkedInterests, setCheckedInterests] = useState<Set<string>>(
@@ -67,7 +72,7 @@ export default function FormSection(props: { settings: FormSectionProps }) {
   return (
     <SectionContainer settings={settings}>
       {/* Header area -- centered text */}
-      <div className="flex flex-col items-center text-center mb-12">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="flex flex-col items-center text-center mb-12">
         <OverlineLabel text={content.overline} className="mb-4" />
         <h2 className={`text-h2 ${t.textPrimary} text-center`}>
           {content.heading}
@@ -77,7 +82,7 @@ export default function FormSection(props: { settings: FormSectionProps }) {
         >
           {content.description}
         </p>
-      </div>
+      </AnimateOnScroll>
 
       {/* White form card */}
       {submitted ? (

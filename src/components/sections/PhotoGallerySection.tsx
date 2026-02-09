@@ -4,6 +4,9 @@
  *   heading: string -- section heading (e.g. "Snippets from the Ministry")
  * -- Media (BASIC) --
  *   images[]: { src, alt } -- gallery photos
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up, carousel fades in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -13,6 +16,7 @@
 "use client";
 
 import { SectionThemeContext, themeTokens } from "@/lib/theme";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import type { PhotoGallerySectionProps } from "@/lib/types/sections";
 import Image from "next/image";
 
@@ -28,6 +32,7 @@ export default function PhotoGallerySection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   if (!settings.visible) return null;
 
@@ -40,9 +45,11 @@ export default function PhotoGallerySection(props: {
       <section id={settings.id} className={`${t.bg} ${paddingClass} overflow-hidden`}>
         {/* Centered heading inside container */}
         <div className="container-standard">
-          <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
-            {content.heading}
-          </h2>
+          <AnimateOnScroll animation="fade-up" enabled={animate}>
+            <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
+              {content.heading}
+            </h2>
+          </AnimateOnScroll>
         </div>
 
         {/* Full-width infinite scrolling carousel — no container */}

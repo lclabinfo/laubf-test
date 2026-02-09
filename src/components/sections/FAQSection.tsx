@@ -5,6 +5,9 @@
  *   showIcon: boolean -- toggles question mark icon circle above heading
  * -- FAQ Items (BASIC) --
  *   items[]: { question, answer }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: icon + heading fade up, accordion items stagger in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -15,6 +18,7 @@
 
 import { useState } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { FAQSectionProps } from "@/lib/types/sections";
 import { cn } from "@/lib/utils";
@@ -26,6 +30,7 @@ export default function FAQSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   function toggleItem(index: number) {
@@ -40,16 +45,18 @@ export default function FAQSection(props: {
       }}
     >
       {/* Question mark icon circle */}
-      {content.showIcon && (
-        <div className={`w-16 h-16 rounded-full ${t.surfaceBg} border ${t.borderSubtle} flex items-center justify-center mx-auto mb-6`}>
-          <IconQuestionMark className={`size-7 ${t.textPrimary}`} />
-        </div>
-      )}
+      <AnimateOnScroll animation="scale-up" enabled={animate}>
+        {content.showIcon && (
+          <div className={`w-16 h-16 rounded-full ${t.surfaceBg} border ${t.borderSubtle} flex items-center justify-center mx-auto mb-6`}>
+            <IconQuestionMark className={`size-7 ${t.textPrimary}`} />
+          </div>
+        )}
 
-      {/* Centered heading */}
-      <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
-        {content.heading}
-      </h2>
+        {/* Centered heading */}
+        <h2 className={`text-h2 ${t.textPrimary} text-center mb-12`}>
+          {content.heading}
+        </h2>
+      </AnimateOnScroll>
 
       {/* Accordion items */}
       <div className="flex flex-col gap-3">

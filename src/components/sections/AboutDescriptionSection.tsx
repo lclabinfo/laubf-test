@@ -7,6 +7,9 @@
  * -- Media (BASIC) --
  *   videoUrl: string -- YouTube embed URL
  *   videoTitle: string -- accessible title for iframe
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: logo + heading + description fade up, video scales in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -15,6 +18,7 @@
 "use client";
 
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { AboutDescriptionSectionProps } from "@/lib/types/sections";
 import Image from "next/image";
@@ -25,11 +29,12 @@ export default function AboutDescriptionSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       {/* Centered header with logo */}
-      <div className="flex flex-col items-center text-center max-w-[840px] mx-auto">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="flex flex-col items-center text-center max-w-[840px] mx-auto">
         {/* Logo */}
         <div className="mb-5">
           <Image
@@ -48,11 +53,11 @@ export default function AboutDescriptionSection(props: {
         <p className={`text-body-1 ${t.textSecondary} leading-relaxed`}>
           {content.description}
         </p>
-      </div>
+      </AnimateOnScroll>
 
       {/* Video embed */}
       {content.videoUrl && (
-        <div className="mt-12 lg:mt-16 max-w-[854px] mx-auto">
+        <AnimateOnScroll animation="scale-up" staggerIndex={1} staggerBaseMs={200} enabled={animate} className="mt-12 lg:mt-16 max-w-[854px] mx-auto">
           <div className="relative aspect-video rounded-2xl overflow-hidden">
             <iframe
               src={content.videoUrl}
@@ -62,7 +67,7 @@ export default function AboutDescriptionSection(props: {
               allowFullScreen
             />
           </div>
-        </div>
+        </AnimateOnScroll>
       )}
     </SectionContainer>
   );

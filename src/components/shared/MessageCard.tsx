@@ -25,7 +25,7 @@ export default function MessageCard({ message }: { message: Message }) {
   return (
     <Link
       href={`/messages/${message.slug}`}
-      className="group relative rounded-[24px] p-3 cursor-pointer transition-colors bg-white-0 hover:bg-white-1-5"
+      className="group relative rounded-[24px] p-3 cursor-pointer transition-all duration-300 bg-white-0 hover:bg-white-1-5 hover:-translate-y-0.5 hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
     >
       {/* YouTube Thumbnail */}
       <div className="relative aspect-video rounded-[16px] overflow-hidden bg-black-1">

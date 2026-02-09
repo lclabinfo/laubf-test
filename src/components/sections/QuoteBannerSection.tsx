@@ -7,6 +7,9 @@
  * ── Verse (BASIC) ──
  *   verse.text: string — Bible verse text
  *   verse.reference: string — "John 17:16-18"
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: overline + heading fade up, verse text fades in.
  * ── Background (ADVANCED) ──
  *   backgroundStyle: 'gradient' | 'solid'
  * ── Layout (ADVANCED) ──
@@ -19,6 +22,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import type { QuoteBannerSectionProps } from "@/lib/types/sections";
 
 export default function QuoteBannerSection(props: {
@@ -26,6 +30,7 @@ export default function QuoteBannerSection(props: {
 }) {
   const { settings } = props;
   const { content } = settings;
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer
@@ -35,7 +40,7 @@ export default function QuoteBannerSection(props: {
       }}
       bgOverride="bg-gradient-to-b from-black-gradient to-black-1 to-[67%]"
     >
-      <div className="relative flex flex-col items-center gap-10 text-center">
+      <div className="relative flex flex-col items-center gap-10 text-center overflow-hidden">
         {/* Spotlight beam from top center */}
         <div
           className="absolute top-[-120px] left-1/2 -translate-x-1/2 w-[926px] h-[500px] pointer-events-none"
@@ -50,19 +55,19 @@ export default function QuoteBannerSection(props: {
         />
 
         {/* Content */}
-        <div className="relative flex flex-col items-center gap-4 lg:gap-6">
+        <AnimateOnScroll animation="fade-up" enabled={animate} className="relative flex flex-col items-center gap-4 lg:gap-6">
           <OverlineLabel text={content.overline} className="text-white-3" />
           <h2 className="text-script-heading text-white-1">
             {content.heading}
           </h2>
-        </div>
+        </AnimateOnScroll>
 
-        <div className="relative flex flex-col items-center gap-4">
+        <AnimateOnScroll animation="fade-in" staggerIndex={1} staggerBaseMs={200} enabled={animate} className="relative flex flex-col items-center gap-4">
           <p className="text-body-1 text-white-2 max-w-[960px] leading-[1.5]">
             {content.verse.text}
           </p>
           <p className="text-h4 text-white-3">{content.verse.reference}</p>
-        </div>
+        </AnimateOnScroll>
       </div>
     </SectionContainer>
   );

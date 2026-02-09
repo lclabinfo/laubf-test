@@ -7,6 +7,9 @@
  *   items[]: { title, description, images[], button? }
  *   Layout alternates: odd items = image left / text right, even = text left / image right
  *   Text alignment mirrors layout: odd = left-aligned, even = right-aligned
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, pillar items alternate slide-in from left/right.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -19,6 +22,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { PillarsSectionProps, PillarItem } from "@/lib/types/sections";
 import Image from "next/image";
@@ -68,14 +72,15 @@ export default function PillarsSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       {/* Section header */}
-      <div className="mb-12 lg:mb-16">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="mb-12 lg:mb-16">
         <OverlineLabel text={content.overline} />
         <h2 className={`text-h2 ${t.textPrimary} mt-3`}>{content.heading}</h2>
-      </div>
+      </AnimateOnScroll>
 
       {/* Pillar items — alternating layout */}
       <div className="flex flex-col gap-12 lg:gap-12">
@@ -83,8 +88,12 @@ export default function PillarsSection(props: {
           const isReversed = i % 2 !== 0;
 
           return (
-            <div
+            <AnimateOnScroll
               key={i}
+              animation={isReversed ? "fade-left" : "fade-right"}
+              staggerIndex={i}
+              staggerBaseMs={100}
+              enabled={animate}
               className={`flex flex-col lg:flex-row gap-8 lg:gap-12 items-center ${
                 isReversed ? "lg:flex-row-reverse" : ""
               }`}
@@ -116,7 +125,7 @@ export default function PillarsSection(props: {
                   </div>
                 )}
               </div>
-            </div>
+            </AnimateOnScroll>
           );
         })}
       </div>

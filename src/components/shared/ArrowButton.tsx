@@ -25,7 +25,7 @@ export default function ArrowButton({
     <button
       onClick={onClick}
       className={cn(
-        "inline-flex items-center justify-center rounded-full border border-white-1 bg-transparent text-white-1 transition-colors hover:bg-white-1/10",
+        "inline-flex items-center justify-center rounded-full border border-white-1 bg-transparent text-white-1 transition-all duration-300 hover:bg-white-1/10 group-hover:scale-110",
         sizeClass,
         className
       )}

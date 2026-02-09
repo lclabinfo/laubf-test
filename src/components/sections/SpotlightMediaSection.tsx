@@ -9,6 +9,9 @@
  *   sermon.series: string — service type
  *   sermon.thumbnailUrl: string — video thumbnail
  *   sermon.videoUrl: string — YouTube/Vimeo embed URL
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading + metadata fade up, video thumbnail scales in.
  * ── Layout (ADVANCED) ──
  *   paddingY, colorScheme
  *
@@ -19,6 +22,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import VideoThumbnail from "@/components/shared/VideoThumbnail";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { SpotlightMediaSectionProps } from "@/lib/types/sections";
 import Link from "next/link";
@@ -30,6 +34,7 @@ export default function SpotlightMediaSection(props: {
   const { content } = settings;
   const { sermon } = content;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   const sermonHref = sermon.slug ? `/messages/${sermon.slug}` : undefined;
 
@@ -37,26 +42,38 @@ export default function SpotlightMediaSection(props: {
     <SectionContainer settings={settings}>
       <div className="flex flex-col gap-10">
         {/* Section heading + title */}
-        <div className="flex flex-col gap-2">
+        <AnimateOnScroll animation="fade-up" enabled={animate} className="flex flex-col gap-2">
           <span className={`text-body-1 ${t.textSecondary}`}>
             {content.sectionHeading}
           </span>
           <h2 className={`text-h1 text-balance ${t.textPrimary}`}>
             {sermon.title}
           </h2>
-        </div>
+        </AnimateOnScroll>
 
         {/* Speaker + metadata */}
-        <div className="flex flex-col gap-1">
+        <AnimateOnScroll animation="fade-up" staggerIndex={1} enabled={animate} className="flex flex-col gap-1">
           <span className={`text-h4 ${t.textPrimary}`}>{sermon.speaker}</span>
           <span className={`text-h4 ${t.textMuted} uppercase`}>
             {sermon.series} &bull; {sermon.date}
           </span>
-        </div>
+        </AnimateOnScroll>
 
         {/* Video player */}
-        {sermonHref ? (
-          <Link href={sermonHref} className="block">
+        <AnimateOnScroll animation="scale-up" staggerIndex={2} enabled={animate}>
+          {sermonHref ? (
+            <Link href={sermonHref} className="block">
+              <VideoThumbnail
+                data={{
+                  id: "sermon-video",
+                  title: sermon.title,
+                  thumbnailUrl: sermon.thumbnailUrl,
+                  videoUrl: sermon.videoUrl,
+                }}
+                size="featured"
+              />
+            </Link>
+          ) : (
             <VideoThumbnail
               data={{
                 id: "sermon-video",
@@ -66,18 +83,8 @@ export default function SpotlightMediaSection(props: {
               }}
               size="featured"
             />
-          </Link>
-        ) : (
-          <VideoThumbnail
-            data={{
-              id: "sermon-video",
-              title: sermon.title,
-              thumbnailUrl: sermon.thumbnailUrl,
-              videoUrl: sermon.videoUrl,
-            }}
-            size="featured"
-          />
-        )}
+          )}
+        </AnimateOnScroll>
       </div>
     </SectionContainer>
   );

@@ -4,6 +4,9 @@
  *   heading: string -- section heading (e.g. "All Events")
  * -- Data --
  *   events: Event[] -- all events from database
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up on scroll.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -14,6 +17,7 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import EventListItem from "@/components/shared/EventListItem";
 import FilterToolbar from "@/components/shared/FilterToolbar";
 import { themeTokens } from "@/lib/theme";
@@ -53,6 +57,7 @@ export default function AllEventsSection(props: {
   const { settings, events } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   /* ── State ── */
   const [viewMode, setViewMode] = useState<ViewMode>("card");
@@ -79,7 +84,9 @@ export default function AllEventsSection(props: {
   return (
     <SectionContainer settings={settings}>
       {/* Section heading */}
-      <h2 className={`text-h2 ${t.textPrimary} mb-8`}>{content.heading}</h2>
+      <AnimateOnScroll animation="fade-up" enabled={animate}>
+        <h2 className={`text-h2 ${t.textPrimary} mb-8`}>{content.heading}</h2>
+      </AnimateOnScroll>
 
       {/* Reusable filter toolbar */}
       <FilterToolbar

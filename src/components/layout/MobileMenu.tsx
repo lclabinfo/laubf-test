@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { ChevronDown, SquareArrowOutUpRight } from "lucide-react";
 import { dropdowns, directLinks } from "./nav-data";
@@ -14,17 +15,35 @@ interface MobileMenuProps {
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const [expanded, setExpanded] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Lock body scroll when open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   const toggleSection = (id: string) => {
     setExpanded((prev) => (prev === id ? null : id));
   };
 
-  return (
+  const menu = (
     <>
       {/* Backdrop */}
       <div
         className={cn(
-          "fixed inset-0 z-50 bg-black-1/40 transition-opacity duration-300",
+          "fixed inset-0 z-[9998] bg-black-1/40 transition-opacity duration-300",
           isOpen ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         onClick={onClose}
@@ -33,8 +52,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
       {/* Drawer */}
       <div
+        ref={drawerRef}
         className={cn(
-          "fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm bg-white-0 transition-transform duration-300 ease-smooth overflow-y-auto",
+          "fixed inset-y-0 right-0 z-[9999] w-full max-w-sm bg-white-0 transition-transform duration-300 ease-smooth overflow-y-auto",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -106,35 +126,60 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               >
                 <div className="overflow-hidden">
                   <div className="pl-4 flex flex-col gap-0.5 pb-2">
-                    {dropdown.sections.map((section) =>
-                      section.items.map((item) => {
-                        const Icon = item.icon;
-                        return (
-                          <Link
-                            key={item.href}
-                            href={item.href}
-                            target={item.external ? "_blank" : undefined}
-                            rel={
-                              item.external ? "noopener noreferrer" : undefined
-                            }
-                            onClick={onClose}
-                            className="flex items-center gap-3 px-4 py-3 rounded-lg text-body-1 text-black-2 transition-colors duration-150 hover:bg-white-1-5"
-                          >
-                            <Icon
-                              className="size-5 text-black-3 shrink-0"
-                              strokeWidth={1.5}
-                            />
-                            {item.label}
-                            {item.external && (
-                              <SquareArrowOutUpRight
-                                className="size-3.5 text-black-3 ml-auto shrink-0"
+                    {/* Ministry overview link for the ministries dropdown */}
+                    {dropdown.featuredCard && (
+                      <Link
+                        href={dropdown.featuredCard.href}
+                        onClick={onClose}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg text-body-1 font-medium text-black-1 transition-colors duration-150 hover:bg-white-1-5"
+                      >
+                        Ministries Overview
+                      </Link>
+                    )}
+                    {dropdown.sections.map((section) => (
+                      <div key={section.title}>
+                        {/* Section title */}
+                        <div className="px-4 pt-3 pb-1 text-overline text-black-3 text-[0.6875rem]">
+                          {section.title}
+                        </div>
+                        {section.items.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <Link
+                              key={item.href}
+                              href={item.href}
+                              target={item.external ? "_blank" : undefined}
+                              rel={
+                                item.external ? "noopener noreferrer" : undefined
+                              }
+                              onClick={onClose}
+                              className="flex items-center gap-3 px-4 py-3 rounded-lg text-body-1 text-black-2 transition-colors duration-150 hover:bg-white-1-5"
+                            >
+                              <Icon
+                                className="size-5 text-black-3 shrink-0"
                                 strokeWidth={1.5}
                               />
-                            )}
+                              {item.label}
+                              {item.external && (
+                                <SquareArrowOutUpRight
+                                  className="size-3.5 text-black-3 ml-auto shrink-0"
+                                  strokeWidth={1.5}
+                                />
+                              )}
+                            </Link>
+                          );
+                        })}
+                        {section.footerLink && (
+                          <Link
+                            href={section.footerLink.href}
+                            onClick={onClose}
+                            className="flex items-center gap-3 px-4 py-2 rounded-lg text-body-2 text-brand-1 transition-colors duration-150 hover:bg-white-1-5"
+                          >
+                            {section.footerLink.label}
                           </Link>
-                        );
-                      }),
-                    )}
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -152,16 +197,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               {link.label}
             </Link>
           ))}
-
-          {/* Member Login — hidden for now
-          <Link
-            href="/member-login"
-            onClick={onClose}
-            className="px-4 py-4 rounded-lg text-nav text-black-1 transition-colors duration-150 hover:bg-white-1-5"
-          >
-            Member Login
-          </Link>
-          */}
         </div>
 
         {/* Bottom CTA */}
@@ -177,4 +212,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       </div>
     </>
   );
+
+  // Render via portal to avoid overflow-x-hidden clipping
+  if (!mounted) return null;
+  return createPortal(menu, document.body);
 }

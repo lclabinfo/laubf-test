@@ -8,6 +8,10 @@
  *   secondaryButton: { label, href, visible }
  * -- Media (BASIC) --
  *   floatingImages[]: { src, alt, width, height } — max 10, auto-distributed on orbit
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle entry animations
+ *     Animations: center content fades up with staggered delays while
+ *     orbiting images continue their motion loop.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -21,6 +25,7 @@ import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
 import { themeTokens } from "@/lib/theme";
 import type { PageHeroSectionProps } from "@/lib/types/sections";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 /* ---------- Elliptical orbit keyframe generator ---------- */
@@ -76,6 +81,7 @@ export default function PageHeroSection(props: {
       ? "rgba(13,13,13,"
       : "rgba(250,250,250,";
 
+  const animate = settings.enableAnimations !== false;
   const images = content.floatingImages.slice(0, MAX_IMAGES);
   const total = images.length;
 
@@ -147,18 +153,18 @@ export default function PageHeroSection(props: {
             />
 
             {content.overline && (
-              <p className={`relative z-10 text-h4 ${t.textPrimary} mb-3`}>
+              <p className={cn(`relative z-10 text-h4 ${t.textPrimary} mb-3`, animate && "animate-hero-fade-up")}>
                 {content.overline}
               </p>
             )}
 
             <h1
-              className={`relative z-10 text-h1 ${t.textPrimary} mb-12`}
+              className={cn(`relative z-10 text-h1 ${t.textPrimary} mb-12`, animate && "animate-hero-fade-up-delayed")}
             >
               {content.heading}
             </h1>
 
-            <div className="relative z-10 flex flex-col sm:flex-row items-center gap-3">
+            <div className={cn("relative z-10 flex flex-col sm:flex-row items-center gap-3", animate && "animate-hero-fade-up-delayed-2")}>
               {content.primaryButton.visible && (
                 <CTAButton
                   label={content.primaryButton.label}

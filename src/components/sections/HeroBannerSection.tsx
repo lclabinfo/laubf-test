@@ -9,6 +9,10 @@
  *   secondaryButton: { label, href, visible }
  * ── Media (BASIC) ──
  *   backgroundImage: { src, alt }
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle entry animations
+ *     Animations: background image fades in, heading + subheading slide up
+ *     with staggered delays, buttons fade up last.
  * ── Layout (ADVANCED) ──
  *   paddingY, colorScheme
  *
@@ -21,6 +25,7 @@
 import { SectionThemeContext } from "@/lib/theme";
 import type { HeroBannerSectionProps } from "@/lib/types/sections";
 import CTAButton from "@/components/shared/CTAButton";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function HeroBannerSection(props: { settings: HeroBannerSectionProps }) {
@@ -28,6 +33,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
   if (!settings.visible) return null;
 
   const { content } = settings;
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionThemeContext.Provider value="dark">
@@ -39,7 +45,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
             muted
             loop
             playsInline
-            className="absolute inset-0 h-full w-full object-cover"
+            className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
           >
             <source src={content.backgroundImage.src} type="video/mp4" />
           </video>
@@ -49,7 +55,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
             alt={content.backgroundImage.alt}
             fill
             priority
-            className="object-cover"
+            className={cn("object-cover", animate && "animate-hero-fade-in-slow")}
           />
         )}
 
@@ -76,7 +82,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
           <div className="container-standard lg:px-0 lg:ml-20 lg:max-w-none">
             <div className="flex flex-col gap-10 max-w-[500px]">
               {/* Heading */}
-              <div className="flex flex-col gap-6">
+              <div className={cn("flex flex-col gap-6", animate && "animate-hero-fade-up")}>
                 <div className="flex flex-col leading-[0.8] text-white-1 drop-shadow-lg">
                   <span className="text-h1">{content.heading.line1}</span>
                   <span className="text-hero-accent">
@@ -86,7 +92,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
 
                 {/* Subheading */}
                 {settings.showSubheading && content.subheading && (
-                  <div className="text-[20px] lg:text-[32px] leading-[1.2] tracking-[-0.04em]">
+                  <div className={cn("text-[20px] lg:text-[32px] leading-[1.2] tracking-[-0.04em]", animate && "animate-hero-fade-up-delayed")}>
                     {content.subheading.split("\n").map((line, i) => {
                       const parts = line.split(
                         /(\b(?:people find their community|disciples are raised|the Word of God is lived)\b)/,
@@ -114,7 +120,7 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
               </div>
 
               {/* Buttons */}
-              <div className="flex gap-3">
+              <div className={cn("flex flex-col sm:flex-row gap-3", animate && "animate-hero-fade-up-delayed-2")}>
                 {content.primaryButton.visible && (
                   <CTAButton
                     label={content.primaryButton.label}

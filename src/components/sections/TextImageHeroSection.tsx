@@ -7,6 +7,9 @@
  *   description: string -- paragraph below heading
  * -- Media (BASIC) --
  *   image: { src, alt } -- full-width landscape hero image
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle entry animations
+ *     Animations: text block fades up on load, hero image scales in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *   textAlign: 'left' | 'center' | 'right' -- text alignment (default: 'left')
@@ -18,6 +21,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { TextImageHeroSectionProps } from "@/lib/types/sections";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 const alignmentClasses = {
@@ -44,13 +48,14 @@ export default function TextImageHeroSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
   const align = settings.textAlign ?? "left";
   const a = alignmentClasses[align];
 
   return (
     <SectionContainer settings={settings} className="pt-12 lg:pt-16">
       {/* Text block */}
-      <div className={`mb-12 lg:mb-16 flex flex-col ${a.wrapper}`}>
+      <div className={cn(`mb-12 lg:mb-16 flex flex-col ${a.wrapper}`, animate && "animate-hero-fade-up")}>
         <p className={`text-overline ${t.textMuted} mb-4`}>{content.overline}</p>
         <h1 className={`mb-6 ${a.heading}`}>
           <span className={`text-h1 ${t.textPrimary} block`}>{content.headingLine1}</span>
@@ -64,7 +69,7 @@ export default function TextImageHeroSection(props: {
       </div>
 
       {/* Full-width hero image */}
-      <div className="relative w-full aspect-[16/7] rounded-2xl overflow-hidden">
+      <div className={cn("relative w-full aspect-[16/7] rounded-2xl overflow-hidden", animate && "animate-hero-fade-up-delayed")}>
         <Image
           src={content.image.src}
           alt={content.image.alt}

@@ -6,6 +6,9 @@
  *   description: string — paragraph describing the acronym
  * -- Button (BASIC) --
  *   button: { label, href, visible }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up, acronym letters stagger in, description fades in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -16,6 +19,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { FeatureBreakdownSectionProps } from "@/lib/types/sections";
 import Image from "next/image";
@@ -26,6 +30,7 @@ export default function FeatureBreakdownSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings} bgOverride="bg-brand-2" className="relative overflow-hidden">
@@ -43,7 +48,9 @@ export default function FeatureBreakdownSection(props: {
 
       <div className="relative z-10 flex flex-col gap-10 lg:gap-0">
         {/* Heading */}
-        <h2 className={`text-h2 ${t.textPrimary} mb-6 lg:mb-10`}>{content.heading}</h2>
+        <AnimateOnScroll animation="fade-up" enabled={animate}>
+          <h2 className={`text-h2 ${t.textPrimary} mb-6 lg:mb-10`}>{content.heading}</h2>
+        </AnimateOnScroll>
 
         <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
           {/* Left column — stacked acronym words with first-letter highlight */}
@@ -60,7 +67,7 @@ export default function FeatureBreakdownSection(props: {
           </div>
 
           {/* Right column — description + CTA */}
-          <div className="flex flex-col gap-8 lg:w-[65%]">
+          <AnimateOnScroll animation="fade-right" enabled={animate} className="flex flex-col gap-8 lg:w-[65%]">
             <p className={`text-body-1 ${t.textSecondary} leading-relaxed`}>
               {content.description}
             </p>
@@ -73,7 +80,7 @@ export default function FeatureBreakdownSection(props: {
                 className="self-start"
               />
             )}
-          </div>
+          </AnimateOnScroll>
         </div>
       </div>
     </SectionContainer>

@@ -49,11 +49,11 @@ export default function VideoModal({
 
   return (
     <div
-      className="fixed inset-0 z-[70] flex items-start justify-center bg-black/80 pt-8 pb-8 px-4 overflow-y-auto"
+      className="fixed inset-0 z-[70] flex items-start justify-center bg-black/80 pt-8 pb-8 px-4 overflow-y-auto animate-hero-fade-in"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-[1024px] bg-white-0 rounded-[24px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]"
+        className="relative w-full max-w-[1024px] bg-white-0 rounded-[24px] overflow-hidden shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)] animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* ── Video Player ── */}

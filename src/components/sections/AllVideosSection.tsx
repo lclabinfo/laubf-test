@@ -4,6 +4,9 @@
  *   heading: string -- section heading (e.g. "All Videos")
  * -- Data --
  *   videos: Video[] -- all videos from database
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up on scroll.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -14,6 +17,7 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import FilterToolbar from "@/components/shared/FilterToolbar";
 import VideoCard from "@/components/shared/VideoCard";
 import VideoModal from "@/components/shared/VideoModal";
@@ -31,6 +35,7 @@ export default function AllVideosSection(props: {
 }) {
   const { settings, videos } = props;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   /* ── State ── */
   const [search, setSearch] = useState("");
@@ -65,7 +70,9 @@ export default function AllVideosSection(props: {
 
   return (
     <SectionContainer settings={settings}>
-      <h2 className={`text-h2 ${t.textPrimary} mb-8`}>All Videos</h2>
+      <AnimateOnScroll animation="fade-up" enabled={animate}>
+        <h2 className={`text-h2 ${t.textPrimary} mb-8`}>All Videos</h2>
+      </AnimateOnScroll>
 
       <FilterToolbar
         disclosure

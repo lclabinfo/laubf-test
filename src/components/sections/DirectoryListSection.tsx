@@ -35,15 +35,26 @@ export default function DirectoryListSection(props: {
   return (
     <SectionThemeContext.Provider value="light">
       <div className="bg-white-1">
-        {/* Main parallax section */}
-        <DirectoryParallaxBlock
-          heading={content.heading}
-          items={content.items}
-          image={content.image}
-        />
+        {/* Desktop: parallax layout */}
+        <div className="hidden lg:block">
+          <DirectoryParallaxBlock
+            heading={content.heading}
+            items={content.items}
+            image={content.image}
+          />
+        </div>
+
+        {/* Mobile: centered list with image header */}
+        <div className="lg:hidden">
+          <DirectoryMobileBlock
+            heading={content.heading}
+            items={content.items}
+            image={content.image}
+          />
+        </div>
 
         {/* CTA block */}
-        <section className="flex flex-col items-center gap-5 pb-30 pt-8 text-center">
+        <section className="flex flex-col items-center gap-5 pb-20 lg:pb-30 pt-8 text-center px-4">
           <h3 className="text-h3 text-black-1">{content.ctaHeading}</h3>
           <CTAButton
             label={content.ctaButton.label}
@@ -53,6 +64,69 @@ export default function DirectoryListSection(props: {
         </section>
       </div>
     </SectionThemeContext.Provider>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Mobile block — image header + centered list                        */
+/* ------------------------------------------------------------------ */
+
+function DirectoryMobileBlock({
+  heading,
+  items,
+  image,
+}: {
+  heading: string;
+  items: DirectoryListSectionProps["content"]["items"];
+  image: DirectoryListSectionProps["content"]["image"];
+}) {
+  return (
+    <section className="px-4 pt-20 pb-8">
+      <div className="flex flex-col items-center gap-8">
+        {/* Small image + heading */}
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative h-[140px] w-[240px] overflow-hidden rounded-xl">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <h2 className="text-h2 text-black-1 text-center">{heading}</h2>
+        </div>
+
+        {/* Centered campus list */}
+        <div className="flex flex-col items-center gap-2 w-full">
+          {items.map((item) => (
+            <Link
+              key={item.id}
+              href={item.href ?? `#${item.id}`}
+              className="group flex items-center justify-center gap-3 w-full max-w-[320px] py-3 rounded-lg transition-colors hover:bg-white-1-5"
+            >
+              <span className="text-h3 font-medium text-black-3 transition-colors group-hover:text-black-1">
+                {item.name}
+              </span>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 48 48"
+                fill="none"
+                className="text-black-3 opacity-0 transition-opacity group-hover:opacity-100 shrink-0"
+              >
+                <path
+                  d="M14 34L34 14M34 14H14M34 14V34"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 

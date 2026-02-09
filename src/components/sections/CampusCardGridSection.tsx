@@ -11,6 +11,9 @@
  * -- CTA (BASIC) --
  *   ctaHeading: string -- fallback prompt (e.g. "Don't see your campus?")
  *   ctaButton: { label, href }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: decorative photos scale in, header fades up, campus cards stagger in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -22,6 +25,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import { IconChevronDown } from "@/components/layout/icons";
 import type { CampusCardGridSectionProps } from "@/lib/types/sections";
@@ -34,12 +38,13 @@ export default function CampusCardGridSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       {/* Decorative overlapping photos */}
       {content.decorativeImages && content.decorativeImages.length > 0 && (
-        <div className="flex items-center justify-center mb-12">
+        <AnimateOnScroll animation="scale-up" enabled={animate} className="flex items-center justify-center mb-12">
           <div className="relative w-[300px] h-[200px] md:w-[400px] md:h-[250px]">
             {content.decorativeImages.map((img, i) => {
               /* Stack images with overlapping positions */
@@ -71,11 +76,11 @@ export default function CampusCardGridSection(props: {
               );
             })}
           </div>
-        </div>
+        </AnimateOnScroll>
       )}
 
       {/* Section header */}
-      <div className="text-center mb-10">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="text-center mb-10">
         {content.overline && (
           <p className={`text-body-1 ${t.textSecondary} mb-2`}>
             {content.overline}
@@ -89,7 +94,7 @@ export default function CampusCardGridSection(props: {
             {content.description}
           </p>
         )}
-      </div>
+      </AnimateOnScroll>
 
       {/* Campus cards grid — rectangular cards matching Figma */}
       <div className="flex flex-wrap justify-center gap-5 max-w-4xl mx-auto">

@@ -21,8 +21,8 @@ export function useNavbarScroll() {
       Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
     const visibilityRatio = Math.max(0, visibleHeight / heroHeight);
 
-    // Transition to opaque navbar when hero is less than 90% visible
-    setIsScrolled(visibilityRatio < 0.9);
+    // Transition to opaque navbar when hero is less than 97% visible (appears faster)
+    setIsScrolled(visibilityRatio < 0.97);
   }, []);
 
   useEffect(() => {

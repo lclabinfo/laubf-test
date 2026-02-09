@@ -10,6 +10,9 @@
  *   videoUrl: string -- (optional) YouTube embed URL for vertical/shorts video
  * -- Timeline (BASIC) --
  *   items[]: { time, title, description }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, image slides in from left, timeline items stagger up.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -20,6 +23,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { TimelineSectionProps } from "@/lib/types/sections";
 import Image from "next/image";
@@ -30,11 +34,12 @@ export default function TimelineSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       {/* Header area */}
-      <div className="mb-12">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="mb-12">
         <OverlineLabel text={content.overline} className="text-brand-1" />
         <h2 className={`text-h2 ${t.textPrimary} mt-3`}>
           {content.heading}
@@ -44,12 +49,12 @@ export default function TimelineSection(props: {
             {content.description}
           </p>
         )}
-      </div>
+      </AnimateOnScroll>
 
       {/* Two-column layout: image left, timeline right */}
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
         {/* Left column -- image */}
-        <div className="lg:w-[40%] shrink-0">
+        <AnimateOnScroll animation="fade-left" enabled={animate} className="lg:w-[40%] shrink-0">
           {content.imageSrc ? (
             <div className="relative aspect-[3/4] w-full max-h-[500px] rounded-2xl overflow-hidden">
               <Image
@@ -70,7 +75,7 @@ export default function TimelineSection(props: {
               />
             </div>
           ) : null}
-        </div>
+        </AnimateOnScroll>
 
         {/* Right column -- timeline items */}
         <div className="lg:w-[60%] flex items-center">

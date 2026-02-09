@@ -67,9 +67,9 @@ export default function FooterSection(props: {
               </div>
             </div>
 
-            {/* Nav columns */}
+            {/* Nav columns — hidden on mobile */}
             {content.columns.map((col) => (
-              <div key={col.heading} className="flex flex-col gap-3">
+              <div key={col.heading} className="hidden sm:flex flex-col gap-3">
                 <h4 className="text-button-2 text-white-2-5 uppercase">
                   {col.heading}
                 </h4>

@@ -9,6 +9,9 @@
  *   secondaryButton: { label, href, visible }
  * ── Background (BASIC) ──
  *   backgroundImage: { src, alt } — shown at 10% opacity
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: content fades up, buttons fade up with delay.
  * ── Layout (ADVANCED) ──
  *   paddingY, colorScheme, backgroundImageOpacity
  *
@@ -20,6 +23,7 @@
 
 import { SectionThemeContext } from "@/lib/theme";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import type { CTABannerSectionProps } from "@/lib/types/sections";
 import Image from "next/image";
 
@@ -30,6 +34,7 @@ export default function CTABannerSection(props: {
   if (!settings.visible) return null;
 
   const { content } = settings;
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionThemeContext.Provider value="dark">
@@ -45,7 +50,7 @@ export default function CTABannerSection(props: {
         )}
 
         {/* Content */}
-        <div className="relative flex flex-col items-center gap-5 text-center">
+        <AnimateOnScroll animation="fade-up" enabled={animate} className="relative flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-3">
             <p className="text-h4 text-white-1">{content.overline}</p>
             <h2 className="text-h2 text-white-1">{content.heading}</h2>
@@ -53,10 +58,10 @@ export default function CTABannerSection(props: {
           <p className="text-body-1 text-white-2 max-w-[640px]">
             {content.body}
           </p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Buttons */}
-        <div className="relative flex gap-3">
+        <AnimateOnScroll animation="fade-up" staggerIndex={1} staggerBaseMs={150} enabled={animate} className="relative flex flex-col sm:flex-row gap-3">
           {content.primaryButton.visible && (
             <CTAButton
               label={content.primaryButton.label}
@@ -71,7 +76,7 @@ export default function CTABannerSection(props: {
               variant="secondary"
             />
           )}
-        </div>
+        </AnimateOnScroll>
       </section>
     </SectionThemeContext.Provider>
   );

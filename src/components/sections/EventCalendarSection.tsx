@@ -4,6 +4,9 @@
  *   heading: string — "Schedule"
  * ── Buttons (BASIC) ──
  *   ctaButtons[]: { label, href, icon? }
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: heading fades up on scroll.
  * ── Layout (ADVANCED) ──
  *   paddingY, colorScheme
  *
@@ -14,6 +17,7 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import CTAButton from "@/components/shared/CTAButton";
 import EventCalendarGrid from "@/components/shared/EventCalendarGrid";
 import EventListItem from "@/components/shared/EventListItem";
@@ -44,6 +48,7 @@ export default function EventCalendarSection(props: {
 }) {
   const { settings, events } = props;
   const { content } = settings;
+  const animate = settings.enableAnimations !== false;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
@@ -108,12 +113,14 @@ export default function EventCalendarSection(props: {
     <SectionContainer settings={settings} className="!pt-0 !pb-24 lg:!pb-30">
       <div className="flex flex-col gap-10">
         {/* Schedule heading */}
-        <h2 className="text-h2 text-black-1">{content.heading}</h2>
+        <AnimateOnScroll animation="fade-up" enabled={animate}>
+          <h2 className="text-h2 text-black-1">{content.heading}</h2>
+        </AnimateOnScroll>
 
         {/* Calendar/List container */}
         <div className="flex flex-col gap-5">
           {/* Header row: month toggle + view toggle */}
-          <div className="flex items-center justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             {/* Month navigation */}
             <div className="flex items-center gap-3">
               <button
@@ -166,8 +173,8 @@ export default function EventCalendarSection(props: {
 
           {/* Filter pills + upcoming count (list view only) */}
           {viewMode === "list" && (
-            <div className="flex items-center justify-between">
-              <div className="flex gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap gap-2">
                 {FILTERS.map((filter) => (
                   <button
                     key={filter.value}
@@ -183,7 +190,7 @@ export default function EventCalendarSection(props: {
                   </button>
                 ))}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="hidden sm:flex items-center gap-2">
                 <span className="text-[14px] text-black-3">
                   Upcoming in {upcomingMonthName}
                 </span>

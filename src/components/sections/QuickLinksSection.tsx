@@ -5,6 +5,9 @@
  *   subtitle?: string -- supporting text
  * -- Data --
  *   meetings: fetched from RECURRING_MEETINGS (Event[])
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, meeting cards stagger in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -15,6 +18,7 @@
 
 import { useRef } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { QuickLinksSectionProps } from "@/lib/types/sections";
 import type { Event } from "@/lib/types/events";
@@ -40,6 +44,7 @@ export default function QuickLinksSection(props: {
   const { settings, meetings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
   const scrollRef = useRef<HTMLDivElement>(null);
 
   function scrollBy(direction: "left" | "right") {
@@ -54,7 +59,7 @@ export default function QuickLinksSection(props: {
   return (
     <SectionContainer settings={settings}>
       {/* Header — left aligned with nav arrows */}
-      <div className="flex items-end justify-between mb-8">
+      <AnimateOnScroll animation="fade-up" enabled={animate} className="flex items-end justify-between mb-8">
         <div>
           <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
           {content.subtitle && (
@@ -81,7 +86,7 @@ export default function QuickLinksSection(props: {
             <IconChevronRight className="size-4" />
           </button>
         </div>
-      </div>
+      </AnimateOnScroll>
 
       {/* Horizontal scrolling carousel — single row */}
       <div

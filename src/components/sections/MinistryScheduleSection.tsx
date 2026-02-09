@@ -14,6 +14,9 @@
  *   buttons?: { label, href, variant }[]
  * -- Media (BASIC) --
  *   image?: { src, alt } -- optional right-side image
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: left column slides in from left, right column slides in from right.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -26,6 +29,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { MinistryScheduleSectionProps } from "@/lib/types/sections";
 import { IconMapPin, IconExternalLink } from "@/components/layout/icons";
@@ -37,6 +41,7 @@ export default function MinistryScheduleSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
   const isScript = content.headingStyle === "script";
   const hasImage = !!content.image;
 
@@ -44,7 +49,7 @@ export default function MinistryScheduleSection(props: {
     <SectionContainer settings={settings}>
       <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
         {/* Left column */}
-        <div className={hasImage ? "w-full lg:w-[50%]" : "w-full lg:w-[40%]"}>
+        <AnimateOnScroll animation="fade-left" enabled={animate} className={hasImage ? "w-full lg:w-[50%]" : "w-full lg:w-[40%]"}>
           {content.logo && (
             <div className="mb-6">
               <Image
@@ -118,10 +123,10 @@ export default function MinistryScheduleSection(props: {
               ))}
             </div>
           )}
-        </div>
+        </AnimateOnScroll>
 
         {/* Right column */}
-        <div className={hasImage ? "w-full lg:w-[50%]" : "w-full lg:w-[60%]"}>
+        <AnimateOnScroll animation="fade-right" staggerIndex={1} staggerBaseMs={150} enabled={animate} className={hasImage ? "w-full lg:w-[50%]" : "w-full lg:w-[60%]"}>
           {hasImage ? (
             <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
               <Image
@@ -171,7 +176,7 @@ export default function MinistryScheduleSection(props: {
               </div>
             )
           )}
-        </div>
+        </AnimateOnScroll>
       </div>
     </SectionContainer>
   );

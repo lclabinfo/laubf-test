@@ -5,6 +5,9 @@
  *   description: string — section description
  * -- Cards (BASIC) --
  *   cards[]: { icon, title, description, buttonLabel, buttonHref, buttonVariant }
+ * -- Animation (ADVANCED) --
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header fades up, pathway cards stagger in.
  * -- Layout (ADVANCED) --
  *   visible, colorScheme, paddingY, containerWidth
  *
@@ -15,6 +18,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { PathwayCardSectionProps } from "@/lib/types/sections";
 import {
@@ -39,15 +43,16 @@ export default function PathwayCardSection(props: {
   const { settings } = props;
   const { content } = settings;
   const t = themeTokens[settings.colorScheme];
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       <div className="flex flex-col items-center gap-16">
         {/* Section header */}
-        <div className="flex flex-col items-center gap-5 text-center max-w-3xl mx-auto">
+        <AnimateOnScroll animation="fade-up" enabled={animate} className="flex flex-col items-center gap-5 text-center max-w-3xl mx-auto">
           <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
           <p className={`text-body-1 ${t.textSecondary}`}>{content.description}</p>
-        </div>
+        </AnimateOnScroll>
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 w-full">
@@ -55,8 +60,12 @@ export default function PathwayCardSection(props: {
             const Icon = iconMap[card.icon];
 
             return (
-              <div
+              <AnimateOnScroll
                 key={i}
+                animation="fade-up"
+                staggerIndex={i}
+                staggerBaseMs={120}
+                enabled={animate}
                 className="flex flex-col items-center text-center gap-5"
               >
                 {/* Icon */}
@@ -87,7 +96,7 @@ export default function PathwayCardSection(props: {
                     }
                   />
                 </div>
-              </div>
+              </AnimateOnScroll>
             );
           })}
         </div>

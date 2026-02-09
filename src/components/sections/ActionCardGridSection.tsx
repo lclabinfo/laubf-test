@@ -5,6 +5,9 @@
  *   subheading: string — description paragraph
  * ── Cards (BASIC) ──
  *   cards[]: ImageCardData[] — 4 step cards (title, description, imageUrl, href)
+ * ── Animation (ADVANCED) ──
+ *   enableAnimations?: boolean (default true) — toggle scroll-reveal animations
+ *     Animations: header slides in from left, cards stagger up.
  * ── Layout (ADVANCED) ──
  *   paddingY, colorScheme
  *
@@ -16,6 +19,7 @@
 
 import SectionContainer from "@/components/shared/SectionContainer";
 import ImageCard from "@/components/shared/ImageCard";
+import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import type { ActionCardGridSectionProps } from "@/lib/types/sections";
 
 export default function ActionCardGridSection(props: {
@@ -23,12 +27,13 @@ export default function ActionCardGridSection(props: {
 }) {
   const { settings } = props;
   const { content } = settings;
+  const animate = settings.enableAnimations !== false;
 
   return (
     <SectionContainer settings={settings}>
       <div className="flex flex-col gap-10 lg:flex-row lg:gap-10">
         {/* Left header */}
-        <div className="flex flex-col gap-5 lg:w-[280px] lg:shrink-0">
+        <AnimateOnScroll animation="fade-left" enabled={animate} className="flex flex-col gap-5 lg:w-[280px] lg:shrink-0">
           <h2 className="text-h2 text-black-1 leading-none">
             <span>{content.heading.line1}</span>
             <br />
@@ -39,12 +44,14 @@ export default function ActionCardGridSection(props: {
             <span>{content.heading.line3}</span>
           </h2>
           <p className="text-h4 text-black-2">{content.subheading}</p>
-        </div>
+        </AnimateOnScroll>
 
         {/* 2×2 grid */}
         <div className="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
-          {content.cards.map((card) => (
-            <ImageCard key={card.id} data={card} />
+          {content.cards.map((card, i) => (
+            <AnimateOnScroll key={card.id} animation="fade-up" staggerIndex={i} enabled={animate}>
+              <ImageCard data={card} />
+            </AnimateOnScroll>
           ))}
         </div>
       </div>
