@@ -42,6 +42,7 @@ const allEventsData: AllEventsSectionProps = {
   id: "all-events",
   visible: true,
   colorScheme: "light",
+  paddingY: "compact",
   content: {
     heading: "All Events",
   },

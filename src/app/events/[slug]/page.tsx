@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { MOCK_EVENTS, getEventBySlug } from "@/lib/mock-data/events";
 import { formatEventDate, getEventBadge } from "@/lib/types/events";
@@ -45,7 +44,7 @@ export default async function EventDetailPage({
     : formatEventDate(event.dateStart);
 
   return (
-    <main className="bg-white-1 pt-32 pb-20">
+    <main className="bg-white-1 pt-[104px] pb-20">
       {/* Breadcrumb */}
       <div className="container-standard">
         <nav className="flex items-center gap-1.5 text-[14px]">
@@ -69,28 +68,24 @@ export default async function EventDetailPage({
         </nav>
       </div>
 
-      {/* Hero image */}
-      <div className="container-standard mt-6">
-        <div className="relative w-full aspect-[16/7] rounded-[20px] overflow-hidden">
-          <Image
-            src={event.image.src}
-            alt={event.image.alt}
-            fill
-            priority
-            className="object-cover"
-          />
-          {getEventBadge(event) && (
-            <span className="absolute top-4 right-4 bg-black-1/80 text-white-0 text-[12px] tracking-wider font-medium px-4 py-1.5 rounded-full uppercase">
-              {getEventBadge(event)}
-            </span>
-          )}
-        </div>
-      </div>
-
       {/* Two-column layout */}
-      <div className="container-standard mt-10 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
+      <div className="container-standard mt-6 grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-10">
         {/* Left column — article */}
         <article>
+          {/* Event Image Placeholder */}
+          <div className="relative w-full aspect-[16/10] rounded-[20px] overflow-hidden bg-gradient-to-br from-white-2 to-white-1-5 mb-8">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="size-16 rounded-full bg-white-2-5/60 flex items-center justify-center">
+                <IconCalendar className="size-7 text-black-3/40" />
+              </div>
+            </div>
+            {getEventBadge(event) && (
+              <span className="absolute top-4 left-4 bg-black-1/80 text-white-0 text-[12px] tracking-wider font-medium px-4 py-1.5 rounded-full uppercase">
+                {getEventBadge(event)}
+              </span>
+            )}
+          </div>
+
           {/* Tags */}
           {event.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mb-4">
@@ -134,7 +129,7 @@ export default async function EventDetailPage({
         </article>
 
         {/* Right column — sidebar card */}
-        <aside className="lg:sticky lg:top-32 h-fit">
+        <aside className="lg:sticky lg:top-[104px] h-fit">
           <div className="bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] p-6">
             <h3 className="text-overline text-black-3 uppercase mb-4">
               Event Details

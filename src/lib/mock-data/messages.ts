@@ -12,6 +12,10 @@ import type { Message } from "@/lib/types/message";
  *  - optional link to related bible study
  * ================================================================ */
 
+export function getMessageBySlug(slug: string): Message | undefined {
+  return MOCK_MESSAGES.find((m) => m.slug === slug);
+}
+
 export const MOCK_MESSAGES: Message[] = [
   {
     id: "msg-1",

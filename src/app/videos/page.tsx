@@ -1,15 +1,45 @@
-import Link from "next/link";
+import EventsHeroSection from "@/components/sections/EventsHeroSection";
+import AllVideosSection from "@/components/sections/AllVideosSection";
 
-export default function Page() {
+import type {
+  EventsHeroSectionProps,
+  AllVideosSectionProps,
+} from "@/lib/types/sections";
+
+import { MOCK_VIDEOS } from "@/lib/mock-data/videos";
+
+/* ================================================================
+ * SAMPLE DATA — Content from Figma design
+ * In production, this data comes from PostgreSQL via CMS API.
+ * ================================================================ */
+
+const heroData: EventsHeroSectionProps = {
+  id: "videos-hero",
+  visible: true,
+  colorScheme: "dark",
+  paddingY: "compact",
+  content: {
+    heading: "Videos",
+    subtitle:
+      "Testimonies, event recaps, worship sessions, and special features from our community.",
+  },
+};
+
+const allVideosData: AllVideosSectionProps = {
+  id: "all-videos",
+  visible: true,
+  colorScheme: "light",
+  paddingY: "compact",
+  content: {
+    heading: "All Videos",
+  },
+};
+
+export default function VideosPage() {
   return (
-    <main className="min-h-screen bg-white-1 pt-32 pb-20">
-      <div className="container-standard">
-        <h1 className="text-h2 text-black-1 mb-6">Videos</h1>
-        <p className="text-body-1 text-black-3 mb-8">This page is coming soon.</p>
-        <Link href="/" className="text-body-1 text-brand-1 hover:underline">
-          &larr; Back to home
-        </Link>
-      </div>
+    <main>
+      <EventsHeroSection settings={heroData} />
+      <AllVideosSection settings={allVideosData} videos={MOCK_VIDEOS} />
     </main>
   );
 }

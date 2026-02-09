@@ -1,18 +1,14 @@
 /*
  * MessageCard — Card component for Sunday message/sermon entries
  *
- * Matches the BibleStudyCard aesthetic with the addition of a YouTube
- * thumbnail area at the top. Displays: thumbnail with play button,
- * series pill, date, title, speaker, passage, and an arrow link.
+ * Inner-padded card with YouTube thumbnail, series pill, date,
+ * title, speaker, and passage. Hover changes background color.
  */
 import Link from "next/link";
 import type { Message } from "@/lib/types/message";
 import {
   IconBookOpen,
   IconUser,
-  IconVideo,
-  IconFileText,
-  IconArrowUpRight,
 } from "@/components/layout/icons";
 
 function formatDate(dateStr: string) {
@@ -29,10 +25,10 @@ export default function MessageCard({ message }: { message: Message }) {
   return (
     <Link
       href={`/messages/${message.slug}`}
-      className="group relative rounded-[24px] cursor-pointer transition-all hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
+      className="group relative rounded-[24px] p-3 cursor-pointer transition-colors bg-white-0 hover:bg-white-1-5"
     >
       {/* YouTube Thumbnail */}
-      <div className="relative aspect-video rounded-t-[24px] overflow-hidden bg-black-1">
+      <div className="relative aspect-video rounded-[16px] overflow-hidden bg-black-1">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={`https://img.youtube.com/vi/${message.youtubeId}/maxresdefault.jpg`}
@@ -62,7 +58,7 @@ export default function MessageCard({ message }: { message: Message }) {
       </div>
 
       {/* Content area */}
-      <div className="flex flex-col items-start p-[28px]">
+      <div className="flex flex-col items-start pt-5 px-2 pb-3">
         {/* Series pill + date row */}
         <div className="flex items-center justify-between w-full mb-[12px]">
           <div className="bg-white-2 flex flex-col items-start px-[8px] py-[6px] rounded-[8px] shrink-0">
@@ -76,14 +72,14 @@ export default function MessageCard({ message }: { message: Message }) {
         </div>
 
         {/* Title */}
-        <div className="w-full px-[8px] mb-[12px]">
+        <div className="w-full mb-[12px]">
           <p className="font-medium leading-[1.2] text-black-1 text-[24px] tracking-[-0.72px] line-clamp-2">
             {message.title}
           </p>
         </div>
 
         {/* Speaker + Passage */}
-        <div className="flex flex-col gap-[6px] px-[8px] w-full mb-[20px]">
+        <div className="flex flex-col gap-[6px] w-full">
           <div className="flex gap-[8px] items-center">
             <IconUser className="shrink-0 size-[16px] text-black-3" />
             <p className="leading-[1.4] text-black-3 text-[16px] tracking-[-0.32px]">
@@ -97,29 +93,12 @@ export default function MessageCard({ message }: { message: Message }) {
             </p>
           </div>
         </div>
-
-        {/* Bottom row: resource indicators + arrow */}
-        <div className="flex h-[32px] items-center justify-between w-full mt-auto">
-          <div className="flex gap-[8px] items-center">
-            {/* Video indicator (always present) */}
-            <div className="bg-white-1-5 flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
-              <IconVideo className="shrink-0 size-[16px] text-black-2" />
-            </div>
-            {/* Live transcript indicator */}
-            {message.liveTranscript && (
-              <div className="bg-white-1-5 flex items-center overflow-clip p-[8px] rounded-[8px] shrink-0">
-                <IconFileText className="shrink-0 size-[16px] text-black-2" />
-              </div>
-            )}
-          </div>
-          <IconArrowUpRight className="shrink-0 size-[24px] text-black-3 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </div>
       </div>
 
-      {/* Border and Shadow overlay */}
+      {/* Border overlay */}
       <div
         aria-hidden="true"
-        className="absolute border border-white-2-5 inset-0 pointer-events-none rounded-[24px] shadow-[0px_4px_12px_0px_rgba(0,0,0,0.04)] transition-shadow group-hover:shadow-[0px_8px_16px_0px_rgba(0,0,0,0.06)]"
+        className="absolute border border-white-2-5 inset-0 pointer-events-none rounded-[24px]"
       />
     </Link>
   );

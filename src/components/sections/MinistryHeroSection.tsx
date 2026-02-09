@@ -41,7 +41,7 @@ export default function MinistryHeroSection(props: {
   const isSans = content.headingStyle === "sans";
 
   return (
-    <SectionContainer settings={settings} className="pt-28 lg:pt-36 !pb-0">
+    <SectionContainer settings={settings} className="pt-[104px] !pb-0">
       {/* Centered text content */}
       <div className="container-standard flex flex-col items-center text-center mb-10 lg:mb-14">
         {content.overline && (

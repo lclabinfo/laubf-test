@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 export function useNavbarScroll() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   const handleScroll = useCallback(() => {
     const heroEl = document.getElementById("hero-section");
@@ -24,16 +26,12 @@ export function useNavbarScroll() {
   }, []);
 
   useEffect(() => {
-    const heroEl = document.getElementById("hero-section");
-    if (!heroEl) {
-      setIsScrolled(true);
-      return;
-    }
-
+    // Re-evaluate on every route change — the hero section may or may not exist
     handleScroll();
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, [handleScroll, pathname]);
 
   return isScrolled;
 }

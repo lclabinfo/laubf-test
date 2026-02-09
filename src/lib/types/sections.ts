@@ -51,7 +51,8 @@ export type SectionType =
   | "events-hero"
   | "quick-links"
   | "all-events"
-  | "all-messages";
+  | "all-messages"
+  | "all-videos";
 
 /* ---- Base Settings ---- */
 export interface BaseSectionSettings {
@@ -587,4 +588,13 @@ export interface AllMessagesContent {
 
 export interface AllMessagesSectionProps extends BaseSectionSettings {
   content: AllMessagesContent;
+}
+
+/* ---- All Videos (filterable grid) ---- */
+export interface AllVideosContent {
+  heading: string;
+}
+
+export interface AllVideosSectionProps extends BaseSectionSettings {
+  content: AllVideosContent;
 }
