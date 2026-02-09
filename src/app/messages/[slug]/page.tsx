@@ -54,9 +54,9 @@ export default async function MessageDetailPage({
   if (!message) notFound();
 
   return (
-    <main className="bg-white-1 min-h-screen">
+    <main className="bg-white-1 min-h-screen -mt-[76px] pt-[76px]">
       {/* Sub-navigation bar */}
-      <div className="sticky top-20 z-30 bg-white-0/95 backdrop-blur-sm border-b border-white-2">
+      <div className="sticky top-[76px] z-30 bg-white-0/95 backdrop-blur-sm border-b border-white-2">
         <div className="container-standard flex items-center justify-between h-16">
           <Link
             href="/messages"

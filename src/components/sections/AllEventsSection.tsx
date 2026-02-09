@@ -79,7 +79,7 @@ export default function AllEventsSection(props: {
   return (
     <SectionContainer settings={settings}>
       {/* Section heading */}
-      <h2 className={`text-h1 ${t.textPrimary} mb-8`}>{content.heading}</h2>
+      <h2 className={`text-h2 ${t.textPrimary} mb-8`}>{content.heading}</h2>
 
       {/* Reusable filter toolbar */}
       <FilterToolbar
@@ -154,6 +154,11 @@ export default function AllEventsSection(props: {
           onFromChange: (v) => updateFilter("dateFrom", v || undefined),
           onToChange: (v) => updateFilter("dateTo", v || undefined),
         }}
+        onReset={() => {
+          setSearch("");
+          setFilters({});
+          setDisplayCount(INITIAL_COUNT);
+        }}
       />
 
       {/* Results count */}
@@ -213,15 +218,20 @@ function CardView({ events }: { events: Event[] }) {
   );
 }
 
+const MAX_VISIBLE_TAGS = 3;
+
 function EventCard({ event }: { event: Event }) {
   const badge = getEventBadge(event);
+  const visibleTags = event.tags.slice(0, MAX_VISIBLE_TAGS);
+  const overflowCount = event.tags.length - MAX_VISIBLE_TAGS;
+
   return (
     <Link
       href={`/events/${event.slug}`}
-      className="group bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] overflow-hidden transition-shadow hover:shadow-[0px_16px_32px_0px_rgba(0,0,0,0.10)]"
+      className="group flex flex-col bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] overflow-clip transition-shadow hover:shadow-[0px_16px_32px_0px_rgba(0,0,0,0.10)] h-full"
     >
       {/* Image */}
-      <div className="relative h-[160px] w-full overflow-hidden">
+      <div className="relative h-[160px] w-full overflow-clip shrink-0">
         <Image
           src={event.image.src}
           alt={event.image.alt}
@@ -229,64 +239,69 @@ function EventCard({ event }: { event: Event }) {
           className="object-cover transition-transform duration-300 group-hover:scale-105"
         />
         {badge && (
-          <span className="absolute top-3 right-3 bg-black-1/80 text-white-0 text-[11px] tracking-wider font-medium px-3 py-1 rounded-full uppercase">
+          <span className="absolute top-4 right-4 bg-black-1 border-[0.5px] border-white-2 text-white-1 text-[12px] tracking-[0.24px] font-medium leading-none px-5 py-3 rounded-full uppercase">
             {badge}
           </span>
         )}
       </div>
 
       {/* Details */}
-      <div className="p-7">
-        {/* Type pill */}
-        <span
-          className={`inline-block text-white-0 text-[12px] tracking-[0.24px] font-medium px-3 py-1 rounded-full mb-3 uppercase ${
-            event.type === "meeting"
-              ? "bg-accent-green"
-              : event.type === "event"
-                ? "bg-accent-blue"
-                : "bg-black-3"
-          }`}
-        >
-          {event.type}
-        </span>
+      <div className="flex flex-col gap-4 pt-[18px] pb-5 px-7 flex-1">
+        {/* Type + Title */}
+        <div className="flex flex-col gap-2 items-start">
+          <span
+            className={`text-white-1 text-[12px] tracking-[0.24px] font-medium leading-none px-2 py-1.5 rounded-lg uppercase ${
+              event.type === "meeting"
+                ? "bg-accent-green"
+                : event.type === "event"
+                  ? "bg-accent-blue"
+                  : "bg-black-3"
+            }`}
+          >
+            {event.type}
+          </span>
 
-        <h3 className="text-[18px] font-medium text-black-1 mb-3 leading-snug line-clamp-2">
-          {event.title}
-        </h3>
+          <h3 className="text-[20px] font-medium text-black-1 leading-none tracking-[-0.4px] truncate w-full">
+            {event.title}
+          </h3>
+        </div>
 
-        <div className="flex flex-col gap-2">
+        {/* Time & Location */}
+        <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <IconCalendar className="size-5 text-black-2 shrink-0" />
-            <span className="text-[14px] text-black-2">
+            <IconClock className="size-5 text-black-2 shrink-0" />
+            <span className="text-[14px] text-black-2 tracking-[-0.28px] leading-[1.4]">
               {new Date(event.dateStart + "T00:00:00").toLocaleDateString(
                 "en-US",
                 { weekday: "short", month: "short", day: "numeric" },
               )}{" "}
-              at {event.time.split(" - ")[0]}
+              @ {event.time.split(" - ")[0]}
             </span>
           </div>
           <div className="flex items-center gap-2">
             <IconMapPin className="size-5 text-black-2 shrink-0" />
-            <span className="text-[14px] text-black-2 line-clamp-1">
+            <span className="text-[14px] text-black-2 tracking-[-0.28px] leading-[1.4] line-clamp-1">
               {event.location}
             </span>
           </div>
         </div>
 
-        {/* Tags */}
+        {/* Tags — pinned to bottom edge */}
         {event.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-4">
-            {event.tags.slice(0, 3).map((tag) => (
-              <span
-                key={tag}
-                className="bg-white-2 text-black-2 text-[12px] px-3 py-1 rounded-full"
-              >
-                {tag}
-              </span>
-            ))}
-            {event.tags.length > 3 && (
-              <span className="bg-white-2 text-black-2 text-[12px] px-2.5 py-1 rounded-full">
-                +{event.tags.length - 3}
+          <div className="flex items-center justify-between mt-auto">
+            <div className="flex gap-2 items-center overflow-clip flex-1 min-w-0">
+              {visibleTags.map((tag) => (
+                <span
+                  key={tag}
+                  className="shrink-0 bg-white-2 text-black-3 text-[12px] tracking-[0.24px] font-medium leading-none text-center px-2 py-1.5 rounded-lg"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {overflowCount > 0 && (
+              <span className="shrink-0 bg-white-2 text-black-3 text-[12px] tracking-[0.24px] font-medium leading-none text-center px-2 py-1.5 rounded-lg ml-2">
+                +{overflowCount}
               </span>
             )}
           </div>

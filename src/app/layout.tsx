@@ -71,29 +71,33 @@ const footerData: FooterSectionProps = {
         heading: "RESOURCES",
         links: [
           {
-            label: "Daily Bread YouTube",
-            href: "https://youtube.com/@dailybread",
+            label: "UBF HQ",
+            href: "https://ubf.org/",
             external: true,
           },
-          {
-            label: "UBF HQ YouTube",
-            href: "https://youtube.com/@ubfhq",
-            external: true,
-          },
-          {
-            label: "UBF TV YouTube",
-            href: "https://youtube.com/@ubftv",
-            external: true,
-          },
-          { label: "UBF HQ", href: "https://ubf.org", external: true },
           {
             label: "Chicago UBF",
-            href: "https://chicagoubf.org",
+            href: "https://www.chicagoubf.org/",
             external: true,
           },
           {
             label: "Korea UBF",
-            href: "https://koreaubf.org",
+            href: "https://www.ubf.kr/",
+            external: true,
+          },
+          {
+            label: "UBF HQ YouTube",
+            href: "https://www.youtube.com/user/ubfwebdev",
+            external: true,
+          },
+          {
+            label: "LA UBF YouTube",
+            href: "https://www.youtube.com/channel/UCj419CtzNGrJ-1vtT2-DCQw",
+            external: true,
+          },
+          {
+            label: "Daily Bread YouTube",
+            href: "https://www.youtube.com/c/ubfdailybread",
             external: true,
           },
         ],

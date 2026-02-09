@@ -165,6 +165,7 @@ export interface DirectoryListSectionProps extends BaseSectionSettings {
 export interface SpotlightMediaContent {
   sectionHeading: string;
   sermon: {
+    slug?: string;
     title: string;
     speaker: string;
     date: string;

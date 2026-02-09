@@ -48,7 +48,7 @@ export default function TextImageHeroSection(props: {
   const a = alignmentClasses[align];
 
   return (
-    <SectionContainer settings={settings} className="pt-28 lg:pt-36">
+    <SectionContainer settings={settings} className="pt-12 lg:pt-16">
       {/* Text block */}
       <div className={`mb-12 lg:mb-16 flex flex-col ${a.wrapper}`}>
         <p className={`text-overline ${t.textMuted} mb-4`}>{content.overline}</p>

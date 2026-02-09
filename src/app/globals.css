@@ -238,7 +238,7 @@
     letter-spacing: -0.02em;
   }
   @media (width >= 64rem) {
-    .text-nav { font-size: 1.25rem; }
+    .text-nav { font-size: 1.125rem; }
   }
 
   .text-pill {
@@ -418,10 +418,9 @@
   }
 
   .study-bible-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    color: var(--color-black-1);
-    line-height: 1.85;
+    font-family: var(--font-sans);
+    color: var(--color-black-2);
+    line-height: 1.75;
   }
   .study-bible-text h4 {
     font-family: var(--font-sans);

@@ -90,8 +90,6 @@ export function getEventBadge(event: Event): string | undefined {
 
   // "UPCOMING" if the event starts within the next 14 days (future only)
   if (diffDays > 0 && diffDays <= 14) return "UPCOMING";
-  // "FEATURED" if it's marked as featured and still in the future
-  if (event.isFeatured && diffDays > 0) return "FEATURED";
   return undefined;
 }
 
@@ -246,5 +244,8 @@ export function filterEvents(
     }
 
     return true;
-  });
+  }).sort(
+    (a, b) =>
+      new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime()
+  );
 }

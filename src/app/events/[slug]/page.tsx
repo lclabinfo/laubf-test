@@ -44,7 +44,7 @@ export default async function EventDetailPage({
     : formatEventDate(event.dateStart);
 
   return (
-    <main className="bg-white-1 pt-[104px] pb-20">
+    <main className="bg-white-1 pt-8 pb-20">
       {/* Breadcrumb */}
       <div className="container-standard">
         <nav className="flex items-center gap-1.5 text-[14px]">
@@ -129,7 +129,7 @@ export default async function EventDetailPage({
         </article>
 
         {/* Right column — sidebar card */}
-        <aside className="lg:sticky lg:top-[104px] h-fit">
+        <aside className="lg:sticky lg:top-[88px] h-fit">
           <div className="bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] p-6">
             <h3 className="text-overline text-black-3 uppercase mb-4">
               Event Details

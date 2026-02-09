@@ -31,6 +31,7 @@ const quickLinksData: QuickLinksSectionProps = {
   id: "quick-links",
   visible: true,
   colorScheme: "light",
+  paddingY: "compact",
   content: {
     heading: "Quick Links",
     subtitle:
@@ -53,6 +54,9 @@ export default function EventsPage() {
     <main>
       <EventsHeroSection settings={heroData} />
       <QuickLinksSection settings={quickLinksData} meetings={RECURRING_MEETINGS} />
+      <div className="container-standard">
+        <hr className="border-white-2" />
+      </div>
       <AllEventsSection settings={allEventsData} events={MOCK_EVENTS} />
     </main>
   );

@@ -57,7 +57,7 @@ const introData: MinistryIntroSectionProps = {
 const whatWeDoData: PillarsSectionProps = {
   id: "adults-what-we-do",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
     overline: "",
     heading: "What We Do",

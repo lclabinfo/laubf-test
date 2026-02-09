@@ -15,7 +15,6 @@ import {
   BookOpen,
   BookText,
   MonitorPlay,
-  Image as ImageIcon,
 } from "lucide-react";
 
 export interface NavLink {
@@ -214,11 +213,6 @@ export const dropdowns: NavDropdown[] = [
             label: "Videos",
             href: "/videos",
             icon: MonitorPlay,
-          },
-          {
-            label: "Photos",
-            href: "/photos",
-            icon: ImageIcon,
           },
         ],
       },

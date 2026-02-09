@@ -58,10 +58,6 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
   if (!settings.visible) return null;
 
   const { content } = settings;
-  const activeDropdownData = activeDropdown
-    ? (dropdowns.find((d) => d.id === activeDropdown) ?? null)
-    : null;
-
   return (
     <>
       <header
@@ -74,7 +70,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
       >
         <div
           className={cn(
-            "container-nav flex items-center justify-between transition-[padding] duration-300 ease-smooth py-3",
+            "container-nav flex items-center justify-between transition-[padding] duration-300 ease-smooth py-2",
           )}
         >
           {/* Logo */}
@@ -105,6 +101,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
             {dropdowns.map((dropdown) => (
               <div
                 key={dropdown.id}
+                className="relative"
                 onMouseEnter={() => openDropdown(dropdown.id)}
                 onMouseLeave={scheduleClose}
               >
@@ -115,7 +112,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
                     )
                   }
                   className={cn(
-                    "flex items-center gap-1.5 pl-3 pr-2 py-4 rounded-xl text-nav transition-colors duration-150",
+                    "flex items-center gap-1.5 pl-3 pr-2 py-3 rounded-xl text-nav transition-colors duration-150",
                     isScrolled
                       ? cn(
                           "text-black-1",
@@ -140,6 +137,14 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
                     strokeWidth={2}
                   />
                 </button>
+                {activeDropdown === dropdown.id && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 z-[100] pt-1">
+                    <DropdownMenu
+                      dropdown={dropdown}
+                      onClose={closeDropdown}
+                    />
+                  </div>
+                )}
               </div>
             ))}
             {directLinks.map((link) => (
@@ -199,21 +204,6 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
           </button>
         </div>
 
-        {/* Desktop dropdown — centered at header level */}
-        {activeDropdownData && (
-          <div
-            className="absolute top-full left-0 right-0 hidden lg:flex justify-center pt-2 z-50 pointer-events-none px-4"
-            onMouseEnter={() => openDropdown(activeDropdownData.id)}
-            onMouseLeave={scheduleClose}
-          >
-            <div className="pointer-events-auto">
-              <DropdownMenu
-                dropdown={activeDropdownData}
-                onClose={closeDropdown}
-              />
-            </div>
-          </div>
-        )}
       </header>
 
       {/* Mobile drawer */}

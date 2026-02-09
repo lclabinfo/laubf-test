@@ -198,6 +198,11 @@ const campusGridData: CampusCardGridSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
+    decorativeImages: [
+      { src: "/pics-temp/csulb/IMG_1408.JPG", alt: "Campus group photo", rotation: -8 },
+      { src: "/pics-temp/csulb/IMG_1410.JPG", alt: "Bible study outdoors", rotation: 3 },
+      { src: "/pics-temp/csulb/IMG_1407.JPG", alt: "Fellowship event", rotation: -5 },
+    ],
     heading: "Check out other campuses",
     campuses: [
       { id: "lbcc", abbreviation: "LBCC", fullName: "Long Beach City College", href: "/ministries/campus/lbcc" },

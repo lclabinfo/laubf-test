@@ -95,7 +95,7 @@ export default function PageHeroSection(props: {
 
   return (
     <SectionContainer settings={settings} className="!py-0" noContainer>
-      <div className="relative min-h-[600px] lg:min-h-[860px] w-full overflow-hidden flex items-center justify-center">
+      <div className="relative min-h-[calc(100dvh-76px)] w-full overflow-hidden flex items-center justify-center">
         {/* Orbiting images */}
         {images.map((img, i) => (
           <motion.div

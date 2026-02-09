@@ -16,8 +16,6 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { MeetTeamSectionProps } from "@/lib/types/sections";
-import Image from "next/image";
-
 export default function MeetTeamSection(props: {
   settings: MeetTeamSectionProps;
 }) {
@@ -41,14 +39,16 @@ export default function MeetTeamSection(props: {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {content.members.map((member, i) => (
           <div key={i} className="flex flex-col">
-            {/* Photo — square */}
-            <div className="relative w-full max-w-[400px] aspect-square rounded-xl overflow-hidden mb-4">
-              <Image
-                src={member.image.src}
-                alt={member.image.alt}
-                fill
-                className="object-cover"
-              />
+            {/* Photo placeholder — square */}
+            <div className="relative w-full max-w-[400px] aspect-square rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-white-2 to-white-1-5">
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="size-16 rounded-full bg-white-2-5/60 flex items-center justify-center">
+                  <svg className="size-8 text-black-3/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             {/* Name */}

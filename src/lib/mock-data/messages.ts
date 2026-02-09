@@ -18,6 +18,21 @@ export function getMessageBySlug(slug: string): Message | undefined {
 
 export const MOCK_MESSAGES: Message[] = [
   {
+    id: "msg-16",
+    slug: "as-the-spirit-gave-them-utterance",
+    title: "As The Spirit Gave Them Utterance",
+    youtubeId: "U-vvxbOHQEM",
+    speaker: "P. William",
+    series: "Sunday Message",
+    passage: "Acts 2:1-13",
+    dateFor: "2026-02-08",
+    description:
+      "On the day of Pentecost, the Holy Spirit came upon the disciples and they spoke in other tongues as the Spirit gave them utterance — the birth of the church and the beginning of the gospel mission to all nations.",
+    rawTranscript: `<p>Today we study Acts chapter 2, the day of Pentecost. The disciples were all together in one place when suddenly a sound like the blowing of a violent wind came from heaven and filled the whole house.</p><p>They saw what seemed to be tongues of fire that separated and came to rest on each of them. All of them were filled with the Holy Spirit and began to speak in other tongues as the Spirit enabled them.</p><p>This was the fulfillment of Jesus' promise — the Holy Spirit empowered ordinary people to become witnesses to the ends of the earth.</p>`,
+    liveTranscript: `<p>[Auto-generated] Good morning everyone. Today we come to one of the most pivotal moments in all of church history — the day of Pentecost in Acts chapter 2. After Jesus ascended to heaven, the disciples waited in Jerusalem as he instructed them...</p>`,
+    duration: "40:00",
+  },
+  {
     id: "msg-1",
     slug: "do-you-truly-love-me-message",
     title: "Do You Truly Love Me More Than These?",

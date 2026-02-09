@@ -1,8 +1,8 @@
-import EventsHeroSection from "@/components/sections/EventsHeroSection";
+import SpotlightMediaSection from "@/components/sections/SpotlightMediaSection";
 import AllMessagesSection from "@/components/sections/AllMessagesSection";
 
 import type {
-  EventsHeroSectionProps,
+  SpotlightMediaSectionProps,
   AllMessagesSectionProps,
 } from "@/lib/types/sections";
 
@@ -13,15 +13,22 @@ import { MOCK_MESSAGES } from "@/lib/mock-data/messages";
  * In production, this data comes from PostgreSQL via CMS API.
  * ================================================================ */
 
-const heroData: EventsHeroSectionProps = {
-  id: "messages-hero",
+const spotlightData: SpotlightMediaSectionProps = {
+  id: "this-weeks-message",
   visible: true,
   colorScheme: "dark",
   paddingY: "compact",
   content: {
-    heading: "Sunday Messages",
-    subtitle:
-      "Watch and listen to sermons from our Sunday worship services and special events.",
+    sectionHeading: "This Week\u2019s Message",
+    sermon: {
+      slug: "as-the-spirit-gave-them-utterance",
+      title: "As The Spirit Gave Them Utterance",
+      speaker: "P. William",
+      date: "FEB 8",
+      series: "SUNDAY MESSAGE",
+      thumbnailUrl: "https://img.youtube.com/vi/U-vvxbOHQEM/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=U-vvxbOHQEM",
+    },
   },
 };
 
@@ -38,7 +45,7 @@ const allMessagesData: AllMessagesSectionProps = {
 export default function MessagesPage() {
   return (
     <main>
-      <EventsHeroSection settings={heroData} />
+      <SpotlightMediaSection settings={spotlightData} />
       <AllMessagesSection settings={allMessagesData} messages={MOCK_MESSAGES} />
     </main>
   );

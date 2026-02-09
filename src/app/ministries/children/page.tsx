@@ -77,7 +77,7 @@ const scheduleData: MinistryScheduleSectionProps = {
 const whatWeDoData: PillarsSectionProps = {
   id: "children-what-we-do",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
     overline: "",
     heading: "What We Do",

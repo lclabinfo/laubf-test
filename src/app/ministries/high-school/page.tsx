@@ -59,7 +59,7 @@ const introData: MinistryIntroSectionProps = {
 const whatWeDoData: PillarsSectionProps = {
   id: "high-school-what-we-do",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
     overline: "",
     heading: "What We Do",

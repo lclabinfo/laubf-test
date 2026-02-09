@@ -10,6 +10,7 @@ import MediaGridSection from "@/components/sections/MediaGridSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 
 import { FEATURED_EVENTS, MOCK_EVENTS } from "@/lib/mock-data/events";
+import { MOCK_VIDEOS } from "@/lib/mock-data/videos";
 import { toEventCardData, toEventListItemData } from "@/lib/types/events";
 
 import type {
@@ -203,51 +204,37 @@ const directoryListData: DirectoryListSectionProps = {
 const spotlightMediaData: SpotlightMediaSectionProps = {
   id: "this-weeks-message",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
-    sectionHeading: "This Week's Message",
+    sectionHeading: "This Week\u2019s Message",
     sermon: {
-      title: "Eternal Life",
-      speaker: "Pastor William Larsen",
-      date: "DEC 29",
-      series: "SUNDAY WORSHIP",
-      thumbnailUrl: "/images/sermon-thumbnail.jpg",
-      videoUrl: "https://www.youtube.com/watch?v=example",
+      slug: "as-the-spirit-gave-them-utterance",
+      title: "As The Spirit Gave Them Utterance",
+      speaker: "P. William",
+      date: "FEB 8",
+      series: "SUNDAY MESSAGE",
+      thumbnailUrl: "https://img.youtube.com/vi/U-vvxbOHQEM/maxresdefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=U-vvxbOHQEM",
     },
   },
 };
 
+const featuredVideos = MOCK_VIDEOS.slice(0, 3);
 const mediaGridData: MediaGridSectionProps = {
   id: "featured-videos",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
     heading: "Featured Videos",
     ctaLabel: "View All Videos",
     ctaHref: "/videos",
-    videos: [
-      {
-        id: "vid-1",
-        title: "Sunday Worship Highlights",
-        thumbnailUrl: "/images/video-1.jpg",
-        videoUrl: "https://www.youtube.com/watch?v=example1",
-        duration: "45:30",
-      },
-      {
-        id: "vid-2",
-        title: "Campus Ministry Recap",
-        thumbnailUrl: "/images/video-2.jpg",
-        videoUrl: "https://www.youtube.com/watch?v=example2",
-        duration: "12:15",
-      },
-      {
-        id: "vid-3",
-        title: "Daily Bread Devotional",
-        thumbnailUrl: "/images/video-3.jpg",
-        videoUrl: "https://www.youtube.com/watch?v=example3",
-        duration: "8:42",
-      },
-    ],
+    videos: featuredVideos.map((v) => ({
+      id: v.id,
+      title: v.title,
+      thumbnailUrl: `https://img.youtube.com/vi/${v.youtubeId}/mqdefault.jpg`,
+      videoUrl: `https://www.youtube.com/watch?v=${v.youtubeId}`,
+      duration: v.duration,
+    })),
   },
 };
 
@@ -292,7 +279,7 @@ export default function HomePage() {
       <ActionCardGridSection settings={actionCardGridData} />
       <DirectoryListSection settings={directoryListData} />
       <SpotlightMediaSection settings={spotlightMediaData} />
-      <MediaGridSection settings={mediaGridData} />
+      <MediaGridSection settings={mediaGridData} videos={featuredVideos} />
       <CTABannerSection settings={ctaBannerData} />
     </main>
   );

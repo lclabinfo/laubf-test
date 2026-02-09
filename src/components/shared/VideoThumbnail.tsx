@@ -16,15 +16,8 @@ export default function VideoThumbnail({
 }: VideoThumbnailProps) {
   const isFeatured = size === "featured";
 
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "group relative block w-full overflow-hidden rounded-xl bg-black-1",
-        isFeatured ? "aspect-video" : "aspect-video",
-        className
-      )}
-    >
+  const inner = (
+    <>
       <Image
         src={data.thumbnailUrl}
         alt={data.title}
@@ -52,6 +45,26 @@ export default function VideoThumbnail({
           </svg>
         </div>
       </div>
-    </button>
+    </>
+  );
+
+  const sharedClasses = cn(
+    "group relative block w-full overflow-hidden rounded-xl bg-black-1",
+    "aspect-video",
+    className
+  );
+
+  if (onClick) {
+    return (
+      <button onClick={onClick} className={sharedClasses}>
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <div className={sharedClasses}>
+      {inner}
+    </div>
   );
 }

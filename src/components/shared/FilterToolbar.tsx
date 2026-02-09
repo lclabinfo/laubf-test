@@ -64,6 +64,8 @@ export interface FilterToolbarProps {
   filters?: FilterDropdownConfig[];
   /** Date range picker configuration */
   dateRange?: DateRangeConfig;
+  /** Callback to reset all filters (shows "Clear all" button when active) */
+  onReset?: () => void;
   /** Additional class name for the outer container */
   className?: string;
   /** Whether the toolbar sticks to the top on scroll */
@@ -81,6 +83,7 @@ export default function FilterToolbar({
   search,
   filters,
   dateRange,
+  onReset,
   className,
   sticky = true,
   stickyTop = "76px",
@@ -106,18 +109,25 @@ export default function FilterToolbar({
     return count;
   })();
 
+  // Whether any filter (including search) is active
+  const hasActiveFilters = activeFilterCount > 0 || (search && search.value.length > 0);
+
   const showFiltersRow = disclosure ? filtersOpen : true;
 
   return (
     <div
       className={cn(
-        "z-30 bg-white-1 pb-4 pt-2 mb-6",
+        "relative z-30 pt-4",
         sticky && "sticky",
         className,
       )}
       style={sticky ? { top: stickyTop } : undefined}
     >
-      <div className="rounded-[16px] border border-white-2-5 bg-white-0 overflow-hidden">
+      {/* Solid background — extends above to cover the gap behind navbar */}
+      <div className="absolute inset-x-0 -top-4 bottom-0 bg-white-1" />
+      {/* Gradient fade below — smooth transition to transparent */}
+      <div className="absolute inset-x-0 top-full h-4 bg-gradient-to-b from-white-1 from-70% to-transparent pointer-events-none" />
+      <div className="relative rounded-[16px] border border-white-2-5 bg-white-0 overflow-hidden">
         {/* Row 1: View toggle + Search + Filter button (disclosure mode) */}
         {(viewModes || search || (disclosure && hasFiltersRow)) && (
           <div
@@ -141,7 +151,7 @@ export default function FilterToolbar({
               </div>
             )}
 
-            {/* Right side — filter toggle + view modes */}
+            {/* Right side — filter toggle + clear + view modes */}
             <div className="flex items-center gap-3">
               {/* Filter toggle button (disclosure mode only) */}
               {disclosure && hasFiltersRow && (
@@ -161,6 +171,23 @@ export default function FilterToolbar({
                       {activeFilterCount}
                     </span>
                   )}
+                </button>
+              )}
+
+              {/* Clear all filters button */}
+              {onReset && hasActiveFilters && (
+                <button
+                  onClick={() => {
+                    onReset();
+                    setFiltersOpen(false);
+                  }}
+                  className="flex items-center gap-1.5 rounded-[10px] border border-white-2 px-4 py-2 text-[14px] font-medium text-black-3 transition-colors hover:border-black-2 hover:text-black-1"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                  <span>Clear all</span>
                 </button>
               )}
 

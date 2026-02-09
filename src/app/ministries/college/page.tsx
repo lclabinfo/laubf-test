@@ -61,7 +61,7 @@ const introData: MinistryIntroSectionProps = {
 const whatWeDoData: PillarsSectionProps = {
   id: "college-what-we-do",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
     overline: "",
     heading: "What We Do",
@@ -118,6 +118,11 @@ const campusGridData: CampusCardGridSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
+    decorativeImages: [
+      { src: "/pics-temp/csulb/IMG_1408.JPG", alt: "Campus group photo", rotation: -8 },
+      { src: "/pics-temp/csulb/IMG_1410.JPG", alt: "Bible study outdoors", rotation: 3 },
+      { src: "/pics-temp/csulb/IMG_1407.JPG", alt: "Fellowship event", rotation: -5 },
+    ],
     heading: "Join a Campus Ministry",
     description:
       "We have Bible study groups meeting on campuses across Southern California. Find a group near you and start studying the Bible with fellow students.",

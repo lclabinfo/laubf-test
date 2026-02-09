@@ -94,7 +94,7 @@ export default function CampusCardGridSection(props: {
       {/* Campus cards grid — rectangular cards matching Figma */}
       <div className="flex flex-wrap justify-center gap-5 max-w-4xl mx-auto">
         {content.campuses.map((campus) => {
-          const cardClasses = `rounded-2xl border ${t.cardBorder} ${t.cardBg} min-h-[80px] px-7 py-5 flex flex-col items-center justify-center gap-2 text-center transition-colors hover:bg-white-1-5`;
+          const cardClasses = `rounded-2xl border ${t.cardBorder} ${t.cardBg} min-h-[80px] px-7 py-5 flex flex-col items-center justify-center gap-2 text-center transition-colors hover:bg-white-2`;
           const cardContent = (
             <>
               {campus.abbreviation && (

@@ -13,16 +13,21 @@
  */
 "use client";
 
+import { useState } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
 import SectionHeader from "@/components/shared/SectionHeader";
 import VideoThumbnail from "@/components/shared/VideoThumbnail";
+import VideoModal from "@/components/shared/VideoModal";
 import type { MediaGridSectionProps } from "@/lib/types/sections";
+import type { Video } from "@/lib/types/video";
 
 export default function MediaGridSection(props: {
   settings: MediaGridSectionProps;
+  videos?: Video[];
 }) {
-  const { settings } = props;
+  const { settings, videos } = props;
   const { content } = settings;
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
   return (
     <SectionContainer settings={settings} className="!pt-0">
@@ -34,11 +39,28 @@ export default function MediaGridSection(props: {
         />
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {content.videos.map((video) => (
-            <VideoThumbnail key={video.id} data={video} size="grid" />
+          {content.videos.map((video, i) => (
+            <VideoThumbnail
+              key={video.id}
+              data={video}
+              size="grid"
+              onClick={
+                videos && videos[i]
+                  ? () => setSelectedVideo(videos[i])
+                  : undefined
+              }
+            />
           ))}
         </div>
       </div>
+
+      {/* Video modal */}
+      {selectedVideo && (
+        <VideoModal
+          video={selectedVideo}
+          onClose={() => setSelectedVideo(null)}
+        />
+      )}
     </SectionContainer>
   );
 }

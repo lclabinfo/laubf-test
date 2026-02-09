@@ -14,9 +14,6 @@ import type { CTAButtonProps } from "@/lib/types/shared";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-const brandShadow =
-  "shadow-[0_10px_15px_var(--color-brand-shadow),0_4px_6px_var(--color-brand-shadow)]";
-
 export default function CTAButton({
   label,
   href,
@@ -29,23 +26,36 @@ export default function CTAButton({
 }: CTAButtonProps) {
   const tokens = useResolvedTheme(theme);
 
-  const base =
-    "inline-flex items-center justify-center rounded-full transition-colors ease-smooth duration-300";
+  const base = cn(
+    "group/btn inline-flex items-center justify-center rounded-full",
+    "transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]",
+    "hover:scale-[1.03] active:scale-[0.97]",
+  );
 
   const sizeClass =
     size === "small" ? "px-6 py-3 text-button-2" : "px-8 py-5 text-button-1";
 
   const variantClass =
     variant === "primary"
-      ? cn(tokens.btnPrimaryBg, tokens.btnPrimaryText, brandShadow)
+      ? cn(
+          tokens.btnPrimaryBg,
+          tokens.btnPrimaryText,
+          "hover:brightness-[1.15]",
+        )
       : cn(
           "bg-transparent border",
           tokens.btnOutlineBorder,
           tokens.btnOutlineText,
-          brandShadow
+          "hover:bg-current/[0.06]",
         );
 
   const classes = cn(base, sizeClass, variantClass, className);
+
+  const iconWrapped = icon ? (
+    <span className="inline-flex transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/btn:translate-x-0.5 group-hover/btn:rotate-[-12deg]">
+      {icon}
+    </span>
+  ) : null;
 
   // Anchor links: smooth scroll instead of navigation
   if (href && href.startsWith("#")) {
@@ -61,7 +71,7 @@ export default function CTAButton({
         className={classes}
       >
         {label}
-        {icon}
+        {iconWrapped}
       </button>
     );
   }
@@ -70,7 +80,7 @@ export default function CTAButton({
     return (
       <Link href={href} className={classes}>
         {label}
-        {icon}
+        {iconWrapped}
       </Link>
     );
   }
@@ -78,7 +88,7 @@ export default function CTAButton({
   return (
     <button onClick={onClick} className={classes}>
       {label}
-      {icon}
+      {iconWrapped}
     </button>
   );
 }

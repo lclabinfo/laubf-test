@@ -193,6 +193,11 @@ export default function AllBibleStudiesSection(props: {
               onFromChange: (v) => updateFilter("dateFrom", v || undefined),
               onToChange: (v) => updateFilter("dateTo", v || undefined),
             }}
+            onReset={() => {
+              setSearch("");
+              setFilters({});
+              setDisplayCount(INITIAL_COUNT);
+            }}
           />
 
           {/* Results count */}
