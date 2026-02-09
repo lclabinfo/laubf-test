@@ -21,8 +21,8 @@ const spotlightData: SpotlightMediaSectionProps = {
   content: {
     sectionHeading: "This Week\u2019s Message",
     sermon: {
-      slug: "the-day-of-pentecost",
-      title: "The Day of Pentecost",
+      slug: "as-the-spirit-gave-them-utterance",
+      title: "As The Spirit Gave Them Utterance",
       speaker: "P. William",
       date: "FEB 8",
       series: "SUNDAY MESSAGE",
@@ -44,7 +44,7 @@ const allMessagesData: AllMessagesSectionProps = {
 
 export default function MessagesPage() {
   return (
-    <main>
+    <main className="-mt-[76px] pt-[76px]" style={{ background: "var(--color-black-1)" }}>
       <SpotlightMediaSection settings={spotlightData} />
       <AllMessagesSection settings={allMessagesData} messages={MOCK_MESSAGES} />
     </main>

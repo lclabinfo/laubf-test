@@ -350,8 +350,8 @@
   @media (width >= 30rem) {
     .container-nav { padding-inline: 1.5rem; }
   }
-  @media (width >= 80rem) {
-    .container-nav { padding-inline: 0; }
+  @media (width >= 64rem) {
+    .container-nav { width: 90%; padding-inline: 0; }
   }
 }
 

@@ -9,7 +9,7 @@ export interface Message {
   youtubeId: string;
   /** Speaker name (e.g. "P. William", "P. Abraham Kim") */
   speaker: string;
-  /** Series/event grouping (e.g. "Gospel of John", "Philippians", "Conference") */
+  /** Series/event grouping (e.g. "Sunday Message", "Conference") */
   series: string;
   /** Bible reference (e.g. "John 21:1-25") */
   passage: string;

@@ -44,7 +44,7 @@ export default function CampusCardGridSection(props: {
     <SectionContainer settings={settings}>
       {/* Decorative overlapping photos */}
       {content.decorativeImages && content.decorativeImages.length > 0 && (
-        <AnimateOnScroll animation="scale-up" enabled={animate} className="flex items-center justify-center mb-12">
+        <AnimateOnScroll animation="scale-up" enabled={animate} className="flex items-center justify-center mb-12 overflow-hidden">
           <div className="relative w-[300px] h-[200px] md:w-[400px] md:h-[250px]">
             {content.decorativeImages.map((img, i) => {
               /* Stack images with overlapping positions */
