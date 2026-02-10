@@ -230,6 +230,8 @@ export default function EventCalendarSection(props: {
               label={btn.label}
               href={btn.href}
               variant={btn.icon ? "primary" : "secondary"}
+              target={btn.href.startsWith("http") ? "_blank" : undefined}
+              rel={btn.href.startsWith("http") ? "noopener noreferrer" : undefined}
               icon={
                 btn.icon ? (
                   <svg

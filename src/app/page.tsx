@@ -96,7 +96,7 @@ const eventCalendarData: EventCalendarSectionProps = {
     filters: ["ALL", "Events", "Meetings", "Programs"],
     events: MOCK_EVENTS.slice(0, 5).map(toEventListItemData),
     ctaButtons: [
-      { label: "Google Calendar", href: "/calendar", icon: true },
+      { label: "2026 LA UBF Calendar", href: "https://laubf.org/calendar?month=2", icon: true },
       { label: "View all events", href: "/events" },
     ],
   },
