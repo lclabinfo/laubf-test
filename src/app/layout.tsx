@@ -69,7 +69,7 @@ const footerData: FooterSectionProps = {
     description:
       "A Bible-centered community raising lifelong disciples on campus and beyond.",
     socialLinks: [
-      { platform: "instagram", href: "https://instagram.com/laubf" },
+      { platform: "instagram", href: "https://instagram.com/la.ubf" },
       { platform: "facebook", href: "https://facebook.com/losangelesubf" },
       { platform: "youtube", href: "https://youtube.com/@laubf" },
     ],
