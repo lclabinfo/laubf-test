@@ -107,8 +107,8 @@ export default function MinistryScheduleSection(props: {
             </div>
           )}
 
-          {/* Buttons row */}
-          {content.buttons && content.buttons.length > 0 && !content.directionsUrl && (
+          {/* Buttons row (only when no schedule entries — otherwise buttons go in right column) */}
+          {content.buttons && content.buttons.length > 0 && !content.directionsUrl && !content.scheduleEntries?.length && (
             <div className="flex flex-wrap gap-3 mt-6">
               {content.buttons.map((btn, i) => (
                 <CTAButton
