@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Daily Bread",
+  description: "Daily devotional readings and reflections from UBF Daily Bread.",
+};
 
 export default function Page() {
   return (

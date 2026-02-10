@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "USC Campus Ministry",
+  description: "LA UBF campus ministry at USC — Bible study and fellowship for USC students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

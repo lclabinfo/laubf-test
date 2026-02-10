@@ -1,4 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Campus Ministries",
+  description: "Explore LA UBF campus ministries across colleges and universities in Los Angeles.",
+};
 
 export default function Page() {
   return (

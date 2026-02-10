@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CCC Campus Ministry",
+  description: "LA UBF campus ministry at Cerritos Community College — Bible study and fellowship for CCC students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

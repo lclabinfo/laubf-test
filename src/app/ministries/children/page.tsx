@@ -18,6 +18,12 @@ import type {
   FormSectionProps,
   PathwayCardSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Children's Ministry",
+  description: "LA UBF children's ministry — nurturing young hearts in faith and community.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design
@@ -114,7 +120,7 @@ const teamData: MeetTeamSectionProps = {
   visible: true,
   colorScheme: "light",
   content: {
-    overline: "HBF",
+    overline: "CBF",
     heading: "Meet Our Team",
     members: [
       {

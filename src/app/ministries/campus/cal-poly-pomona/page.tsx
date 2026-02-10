@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cal Poly Pomona Campus Ministry",
+  description: "LA UBF campus ministry at Cal Poly Pomona — Bible study and fellowship for CPP students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

@@ -7,6 +7,12 @@ import type {
 } from "@/lib/types/sections";
 
 import { MOCK_VIDEOS } from "@/lib/mock-data/videos";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Videos",
+  description: "Watch videos from LA UBF — worship services, testimonies, and special events.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

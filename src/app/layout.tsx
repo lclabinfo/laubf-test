@@ -15,9 +15,27 @@ const dmSerifDisplay = DM_Serif_Display({
 });
 
 export const metadata: Metadata = {
-  title: "LA UBF | Los Angeles University Bible Fellowship",
+  title: {
+    default: "LA UBF",
+    template: "%s | LA UBF",
+  },
   description:
-    "A Bible-centered community raising lifelong disciples on campus and beyond.",
+    "LA UBF (Los Angeles University Bible Fellowship) is a Bible-centered community raising lifelong disciples on college campuses and beyond.",
+  metadataBase: new URL("https://laubf.org"),
+  openGraph: {
+    type: "website",
+    siteName: "LA UBF",
+    locale: "en_US",
+    description:
+      "A Bible-centered community raising lifelong disciples on college campuses and beyond.",
+  },
+  twitter: {
+    card: "summary",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 const navbarSettings: NavbarSettings = {

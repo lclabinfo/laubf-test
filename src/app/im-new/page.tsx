@@ -17,6 +17,12 @@ import type {
   FormSectionProps,
   FAQSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "I'm New",
+  description: "New to LA UBF? Plan your visit, learn what to expect, and find ways to connect with our community.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design
@@ -111,7 +117,8 @@ const timelineData: TimelineSectionProps = {
   content: {
     overline: "SUNDAY SERVICE",
     heading: "What to Expect on Sunday",
-    imageSrc: "/pics-temp/DSC00412.JPG",
+    // TODO: add youtube video here
+    imageSrc: "/images/home/visit-us.JPG",
     imageAlt: "LA UBF church building",
     items: [
       {
@@ -235,29 +242,29 @@ const faqData: FAQSectionProps = {
     showIcon: true,
     items: [
       {
-        question: "Where and when do campus groups meet?",
+        question: "[Mock] Where and when do campus groups meet?",
         answer:
           "Campus Bible study groups meet at various times throughout the week depending on the campus. Most groups meet once or twice a week. Fill out the contact form above and we\u2019ll connect you with the group nearest to you.",
       },
       {
-        question: "Where and when do campus groups meet?",
+        question: "[Mock] What should I expect on my first Sunday visit?",
         answer:
-          "Campus Bible study groups meet at various times throughout the week depending on the campus. Most groups meet once or twice a week. Fill out the contact form above and we\u2019ll connect you with the group nearest to you.",
+          "Our Sunday worship service is about 90 minutes and includes praise, prayer, and a sermon. Dress is casual\u2014come as you are. You\u2019re welcome to sit anywhere, and someone from our welcome team will be happy to help you get settled.",
       },
       {
-        question: "Where and when do campus groups meet?",
+        question: "[Mock] Do I need to know the Bible to attend?",
         answer:
-          "Campus Bible study groups meet at various times throughout the week depending on the campus. Most groups meet once or twice a week. Fill out the contact form above and we\u2019ll connect you with the group nearest to you.",
+          "Not at all! Many of our members started with little or no Bible knowledge. Our studies are designed to be accessible to everyone, and our leaders are happy to walk alongside you at your own pace.",
       },
       {
-        question: "Where and when do campus groups meet?",
+        question: "[Mock] Is there parking available at the church?",
         answer:
-          "Campus Bible study groups meet at various times throughout the week depending on the campus. Most groups meet once or twice a week. Fill out the contact form above and we\u2019ll connect you with the group nearest to you.",
+          "Yes, we have a free parking lot on-site. Street parking is also available on the surrounding blocks. If the lot is full, our parking team can help direct you.",
       },
       {
-        question: "Where and when do campus groups meet?",
+        question: "[Mock] How can I get connected beyond Sunday service?",
         answer:
-          "Campus Bible study groups meet at various times throughout the week depending on the campus. Most groups meet once or twice a week. Fill out the contact form above and we\u2019ll connect you with the group nearest to you.",
+          "We\u2019d love for you to join a small group Bible study, attend one of our fellowship events, or serve on a ministry team. Fill out the contact form on this page and we\u2019ll help you find the best next step.",
       },
     ],
   },

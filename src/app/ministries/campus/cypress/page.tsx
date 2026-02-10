@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cypress Campus Ministry",
+  description: "LA UBF campus ministry at Cypress College — Bible study and fellowship for Cypress students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

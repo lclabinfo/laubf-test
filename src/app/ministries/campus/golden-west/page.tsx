@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Golden West Campus Ministry",
+  description: "LA UBF campus ministry at Golden West College — Bible study and fellowship for Golden West students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

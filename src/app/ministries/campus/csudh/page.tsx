@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CSUDH Campus Ministry",
+  description: "LA UBF campus ministry at Cal State Dominguez Hills — Bible study and fellowship for CSUDH students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

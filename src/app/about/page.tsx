@@ -11,6 +11,12 @@ import type {
   StatementSectionProps,
   PathwayCardSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+  description: "Learn about LA UBF — our mission, values, and community of faith on college campuses across Los Angeles.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

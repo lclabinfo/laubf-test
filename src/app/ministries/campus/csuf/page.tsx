@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CSUF Campus Ministry",
+  description: "LA UBF campus ministry at Cal State Fullerton — Bible study and fellowship for CSUF students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

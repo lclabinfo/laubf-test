@@ -20,6 +20,12 @@ import type {
   FormSectionProps,
   PathwayCardSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "College Ministry",
+  description: "LA UBF college ministry — Bible study, fellowship, and discipleship for university students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

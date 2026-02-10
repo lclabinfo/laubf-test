@@ -9,6 +9,12 @@ import type {
   CampusCardGridSectionProps,
   PathwayCardSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Ministries",
+  description: "Explore LA UBF ministries — campus, college, young adult, high school, and children's programs.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design
@@ -43,14 +49,14 @@ const ageGroupsData: PillarsSectionProps = {
       {
         title: "Young Adults",
         description:
-          "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
+          "A community of college students and young professionals growing together through campus Bible studies, fellowship, and shared worship.",
         images: [{ src: "/images/ministries/young%20adults.jpg", alt: "Young adults Bible study" }],
         button: { label: "Learn more", href: "/ministries/college" },
       },
       {
         title: "Adults",
         description:
-          "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
+          "Adults from many walks of life\u2014campus leaders, Bible teachers, parents, and missionaries\u2014growing in faith through personal and group Bible study, conferences, and outreach.",
         images: [
           { src: "/images/ministries/adults/introduction.jpg", alt: "Adult fellowship" },
         ],
@@ -59,7 +65,7 @@ const ageGroupsData: PillarsSectionProps = {
       {
         title: "Middle & High School\n(HBF / JBF)",
         description:
-          "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
+          "Our youth ministries for middle and high school students, with engaging Bible studies, fun fellowship activities, and a supportive community during these formative years.",
         images: [
           { src: "/images/ministries/middle%20n%20high.JPG", alt: "HBF JBF students" },
         ],
@@ -68,7 +74,7 @@ const ageGroupsData: PillarsSectionProps = {
       {
         title: "Children (CBF)",
         description:
-          "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
+          "A safe, engaging, and age-appropriate environment where children can learn about God\u2019s Word and build friendships while growing in faith.",
         images: [
           { src: "/images/ministries/children/introduction.png", alt: "Children Bible fellowship" },
         ],

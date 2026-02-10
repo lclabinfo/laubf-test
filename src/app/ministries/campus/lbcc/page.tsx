@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "LBCC Campus Ministry",
+  description: "LA UBF campus ministry at Long Beach City College — Bible study and fellowship for LBCC students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

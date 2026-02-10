@@ -9,6 +9,12 @@ import type {
 } from "@/lib/types/sections";
 
 import { MOCK_EVENTS, RECURRING_MEETINGS } from "@/lib/mock-data/events";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Events",
+  description: "Browse upcoming events, meetings, and programs at LA UBF.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

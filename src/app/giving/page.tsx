@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Giving",
+  description: "Support the mission of LA UBF through generous giving.",
+};
 
 export default function Page() {
   return (

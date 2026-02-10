@@ -7,6 +7,12 @@ import type {
 } from "@/lib/types/sections";
 
 import { MOCK_MESSAGES } from "@/lib/mock-data/messages";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Messages",
+  description: "Watch and listen to Sunday messages, Bible teachings, and sermon series from LA UBF.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

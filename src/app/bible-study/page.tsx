@@ -7,6 +7,12 @@ import type {
 } from "@/lib/types/sections";
 
 import { MOCK_BIBLE_STUDIES } from "@/lib/mock-data/bible-studies";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Bible Study",
+  description: "Explore Bible study resources, series, and materials from LA UBF.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design

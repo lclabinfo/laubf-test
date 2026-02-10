@@ -15,6 +15,12 @@ import type {
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Mt. SAC Campus Ministry",
+  description: "LA UBF campus ministry at Mt. San Antonio College — Bible study and fellowship for Mt. SAC students.",
+};
 
 /* ================================================================
  * SAMPLE DATA — Content from Figma design
