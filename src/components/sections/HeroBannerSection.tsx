@@ -22,11 +22,15 @@
  */
 "use client";
 
+import { useEffect, useRef } from "react";
 import { SectionThemeContext } from "@/lib/theme";
 import type { HeroBannerSectionProps } from "@/lib/types/sections";
 import CTAButton from "@/components/shared/CTAButton";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+
+const COMPRESSED_VIDEO = "/videos/compressed-hero-vid.webm";
+const LG_BREAKPOINT = 1024;
 
 export default function HeroBannerSection(props: { settings: HeroBannerSectionProps }) {
   const { settings } = props;
@@ -40,29 +44,11 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
       <section id="hero-section" className="relative flex min-h-screen items-end overflow-hidden bg-black-1 -mt-[76px]">
         {/* Background media */}
         {content.backgroundImage.src.endsWith(".mp4") ? (
-          <>
-            {/* Mobile / tablet: compressed webm */}
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={cn("absolute inset-0 h-full w-full object-cover lg:hidden", animate && "animate-hero-fade-in-slow")}
-            >
-              <source src="/videos/compressed-hero-vid.webm" type="video/webm" />
-              <source src={content.backgroundImage.src} type="video/mp4" />
-            </video>
-            {/* Desktop: original mp4 */}
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className={cn("absolute inset-0 h-full w-full object-cover hidden lg:block", animate && "animate-hero-fade-in-slow")}
-            >
-              <source src={content.backgroundImage.src} type="video/mp4" />
-            </video>
-          </>
+          <HeroVideo
+            desktopSrc={content.backgroundImage.src}
+            mobileSrc={COMPRESSED_VIDEO}
+            animate={animate}
+          />
         ) : (
           <Image
             src={content.backgroundImage.src}
@@ -156,5 +142,46 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
         </div>
       </section>
     </SectionThemeContext.Provider>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  HeroVideo — single <video> element, picks source by screen width  */
+/* ------------------------------------------------------------------ */
+function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mobileSrc: string; animate: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const pickSource = () => {
+      const wantMobile = window.innerWidth < LG_BREAKPOINT;
+      const next = wantMobile ? mobileSrc : desktopSrc;
+
+      if (video.currentSrc.endsWith(next)) return;     // already correct
+      video.src = next;
+      video.load();
+      video.play().catch(() => {});                     // autoplay may be blocked
+    };
+
+    pickSource();
+
+    // Also handle orientation change / resize
+    const mql = window.matchMedia(`(min-width: ${LG_BREAKPOINT}px)`);
+    mql.addEventListener("change", pickSource);
+    return () => mql.removeEventListener("change", pickSource);
+  }, [desktopSrc, mobileSrc]);
+
+  return (
+    <video
+      ref={videoRef}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="auto"
+      className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
+    />
   );
 }
