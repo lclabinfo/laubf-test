@@ -46,7 +46,7 @@ const heroBannerData: HeroBannerSectionProps = {
       visible: true,
     },
     backgroundImage: {
-      src: "/images/home/hero-vid.mp4",
+      src: "/videos/compressed-hero-vid.mp4",
       alt: "LA UBF community gathering",
     },
   },
