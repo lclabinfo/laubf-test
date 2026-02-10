@@ -4,22 +4,22 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                        APPLICATION LAYER                         │
-│   Next.js App  ←→  API Layer  ←→  DB Client (Drizzle/Prisma)   │
+│                        APPLICATION LAYER                        │
+│   Next.js App  ←→  API Layer  ←→  DB Client (Drizzle/Prisma)    │
 └──────────────────────────┬──────────────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────────────┐
-│                     PostgreSQL (Primary)                         │
-│                                                                  │
-│  ┌──────────┐  ┌────────────┐  ┌───────────┐  ┌─────────────┐  │
-│  │ Tenancy  │  │  Content   │  │Page Builder│  │  Site Config │  │
-│  │ Layer    │  │Collections │  │  (CMS)     │  │  & Design   │  │
-│  └──────────┘  └────────────┘  └───────────┘  └─────────────┘  │
+│                     PostgreSQL (Primary)                        │
+│                                                                 │
+│  ┌──────────┐  ┌────────────┐  ┌────────────┐  ┌──────────────┐ │
+│  │ Tenancy  │  │  Content   │  │Page Builder│  │  Site Config │ │
+│  │ Layer    │  │Collections │  │  (CMS)     │  │  & Design    │ │
+│  └──────────┘  └────────────┘  └────────────┘  └──────────────┘ │
 └─────────────────────────────────────────────────────────────────┘
                            │
 ┌──────────────────────────▼──────────────────────────────────────┐
-│                       CDN (Images/Media)                         │
-│              R2 / CloudFront / Cloudflare Images                 │
+│                       CDN (Images/Media)                        │
+│              R2 / CloudFront / Cloudflare Images                │
 └─────────────────────────────────────────────────────────────────┘
 ```
 

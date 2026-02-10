@@ -22,7 +22,7 @@
  */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { SectionThemeContext } from "@/lib/theme";
 import type { HeroBannerSectionProps } from "@/lib/types/sections";
 import CTAButton from "@/components/shared/CTAButton";
@@ -150,33 +150,53 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
 /* ------------------------------------------------------------------ */
 function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mobileSrc: string; animate: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  // Default to mobile (compressed) — correct for SSR and most first-paints.
-  // On desktop the effect swaps to the full-quality source once.
-  const [src, setSrc] = useState(mobileSrc);
 
-  useEffect(() => {
-    const pickSource = () => {
-      const isDesktop = window.innerWidth >= LG_BREAKPOINT;
-      setSrc(isDesktop ? desktopSrc : mobileSrc);
-    };
-
-    pickSource();
-
-    const mql = window.matchMedia(`(min-width: ${LG_BREAKPOINT}px)`);
-    mql.addEventListener("change", pickSource);
-    return () => mql.removeEventListener("change", pickSource);
-  }, [desktopSrc, mobileSrc]);
-
-  // When src changes, reload only if the browser already loaded a different source
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    // currentSrc is empty on first render — let the browser handle that naturally
-    if (video.currentSrc && !video.currentSrc.endsWith(src)) {
+
+    // Pick the right source for this screen size
+    const applySrc = () => {
+      const isDesktop = window.innerWidth >= LG_BREAKPOINT;
+      const next = isDesktop ? desktopSrc : mobileSrc;
+      if (video.src.endsWith(next)) return;
+      video.src = next;
       video.load();
       video.play().catch(() => {});
-    }
-  }, [src]);
+    };
+
+    applySrc();
+
+    // Swap source on breakpoint change (resize / orientation)
+    const mql = window.matchMedia(`(min-width: ${LG_BREAKPOINT}px)`);
+    mql.addEventListener("change", applySrc);
+
+    // Resume playback when scrolling back into view —
+    // mobile browsers pause off-screen videos to save battery.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && video.paused) {
+          video.play().catch(() => {});
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(video);
+
+    // Fallback loop: some mobile browsers ignore the loop attribute,
+    // so restart manually when the video ends.
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    };
+    video.addEventListener("ended", handleEnded);
+
+    return () => {
+      mql.removeEventListener("change", applySrc);
+      observer.disconnect();
+      video.removeEventListener("ended", handleEnded);
+    };
+  }, [desktopSrc, mobileSrc]);
 
   return (
     <video
@@ -187,8 +207,6 @@ function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mob
       playsInline
       preload="auto"
       className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
-    >
-      <source src={src} type={src.endsWith(".webm") ? "video/webm" : "video/mp4"} />
-    </video>
+    />
   );
 }
