@@ -40,15 +40,29 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
       <section id="hero-section" className="relative flex min-h-screen items-end overflow-hidden bg-black-1 -mt-[76px]">
         {/* Background media */}
         {content.backgroundImage.src.endsWith(".mp4") ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
-          >
-            <source src={content.backgroundImage.src} type="video/mp4" />
-          </video>
+          <>
+            {/* Mobile / tablet: compressed webm */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={cn("absolute inset-0 h-full w-full object-cover lg:hidden", animate && "animate-hero-fade-in-slow")}
+            >
+              <source src="/videos/compressed-hero-vid.webm" type="video/webm" />
+              <source src={content.backgroundImage.src} type="video/mp4" />
+            </video>
+            {/* Desktop: original mp4 */}
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className={cn("absolute inset-0 h-full w-full object-cover hidden lg:block", animate && "animate-hero-fade-in-slow")}
+            >
+              <source src={content.backgroundImage.src} type="video/mp4" />
+            </video>
+          </>
         ) : (
           <Image
             src={content.backgroundImage.src}
