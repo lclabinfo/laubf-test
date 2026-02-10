@@ -166,7 +166,7 @@ export default function AllEventsSection(props: {
       />
 
       {/* Results count */}
-      <p className={`text-body-3 ${t.textMuted} mb-6`}>
+      <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
         Showing {visibleEvents.length} of {filteredEvents.length} events
       </p>
 

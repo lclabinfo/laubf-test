@@ -117,17 +117,15 @@ export default function FilterToolbar({
   return (
     <div
       className={cn(
-        "relative z-30 pt-4 pb-6",
+        "relative z-30 pt-4",
         sticky && "sticky",
         className,
       )}
       style={sticky ? { top: stickyTop } : undefined}
     >
       {/* Solid background — extends above to cover the gap behind navbar */}
-      <div className="absolute inset-x-0 -top-4 bottom-0 bg-white-1" />
-      {/* Gradient fade below — smooth transition to transparent */}
-      <div className="absolute inset-x-0 top-full h-4 bg-gradient-to-b from-white-1 from-70% to-transparent pointer-events-none" />
-      <div className="relative rounded-[16px] border border-white-2-5 bg-white-0 overflow-hidden">
+      <div className="absolute inset-x-0 -top-4 bottom-0 bg-white-1 rounded-b-[20px]" />
+      <div className="relative rounded-[20px] border border-white-2-5 bg-white-0 overflow-hidden shadow-[0px_8px_24px_rgba(0,0,0,0.06)]">
         {/* Row 1: View toggle + Search + Filter button (disclosure mode) */}
         {(viewModes || search || (disclosure && hasFiltersRow)) && (
           <div

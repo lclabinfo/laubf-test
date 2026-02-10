@@ -134,39 +134,7 @@ const MOCK_EVENTS: Event[] = [
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 6. Winter Retreat (PROGRAM)
-  // ──────────────────────────────────────────────────────────────────────────
-  {
-    slug: "winter-retreat-2026",
-    title: "Winter Retreat: Rooted in Christ",
-    type: "program",
-    dateStart: "2026-03-13",
-    dateEnd: "2026-03-15",
-    time: "Friday 6:00 PM - Sunday 12:00 PM",
-    location: "Pine Valley Conference Center, Big Bear, CA",
-    description:
-      "A weekend getaway in the mountains for young adults to deepen their walk with Christ through worship, study, and fellowship.",
-    body: `<p>Escape the busyness of campus life and spend a weekend in the beautiful San Bernardino Mountains. Our Winter Retreat theme is <strong>"Rooted in Christ"</strong> based on Colossians 2:6-7.</p>
-<h3>Retreat Schedule Highlights</h3>
-<ul>
-<li>Friday evening: Arrival, dinner, and icebreaker games</li>
-<li>Saturday: Morning worship, Bible study sessions, free time for hiking and snow activities</li>
-<li>Saturday evening: Bonfire testimony night</li>
-<li>Sunday: Closing worship and commissioning prayer</li>
-</ul>
-<p>Registration includes lodging, meals, and transportation from LA UBF center. Space is limited to 40 participants, so register early. Financial assistance is available upon request.</p>`,
-    image: { src: "", alt: "Young adults at winter retreat in the mountains" },
-
-    tags: ["#YAM", "#FELLOWSHIP", "#CONFERENCE"],
-    ministry: "young-adult",
-    campus: "all",
-    isRecurring: false,
-    registrationUrl: "https://forms.google.com/winter-retreat-2026",
-    isFeatured: true,
-  },
-
-  // ──────────────────────────────────────────────────────────────────────────
-  // 7. Marriage & Family Seminar (EVENT)
+  // 6. Marriage & Family Seminar (EVENT)
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "marriage-family-seminar-spring-2026",
@@ -332,31 +300,7 @@ const MOCK_EVENTS: Event[] = [
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 13. CSUF Bible Study Kickoff (EVENT)
-  // ──────────────────────────────────────────────────────────────────────────
-  {
-    slug: "csuf-bible-study-kickoff-2026",
-    title: "CSUF Bible Study Kickoff",
-    type: "event",
-    dateStart: "2026-03-10",
-    time: "5:30 PM - 7:30 PM",
-    location: "CSUF Titan Student Union, Room 310",
-    description:
-      "Kickoff event for a new weekly Bible study at Cal State Fullerton. Free dinner and an introduction to the Gospel of John.",
-    body: `<p>We are excited to launch a brand new weekly Bible study on the Cal State Fullerton campus. Join us for the kickoff event where you will meet our study leaders, enjoy a free dinner, and get a preview of what we will be studying together this semester.</p>
-<h3>About the Study</h3>
-<p>We will be working through the <strong>Gospel of John</strong>, one of the most beloved books of the Bible. John presents Jesus as the Son of God who came to give us eternal life. Each week's study is self-contained, so you can jump in at any point.</p>
-<p>Whether you are a committed Christian or have never opened a Bible, this study is for you. Come with questions. Leave with hope.</p>`,
-    image: { src: "", alt: "Students at CSUF Bible study kickoff event" },
-
-    tags: ["#YAM", "#CAMPUS", "#BIBLE STUDY", "#OPEN EVENT"],
-    ministry: "young-adult",
-    campus: "csuf",
-    isRecurring: false,
-  },
-
-  // ──────────────────────────────────────────────────────────────────────────
-  // 14. Adult Bible Study - Book of Romans (RECURRING)
+  // 11. Adult Bible Study - Book of Romans (RECURRING)
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "adult-bible-study-romans",
@@ -488,40 +432,7 @@ const MOCK_EVENTS: Event[] = [
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 19. Vacation Bible School (PROGRAM)
-  // ──────────────────────────────────────────────────────────────────────────
-  {
-    slug: "vacation-bible-school-2026",
-    title: "Vacation Bible School: Kingdom Explorers",
-    type: "program",
-    dateStart: "2026-03-23",
-    dateEnd: "2026-03-27",
-    time: "9:00 AM - 12:00 PM",
-    location: "LA UBF Main Center",
-    description:
-      "A week of Bible adventures for children ages 4-12 with themed lessons, music, crafts, and outdoor games.",
-    body: `<p>Get ready for the most exciting week of the summer! Kingdom Explorers VBS takes children on a journey through the Bible to discover how God's Kingdom breaks into our world through Jesus.</p>
-<h3>Daily Themes</h3>
-<ul>
-<li><strong>Day 1</strong>: Creation - God Makes Everything Good</li>
-<li><strong>Day 2</strong>: Abraham - God Keeps His Promises</li>
-<li><strong>Day 3</strong>: Moses - God Sets His People Free</li>
-<li><strong>Day 4</strong>: Jesus - God Sends a Savior</li>
-<li><strong>Day 5</strong>: The Church - God Builds His Kingdom</li>
-</ul>
-<h3>What Children Will Experience</h3>
-<p>Each day includes Bible stories with dramatic presentations, worship songs with motions, hands-on crafts, science experiments that illustrate biblical truths, and outdoor games. A closing celebration on Friday evening will showcase what the children have learned, and families are invited to attend.</p>`,
-    image: { src: "", alt: "Children at Vacation Bible School activities" },
-
-    tags: ["#CHILDREN", "#BIBLE STUDY", "#OUTREACH", "#OPEN EVENT"],
-    ministry: "children",
-    isRecurring: false,
-    registrationUrl: "https://forms.google.com/vbs-2026",
-    isFeatured: true,
-  },
-
-  // ──────────────────────────────────────────────────────────────────────────
-  // 20. Summer Mission Conference (PROGRAM)
+  // 19. Summer Mission Conference (PROGRAM)
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "summer-mission-conference-2026",

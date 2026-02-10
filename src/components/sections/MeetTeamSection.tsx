@@ -42,12 +42,12 @@ export default function MeetTeamSection(props: {
         <h2 className={`text-h2 ${t.textPrimary}`}>{content.heading}</h2>
       </AnimateOnScroll>
 
-      {/* Team member cards — 3-column grid, left-aligned text */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Team member cards — centered */}
+      <div className="flex flex-wrap justify-center gap-6">
         {content.members.map((member, i) => (
-          <AnimateOnScroll key={i} animation="fade-up" staggerIndex={i} enabled={animate} className="flex flex-col">
+          <AnimateOnScroll key={i} animation="fade-up" staggerIndex={i} enabled={animate} className="flex flex-col w-full max-w-[280px]">
             {/* Photo placeholder — square */}
-            <div className="relative w-full max-w-[400px] aspect-square rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-white-2 to-white-1-5">
+            <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-white-2 to-white-1-5">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="size-16 rounded-full bg-white-2-5/60 flex items-center justify-center">
                   <svg className="size-8 text-black-3/30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -64,9 +64,11 @@ export default function MeetTeamSection(props: {
             </h3>
 
             {/* Role */}
-            <p className={`text-h4 font-normal ${t.textMuted} mt-1`}>
-              {member.role}
-            </p>
+            {member.role && (
+              <p className={`text-h4 font-normal ${t.textMuted} mt-1`}>
+                {member.role}
+              </p>
+            )}
 
             {/* Email */}
             {member.email && (

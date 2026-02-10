@@ -113,7 +113,7 @@ export default function AllVideosSection(props: {
       />
 
       {/* Results count */}
-      <p className={`text-body-3 ${t.textMuted} mb-6`}>
+      <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
         Showing {visibleVideos.length} of {filteredVideos.length} videos
       </p>
 

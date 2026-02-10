@@ -88,8 +88,8 @@ export function getEventBadge(event: Event): string | undefined {
   const start = new Date(event.dateStart + "T00:00:00");
   const diffDays = (start.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
 
-  // "UPCOMING" if the event starts within the next 14 days (future only)
-  if (diffDays > 0 && diffDays <= 14) return "UPCOMING";
+  // "UPCOMING" for any future event
+  if (diffDays > 0) return "UPCOMING";
   return undefined;
 }
 

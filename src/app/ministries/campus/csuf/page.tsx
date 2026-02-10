@@ -99,19 +99,16 @@ const teamData: MeetTeamSectionProps = {
     heading: "Meet Our Team",
     members: [
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05222.jpg", alt: "William Larsen" },
+        name: "Daniel Shim",
+        role: "",
+        email: "dshim619@gmail.com",
+        image: { src: "/pics-temp/DSC05222.jpg", alt: "Daniel Shim" },
       },
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05299.jpg", alt: "William Larsen" },
-      },
-      {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC01195.jpg", alt: "William Larsen" },
+        name: "Joseph Cho",
+        role: "",
+        email: "joseph.whcho@gmail.com",
+        image: { src: "/pics-temp/DSC05299.jpg", alt: "Joseph Cho" },
       },
     ],
   },

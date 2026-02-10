@@ -25,7 +25,7 @@ import SectionContainer from "@/components/shared/SectionContainer";
 import OverlineLabel from "@/components/shared/OverlineLabel";
 import CTAButton from "@/components/shared/CTAButton";
 import { themeTokens } from "@/lib/theme";
-import type { MediaTextSectionProps } from "@/lib/types/sections";
+import type { MediaTextSectionProps, SectionImage } from "@/lib/types/sections";
 import Image from "next/image";
 
 /* ---------- Constants ---------- */
@@ -48,7 +48,7 @@ function RotatingWheel({
   images,
   speed,
 }: {
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
   speed: number;
 }) {
   const [isPaused, setIsPaused] = useState(false);
@@ -149,7 +149,7 @@ function MobileCarousel({
   images,
   themeColor,
 }: {
-  images: { src: string; alt: string }[];
+  images: SectionImage[];
   themeColor: string;
 }) {
   const duplicated = [...images, ...images, ...images];

@@ -42,6 +42,7 @@ const heroData: MinistryHeroSectionProps = {
     heroImage: {
       src: "/images/ministries/csulb/hero.JPG",
       alt: "CSULB True Vine Club campus ministry",
+      objectPosition: "center 20%",
     },
   },
 };
@@ -99,19 +100,16 @@ const teamData: MeetTeamSectionProps = {
     heading: "Meet Our Team",
     members: [
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05222.jpg", alt: "William Larsen" },
+        name: "Robert Fishman",
+        role: "",
+        email: "rfishman2@gmail.com",
+        image: { src: "/pics-temp/DSC05222.jpg", alt: "Robert Fishman" },
       },
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05299.jpg", alt: "William Larsen" },
-      },
-      {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC01195.jpg", alt: "William Larsen" },
+        name: "Jorge Lau",
+        role: "",
+        email: "jorgea.laujr@gmail.com",
+        image: { src: "/pics-temp/DSC05299.jpg", alt: "Jorge Lau" },
       },
     ],
   },

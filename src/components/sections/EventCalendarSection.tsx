@@ -218,7 +218,7 @@ export default function EventCalendarSection(props: {
               )}
             </div>
           ) : (
-            <EventCalendarGrid events={filteredEvents} />
+            <EventCalendarGrid events={filteredEvents} month={currentMonth} year={currentYear} />
           )}
         </div>
 

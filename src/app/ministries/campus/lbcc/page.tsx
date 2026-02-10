@@ -104,18 +104,21 @@ const teamData: MeetTeamSectionProps = {
     members: [
       {
         name: "William Larsen",
-        role: "Campus ministry leader",
+        role: "",
+        email: "williamjlarsen@gmail.com",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "William Larsen" },
       },
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05299.jpg", alt: "William Larsen" },
+        name: "Troy Segale",
+        role: "",
+        email: "tsegale@gmail.com",
+        image: { src: "/pics-temp/DSC05299.jpg", alt: "Troy Segale" },
       },
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC01195.jpg", alt: "William Larsen" },
+        name: "Joey Fishman",
+        role: "",
+        email: "fishformen123@gmail.com",
+        image: { src: "/pics-temp/DSC01195.jpg", alt: "Joey Fishman" },
       },
     ],
   },

@@ -2,13 +2,19 @@
  * EventCalendarGrid — Interactive month calendar with Google-Calendar-style event blocks
  *
  * Features:
- * - Full month grid (Sun–Sat) with prev/next navigation
+ * - Full month grid (Sun–Sat) with optional external month control
  * - Events rendered as colored rectangular blocks that span across multi-day ranges
  * - Collision detection & vertical stacking for overlapping events
+ * - Fixed row heights with per-day "+N more" overflow
  * - Click an event block to open a popover with quick info
+ * - Click "+N more" to see all events for that day
  * - "View Full Details" CTA in popover links to /events/[slug]
  *
- * Used by: AllEventsSection (calendar view toggle), EventCalendarSection (home page)
+ * Props:
+ *   events — array of Event objects
+ *   month/year — optional controlled month/year from parent (hides internal nav)
+ *
+ * Used by: AllEventsSection (uncontrolled), EventCalendarSection (controlled by parent)
  */
 "use client";
 
@@ -60,23 +66,37 @@ interface EventSpan {
 
 /* Max event rows visible per week before "+N more" */
 const MAX_VISIBLE_ROWS = 3;
+const EVENT_ROW_H = 26;
+const OVERFLOW_ROW_H = 20;
+const FIXED_EVENT_AREA_H = MAX_VISIBLE_ROWS * EVENT_ROW_H + OVERFLOW_ROW_H;
 
 /* ---- Component ---- */
 
 interface EventCalendarGridProps {
   events: Event[];
+  /** When provided with `year`, the grid uses these instead of internal state and hides its own nav. */
+  month?: number;
+  year?: number;
 }
 
-export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
+export default function EventCalendarGrid({ events, month: controlledMonth, year: controlledYear }: EventCalendarGridProps) {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
-  const popoverRef = useRef<HTMLDivElement>(null);
+  const isControlled = controlledMonth !== undefined && controlledYear !== undefined;
 
-  // Close popover on outside click
+  const [internalMonth, setInternalMonth] = useState(today.getMonth());
+  const [internalYear, setInternalYear] = useState(today.getFullYear());
+
+  const activeMonth = isControlled ? controlledMonth : internalMonth;
+  const activeYear = isControlled ? controlledYear : internalYear;
+
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [expandedDayKey, setExpandedDayKey] = useState<string | null>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const dayPopoverRef = useRef<HTMLDivElement>(null);
+
+  // Close event popover on outside click
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (popoverRef.current && !popoverRef.current.contains(e.target as Node)) {
@@ -89,32 +109,45 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
     }
   }, [selectedEvent]);
 
+  // Close day popover on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (dayPopoverRef.current && !dayPopoverRef.current.contains(e.target as Node)) {
+        setExpandedDayKey(null);
+      }
+    }
+    if (expandedDayKey) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [expandedDayKey]);
+
   /* ---- Calendar grid computation ---- */
   const calendarDays = useMemo(() => {
-    const firstDay = new Date(currentYear, currentMonth, 1);
-    const lastDay = new Date(currentYear, currentMonth + 1, 0);
+    const firstDay = new Date(activeYear, activeMonth, 1);
+    const lastDay = new Date(activeYear, activeMonth + 1, 0);
     const startWeekday = firstDay.getDay();
     const daysInMonth = lastDay.getDate();
 
     const days: CalendarDay[] = [];
 
     // Previous month padding
-    const prevMonthLast = new Date(currentYear, currentMonth, 0).getDate();
+    const prevMonthLast = new Date(activeYear, activeMonth, 0).getDate();
     for (let i = startWeekday - 1; i >= 0; i--) {
       const d = prevMonthLast - i;
-      const prevMonth = currentMonth === 0 ? 11 : currentMonth - 1;
-      const prevYear = currentMonth === 0 ? currentYear - 1 : currentYear;
+      const prevMonth = activeMonth === 0 ? 11 : activeMonth - 1;
+      const prevYear = activeMonth === 0 ? activeYear - 1 : activeYear;
       const key = `${prevYear}-${String(prevMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       days.push({ date: d, key, isCurrentMonth: false, isToday: false, dayOfWeek: days.length % 7 });
     }
 
     // Current month days
     for (let d = 1; d <= daysInMonth; d++) {
-      const key = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const key = `${activeYear}-${String(activeMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
       const isToday2 =
         d === today.getDate() &&
-        currentMonth === today.getMonth() &&
-        currentYear === today.getFullYear();
+        activeMonth === today.getMonth() &&
+        activeYear === today.getFullYear();
       days.push({ date: d, key, isCurrentMonth: true, isToday: isToday2, dayOfWeek: days.length % 7 });
     }
 
@@ -122,15 +155,15 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
     const remaining = 7 - (days.length % 7);
     if (remaining < 7) {
       for (let d = 1; d <= remaining; d++) {
-        const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
-        const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear;
+        const nextMonth = activeMonth === 11 ? 0 : activeMonth + 1;
+        const nextYear = activeMonth === 11 ? activeYear + 1 : activeYear;
         const key = `${nextYear}-${String(nextMonth + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
         days.push({ date: d, key, isCurrentMonth: false, isToday: false, dayOfWeek: days.length % 7 });
       }
     }
 
     return days;
-  }, [currentMonth, currentYear, today]);
+  }, [activeMonth, activeYear, today]);
 
   // Chunk into weeks
   const weeks = useMemo(() => {
@@ -214,71 +247,105 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
         }
       }
 
-      return { spans: placed, maxRows: rows.length };
+      // Per-day overflow counts
+      const dayOverflows: number[] = Array(7).fill(0);
+      const hiddenSpans = placed.filter((s) => s.row >= MAX_VISIBLE_ROWS);
+      for (const s of hiddenSpans) {
+        for (let c = s.startCol; c < s.startCol + s.span; c++) {
+          dayOverflows[c]++;
+        }
+      }
+
+      return { spans: placed, dayOverflows };
     });
   }, [weeks, events]);
 
-  const monthLabel = new Date(currentYear, currentMonth, 1).toLocaleDateString(
+  /* ---- Events for expanded day ---- */
+  const expandedDayEvents = useMemo(() => {
+    if (!expandedDayKey) return [];
+    return events
+      .filter((e) => {
+        const end = e.dateEnd || e.dateStart;
+        return e.dateStart <= expandedDayKey && end >= expandedDayKey;
+      })
+      .sort((a, b) => a.time.localeCompare(b.time));
+  }, [events, expandedDayKey]);
+
+  const expandedDayLabel = expandedDayKey
+    ? new Date(expandedDayKey + "T00:00:00").toLocaleDateString("en-US", {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+      })
+    : "";
+
+  /* ---- Internal navigation (only used when uncontrolled) ---- */
+  const monthLabel = new Date(activeYear, activeMonth, 1).toLocaleDateString(
     "en-US",
     { month: "long", year: "numeric" },
   );
 
   function goToPrevMonth() {
     setSelectedEvent(null);
-    if (currentMonth === 0) {
-      setCurrentMonth(11);
-      setCurrentYear((y) => y - 1);
+    setExpandedDayKey(null);
+    if (internalMonth === 0) {
+      setInternalMonth(11);
+      setInternalYear((y) => y - 1);
     } else {
-      setCurrentMonth((m) => m - 1);
+      setInternalMonth((m) => m - 1);
     }
   }
 
   function goToNextMonth() {
     setSelectedEvent(null);
-    if (currentMonth === 11) {
-      setCurrentMonth(0);
-      setCurrentYear((y) => y + 1);
+    setExpandedDayKey(null);
+    if (internalMonth === 11) {
+      setInternalMonth(0);
+      setInternalYear((y) => y + 1);
     } else {
-      setCurrentMonth((m) => m + 1);
+      setInternalMonth((m) => m + 1);
     }
   }
 
   function goToToday() {
     setSelectedEvent(null);
-    setCurrentMonth(today.getMonth());
-    setCurrentYear(today.getFullYear());
+    setExpandedDayKey(null);
+    setInternalMonth(today.getMonth());
+    setInternalYear(today.getFullYear());
   }
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Month navigation */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      {/* Month navigation — only shown when grid controls its own month */}
+      {!isControlled && (
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={goToPrevMonth}
+              className="flex size-9 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
+              aria-label="Previous month"
+            >
+              <IconChevronLeft className="size-4" />
+            </button>
+            <h3 className="text-[20px] font-medium text-black-1 min-w-[200px] text-center">
+              {monthLabel}
+            </h3>
+            <button
+              onClick={goToNextMonth}
+              className="flex size-9 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
+              aria-label="Next month"
+            >
+              <IconChevronRight className="size-4" />
+            </button>
+          </div>
           <button
-            onClick={goToPrevMonth}
-            className="flex size-9 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
-            aria-label="Previous month"
+            onClick={goToToday}
+            className="text-[14px] font-medium text-accent-blue hover:underline"
           >
-            <IconChevronLeft className="size-4" />
-          </button>
-          <h3 className="text-[20px] font-medium text-black-1 min-w-[200px] text-center">
-            {monthLabel}
-          </h3>
-          <button
-            onClick={goToNextMonth}
-            className="flex size-9 items-center justify-center rounded-full border border-white-2 text-black-2 transition-colors hover:bg-white-1-5"
-            aria-label="Next month"
-          >
-            <IconChevronRight className="size-4" />
+            Today
           </button>
         </div>
-        <button
-          onClick={goToToday}
-          className="text-[14px] font-medium text-accent-blue hover:underline"
-        >
-          Today
-        </button>
-      </div>
+      )}
 
       {/* Calendar grid */}
       <div className="rounded-[20px] border border-white-2-5 bg-white-0 overflow-hidden">
@@ -294,18 +361,16 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
           ))}
         </div>
 
-        {/* Week rows */}
+        {/* Week rows — fixed height for all rows */}
         {weeks.map((week, weekIndex) => {
-          const { spans, maxRows } = weekEventSpans[weekIndex];
+          const { spans, dayOverflows } = weekEventSpans[weekIndex];
           const visibleSpans = spans.filter((s) => s.row < MAX_VISIBLE_ROWS);
-          const hiddenCount = spans.length - visibleSpans.length;
-          const eventAreaHeight = Math.min(maxRows, MAX_VISIBLE_ROWS) * 26 + (hiddenCount > 0 ? 18 : 0);
 
           return (
             <div
               key={weekIndex}
               className="relative border-b border-white-2/50 last:border-b-0"
-              style={{ minHeight: `${44 + eventAreaHeight}px` }}
+              style={{ minHeight: `${44 + FIXED_EVENT_AREA_H}px` }}
             >
               {/* Day numbers row */}
               <div className="grid grid-cols-7">
@@ -332,7 +397,7 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
               </div>
 
               {/* Event blocks layer */}
-              <div className="relative w-full" style={{ height: `${eventAreaHeight}px` }}>
+              <div className="relative w-full" style={{ height: `${FIXED_EVENT_AREA_H}px` }}>
                 {/* Background column separators (so blocks line up visually) */}
                 <div className="absolute inset-0 grid grid-cols-7 pointer-events-none">
                   {week.map((day) => (
@@ -354,7 +419,7 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
                       TYPE_BLOCK_COLORS[s.event.type] ?? "bg-black-3 text-white-0"
                     } ${s.isContinuation ? "rounded-l-none" : ""} ${s.isContinued ? "rounded-r-none" : ""}`}
                     style={{
-                      top: `${s.row * 26 + 2}px`,
+                      top: `${s.row * EVENT_ROW_H + 2}px`,
                       left: `calc(${(s.startCol / 7) * 100}% + 2px)`,
                       width: `calc(${(s.span / 7) * 100}% - 4px)`,
                     }}
@@ -369,14 +434,21 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
                   </button>
                 ))}
 
-                {/* Overflow indicator */}
-                {hiddenCount > 0 && (
-                  <div
-                    className="absolute left-2 text-[11px] font-medium text-black-3"
-                    style={{ top: `${MAX_VISIBLE_ROWS * 26 + 2}px` }}
-                  >
-                    +{hiddenCount} more
-                  </div>
+                {/* Per-day overflow indicators */}
+                {dayOverflows.map((count, colIndex) =>
+                  count > 0 ? (
+                    <button
+                      key={`overflow-${colIndex}`}
+                      onClick={() => setExpandedDayKey(week[colIndex].key)}
+                      className="absolute text-[11px] font-medium text-accent-blue hover:underline cursor-pointer z-10"
+                      style={{
+                        top: `${MAX_VISIBLE_ROWS * EVENT_ROW_H + 2}px`,
+                        left: `calc(${(colIndex / 7) * 100}% + 4px)`,
+                      }}
+                    >
+                      +{count} more
+                    </button>
+                  ) : null
                 )}
               </div>
             </div>
@@ -468,6 +540,61 @@ export default function EventCalendarGrid({ events }: EventCalendarGridProps) {
               VIEW FULL DETAILS
               <IconArrowRight className="size-4" />
             </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Day events popover */}
+      {expandedDayKey && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black-1/20 backdrop-blur-sm"
+            onClick={() => setExpandedDayKey(null)}
+          />
+          <div
+            ref={dayPopoverRef}
+            className="relative w-full max-w-[360px] bg-white-0 rounded-[20px] shadow-[0px_24px_48px_rgba(0,0,0,0.15)] p-6 z-10"
+          >
+            <button
+              onClick={() => setExpandedDayKey(null)}
+              className="absolute top-4 right-4 flex size-7 items-center justify-center rounded-full text-black-3 transition-colors hover:bg-white-2 hover:text-black-1"
+              aria-label="Close"
+            >
+              <IconClose className="size-4" />
+            </button>
+
+            <h4 className="text-[16px] font-medium text-black-1 mb-4 pr-8">
+              {expandedDayLabel}
+            </h4>
+
+            <div className="flex flex-col gap-1 max-h-[300px] overflow-y-auto">
+              {expandedDayEvents.map((evt) => (
+                <button
+                  key={evt.slug}
+                  onClick={() => {
+                    setExpandedDayKey(null);
+                    setSelectedEvent(evt);
+                  }}
+                  className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-white-1-5"
+                >
+                  <span
+                    className={`size-2.5 rounded-full shrink-0 ${TYPE_PILL_COLORS[evt.type] ?? "bg-black-3"}`}
+                  />
+                  <div className="flex flex-col gap-0.5 min-w-0">
+                    <span className="text-[13px] font-medium text-black-1 truncate">
+                      {evt.title}
+                    </span>
+                    <span className="text-[12px] text-black-3">
+                      {evt.time.split(" - ")[0]}
+                      {evt.location && ` · ${evt.location}`}
+                    </span>
+                  </div>
+                </button>
+              ))}
+              {expandedDayEvents.length === 0 && (
+                <p className="text-[13px] text-black-3 py-2">No events</p>
+              )}
+            </div>
           </div>
         </div>
       )}

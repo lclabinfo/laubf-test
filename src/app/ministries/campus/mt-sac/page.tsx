@@ -99,19 +99,10 @@ const teamData: MeetTeamSectionProps = {
     heading: "Meet Our Team",
     members: [
       {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05222.jpg", alt: "William Larsen" },
-      },
-      {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC05299.jpg", alt: "William Larsen" },
-      },
-      {
-        name: "William Larsen",
-        role: "Campus ministry leader",
-        image: { src: "/pics-temp/DSC01195.jpg", alt: "William Larsen" },
+        name: "Jason Koch",
+        role: "",
+        email: "jkoch7@gmail.com",
+        image: { src: "/pics-temp/DSC05222.jpg", alt: "Jason Koch" },
       },
     ],
   },

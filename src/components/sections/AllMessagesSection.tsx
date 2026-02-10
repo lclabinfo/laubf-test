@@ -209,7 +209,7 @@ export default function AllMessagesSection(props: {
           />
 
           {/* Results count */}
-          <p className={`text-body-3 ${t.textMuted} mb-6`}>
+          <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
             Showing {visibleMessages.length} of {filteredMessages.length} messages
           </p>
 

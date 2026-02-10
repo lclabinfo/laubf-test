@@ -54,7 +54,7 @@ export default function EventGridCard({ event }: { event: Event }) {
             {event.type}
           </span>
 
-          <h3 className="text-[20px] font-medium text-black-1 leading-none tracking-[-0.4px] truncate w-full">
+          <h3 className="text-[20px] font-medium text-black-1 leading-none tracking-[-0.4px] truncate w-full pb-0.5">
             {event.title}
           </h3>
         </div>
