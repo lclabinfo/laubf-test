@@ -7,6 +7,7 @@ import Image from "next/image";
 import { ChevronDown, SquareArrowOutUpRight } from "lucide-react";
 import { dropdowns, directLinks } from "./nav-data";
 import { IconClose } from "./icons";
+import CTAButton from "@/components/shared/CTAButton";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -185,13 +186,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Bottom CTA */}
         <div className="p-4 shrink-0 border-t border-white-2">
-          <Link
+          <CTAButton
+            label="I'm new"
             href="/im-new"
+            variant="primary"
+            size="full"
+            theme="light"
             onClick={onClose}
-            className="flex items-center justify-center w-full rounded-full bg-black-1 px-8 py-4 text-nav text-white-1 transition-opacity hover:opacity-90"
-          >
-            I&apos;m new
-          </Link>
+          />
         </div>
       </div>
     </>

@@ -5,11 +5,14 @@ export interface CTAButtonProps {
   label: string;
   href?: string;
   onClick?: () => void;
-  variant?: "primary" | "secondary";
-  size?: "default" | "small";
+  variant?: "primary" | "secondary" | "campus";
+  size?: "default" | "small" | "nav" | "full";
   theme?: SectionTheme;
   icon?: React.ReactNode;
   className?: string;
+  type?: "button" | "submit";
+  target?: string;
+  rel?: string;
 }
 
 /* ---- Event Card ---- */

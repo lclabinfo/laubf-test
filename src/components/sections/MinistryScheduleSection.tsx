@@ -106,21 +106,6 @@ export default function MinistryScheduleSection(props: {
               />
             </div>
           )}
-
-          {/* Buttons row (only when no schedule entries — otherwise buttons go in right column) */}
-          {content.buttons && content.buttons.length > 0 && !content.directionsUrl && !content.scheduleEntries?.length && (
-            <div className="flex flex-wrap gap-3 mt-6">
-              {content.buttons.map((btn, i) => (
-                <CTAButton
-                  key={i}
-                  label={btn.label}
-                  href={btn.href}
-                  variant={btn.variant}
-                  size="small"
-                />
-              ))}
-            </div>
-          )}
         </AnimateOnScroll>
 
         {/* Right column */}
@@ -167,7 +152,6 @@ export default function MinistryScheduleSection(props: {
                         label={btn.label}
                         href={btn.href}
                         variant={btn.variant}
-                        size="small"
                       />
                     ))}
                   </div>

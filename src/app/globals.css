@@ -144,6 +144,9 @@
     .text-h1 { font-size: 3.5rem; }
   }
   @media (width >= 64rem) {
+    .text-h1 { font-size: 4rem; }
+  }
+  @media (width >= 80rem) {
     .text-h1 { font-size: 5rem; }
   }
 
@@ -158,6 +161,9 @@
     .text-h2 { font-size: 2.25rem; }
   }
   @media (width >= 64rem) {
+    .text-h2 { font-size: 2.5rem; }
+  }
+  @media (width >= 80rem) {
     .text-h2 { font-size: 3rem; }
   }
 
@@ -172,6 +178,9 @@
     .text-h3 { font-size: 1.75rem; }
   }
   @media (width >= 64rem) {
+    .text-h3 { font-size: 1.875rem; }
+  }
+  @media (width >= 80rem) {
     .text-h3 { font-size: 2.25rem; }
   }
 
@@ -186,6 +195,9 @@
     .text-h4 { font-size: 1.25rem; }
   }
   @media (width >= 64rem) {
+    .text-h4 { font-size: 1.375rem; }
+  }
+  @media (width >= 80rem) {
     .text-h4 { font-size: 1.5rem; }
   }
 
@@ -200,6 +212,9 @@
     .text-body-1 { font-size: 1.125rem; }
   }
   @media (width >= 64rem) {
+    .text-body-1 { font-size: 1.125rem; }
+  }
+  @media (width >= 80rem) {
     .text-body-1 { font-size: 1.25rem; }
   }
 
@@ -297,6 +312,9 @@
     .text-display-heading { font-size: 3.5rem; }
   }
   @media (width >= 64rem) {
+    .text-display-heading { font-size: 4rem; }
+  }
+  @media (width >= 80rem) {
     .text-display-heading { font-size: 5rem; }
   }
 

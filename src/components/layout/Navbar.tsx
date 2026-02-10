@@ -25,6 +25,7 @@ import { dropdowns, directLinks } from "./nav-data";
 import { IconHamburger } from "./icons";
 import DropdownMenu from "./DropdownMenu";
 import MobileMenu from "./MobileMenu";
+import CTAButton from "@/components/shared/CTAButton";
 import type { NavbarSettings } from "@/lib/types/sections";
 import { cn } from "@/lib/utils";
 
@@ -187,17 +188,13 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
               </Link>
             )}
             {content.ctaButton.visible && (
-              <Link
+              <CTAButton
+                label={content.ctaButton.label}
                 href={content.ctaButton.href}
-                className={cn(
-                  "rounded-full px-7 py-3.5 text-button-1 transition-opacity hover:opacity-90",
-                  isScrolled
-                    ? "bg-black-1 text-white-1"
-                    : "bg-white-1 text-black-1",
-                )}
-              >
-                {content.ctaButton.label}
-              </Link>
+                variant="primary"
+                size="nav"
+                theme={isScrolled ? "light" : "dark"}
+              />
             )}
           </div>
 

@@ -58,7 +58,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "Adults from many walks of life\u2014campus leaders, Bible teachers, parents, and missionaries\u2014growing in faith through personal and group Bible study, conferences, and outreach.",
         images: [
-          { src: "/images/ministries/adults/introduction.jpg", alt: "Adult fellowship" },
+          { src: "/images/ministries/adults.webp", alt: "Adult fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/adults" },
       },
@@ -76,7 +76,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "A safe, engaging, and age-appropriate environment where children can learn about God\u2019s Word and build friendships while growing in faith.",
         images: [
-          { src: "/images/ministries/children/introduction.png", alt: "Children Bible fellowship" },
+          { src: "/images/ministries/children.webp", alt: "Children Bible fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/children" },
       },

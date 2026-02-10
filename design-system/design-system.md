@@ -144,19 +144,19 @@ The homepage alternates: **Dark** (Hero) → **Dark** (Who We Are) → **Light**
 
 ### 2.3 Responsive Type Scale
 
-Mobile sizes are **not defined in Figma** — the following is the recommended scale based on reference code patterns and standard ratios (~60-70% of desktop for headings):
+Mobile sizes are **not defined in Figma** — the following is the recommended scale based on reference code patterns and standard ratios (~60-70% of desktop for headings). An **xl (≥1280px)** intermediate breakpoint smooths the transition between tablet/small-desktop and full desktop sizes:
 
-| Token     | Desktop (≥1024px) | Tablet (≥768px) | Mobile (<768px) |
-| --------- | ----------------- | --------------- | --------------- |
-| h1        | 80px              | 56px            | 40px            |
-| h2        | 48px              | 36px            | 28px            |
-| h3        | 36px              | 28px            | 24px            |
-| h4        | 24px              | 20px            | 18px            |
-| body-1    | 20px              | 18px            | 16px            |
-| body-2    | 16px              | 16px            | 14px            |
-| body-3    | 14px              | 14px            | 13px            |
-| button-1  | 18px              | 16px            | 16px            |
-| nav       | 20px              | 16px            | 16px            |
+| Token     | Desktop (≥1280px) | Lg Desktop (≥1024px) | Tablet (≥768px) | Mobile (<768px) |
+| --------- | ----------------- | -------------------- | --------------- | --------------- |
+| h1        | 80px              | 64px                 | 56px            | 40px            |
+| h2        | 48px              | 40px                 | 36px            | 28px            |
+| h3        | 36px              | 30px                 | 28px            | 24px            |
+| h4        | 24px              | 22px                 | 20px            | 18px            |
+| body-1    | 20px              | 18px                 | 18px            | 16px            |
+| body-2    | 16px              | 16px                 | 16px            | 14px            |
+| body-3    | 14px              | 14px                 | 14px            | 13px            |
+| button-1  | 18px              | 18px                 | 16px            | 16px            |
+| nav       | 20px              | 18px                 | 16px            | 16px            |
 
 **Hero special case:** The hero title in the reference code scales `40px → 80px → 160px` across breakpoints. The Figma design shows 80px for the heading at 1440px. The 160px size from the reference code may be the Figma Make version (not final). **Use 80px at desktop as the source of truth.**
 

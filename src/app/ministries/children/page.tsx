@@ -39,7 +39,7 @@ const heroData: MinistryHeroSectionProps = {
     heading: "Children",
     headingStyle: "sans",
     heroImage: {
-      src: "/images/ministries/children/introduction.png",
+      src: "/images/ministries/children.webp",
       alt: "Children ministry group photo",
     },
   },

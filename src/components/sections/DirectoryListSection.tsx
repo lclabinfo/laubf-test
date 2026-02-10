@@ -98,7 +98,7 @@ function DirectoryMobileBlock({
         </div>
 
         {/* Centered campus list */}
-        <div className="flex flex-col items-center gap-3 w-full">
+        <div className="flex flex-col items-center gap-0 w-full">
           {items.map((item) => (
             <Link
               key={item.id}

@@ -18,8 +18,8 @@ export default function ImageCard({ data, className }: ImageCardProps) {
     <Tag
       {...(hasLink ? { href: data.href } : {})}
       className={cn(
-        "group relative flex flex-col items-start justify-end overflow-hidden rounded-xl",
-        "aspect-[430/370] p-7 lg:p-8",
+        "group relative flex flex-col overflow-hidden rounded-xl",
+        "min-h-[180px] sm:min-h-[200px] lg:aspect-[430/370] lg:min-h-0",
         className
       )}
     >
@@ -30,18 +30,20 @@ export default function ImageCard({ data, className }: ImageCardProps) {
         className="object-cover transition-transform duration-500 ease-smooth group-hover:scale-105"
         style={{ objectPosition: data.imageObjectPosition }}
       />
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-b from-transparent from-[44%] to-[rgba(0,0,0,0.71)] to-[69%]" />
-      <div className="relative flex w-full items-end justify-between gap-4">
-        <div className="flex flex-col gap-2 text-white-1">
-          <h3 className="text-h3">{data.title}</h3>
-          <p className="text-body-2 max-w-[302px]">{data.description}</p>
+      {/* Gradient scrim sized to text content, not full card */}
+      <div className="relative z-10 mt-auto bg-gradient-to-t from-[rgba(0,0,0,0.71)] to-transparent pt-16 lg:pt-20 p-7 lg:p-8">
+        <div className="flex w-full items-end justify-between gap-4">
+          <div className="flex flex-col gap-2 text-white-1">
+            <h3 className="text-h3 text-balance">{data.title}</h3>
+            <p className="text-body-2 max-w-[302px] text-balance">{data.description}</p>
+          </div>
+          {hasLink && (
+            <ArrowButton
+              size={48}
+              className="shrink-0 border border-white-1 text-white-1"
+            />
+          )}
         </div>
-        {hasLink && (
-          <ArrowButton
-            size={48}
-            className="shrink-0 border border-white-1 text-white-1"
-          />
-        )}
       </div>
     </Tag>
   );

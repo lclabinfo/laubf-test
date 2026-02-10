@@ -37,7 +37,7 @@ const heroData: MinistryHeroSectionProps = {
     heading: "Adult",
     headingStyle: "sans",
     heroImage: {
-      src: "/images/ministries/adults/introduction.jpg",
+      src: "/images/ministries/adults.webp",
       alt: "Adult ministry worship service",
     },
   },

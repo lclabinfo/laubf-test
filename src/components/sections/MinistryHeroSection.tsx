@@ -23,6 +23,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import { themeTokens } from "@/lib/theme";
 import type { MinistryHeroSectionProps } from "@/lib/types/sections";
+import CTAButton from "@/components/shared/CTAButton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
@@ -66,17 +67,18 @@ export default function MinistryHeroSection(props: {
 
         {/* CTA button + social icons */}
         {(content.ctaButton?.visible || content.socialLinks) && (
-          <div className="flex items-center gap-3 mt-8">
+          <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
             {content.ctaButton?.visible && (
-              <Link
+              <CTAButton
+                label={content.ctaButton.label}
                 href={content.ctaButton.href}
+                variant={isSans ? "campus" : "primary"}
+                size="small"
+                theme="light"
+                icon={<IconExternalLink className="size-6" />}
                 target={content.ctaButton.href.startsWith("http") ? "_blank" : undefined}
                 rel={content.ctaButton.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`${isSans ? "bg-white-2 rounded-lg px-4 py-3 text-button-1 font-medium text-black-1 hover:bg-white-2-5 transition-colors inline-flex items-center gap-2" : "bg-black-1 text-white-1 rounded-full px-6 py-3 text-button-1 font-medium hover:bg-black-2 transition-colors inline-flex items-center gap-2"}`}
-              >
-                {content.ctaButton.label}
-                <IconExternalLink className="size-4" />
-              </Link>
+              />
             )}
             {content.socialLinks && content.socialLinks.length > 0 && (
               <div className="flex items-center gap-3">
@@ -92,7 +94,7 @@ export default function MinistryHeroSection(props: {
                       aria-label={link.platform}
                     >
                       {SocialIcon ? (
-                        <SocialIcon className="size-5" />
+                        <SocialIcon className="size-6" />
                       ) : (
                         <span className="text-body-3">{link.platform[0]?.toUpperCase()}</span>
                       )}

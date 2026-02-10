@@ -26,11 +26,28 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import CTAButton from "@/components/shared/CTAButton";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
-import { themeTokens } from "@/lib/theme";
+import { themeTokens, type ThemeTokens } from "@/lib/theme";
 import { IconChevronDown } from "@/components/layout/icons";
-import type { CampusCardGridSectionProps } from "@/lib/types/sections";
+import type { CampusCardGridSectionProps, CampusCardItem } from "@/lib/types/sections";
 import Image from "next/image";
 import Link from "next/link";
+
+function CampusCard({ campus, tokens }: { campus: CampusCardItem; tokens: ThemeTokens }) {
+  const classes = `flex flex-col items-center justify-center text-center transition-colors min-h-16 py-2.5 px-5 md:py-3 md:px-7 gap-0.5 md:gap-1 rounded-2xl border ${tokens.cardBorder} ${tokens.cardBg} hover:bg-white-2`;
+  const content = (
+    <>
+      {campus.abbreviation && (
+        <p className={`text-button-2 ${tokens.textMuted}`}>{campus.abbreviation}</p>
+      )}
+      <p className={`text-body-2 font-medium ${tokens.textPrimary} tracking-tight`}>{campus.fullName}</p>
+    </>
+  );
+
+  if (campus.href) {
+    return <Link href={campus.href} className={classes}>{content}</Link>;
+  }
+  return <div className={classes}>{content}</div>;
+}
 
 export default function CampusCardGridSection(props: {
   settings: CampusCardGridSectionProps;
@@ -98,40 +115,11 @@ export default function CampusCardGridSection(props: {
         )}
       </AnimateOnScroll>
 
-      {/* Campus cards grid — rectangular cards matching Figma */}
-      {/* Mobile: solid black column, near-zero gap, compact cards */}
-      <div className="bg-black-1 rounded-2xl md:bg-transparent md:rounded-none -mx-4 md:mx-0 px-4 md:px-0 py-2 md:py-0">
-        <div className="flex flex-wrap justify-center gap-0 md:gap-5 max-w-4xl mx-auto">
-          {content.campuses.map((campus) => {
-            const cardClasses = `flex flex-col items-center justify-center text-center transition-colors w-full md:w-auto py-2 md:py-3 px-4 md:px-7 gap-0 md:gap-1 md:rounded-2xl md:border ${t.cardBorder} ${t.cardBg} max-md:!bg-transparent max-md:!border-transparent md:hover:bg-white-2`;
-            const cardContent = (
-              <>
-                {campus.abbreviation && (
-                  <p className={`text-button-2 ${t.textMuted} max-md:!text-white-2`}>
-                    {campus.abbreviation}
-                  </p>
-                )}
-                <p className={`text-body-2 font-medium ${t.textPrimary} max-md:!text-white-0 tracking-tight`}>
-                  {campus.fullName}
-                </p>
-              </>
-            );
-
-            if (campus.href) {
-              return (
-                <Link key={campus.id} href={campus.href} className={cardClasses}>
-                  {cardContent}
-                </Link>
-              );
-            }
-
-            return (
-              <div key={campus.id} className={cardClasses}>
-                {cardContent}
-              </div>
-            );
-          })}
-        </div>
+      {/* Campus cards grid */}
+      <div className="flex flex-wrap justify-center gap-2.5 md:gap-5 max-w-4xl mx-auto">
+        {content.campuses.map((campus) => (
+          <CampusCard key={campus.id} campus={campus} tokens={t} />
+        ))}
       </div>
 
       {/* Bottom CTA area */}

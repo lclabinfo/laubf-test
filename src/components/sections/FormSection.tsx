@@ -30,6 +30,7 @@ import OverlineLabel from "@/components/shared/OverlineLabel";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import { themeTokens } from "@/lib/theme";
 import type { FormSectionProps } from "@/lib/types/sections";
+import CTAButton from "@/components/shared/CTAButton";
 import { IconChevronDown, IconCheck } from "@/components/layout/icons";
 import { cn } from "@/lib/utils";
 
@@ -289,12 +290,14 @@ export default function FormSection(props: { settings: FormSectionProps }) {
             </label>
 
             {/* Submit button */}
-            <button
+            <CTAButton
+              label={content.submitLabel}
+              variant="primary"
+              size="full"
+              theme="light"
               type="submit"
-              className="w-full bg-black-1 text-white-1 rounded-full py-4 text-button-1 font-medium transition-colors hover:bg-black-2 mt-2"
-            >
-              {content.submitLabel}
-            </button>
+              className="mt-2"
+            />
           </form>
         </div>
       )}
