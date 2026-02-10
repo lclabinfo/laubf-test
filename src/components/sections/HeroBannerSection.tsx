@@ -22,7 +22,7 @@
  */
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionThemeContext } from "@/lib/theme";
 import type { HeroBannerSectionProps } from "@/lib/types/sections";
 import CTAButton from "@/components/shared/CTAButton";
@@ -150,28 +150,33 @@ export default function HeroBannerSection(props: { settings: HeroBannerSectionPr
 /* ------------------------------------------------------------------ */
 function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mobileSrc: string; animate: boolean }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  // Default to mobile (compressed) — correct for SSR and most first-paints.
+  // On desktop the effect swaps to the full-quality source once.
+  const [src, setSrc] = useState(mobileSrc);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
     const pickSource = () => {
-      const wantMobile = window.innerWidth < LG_BREAKPOINT;
-      const next = wantMobile ? mobileSrc : desktopSrc;
-
-      if (video.currentSrc.endsWith(next)) return;     // already correct
-      video.src = next;
-      video.load();
-      video.play().catch(() => {});                     // autoplay may be blocked
+      const isDesktop = window.innerWidth >= LG_BREAKPOINT;
+      setSrc(isDesktop ? desktopSrc : mobileSrc);
     };
 
     pickSource();
 
-    // Also handle orientation change / resize
     const mql = window.matchMedia(`(min-width: ${LG_BREAKPOINT}px)`);
     mql.addEventListener("change", pickSource);
     return () => mql.removeEventListener("change", pickSource);
   }, [desktopSrc, mobileSrc]);
+
+  // When src changes, reload only if the browser already loaded a different source
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    // currentSrc is empty on first render — let the browser handle that naturally
+    if (video.currentSrc && !video.currentSrc.endsWith(src)) {
+      video.load();
+      video.play().catch(() => {});
+    }
+  }, [src]);
 
   return (
     <video
@@ -182,6 +187,8 @@ function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mob
       playsInline
       preload="auto"
       className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
-    />
+    >
+      <source src={src} type={src.endsWith(".webm") ? "video/webm" : "video/mp4"} />
+    </video>
   );
 }
