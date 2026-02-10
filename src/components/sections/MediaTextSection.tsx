@@ -98,7 +98,7 @@ function RotatingWheel({
 
   return (
     <div
-      className="h-[573px] relative w-[600px] max-w-full shrink-0"
+      className="h-[573px] absolute -right-[30px] top-0 w-[600px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -221,11 +221,11 @@ export default function MediaTextSection(props: {
       : "linear-gradient(rgb(250,250,250) 0%, rgba(250,250,250,0.25) 24.5%, rgba(250,250,250,0) 50%, rgba(250,250,250,0.25) 75%, rgb(250,250,250) 100%)";
 
   return (
-    <SectionContainer settings={settings} className="!py-0" noContainer>
+    <SectionContainer settings={settings} className="py-0!" noContainer>
       {/* Desktop layout: wheel flush-left, text right — 0.8:1 ratio */}
-      <div className="hidden md:grid grid-cols-[4fr_5fr] w-full overflow-hidden">
-        {/* Carousel column — clips the fixed-size wheel */}
-        <div className="relative overflow-hidden">
+      <div className="hidden md:grid grid-cols-[4fr_5fr] w-full overflow-hidden pr-10">
+        {/* Carousel column — clips the fixed-size wheel, anchored to right edge */}
+        <div className="relative overflow-hidden h-[573px]">
           <RotatingWheel
             images={content.images}
             speed={speed}
@@ -239,7 +239,7 @@ export default function MediaTextSection(props: {
 
         {/* Text content — vertically centered, right edge aligns with container */}
         <div
-          className="flex flex-col justify-center gap-8 pl-10 py-24"
+          className="flex flex-col justify-center gap-8 pl-8 py-24"
           style={{ paddingRight: "max(2rem, calc((100vw - 1200px) / 2))" }}
         >
           <div className="flex flex-col gap-6">

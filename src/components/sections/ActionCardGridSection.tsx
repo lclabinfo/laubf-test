@@ -20,6 +20,7 @@
 import SectionContainer from "@/components/shared/SectionContainer";
 import ImageCard from "@/components/shared/ImageCard";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
+import CTAButton from "@/components/shared/CTAButton";
 import type { ActionCardGridSectionProps } from "@/lib/types/sections";
 
 export default function ActionCardGridSection(props: {
@@ -37,17 +38,25 @@ export default function ActionCardGridSection(props: {
           <h2 className="text-h2 text-black-1 leading-none">
             <span>{content.heading.line1}</span>
             <br />
-            <span className="text-display-heading">
+            <span className="font-display italic font-normal">
               {content.heading.line2}
             </span>
             <br />
             <span>{content.heading.line3}</span>
           </h2>
           <p className="text-h4 text-black-2">{content.subheading}</p>
+          {content.ctaButton && (
+            <CTAButton
+              label={content.ctaButton.label}
+              href={content.ctaButton.href}
+              variant="primary"
+              className="w-fit"
+            />
+          )}
         </AnimateOnScroll>
 
         {/* 2×2 grid */}
-        <div className="grid flex-1 grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid flex-1 grid-cols-1 gap-5 lg:grid-cols-2">
           {content.cards.map((card, i) => (
             <AnimateOnScroll key={card.id} animation="fade-up" staggerIndex={i} enabled={animate}>
               <ImageCard data={card} />

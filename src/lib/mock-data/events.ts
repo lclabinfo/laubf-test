@@ -6,7 +6,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "friday-night-bible-study",
-    title: "Friday Night Bible Study",
+    title: "[Mock] Friday Night Bible Study",
     type: "meeting",
     dateStart: "2026-01-30",
     time: "7:00 PM - 9:00 PM",
@@ -31,7 +31,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "sunday-worship-service",
-    title: "Sunday Worship Service",
+    title: "[Mock] Sunday Worship Service",
     type: "meeting",
     dateStart: "2026-02-01",
     time: "10:30 AM - 12:30 PM",
@@ -60,7 +60,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "new-year-prayer-meeting-2026",
-    title: "New Year Prayer Meeting",
+    title: "[Mock] New Year Prayer Meeting",
     type: "event",
     dateStart: "2026-01-01",
     time: "10:00 AM - 12:00 PM",
@@ -88,7 +88,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "csulb-welcome-week-spring-2026",
-    title: "CSULB Welcome Week Outreach",
+    title: "[Mock] CSULB Welcome Week Outreach",
     type: "event",
     dateStart: "2026-02-12",
     dateEnd: "2026-02-14",
@@ -114,7 +114,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "csulb-campus-bible-study",
-    title: "CSULB Campus Bible Study",
+    title: "[Mock] CSULB Campus Bible Study",
     type: "meeting",
     dateStart: "2026-02-03",
     time: "12:00 PM - 1:00 PM",
@@ -138,7 +138,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "marriage-family-seminar-spring-2026",
-    title: "Marriage & Family Seminar",
+    title: "[Mock] Marriage & Family Seminar",
     type: "event",
     dateStart: "2026-02-21",
     time: "9:00 AM - 3:00 PM",
@@ -166,7 +166,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "childrens-sunday-school",
-    title: "Children's Sunday School",
+    title: "[Mock] Children's Sunday School",
     type: "meeting",
     dateStart: "2026-02-01",
     time: "10:30 AM - 12:00 PM",
@@ -193,7 +193,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "ucla-spring-outreach-2026",
-    title: "UCLA Spring Campus Outreach",
+    title: "[Mock] UCLA Spring Campus Outreach",
     type: "event",
     dateStart: "2026-02-09",
     dateEnd: "2026-02-11",
@@ -217,7 +217,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "easter-celebration-2026",
-    title: "Easter Celebration Service",
+    title: "[Mock] Easter Celebration Service",
     type: "event",
     dateStart: "2026-03-01",
     time: "10:00 AM - 12:30 PM",
@@ -246,7 +246,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "spring-leadership-training-2026",
-    title: "Spring Leadership Training",
+    title: "[Mock] Spring Leadership Training",
     type: "program",
     dateStart: "2026-03-07",
     dateEnd: "2026-03-08",
@@ -276,7 +276,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "saturday-morning-prayer-meeting",
-    title: "Saturday Morning Prayer Meeting",
+    title: "[Mock] Saturday Morning Prayer Meeting",
     type: "meeting",
     dateStart: "2026-02-01",
     time: "6:00 AM - 7:00 AM",
@@ -304,7 +304,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "adult-bible-study-romans",
-    title: "Adult Bible Study: Book of Romans",
+    title: "[Mock] Adult Bible Study: Book of Romans",
     type: "meeting",
     dateStart: "2026-01-28",
     time: "7:30 PM - 9:00 PM",
@@ -327,7 +327,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "mothers-day-brunch-2026",
-    title: "Mother's Day Appreciation Brunch",
+    title: "[Mock] Mother's Day Appreciation Brunch",
     type: "meeting",
     dateStart: "2025-10-12",
     time: "11:00 AM - 1:00 PM",
@@ -354,7 +354,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "hs-summer-bible-academy-2026",
-    title: "High School Summer Bible Academy",
+    title: "[Mock] High School Summer Bible Academy",
     type: "program",
     dateStart: "2025-10-20",
     dateEnd: "2025-10-24",
@@ -384,7 +384,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "church-picnic-sports-day-2026",
-    title: "Church Picnic & Sports Day",
+    title: "[Mock] Church Picnic & Sports Day",
     type: "event",
     dateStart: "2025-11-01",
     time: "10:00 AM - 4:00 PM",
@@ -412,7 +412,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "usc-campus-bible-study-launch-2026",
-    title: "USC Campus Bible Study Launch",
+    title: "[Mock] USC Campus Bible Study Launch",
     type: "event",
     dateStart: "2025-10-28",
     time: "6:00 PM - 8:00 PM",
@@ -436,7 +436,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "summer-mission-conference-2026",
-    title: "Summer Mission Conference",
+    title: "[Mock] Summer Mission Conference",
     type: "program",
     dateStart: "2025-12-05",
     dateEnd: "2025-12-07",
@@ -466,7 +466,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "golden-west-fall-outreach-2026",
-    title: "Golden West College Fall Outreach",
+    title: "[Mock] Golden West College Fall Outreach",
     type: "event",
     dateStart: "2025-10-06",
     dateEnd: "2025-10-08",
@@ -490,7 +490,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "back-to-school-prayer-night-2026",
-    title: "Back to School Prayer Night",
+    title: "[Mock] Back to School Prayer Night",
     type: "meeting",
     dateStart: "2025-10-15",
     time: "7:00 PM - 9:00 PM",
@@ -518,7 +518,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "cal-poly-pomona-welcome-bbq-2026",
-    title: "Cal Poly Pomona Welcome BBQ",
+    title: "[Mock] Cal Poly Pomona Welcome BBQ",
     type: "event",
     dateStart: "2025-10-25",
     time: "5:00 PM - 8:00 PM",
@@ -542,7 +542,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "csudh-info-session-fall-2026",
-    title: "CSUDH Campus Ministry Info Session",
+    title: "[Mock] CSUDH Campus Ministry Info Session",
     type: "event",
     dateStart: "2025-11-05",
     time: "12:00 PM - 1:30 PM",
@@ -570,7 +570,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "fall-bible-conference-2026",
-    title: "Fall Bible Conference: Walking by Faith",
+    title: "[Mock] Fall Bible Conference: Walking by Faith",
     type: "program",
     dateStart: "2025-12-27",
     dateEnd: "2025-12-29",
@@ -601,7 +601,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "harvest-festival-2026",
-    title: "Harvest Festival",
+    title: "[Mock] Harvest Festival",
     type: "meeting",
     dateStart: "2025-10-31",
     time: "4:00 PM - 8:00 PM",
@@ -629,7 +629,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "mt-sac-outreach-week-2026",
-    title: "Mt. SAC Campus Outreach Week",
+    title: "[Mock] Mt. SAC Campus Outreach Week",
     type: "event",
     dateStart: "2025-11-03",
     dateEnd: "2025-11-05",
@@ -653,7 +653,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "thanksgiving-worship-potluck-2026",
-    title: "Thanksgiving Worship & Potluck",
+    title: "[Mock] Thanksgiving Worship & Potluck",
     type: "meeting",
     dateStart: "2025-11-22",
     time: "10:30 AM - 2:00 PM",
@@ -681,7 +681,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "ya-friendsgiving-2026",
-    title: "Young Adult Friendsgiving",
+    title: "[Mock] Young Adult Friendsgiving",
     type: "event",
     dateStart: "2025-11-08",
     time: "6:00 PM - 9:00 PM",
@@ -709,7 +709,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "christmas-cantata-celebration-2026",
-    title: "Christmas Cantata & Celebration",
+    title: "[Mock] Christmas Cantata & Celebration",
     type: "event",
     dateStart: "2025-12-20",
     time: "10:00 AM - 1:00 PM",
@@ -739,7 +739,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "end-of-year-testimony-sharing-2026",
-    title: "End of Year Testimony Sharing",
+    title: "[Mock] End of Year Testimony Sharing",
     type: "meeting",
     dateStart: "2025-12-30",
     time: "7:00 PM - 9:30 PM",
@@ -766,7 +766,7 @@ const MOCK_EVENTS: Event[] = [
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "cypress-college-lunch-fellowship-2026",
-    title: "Cypress College Lunch Fellowship",
+    title: "[Mock] Cypress College Lunch Fellowship",
     type: "meeting",
     dateStart: "2025-10-22",
     time: "12:00 PM - 1:30 PM",
@@ -782,6 +782,157 @@ const MOCK_EVENTS: Event[] = [
     ministry: "young-adult",
     campus: "cypress",
     isRecurring: false,
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 33. Winter Bible Academy (PROGRAM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "winter-bible-academy-2026",
+    title: "[Mock] Winter Bible Academy",
+    type: "program",
+    dateStart: "2026-01-09",
+    dateEnd: "2026-01-11",
+    time: "9:00 AM - 4:00 PM",
+    location: "LA UBF Main Center",
+    description:
+      "A three-day intensive study of the Book of Romans, designed to deepen understanding of the Gospel and Christian identity.",
+    body: `<p>The Winter Bible Academy is our annual deep-dive into Scripture. This year we will study the Book of Romans, one of the most foundational texts for understanding the Gospel.</p>
+<h3>Schedule</h3>
+<ul>
+<li><strong>Day 1</strong>: Romans 1-4 — The problem of sin and justification by faith</li>
+<li><strong>Day 2</strong>: Romans 5-8 — New life in Christ and the work of the Holy Spirit</li>
+<li><strong>Day 3</strong>: Romans 9-16 — God's plan for Israel and practical Christian living</li>
+</ul>
+<p>Each day includes lecture sessions, small group discussions, and Q&A with the teaching team. Lunch will be provided. Open to all ages and spiritual backgrounds.</p>`,
+    image: { src: "", alt: "Students studying during Winter Bible Academy" },
+    tags: ["#CHURCH-WIDE", "#CONFERENCE", "#BIBLE STUDY"],
+    ministry: "church-wide",
+    isRecurring: false,
+    registrationUrl: "https://forms.google.com/winter-bible-academy-2026",
+    isFeatured: true,
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 34. Young Adult Discipleship Program (PROGRAM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "ya-discipleship-program-spring-2026",
+    title: "[Mock] Young Adult Discipleship Program",
+    type: "program",
+    dateStart: "2026-02-21",
+    dateEnd: "2026-05-16",
+    time: "10:00 AM - 12:00 PM",
+    location: "LA UBF Main Center",
+    description:
+      "A 12-week discipleship track for young adults covering foundational Christian disciplines including prayer, Scripture study, evangelism, and servant leadership.",
+    body: `<p>Are you ready to go deeper in your faith? The Young Adult Discipleship Program is a structured 12-week journey that equips believers with practical tools for spiritual growth.</p>
+<h3>Program Modules</h3>
+<ul>
+<li>Weeks 1-3: Foundations of Faith — understanding the Gospel and assurance of salvation</li>
+<li>Weeks 4-6: Spiritual Disciplines — daily Bible reading, prayer life, and fasting</li>
+<li>Weeks 7-9: Community & Accountability — building authentic relationships in Christ</li>
+<li>Weeks 10-12: Mission & Calling — discovering your gifts and sharing the Gospel</li>
+</ul>
+<p>Participants will be paired with a mentor and meet weekly on Saturday mornings. Space is limited to 20 participants to ensure personal attention.</p>`,
+    image: { src: "", alt: "Young adults in discipleship small group" },
+    tags: ["#YAM", "#DISCIPLESHIP", "#BIBLE STUDY"],
+    ministry: "young-adult",
+    campus: "all",
+    isRecurring: false,
+    registrationUrl: "https://forms.google.com/ya-discipleship-2026",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 35. Children's Vacation Bible School (PROGRAM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "vacation-bible-school-2026",
+    title: "[Mock] Vacation Bible School",
+    type: "program",
+    dateStart: "2026-06-22",
+    dateEnd: "2026-06-26",
+    time: "9:00 AM - 12:30 PM",
+    location: "LA UBF Main Center",
+    description:
+      "A week-long summer program for children ages 5-12 featuring Bible stories, crafts, games, music, and snacks.",
+    body: `<p>Vacation Bible School is the highlight of the summer for our children's ministry. This year's theme is "God's Amazing Creation" — exploring the wonders of Genesis 1-2.</p>
+<h3>Daily Schedule</h3>
+<ul>
+<li>9:00 AM — Opening worship and singing</li>
+<li>9:30 AM — Bible story time with drama and visuals</li>
+<li>10:15 AM — Crafts and hands-on activities</li>
+<li>11:00 AM — Outdoor games and recreation</li>
+<li>11:45 AM — Snack time and small group review</li>
+<li>12:15 PM — Closing prayer and pickup</li>
+</ul>
+<p>We need 15+ volunteers for the week — teachers, craft helpers, game leaders, and kitchen helpers. Register your children or sign up to volunteer through the link below.</p>`,
+    image: { src: "", alt: "Children participating in Vacation Bible School activities" },
+    tags: ["#CHILDREN", "#FELLOWSHIP", "#OPEN EVENT"],
+    ministry: "children",
+    isRecurring: false,
+    registrationUrl: "https://forms.google.com/vbs-2026",
+    isFeatured: true,
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 36. Marriage & Family Enrichment Weekend (PROGRAM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "marriage-family-enrichment-2026",
+    title: "[Mock] Marriage & Family Enrichment Weekend",
+    type: "program",
+    dateStart: "2026-04-18",
+    dateEnd: "2026-04-19",
+    time: "9:00 AM - 5:00 PM",
+    location: "LA UBF Main Center",
+    description:
+      "A two-day retreat for married couples and families focused on strengthening relationships through Biblical principles.",
+    body: `<p>Strong families are the foundation of a strong church. This two-day program brings together married couples and parents for encouragement, practical teaching, and fellowship.</p>
+<h3>Topics</h3>
+<ul>
+<li>Communication in marriage: speaking the truth in love</li>
+<li>Parenting with purpose: raising children in the Lord</li>
+<li>Managing conflict God's way</li>
+<li>Building a Christ-centered home</li>
+</ul>
+<p>Childcare will be provided for children ages 3-12. Lunch is included both days. Couples are encouraged to attend together but individuals are welcome as well.</p>`,
+    image: { src: "", alt: "Couples at the marriage enrichment weekend" },
+    tags: ["#ADULT", "#CONFERENCE", "#FELLOWSHIP"],
+    ministry: "adult",
+    isRecurring: false,
+    registrationUrl: "https://forms.google.com/marriage-enrichment-2026",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // 37. Campus Evangelism Training (PROGRAM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "campus-evangelism-training-2026",
+    title: "[Mock] Campus Evangelism Training",
+    type: "program",
+    dateStart: "2026-03-21",
+    dateEnd: "2026-03-22",
+    time: "10:00 AM - 3:00 PM",
+    location: "LA UBF Main Center",
+    description:
+      "Hands-on training for campus ministry leaders on how to share the Gospel effectively, invite students to Bible study, and build lasting connections on campus.",
+    body: `<p>How do you start a conversation about faith on a college campus? This two-day training equips campus ministers and student leaders with practical skills for campus evangelism.</p>
+<h3>Training Sessions</h3>
+<ul>
+<li>Understanding today's college students: culture, questions, and openness</li>
+<li>Starting spiritual conversations naturally</li>
+<li>The one-to-one Bible study invitation approach</li>
+<li>Following up and building discipleship relationships</li>
+<li>Practicum: role-play and real-world scenarios</li>
+</ul>
+<p>Open to all campus ministry leaders, Bible teachers, and students interested in outreach. Lunch provided both days.</p>`,
+    image: { src: "", alt: "Campus evangelism training session" },
+    tags: ["#YAM", "#CAMPUS", "#OUTREACH", "#CONFERENCE"],
+    ministry: "young-adult",
+    campus: "all",
+    isRecurring: false,
+    registrationUrl: "https://forms.google.com/evangelism-training-2026",
   },
 ];
 

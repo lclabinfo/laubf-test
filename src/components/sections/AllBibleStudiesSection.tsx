@@ -142,7 +142,7 @@ export default function AllBibleStudiesSection(props: {
       {tab === "all" && (
         <>
           <AnimateOnScroll animation="fade-up" enabled={animate}>
-            <h2 className={`text-h2 ${t.textPrimary} mb-8`}>
+            <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>
               All Bible studies
             </h2>
           </AnimateOnScroll>

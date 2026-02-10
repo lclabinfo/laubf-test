@@ -3,7 +3,7 @@
  * - title: string — card heading
  * - description: string — card body text
  * - imageUrl: string — background image
- * - href: string — link destination
+ * - href?: string — link destination (when omitted, renders as static card without arrow)
  */
 import type { ImageCardProps } from "@/lib/types/shared";
 import { cn } from "@/lib/utils";
@@ -11,9 +11,12 @@ import Image from "next/image";
 import ArrowButton from "./ArrowButton";
 
 export default function ImageCard({ data, className }: ImageCardProps) {
+  const hasLink = !!data.href;
+  const Tag = hasLink ? "a" : "div";
+
   return (
-    <a
-      href={data.href ?? "#"}
+    <Tag
+      {...(hasLink ? { href: data.href } : {})}
       className={cn(
         "group relative flex flex-col items-start justify-end overflow-hidden rounded-xl",
         "aspect-[430/370] p-7 lg:p-8",
@@ -33,11 +36,13 @@ export default function ImageCard({ data, className }: ImageCardProps) {
           <h3 className="text-h3">{data.title}</h3>
           <p className="text-body-2 max-w-[302px]">{data.description}</p>
         </div>
-        <ArrowButton
-          size={48}
-          className="shrink-0 border border-white-1 text-white-1"
-        />
+        {hasLink && (
+          <ArrowButton
+            size={48}
+            className="shrink-0 border border-white-1 text-white-1"
+          />
+        )}
       </div>
-    </a>
+    </Tag>
   );
 }

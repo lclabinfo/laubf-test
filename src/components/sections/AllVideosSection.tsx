@@ -71,7 +71,7 @@ export default function AllVideosSection(props: {
   return (
     <SectionContainer settings={settings}>
       <AnimateOnScroll animation="fade-up" enabled={animate}>
-        <h2 className={`text-h2 ${t.textPrimary} mb-8`}>All Videos</h2>
+        <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>All Videos</h2>
       </AnimateOnScroll>
 
       <FilterToolbar

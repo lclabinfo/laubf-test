@@ -211,7 +211,7 @@ export default function EventCalendarSection(props: {
                   </p>
                 </div>
               ) : (
-                monthEvents.map((event) => {
+                monthEvents.slice(0, 8).map((event) => {
                   const data = toEventListItemData(event);
                   return <EventListItem key={event.slug} data={data} />;
                 })

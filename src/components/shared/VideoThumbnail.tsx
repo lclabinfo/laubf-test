@@ -30,7 +30,7 @@ export default function VideoThumbnail({
         <div
           className={cn(
             "flex items-center justify-center rounded-full bg-white-1/90 backdrop-blur-sm transition-transform group-hover:scale-110",
-            isFeatured ? "size-36" : "size-12"
+            isFeatured ? "size-20 sm:size-28 md:size-36" : "size-12"
           )}
         >
           <svg
@@ -38,7 +38,7 @@ export default function VideoThumbnail({
             fill="none"
             className={cn(
               "text-black-1",
-              isFeatured ? "size-16 ml-2" : "size-5 ml-0.5"
+              isFeatured ? "size-8 sm:size-12 md:size-16 ml-1 md:ml-2" : "size-5 ml-0.5"
             )}
           >
             <path d="M8 5v14l11-7L8 5z" fill="currentColor" />

@@ -15,14 +15,12 @@ import EventBadge from "./EventBadge";
 import ArrowButton from "./ArrowButton";
 
 export default function EventCard({ data, size, className }: EventCardProps) {
-  const isLarge = size === "large";
-
   return (
     <a
       href={data.href ?? "#"}
       className={cn(
-        "group relative block overflow-hidden rounded-xl bg-black-1",
-        isLarge ? "aspect-square lg:aspect-auto lg:h-[500px]" : "aspect-video lg:aspect-auto lg:h-[240px]",
+        "group relative block overflow-hidden rounded-xl bg-black-1 h-full",
+        size === "large" ? "min-h-[280px]" : "min-h-[280px] lg:h-[240px]",
         className
       )}
     >
@@ -38,21 +36,11 @@ export default function EventCard({ data, size, className }: EventCardProps) {
         <div className="absolute inset-0 bg-white-2" />
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-      <div
-        className={cn(
-          "absolute bottom-0 left-0 right-0 flex items-end justify-between",
-          isLarge ? "p-8 lg:p-12" : "p-6 lg:p-8"
-        )}
-      >
+      <div className="absolute bottom-0 left-0 right-0 flex items-end justify-between p-6 lg:p-8">
         <div className="flex flex-col gap-3">
           {data.badge && <EventBadge label={data.badge} />}
           <div className="flex flex-col gap-2">
-            <h3
-              className={cn(
-                "text-white-1",
-                isLarge ? "text-h3" : "text-h4 font-medium"
-              )}
-            >
+            <h3 className="text-h4 font-medium text-white-1">
               {data.title}
             </h3>
             <div className="flex flex-col gap-1">
@@ -91,7 +79,9 @@ export default function EventCard({ data, size, className }: EventCardProps) {
             </div>
           </div>
         </div>
-        <ArrowButton size={56} className="shrink-0" />
+        <div className="hidden lg:block shrink-0">
+          <ArrowButton size={56} />
+        </div>
       </div>
     </a>
   );

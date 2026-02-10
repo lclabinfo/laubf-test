@@ -124,6 +124,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
     heading: { line1: "Your", line2: "Next Steps", line3: "at LA UBF" },
     subheading:
       "Explore different ways to connect, grow in faith, and be part of our community.",
+    ctaButton: { label: "Plan your visit", href: "/im-new" },
     cards: [
       {
         id: "ns-1",
@@ -132,7 +133,6 @@ const actionCardGridData: ActionCardGridSectionProps = {
           "Join us every Sunday for worship, teaching, and fellowship with believers.",
         imageUrl: "/images/home/sunday-worship.jpg",
         imageAlt: "Sunday worship service",
-        href: "/sunday-worship",
       },
       {
         id: "ns-2",
@@ -141,7 +141,6 @@ const actionCardGridData: ActionCardGridSectionProps = {
           "Connect with other students on your campus for Bible study and community.",
         imageUrl: "/images/home/campus-ministry.JPG",
         imageAlt: "Campus ministry gathering",
-        href: "/campus-ministries",
       },
       {
         id: "ns-3",
@@ -150,7 +149,6 @@ const actionCardGridData: ActionCardGridSectionProps = {
           "Study the Bible one-on-one with a mentor at a time that works for you.",
         imageUrl: "/images/home/bible-study.png",
         imageAlt: "One-on-one Bible study",
-        href: "/bible-studies",
       },
       {
         id: "ns-4",
@@ -159,7 +157,6 @@ const actionCardGridData: ActionCardGridSectionProps = {
           "Build lasting friendships through shared meals, activities, and life together.",
         imageUrl: "/images/home/fellowship.jpg",
         imageAlt: "Fellowship dinner",
-        href: "/fellowship",
       },
     ],
   },
@@ -199,7 +196,7 @@ const directoryListData: DirectoryListSectionProps = {
     ctaHeading: "Don't see your campus?",
     ctaButton: {
       label: "Let us know your interest",
-      href: "/contact",
+      href: "/im-new",
     },
   },
 };
@@ -251,7 +248,7 @@ const ctaBannerData: CTABannerSectionProps = {
     body: "All are welcome. Come connect with us and get to know our community.",
     primaryButton: {
       label: "Plan your visit",
-      href: "/plan-your-visit",
+      href: "/im-new",
       visible: true,
     },
     secondaryButton: {
@@ -260,7 +257,7 @@ const ctaBannerData: CTABannerSectionProps = {
       visible: true,
     },
     backgroundImage: {
-      src: "/images/visit-us-bg.jpg",
+      src: "/images/home/visit-us.JPG",
       alt: "LA UBF community",
     },
   },

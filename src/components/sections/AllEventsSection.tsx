@@ -82,7 +82,7 @@ export default function AllEventsSection(props: {
     <SectionContainer settings={settings}>
       {/* Section heading */}
       <AnimateOnScroll animation="fade-up" enabled={animate}>
-        <h2 className={`text-h2 ${t.textPrimary} mb-8`}>{content.heading}</h2>
+        <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>{content.heading}</h2>
       </AnimateOnScroll>
 
       {/* Reusable filter toolbar */}

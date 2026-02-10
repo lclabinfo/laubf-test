@@ -82,7 +82,7 @@ function DirectoryMobileBlock({
 }) {
   return (
     <section className="px-4 pt-20 pb-8">
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-5">
         {/* Small image + heading */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative h-[140px] w-[240px] overflow-hidden rounded-xl">
@@ -98,7 +98,7 @@ function DirectoryMobileBlock({
         </div>
 
         {/* Centered campus list */}
-        <div className="flex flex-col items-center gap-2 w-full">
+        <div className="flex flex-col items-center gap-3 w-full">
           {items.map((item) => (
             <Link
               key={item.id}

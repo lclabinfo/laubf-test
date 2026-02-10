@@ -49,7 +49,7 @@ export default function HighlightCardsSection(props: {
         <div className="grid gap-5 lg:grid-cols-2">
           {/* Large card */}
           {events[0] && (
-            <AnimateOnScroll animation="fade-up" staggerIndex={0} enabled={animate}>
+            <AnimateOnScroll animation="fade-up" staggerIndex={0} enabled={animate} className="h-full">
               <EventCard data={events[0]} size="large" />
             </AnimateOnScroll>
           )}

@@ -63,9 +63,7 @@ export default function MinistryScheduleSection(props: {
             </div>
           )}
           <h2
-            className={`${
-              isScript ? "text-script-heading" : "text-h2"
-            } ${t.textPrimary} mb-4`}
+            className={`text-h2 ${t.textPrimary} mb-4`}
           >
             {content.heading}
           </h2>
@@ -90,7 +88,7 @@ export default function MinistryScheduleSection(props: {
             <div className="mb-6">
               <p className={`text-h4 ${t.textMuted} mb-1`}>Location</p>
               {content.address.map((line, i) => (
-                <p key={i} className={`text-body-1 font-medium ${t.textPrimary} leading-snug`}>
+                <p key={i} className={`text-h3 font-medium ${t.textPrimary} leading-snug`}>
                   {line}
                 </p>
               ))}

@@ -146,7 +146,7 @@ export default function AllMessagesSection(props: {
       {tab === "all" && (
         <>
           <AnimateOnScroll animation="fade-up" enabled={animate}>
-            <h2 className={`text-h2 ${t.textPrimary} mb-8`}>
+            <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>
               All Messages
             </h2>
           </AnimateOnScroll>

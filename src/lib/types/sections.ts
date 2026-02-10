@@ -142,6 +142,7 @@ export interface QuoteBannerSectionProps extends BaseSectionSettings {
 export interface ActionCardGridContent {
   heading: { line1: string; line2: string; line3: string };
   subheading: string;
+  ctaButton?: { label: string; href: string };
   cards: ImageCardData[];
 }
 

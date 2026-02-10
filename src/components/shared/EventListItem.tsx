@@ -19,6 +19,15 @@ function formatDay(date: Date): string {
   return date.getDate().toString();
 }
 
+function formatMobileDate(dateStart: Date, dateEnd?: Date): string {
+  const start = dateStart.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  if (dateEnd && dateStart.toDateString() !== dateEnd.toDateString()) {
+    const end = dateEnd.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    return `${start} – ${end}`;
+  }
+  return start;
+}
+
 export default function EventListItem({
   data,
   className,
@@ -31,12 +40,12 @@ export default function EventListItem({
     <a
       href={data.href ?? "#"}
       className={cn(
-        "group flex items-center gap-6 border-b border-border-light py-3 transition-colors hover:bg-white-1-5",
+        "group flex items-center gap-4 sm:gap-6 border-b border-border-light py-3 transition-colors hover:bg-white-1-5",
         className
       )}
     >
-      {/* Date column */}
-      <div className="flex items-center gap-0">
+      {/* Date column — hidden on mobile */}
+      <div className="hidden sm:flex items-center gap-0">
         <div className="flex w-12 flex-col items-center">
           <span className="text-pill text-black-3">
             {formatMonth(data.dateStart)}
@@ -61,9 +70,13 @@ export default function EventListItem({
       </div>
 
       {/* Info column */}
-      <div className="flex flex-1 flex-col gap-1">
+      <div className="flex flex-1 flex-col gap-1 min-w-0">
         <div className="flex items-center gap-2">
           <TypePill type={data.type} />
+          {/* Mobile inline date */}
+          <span className="sm:hidden text-body-3 text-black-3">
+            {formatMobileDate(data.dateStart, data.dateEnd ?? undefined)}
+          </span>
           <span className="text-body-3 text-black-3">{data.time}</span>
         </div>
         <h4 className="text-h4 font-medium text-black-1 line-clamp-1">
