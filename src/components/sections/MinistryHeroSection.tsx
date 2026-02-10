@@ -27,13 +27,14 @@ import CTAButton from "@/components/shared/CTAButton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import { IconExternalLink, IconMail, IconInstagram, IconFacebook } from "@/components/layout/icons";
+import { ExternalLink, Mail, Instagram, Facebook, Globe } from "lucide-react";
 
 function getSocialIcon(platform: string) {
   const p = platform.toLowerCase();
-  if (p === "email" || p === "mail") return IconMail;
-  if (p === "instagram") return IconInstagram;
-  if (p === "facebook") return IconFacebook;
+  if (p === "email" || p === "mail") return Mail;
+  if (p === "instagram") return Instagram;
+  if (p === "facebook") return Facebook;
+  if (p === "website") return Globe;
   return null;
 }
 
@@ -75,7 +76,7 @@ export default function MinistryHeroSection(props: {
                 variant={isSans ? "campus" : "primary"}
                 size="small"
                 theme="light"
-                icon={<IconExternalLink className="size-6" />}
+                icon={<ExternalLink className="size-6" />}
                 target={content.ctaButton.href.startsWith("http") ? "_blank" : undefined}
                 rel={content.ctaButton.href.startsWith("http") ? "noopener noreferrer" : undefined}
               />
@@ -90,13 +91,13 @@ export default function MinistryHeroSection(props: {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${isSans ? "w-[44px] h-[44px] rounded-lg bg-white-2 hover:bg-white-2-5" : "w-9 h-9 rounded-full border " + t.borderSubtle} flex items-center justify-center ${t.textMuted} transition-colors`}
+                      className={`${isSans ? "px-3 py-3 rounded-lg bg-white-2 hover:bg-white-2-5" : "w-9 h-9 rounded-full border " + t.borderSubtle} flex items-center justify-center ${t.textMuted} transition-colors`}
                       aria-label={link.platform}
                     >
                       {SocialIcon ? (
-                        <SocialIcon className="size-6" />
+                        <SocialIcon className="size-6 text-black-2"  />
                       ) : (
-                        <span className="text-body-3">{link.platform[0]?.toUpperCase()}</span>
+                        <span className="text-body-1">{link.platform[0]?.toUpperCase()}</span>
                       )}
                     </a>
                   );

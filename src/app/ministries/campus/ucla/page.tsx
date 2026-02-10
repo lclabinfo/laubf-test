@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:ucla@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/ucla.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/ucla.ubf" },
+      // { platform: "Email", href: "mailto:ucla@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/ucla.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/ucla.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "Jesus answered, \u201CEveryone who drinks this water will be thirsty again, but whoever drinks the water I give them will never thirst.\u201D (John 4:13-14)\n\nUCLA Living Water Club is our campus ministry at UCLA. We help students discover the living water of God\u2019s Word through Bible study, that they may come to know God personally and find clear purpose and meaning in life through our Lord Jesus Christ. We have group Bible studies at Ackerman Union.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Mondays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Ackerman Union",
-      },
-      {
-        day: "Wednesdays",
-        time: "5:00 PM - 6:00 PM",
-        location: "Ackerman Union",
-      },
+      // {
+      //   day: "Mondays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Ackerman Union",
+      // },
+      // {
+      //   day: "Wednesdays",
+      //   time: "5:00 PM - 6:00 PM",
+      //   location: "Ackerman Union",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/ucla", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://uclalivingwater.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://uclalivingwater.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

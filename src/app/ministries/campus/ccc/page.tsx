@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:ccc@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/ccc.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/ccc.ubf" },
+      // { platform: "Email", href: "mailto:ccc@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/ccc.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/ccc.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CThe stone the builders rejected has become the cornerstone.\u201D (Psalm 118:22)\n\nCerritos College Cornerstone Club is our campus ministry at Cerritos Community College. We help students build a strong foundation of faith through Bible study. Through studying the Bible together, students can come to know God personally, discover their true identity, and find clear purpose and meaning in life through our Lord Jesus Christ.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Tuesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Student Center",
-      },
-      {
-        day: "Thursdays",
-        time: "4:00 PM - 5:00 PM",
-        location: "Student Center",
-      },
+      // {
+      //   day: "Tuesdays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Student Center",
+      // },
+      // {
+      //   day: "Thursdays",
+      //   time: "4:00 PM - 5:00 PM",
+      //   location: "Student Center",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/ccc", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://ccccornerstone.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://ccccornerstone.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

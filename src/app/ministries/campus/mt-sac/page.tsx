@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:mtsac@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/mtsac.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/mtsac.ubf" },
+      // { platform: "Email", href: "mailto:mtsac@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/mtsac.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/mtsac.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CI am like an olive tree flourishing in the house of God; I trust in God\u2019s unfailing love for ever and ever.\u201D (Psalm 52:8)\n\nMt. SAC Olive Tree Club is our campus ministry at Mt. San Antonio College. We help students grow and flourish in their faith through Bible study, that through studying God\u2019s Word each student may come to know God personally and discover their clear purpose and meaning of life in our Lord Jesus Christ. We have group Bible studies at Mt. SAC campus.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Wednesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Building 9B",
-      },
-      {
-        day: "Fridays",
-        time: "3:00 PM - 4:00 PM",
-        location: "Building 9B",
-      },
+      // {
+      //   day: "Wednesdays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Building 9B",
+      // },
+      // {
+      //   day: "Fridays",
+      //   time: "3:00 PM - 4:00 PM",
+      //   location: "Building 9B",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/mt-sac", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://mtsacolivetree.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://mtsacolivetree.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

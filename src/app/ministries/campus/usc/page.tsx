@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:usc@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/usc.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/usc.ubf" },
+      // { platform: "Email", href: "mailto:usc@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/usc.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/usc.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CIf you have faith as small as a mustard seed, you can say to this mountain, \u2018Move from here to there,\u2019 and it will move.\u201D (Matthew 17:20)\n\nUSC Mustard Seed Club is our campus ministry at the University of Southern California. We try to help each student to study the Bible, that through Bible study he or she may come to know God personally, and also come to know himself or herself, and find the clear purpose and meaning of life in our Lord Jesus Christ. We have group Bible studies at USC campus.",
+    description: "coming soon",
   },
 };
 
@@ -75,23 +74,18 @@ const scheduleData: MinistryScheduleSectionProps = {
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
       {
-        day: "Tuesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Tommy Trojan Lounge",
-      },
-      {
-        day: "Thursdays",
-        time: "5:00 PM - 6:00 PM",
-        location: "Tommy Trojan Lounge",
+        day: "Mondays",
+        time: "1:00 PM - 2:00 PM",
+        location: "Leavey Library",
       },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/usc", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://uscmustardseed.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://uscmustardseed.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

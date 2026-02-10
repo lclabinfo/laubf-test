@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:csuf@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/csuf.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/csuf.ubf" },
+      // { platform: "Email", href: "mailto:csuf@laubf.org" },
+      { platform: "Instagram", href: "https://instagram.com/fullertonbiblefellowship" },
+      // { platform: "Facebook", href: "https://facebook.com/csuf.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CFor where two or three gather in my name, there am I with them.\u201D (Matthew 18:20)\n\nCSUF Berean Club is our campus ministry at Cal State Fullerton. We help students search the Scriptures and grow in faith through personal and group Bible studies. Our community is a place where you can explore the Bible, ask questions, and discover how God\u2019s Word applies to your life as a college student.",
+    description: "coming soon",
   },
 };
 
@@ -75,23 +74,18 @@ const scheduleData: MinistryScheduleSectionProps = {
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
       {
-        day: "Tuesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Titan Student Union",
-      },
-      {
         day: "Thursdays",
-        time: "4:00 PM - 5:00 PM",
-        location: "Titan Student Union",
+        time: "11:30 AM",
+        location: "A table in front of Health Center",
       },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/csuf", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://csufberean.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://csufberean.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

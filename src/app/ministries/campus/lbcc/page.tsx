@@ -41,9 +41,10 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:lbcc@laubf.org" },
+      { platform: "Email", href: "mailto:fishformen123@gmail.com" },
       { platform: "Instagram", href: "https://instagram.com/lbcc.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/lbcc.ubf" },
+      { platform: "Facebook", href: "https://www.facebook.com/lbcctruevine/" },
+      { platform: "Website", href: "https://lbcctruevine.org/" },
     ],
     heroImage: {
       src: "/images/ministries/lbcc/lbcc-truevineclub.jpg",
@@ -93,7 +94,7 @@ const scheduleData: MinistryScheduleSectionProps = {
       },
       {
         label: "Visit our website",
-        href: "https://lbcc.ubf.org",
+        href: "https://lbcctruevine.org/",
         variant: "secondary" as const,
       },
     ],

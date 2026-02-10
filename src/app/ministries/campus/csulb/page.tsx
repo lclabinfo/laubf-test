@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:csulb@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/csulb.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/csulb.ubf" },
+      // { platform: "Email", href: "mailto:csulb@laubf.org" },
+      { platform: "Instagram", href: "https://www.instagram.com/truevine_csulb/" },
+      // { platform: "Facebook", href: "https://facebook.com/csulb.ubf" },
     ],
     heroImage: {
       src: "/images/ministries/csulb/hero.JPG",
@@ -60,9 +60,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CYour word is a lamp for my feet, a light on my path.\u201D (Psalm 119:105)\n\nCSULB Navigators Club is our campus ministry club at Cal State Long Beach. We help students study the Bible and discover the light of God\u2019s word in their lives. Through regular Bible studies and fellowship, students can come to know God personally, find their purpose, and build a supportive Christian community on campus.",
-  },
+    description: "coming soon"  },
 };
 
 const scheduleData: MinistryScheduleSectionProps = {
@@ -77,13 +75,8 @@ const scheduleData: MinistryScheduleSectionProps = {
     scheduleEntries: [
       {
         day: "Wednesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "USU (University Student Union)",
-      },
-      {
-        day: "Fridays",
-        time: "5:00 PM - 6:00 PM",
-        location: "USU (University Student Union)",
+        time: "7:00 PM - 8:00 PM",
+        location: "Student Union 2nd fl",
       },
     ],
     buttons: [

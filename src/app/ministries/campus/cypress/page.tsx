@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:cypress@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/cypress.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/cypress.ubf" },
+      // { platform: "Email", href: "mailto:cypress@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/cypress.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/cypress.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CI, Jesus, have sent my angel to give you this testimony for the churches. I am the Root and the Offspring of David, and the bright Morning Star.\u201D (Revelation 22:16)\n\nCypress College Morning Star Club is our campus ministry at Cypress College. We help students find hope and direction through Bible study, guiding each person to know God personally and discover the clear purpose and meaning of life in our Lord Jesus Christ. We have group Bible studies at the Student Center.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Mondays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Student Center",
-      },
-      {
-        day: "Wednesdays",
-        time: "4:00 PM - 5:00 PM",
-        location: "Student Center",
-      },
+      // {
+      //   day: "Mondays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Student Center",
+      // },
+      // {
+      //   day: "Wednesdays",
+      //   time: "4:00 PM - 5:00 PM",
+      //   location: "Student Center",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/cypress", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://cypressmorningstar.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://cypressmorningstar.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

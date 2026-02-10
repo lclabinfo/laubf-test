@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:cpp@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/cpp.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/cpp.ubf" },
+      // { platform: "Email", href: "mailto:cpp@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/cpp.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/cpp.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,9 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CTrust in the Lord forever, for the Lord, the Lord himself, is the Rock eternal.\u201D (Isaiah 26:4)\n\nCal Poly Pomona Rock of Ages Club is our campus ministry club at Cal Poly Pomona. We help students build their lives on the solid rock of God\u2019s Word through Bible study. Through studying the Bible, students can come to know God personally, discover their true identity, and find clear purpose and meaning in life through our Lord Jesus Christ. We have group Bible studies at Cal Poly Pomona campus.",
-  },
+    description: "coming soon"  },
 };
 
 const scheduleData: MinistryScheduleSectionProps = {
@@ -74,24 +72,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Tuesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Bronco Student Center",
-      },
-      {
-        day: "Thursdays",
-        time: "5:00 PM - 6:00 PM",
-        location: "Bronco Student Center",
-      },
+      // {
+      //   day: "Tuesdays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Bronco Student Center",
+      // },
+      // {
+      //   day: "Thursdays",
+      //   time: "5:00 PM - 6:00 PM",
+      //   location: "Bronco Student Center",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/cal-poly-pomona", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://cpprockofages.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://cpprockofages.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

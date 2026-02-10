@@ -37,13 +37,13 @@ const heroData: MinistryHeroSectionProps = {
     headingStyle: "sans",
     ctaButton: {
       label: "Start Bible Study",
-      href: "https://startbiblestudy.org/golden-west",
+      href: "https://startbiblestudy.org/golden-cc",
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:gwc@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/gwc.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/gwc.ubf" },
+      // { platform: "Email", href: "mailto:gwc@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/gwc.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/gwc.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CTherefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!\u201D (2 Corinthians 5:17)\n\nGolden West New Creation Club is our campus ministry club at Golden West College. We try to help each student to study the Bible, that through Bible study he or she may come to know God personally, and also come to know himself or herself, and find the clear purpose and meaning of life in our Lord Jesus Christ. We help students experience new life in Christ through Bible study.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Tuesdays",
-        time: "11:00 AM - 12:00 PM",
-        location: "Student Center",
-      },
-      {
-        day: "Thursdays",
-        time: "3:00 PM - 4:00 PM",
-        location: "Student Center",
-      },
+      // {
+      //   day: "Tuesdays",
+      //   time: "11:00 AM - 12:00 PM",
+      //   location: "Student Center",
+      // },
+      // {
+      //   day: "Thursdays",
+      //   time: "3:00 PM - 4:00 PM",
+      //   location: "Student Center",
+      // },
     ],
     buttons: [
-      { label: "Start Bible Study", href: "https://startbiblestudy.org/golden-west", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://gwcnewcreation.org/",
-        variant: "secondary",
-      },
+      { label: "Start Bible Study", href: "https://startbiblestudy.org/golden-cc", variant: "primary" },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://gwcnewcreation.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };

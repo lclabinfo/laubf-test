@@ -41,9 +41,9 @@ const heroData: MinistryHeroSectionProps = {
       visible: true,
     },
     socialLinks: [
-      { platform: "Email", href: "mailto:csudh@laubf.org" },
-      { platform: "Instagram", href: "https://instagram.com/csudh.ubf" },
-      { platform: "Facebook", href: "https://facebook.com/csudh.ubf" },
+      // { platform: "Email", href: "mailto:csudh@laubf.org" },
+      // { platform: "Instagram", href: "https://instagram.com/csudh.ubf" },
+      // { platform: "Facebook", href: "https://facebook.com/csudh.ubf" },
     ],
     heroImage: {
       src: "",
@@ -59,8 +59,7 @@ const introData: MinistryIntroSectionProps = {
   content: {
     overline: "INTRODUCTION",
     heading: "About the Ministry",
-    description:
-      "\u201CThe Lord is my shepherd, I lack nothing.\u201D (Psalm 23:1)\n\nCSUDH Good Shepherd Club is our campus ministry at Cal State Dominguez Hills. We help students study the Bible, so that through Bible study each person may come to know God personally, discover their true identity, and find clear purpose and meaning of life in our Lord Jesus Christ. We have group Bible studies at the Loker Student Union.",
+    description: "coming soon",
   },
 };
 
@@ -74,24 +73,24 @@ const scheduleData: MinistryScheduleSectionProps = {
       "Whether you're a believer or just curious, you're welcome here.",
     scheduleLabel: "WHEN & WHERE",
     scheduleEntries: [
-      {
-        day: "Wednesdays",
-        time: "12:00 PM - 1:00 PM",
-        location: "Loker Student Union",
-      },
-      {
-        day: "Fridays",
-        time: "4:00 PM - 5:00 PM",
-        location: "Loker Student Union",
-      },
+      // {
+      //   day: "Wednesdays",
+      //   time: "12:00 PM - 1:00 PM",
+      //   location: "Loker Student Union",
+      // },
+      // {
+      //   day: "Fridays",
+      //   time: "4:00 PM - 5:00 PM",
+      //   location: "Loker Student Union",
+      // },
     ],
     buttons: [
       { label: "Start Bible Study", href: "https://startbiblestudy.org/csudh", variant: "primary" },
-      {
-        label: "Visit our website",
-        href: "https://csudhgoodshepherd.org/",
-        variant: "secondary",
-      },
+      // {
+      //   label: "Visit our website",
+      //   href: "https://csudhgoodshepherd.org/",
+      //   variant: "secondary",
+      // },
     ],
   },
 };
