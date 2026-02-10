@@ -1,21 +1,13 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { TODAYS_DAILY_BREAD } from "@/lib/mock-data/daily-bread";
+import DailyBreadDetailPage from "@/components/daily-bread/DailyBreadDetailPage";
 
 export const metadata: Metadata = {
   title: "Daily Bread",
-  description: "Daily devotional readings and reflections from UBF Daily Bread.",
+  description:
+    "Today\u2019s Daily Bread devotional \u2014 Bible passage, reflection, and prayer from LA UBF.",
 };
 
-export default function Page() {
-  return (
-    <main className="min-h-screen bg-white-1 pt-32 pb-20">
-      <div className="container-standard">
-        <h1 className="text-h2 text-black-1 mb-6">Daily Bread</h1>
-        <p className="text-body-1 text-black-3 mb-8">This page is coming soon.</p>
-        <Link href="/" className="text-body-1 text-brand-1 hover:underline">
-          &larr; Back to home
-        </Link>
-      </div>
-    </main>
-  );
+export default function DailyBreadPage() {
+  return <DailyBreadDetailPage entry={TODAYS_DAILY_BREAD} />;
 }

@@ -9,4 +9,5 @@ export interface DailyBread {
   bibleText: string; // HTML scripture text
   author: string;
   tags: string[];
+  audioUrl?: string;
 }
