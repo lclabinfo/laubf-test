@@ -46,7 +46,7 @@ const heroData: MinistryHeroSectionProps = {
       { platform: "Facebook", href: "https://facebook.com/csuf.ubf" },
     ],
     heroImage: {
-      src: "/pics-temp/csulb/IMG_1408.JPG",
+      src: "",
       alt: "CSUF campus ministry",
     },
   },

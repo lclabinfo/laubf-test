@@ -109,13 +109,15 @@ export default function MinistryHeroSection(props: {
       {content.heroImage && (
         <div className={cn("container-standard pb-0", animate && "animate-hero-fade-up-delayed")}>
           <div className={`relative w-full ${isSans ? "h-[320px] lg:h-[480px] rounded-xl" : "aspect-[16/7] rounded-2xl"} overflow-hidden bg-gradient-to-br from-white-2 to-white-1-5`}>
-            <Image
-              src={content.heroImage.src}
-              alt={content.heroImage.alt}
-              fill
-              className="object-cover"
-              style={{ objectPosition: content.heroImage?.objectPosition }}
-            />
+            {content.heroImage.src && (
+              <Image
+                src={content.heroImage.src}
+                alt={content.heroImage.alt}
+                fill
+                className="object-cover"
+                style={{ objectPosition: content.heroImage?.objectPosition }}
+              />
+            )}
           </div>
         </div>
       )}

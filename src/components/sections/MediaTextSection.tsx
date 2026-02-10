@@ -217,8 +217,8 @@ export default function MediaTextSection(props: {
 
   const vignetteGradient =
     settings.colorScheme === "dark"
-      ? "linear-gradient(rgb(13,13,13) 0%, rgba(13,13,13,0.25) 24.5%, rgba(13,13,13,0) 50%, rgba(13,13,13,0.25) 75%, rgb(13,13,13) 100%)"
-      : "linear-gradient(rgb(250,250,250) 0%, rgba(250,250,250,0.25) 24.5%, rgba(250,250,250,0) 50%, rgba(250,250,250,0.25) 75%, rgb(250,250,250) 100%)";
+      ? "linear-gradient(rgb(13,13,13) 5%, rgba(13,13,13,0.5) 25%, rgba(13,13,13,0) 50%, rgba(13,13,13,0.5) 75%, rgb(13,13,13) 97.5%)"
+      : "linear-gradient(rgb(250,250,250) 0%, rgba(250,250,250,0.5) 24.5%, rgba(250,250,250,0) 50%, rgba(250,250,250,0.5) 75%, rgb(250,250,250) 100%)";
 
   return (
     <SectionContainer settings={settings} className="py-0!" noContainer>

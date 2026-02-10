@@ -46,7 +46,7 @@ const heroData: MinistryHeroSectionProps = {
       { platform: "Facebook", href: "https://facebook.com/ccc.ubf" },
     ],
     heroImage: {
-      src: "/pics-temp/csulb/IMG_1408.JPG",
+      src: "",
       alt: "Cerritos College campus ministry",
     },
   },

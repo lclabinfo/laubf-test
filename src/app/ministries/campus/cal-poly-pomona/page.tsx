@@ -46,7 +46,7 @@ const heroData: MinistryHeroSectionProps = {
       { platform: "Facebook", href: "https://facebook.com/cpp.ubf" },
     ],
     heroImage: {
-      src: "/pics-temp/csulb/IMG_1408.JPG",
+      src: "",
       alt: "Cal Poly Pomona campus ministry",
     },
   },
