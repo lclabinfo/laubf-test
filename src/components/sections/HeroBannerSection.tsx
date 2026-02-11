@@ -183,18 +183,31 @@ function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mob
     );
     observer.observe(video);
 
-    // Fallback loop: some mobile browsers ignore the loop attribute,
-    // so restart manually when the video ends.
+    // Manual loop: we intentionally omit the `loop` attribute because
+    // when it's set the `ended` event never fires (per spec), so if the
+    // browser's native loop breaks for webm we'd have no fallback.
+    // Instead we loop manually via `ended` + a `timeupdate` safety net.
     const handleEnded = () => {
       video.currentTime = 0;
       video.play().catch(() => {});
     };
     video.addEventListener("ended", handleEnded);
 
+    // Safety net: if `ended` never fires (some mobile browsers stall at
+    // the very end), restart when we're within 0.3 s of the duration.
+    const handleTimeUpdate = () => {
+      if (video.duration && video.currentTime >= video.duration - 0.3) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      }
+    };
+    video.addEventListener("timeupdate", handleTimeUpdate);
+
     return () => {
       mql.removeEventListener("change", applySrc);
       observer.disconnect();
       video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
     };
   }, [desktopSrc, mobileSrc]);
 
@@ -203,7 +216,6 @@ function HeroVideo({ desktopSrc, mobileSrc, animate }: { desktopSrc: string; mob
       ref={videoRef}
       autoPlay
       muted
-      loop
       playsInline
       preload="auto"
       className={cn("absolute inset-0 h-full w-full object-cover", animate && "animate-hero-fade-in-slow")}
