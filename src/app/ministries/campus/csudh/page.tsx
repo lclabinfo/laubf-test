@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "csudh-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CSUDH",
     heading: "Meet Our Team",
@@ -107,19 +106,19 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Augustine Kim",
         role: "",
-        email: "augustinekimcpa@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Augustine Kim" },
       },
       {
         name: "Paul Lim",
         role: "",
-        email: "mosespaulhope@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05299.jpg", alt: "Paul Lim" },
       },
       {
         name: "Moses Han",
         role: "",
-        email: "moseshan1968@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC01195.jpg", alt: "Moses Han" },
       },
     ],

@@ -94,7 +94,6 @@ const teamData: MeetTeamSectionProps = {
   id: "csulb-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CSULB TRUE VINE CLUB",
     heading: "Meet Our Team",
@@ -102,13 +101,13 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Robert Fishman",
         role: "",
-        email: "rfishman2@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Robert Fishman" },
       },
       {
         name: "Jorge Lau",
         role: "",
-        email: "jorgea.laujr@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05299.jpg", alt: "Jorge Lau" },
       },
     ],

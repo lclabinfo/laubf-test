@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "golden-west-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "GOLDEN WEST COLLEGE",
     heading: "Meet Our Team",
@@ -107,7 +106,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Frank Holman",
         role: "",
-        email: "franklin.holman@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Frank Holman" },
       },
     ],

@@ -94,7 +94,6 @@ const teamData: MeetTeamSectionProps = {
   id: "usc-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "USC",
     heading: "Meet Our Team",
@@ -102,7 +101,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "David Park",
         role: "",
-        email: "davidwanp@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "David Park" },
       },
     ],

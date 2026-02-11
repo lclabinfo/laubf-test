@@ -126,16 +126,19 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Leader name",
         role: "",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Leader name" },
       },
       {
         name: "Leader name",
         role: "",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05299.jpg", alt: "Leader name" },
       },
       {
         name: "Leader name",
         role: "",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC01195.jpg", alt: "Leader name" },
       },
     ],

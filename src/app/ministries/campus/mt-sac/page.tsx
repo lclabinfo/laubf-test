@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "mt-sac-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "MT. SAC",
     heading: "Meet Our Team",
@@ -107,7 +106,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Jason Koch",
         role: "",
-        email: "jkoch7@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Jason Koch" },
       },
     ],

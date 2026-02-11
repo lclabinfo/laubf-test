@@ -105,7 +105,6 @@ const teamData: MeetTeamSectionProps = {
   id: "lbcc-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "LBCC TRUE VINE CLUB",
     heading: "Meet Our Team",
@@ -113,19 +112,19 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "William Larsen",
         role: "",
-        email: "williamjlarsen@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "William Larsen" },
       },
       {
         name: "Troy Segale",
         role: "",
-        email: "tsegale@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05299.jpg", alt: "Troy Segale" },
       },
       {
         name: "Joey Fishman",
         role: "",
-        email: "fishformen123@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC01195.jpg", alt: "Joey Fishman" },
       },
     ],

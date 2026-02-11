@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "ccc-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CERRITOS COLLEGE",
     heading: "Meet Our Team",
@@ -107,7 +106,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Paul Lim",
         role: "",
-        email: "lseu8@cs.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Paul Lim" },
       },
     ],

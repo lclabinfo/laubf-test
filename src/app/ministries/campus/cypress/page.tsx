@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "cypress-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CYPRESS COLLEGE",
     heading: "Meet Our Team",
@@ -107,7 +106,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "David Cho",
         role: "",
-        email: "ydchocpa14@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "David Cho" },
       },
     ],

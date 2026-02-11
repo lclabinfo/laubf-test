@@ -99,7 +99,6 @@ const teamData: MeetTeamSectionProps = {
   id: "ucla-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "UCLA",
     heading: "Meet Our Team",
@@ -107,7 +106,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Peace Oh",
         role: "",
-        email: "peacehavefaith@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Peace Oh" },
       },
     ],

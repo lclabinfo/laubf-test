@@ -495,7 +495,7 @@ export interface MinistryScheduleSectionProps extends BaseSectionSettings {
 export interface TeamMember {
   name: string;
   role: string;
-  email?: string;
+  bio?: string;
   image: SectionImage;
 }
 
@@ -507,8 +507,6 @@ export interface MeetTeamContent {
 
 export interface MeetTeamSectionProps extends BaseSectionSettings {
   content: MeetTeamContent;
-  /** When true, show only first name + last initial, hide email and photo (e.g. campus ministry pages). */
-  privacyMode?: boolean;
 }
 
 /* ---- Photo Gallery ---- */

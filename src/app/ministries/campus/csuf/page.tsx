@@ -94,7 +94,6 @@ const teamData: MeetTeamSectionProps = {
   id: "csuf-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CSUF",
     heading: "Meet Our Team",
@@ -102,13 +101,13 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Daniel Shim",
         role: "",
-        email: "dshim619@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Daniel Shim" },
       },
       {
         name: "Joseph Cho",
         role: "",
-        email: "joseph.whcho@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05299.jpg", alt: "Joseph Cho" },
       },
     ],

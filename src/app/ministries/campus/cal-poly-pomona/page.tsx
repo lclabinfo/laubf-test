@@ -98,7 +98,6 @@ const teamData: MeetTeamSectionProps = {
   id: "cal-poly-pomona-team",
   visible: true,
   colorScheme: "light",
-  privacyMode: true,
   content: {
     overline: "CAL POLY POMONA",
     heading: "Meet Our Team",
@@ -106,7 +105,7 @@ const teamData: MeetTeamSectionProps = {
       {
         name: "Andrew Cuevas",
         role: "",
-        email: "awcuevas@gmail.com",
+        bio: "Bio here",
         image: { src: "/pics-temp/DSC05222.jpg", alt: "Andrew Cuevas" },
       },
     ],
