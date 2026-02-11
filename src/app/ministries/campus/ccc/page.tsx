@@ -99,6 +99,7 @@ const teamData: MeetTeamSectionProps = {
   id: "ccc-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CERRITOS COLLEGE",
     heading: "Meet Our Team",

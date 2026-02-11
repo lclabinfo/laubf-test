@@ -98,6 +98,7 @@ const teamData: MeetTeamSectionProps = {
   id: "cal-poly-pomona-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CAL POLY POMONA",
     heading: "Meet Our Team",

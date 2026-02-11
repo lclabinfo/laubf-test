@@ -99,6 +99,7 @@ const teamData: MeetTeamSectionProps = {
   id: "golden-west-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "GOLDEN WEST COLLEGE",
     heading: "Meet Our Team",

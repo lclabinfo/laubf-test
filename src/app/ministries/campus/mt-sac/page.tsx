@@ -99,6 +99,7 @@ const teamData: MeetTeamSectionProps = {
   id: "mt-sac-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "MT. SAC",
     heading: "Meet Our Team",

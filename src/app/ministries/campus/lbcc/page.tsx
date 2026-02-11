@@ -105,6 +105,7 @@ const teamData: MeetTeamSectionProps = {
   id: "lbcc-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "LBCC TRUE VINE CLUB",
     heading: "Meet Our Team",

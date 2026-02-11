@@ -94,6 +94,7 @@ const teamData: MeetTeamSectionProps = {
   id: "csuf-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CSUF",
     heading: "Meet Our Team",

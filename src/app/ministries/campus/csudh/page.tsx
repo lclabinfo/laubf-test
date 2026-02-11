@@ -99,6 +99,7 @@ const teamData: MeetTeamSectionProps = {
   id: "csudh-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CSUDH",
     heading: "Meet Our Team",

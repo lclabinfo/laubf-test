@@ -507,6 +507,8 @@ export interface MeetTeamContent {
 
 export interface MeetTeamSectionProps extends BaseSectionSettings {
   content: MeetTeamContent;
+  /** When true, show only first name + last initial, hide email and photo (e.g. campus ministry pages). */
+  privacyMode?: boolean;
 }
 
 /* ---- Photo Gallery ---- */

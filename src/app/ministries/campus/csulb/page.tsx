@@ -94,6 +94,7 @@ const teamData: MeetTeamSectionProps = {
   id: "csulb-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CSULB TRUE VINE CLUB",
     heading: "Meet Our Team",

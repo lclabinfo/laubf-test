@@ -99,6 +99,7 @@ const teamData: MeetTeamSectionProps = {
   id: "cypress-team",
   visible: true,
   colorScheme: "light",
+  privacyMode: true,
   content: {
     overline: "CYPRESS COLLEGE",
     heading: "Meet Our Team",
