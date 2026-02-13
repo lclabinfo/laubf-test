@@ -46,7 +46,7 @@ export default function SpotlightMediaSection(props: {
           <span className={`text-body-1 ${t.textSecondary}`}>
             {content.sectionHeading}
           </span>
-          <h2 className={`text-h1 text-balance ${t.textPrimary}`}>
+          <h2 className={`text-h2 text-balance ${t.textPrimary}`}>
             {sermon.title}
           </h2>
         </AnimateOnScroll>

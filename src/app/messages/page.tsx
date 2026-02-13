@@ -42,7 +42,7 @@ const allMessagesData: AllMessagesSectionProps = {
   id: "all-messages",
   visible: true,
   colorScheme: "light",
-  paddingY: "compact",
+  paddingY: "none",
   content: {
     heading: "All Messages",
   },

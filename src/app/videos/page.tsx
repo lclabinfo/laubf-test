@@ -35,7 +35,7 @@ const allVideosData: AllVideosSectionProps = {
   id: "all-videos",
   visible: true,
   colorScheme: "light",
-  paddingY: "compact",
+  paddingY: "none",
   content: {
     heading: "All Videos",
   },

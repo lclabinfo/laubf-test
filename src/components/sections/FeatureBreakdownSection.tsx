@@ -33,7 +33,7 @@ export default function FeatureBreakdownSection(props: {
   const animate = settings.enableAnimations !== false;
 
   return (
-    <SectionContainer settings={settings} bgOverride="bg-brand-2" className="relative overflow-hidden">
+    <SectionContainer settings={settings} bgOverride="bg-brand-2" className="relative overflow-hidden !py-14 lg:!py-30">
       {/* Background watermark logo */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 opacity-[0.08] pointer-events-none">
         <Image
@@ -46,13 +46,13 @@ export default function FeatureBreakdownSection(props: {
         />
       </div>
 
-      <div className="relative z-10 flex flex-col gap-10 lg:gap-0">
+      <div className="relative z-10 flex flex-col gap-4 lg:gap-0 mx-auto w-[80%] sm:w-full">
         {/* Heading */}
         <AnimateOnScroll animation="fade-up" enabled={animate}>
-          <h2 className={`text-h2 ${t.textPrimary} mb-6 lg:mb-10`}>{content.heading}</h2>
+          <h2 className={`text-h2 ${t.textPrimary} mb-2 lg:mb-10`}>{content.heading}</h2>
         </AnimateOnScroll>
 
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-16">
           {/* Left column — stacked acronym words with first-letter highlight */}
           <div className="flex flex-col gap-1 lg:w-[35%] shrink-0">
             {content.acronymLines.map((line, i) => (

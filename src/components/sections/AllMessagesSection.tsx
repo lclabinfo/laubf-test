@@ -129,7 +129,7 @@ export default function AllMessagesSection(props: {
   ];
 
   return (
-    <SectionContainer settings={settings}>
+    <SectionContainer settings={settings} className="pt-0 py-30">
       {/* ── Toolbar with tabs + filters ── */}
       <FilterToolbar
         tabs={{
@@ -208,6 +208,7 @@ export default function AllMessagesSection(props: {
           setFilters({});
           setDisplayCount(INITIAL_COUNT);
         } : undefined}
+        className="mb-8"
       />
 
       {/* ── All Messages Tab ── */}

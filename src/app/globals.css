@@ -330,35 +330,15 @@
 
   /* Container variants */
   .container-standard {
-    width: 100%;
+    width: 85%;
     max-width: 1200px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-  @media (width >= 30rem) {
-    .container-standard { padding-inline: 1.5rem; }
-  }
-  @media (width >= 48rem) {
-    .container-standard { padding-inline: 2rem; }
-  }
-  @media (width >= 80rem) {
-    .container-standard { padding-inline: 0; }
   }
 
   .container-narrow {
-    width: 100%;
+    width: 85%;
     max-width: 960px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
-  }
-  @media (width >= 30rem) {
-    .container-narrow { padding-inline: 1.5rem; }
-  }
-  @media (width >= 48rem) {
-    .container-narrow { padding-inline: 2rem; }
-  }
-  @media (width >= 80rem) {
-    .container-narrow { padding-inline: 0; }
   }
 
   .container-nav {
