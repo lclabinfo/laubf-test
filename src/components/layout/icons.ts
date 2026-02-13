@@ -245,6 +245,18 @@ export const IconUser = multiIcon([
   createElement("circle", { key: "2", cx: "12", cy: "7", r: "4" }),
 ]);
 
+/** Arrow pointing down - for sort descending */
+export const IconArrowDown = icon("M12 5v14M19 12l-7 7-7-7");
+
+/** Arrow pointing up - for sort ascending */
+export const IconArrowUp = icon("M12 19V5M5 12l7-7 7 7");
+
+/** X/close icon - for clear all */
+export const IconX = multiIcon([
+  createElement("line", { key: "1", x1: "18", y1: "6", x2: "6", y2: "18" }),
+  createElement("line", { key: "2", x1: "6", y1: "6", x2: "18", y2: "18" }),
+]);
+
 /** Link/chain icon - for online meeting button */
 export const IconLink = multiIcon([
   createElement("path", {

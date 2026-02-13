@@ -60,7 +60,7 @@ const mediaTextData: MediaTextSectionProps = {
   content: {
     overline: "WHO WE ARE",
     heading: "Christian Ministry for College Students",
-    body: "UBF is an international, non-denominational evangelical church. We serve college students from diverse backgrounds, helping them to grow in faith, build community, and find purpose through the Word of God.",
+    body: "LA UBF (Los Angeles University Bible Fellowship) is an international, non-denominational evangelical church. We serve college students from diverse backgrounds, helping them to grow in faith, build community, and find purpose through the Word of God.",
     button: { label: "More about us", href: "/about", visible: true },
     images: [
       { src: "/images/home/rotatingwheel/bible-study.png", alt: "Bible study" },

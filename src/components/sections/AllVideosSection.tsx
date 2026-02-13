@@ -17,7 +17,6 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
-import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import FilterToolbar from "@/components/shared/FilterToolbar";
 import VideoCard from "@/components/shared/VideoCard";
 import VideoModal from "@/components/shared/VideoModal";
@@ -35,13 +34,14 @@ export default function AllVideosSection(props: {
 }) {
   const { settings, videos } = props;
   const t = themeTokens[settings.colorScheme];
-  const animate = settings.enableAnimations !== false;
 
   /* ── State ── */
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<VideoFilters>({});
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [sortField, setSortField] = useState("date");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   /* ── Derived data ── */
   const categoryList = useMemo(() => deriveCategories(videos), [videos]);
@@ -51,11 +51,19 @@ export default function AllVideosSection(props: {
     [categoryList],
   );
 
-  /* ── Filtering ── */
-  const filteredVideos = useMemo(
-    () => filterVideos(videos, { ...filters, search: search || undefined }),
-    [videos, filters, search],
-  );
+  /* ── Filtering & Sorting ── */
+  const filteredVideos = useMemo(() => {
+    const filtered = filterVideos(videos, { ...filters, search: search || undefined });
+    return [...filtered].sort((a, b) => {
+      let cmp = 0;
+      if (sortField === "date") {
+        cmp = a.datePublished.localeCompare(b.datePublished);
+      } else {
+        cmp = a.title.localeCompare(b.title);
+      }
+      return sortDirection === "asc" ? cmp : -cmp;
+    });
+  }, [videos, filters, search, sortField, sortDirection]);
 
   const visibleVideos = filteredVideos.slice(0, displayCount);
   const hasMore = displayCount < filteredVideos.length;
@@ -70,12 +78,7 @@ export default function AllVideosSection(props: {
 
   return (
     <SectionContainer settings={settings}>
-      <AnimateOnScroll animation="fade-up" enabled={animate}>
-        <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>All Videos</h2>
-      </AnimateOnScroll>
-
       <FilterToolbar
-        disclosure
         search={{
           value: search,
           onChange: (v) => {
@@ -105,17 +108,24 @@ export default function AllVideosSection(props: {
           onFromChange: (v) => updateFilter("dateFrom", v || undefined),
           onToChange: (v) => updateFilter("dateTo", v || undefined),
         }}
+        sort={{
+          options: [
+            { value: "date", label: "Date" },
+            { value: "title", label: "Title" },
+          ],
+          active: sortField,
+          direction: sortDirection,
+          onChange: (value, dir) => {
+            setSortField(value);
+            setSortDirection(dir);
+          },
+        }}
         onReset={() => {
           setSearch("");
           setFilters({});
           setDisplayCount(INITIAL_COUNT);
         }}
       />
-
-      {/* Results count */}
-      <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
-        Showing {visibleVideos.length} of {filteredVideos.length} videos
-      </p>
 
       {/* Videos grid */}
       {filteredVideos.length === 0 ? (

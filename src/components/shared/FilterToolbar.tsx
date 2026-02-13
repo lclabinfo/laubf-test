@@ -1,25 +1,22 @@
 /*
- * FilterToolbar — Reusable filter/search toolbar component
+ * FilterToolbar — Redesigned flat, minimal filter/search toolbar
  *
- * A composable toolbar with:
- * - View mode toggle (optional)
- * - Search input (optional)
- * - Dropdown filters with labels (configurable)
- * - Date range pickers (optional)
- * - Progressive disclosure mode (filters hidden behind a button)
- *
- * Designed to be used across different pages (events, messages, photos, etc.)
- * with different data types and filter fields while maintaining consistent UI.
+ * Row 1 (main bar): Tabs (left) | Filter icon button | Sort dropdown | Search | Divider | View toggle (right)
+ * Row 2 (filter panel): Collapsible row of styled dropdown buttons + date range + clear all
  */
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import { cn } from "@/lib/utils";
+import { X } from "lucide-react";
 import {
   IconSearch,
   IconChevronDown,
   IconCalendar,
   IconFilter,
+  IconArrowDown,
+  IconArrowUp,
+  IconX,
 } from "@/components/layout/icons";
 
 /* ── Types ── */
@@ -36,6 +33,8 @@ export interface FilterDropdownConfig {
   value: string;
   options: { value: string; label: string }[];
   onChange: (value: string) => void;
+  /** Whether to show a search input inside the dropdown. Defaults to true. */
+  searchable?: boolean;
 }
 
 export interface DateRangeConfig {
@@ -47,52 +46,79 @@ export interface DateRangeConfig {
   onToChange: (value: string) => void;
 }
 
+export interface SortOption {
+  value: string;
+  label: string;
+}
+
+export interface TabConfig {
+  key: string;
+  label: string;
+}
+
 export interface FilterToolbarProps {
-  /** View mode toggle buttons (e.g. Card, List, Calendar) */
+  /** Flat underline-style tab navigation rendered on the left side of the bar */
+  tabs?: {
+    options: TabConfig[];
+    active: string;
+    onChange: (key: string) => void;
+  };
   viewModes?: {
     options: ViewModeOption[];
     active: string;
     onChange: (value: string) => void;
   };
-  /** Search input configuration */
   search?: {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
   };
-  /** Dropdown filter configurations */
   filters?: FilterDropdownConfig[];
-  /** Date range picker configuration */
   dateRange?: DateRangeConfig;
-  /** Callback to reset all filters (shows "Clear all" button when active) */
+  sort?: {
+    options: SortOption[];
+    active: string;
+    direction: "asc" | "desc";
+    onChange: (value: string, dir: "asc" | "desc") => void;
+  };
   onReset?: () => void;
-  /** Additional class name for the outer container */
   className?: string;
-  /** Whether the toolbar sticks to the top on scroll */
   sticky?: boolean;
-  /** Top offset for sticky positioning (e.g. "76px" for navbar) */
   stickyTop?: string;
-  /** When true, filters are hidden behind a "Filter" button (progressive disclosure) */
+  /** @deprecated No longer used in new design — filter panel is always toggle-based */
   disclosure?: boolean;
 }
 
 /* ── Component ── */
 
 export default function FilterToolbar({
+  tabs,
   viewModes,
   search,
   filters,
   dateRange,
+  sort,
   onReset,
   className,
   sticky = true,
-  stickyTop = "76px",
-  disclosure = false,
+  stickyTop = "64px",
 }: FilterToolbarProps) {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  // Track when the open animation finishes so we can remove overflow:hidden
+  // and allow dropdowns inside the filter panel to overflow freely
+  const [filterAnimDone, setFilterAnimDone] = useState(false);
 
-  const hasFiltersRow =
-    (filters && filters.length > 0) || dateRange;
+  useEffect(() => {
+    if (filtersOpen) {
+      const timer = setTimeout(() => setFilterAnimDone(true), 310);
+      return () => clearTimeout(timer);
+    } else {
+      setFilterAnimDone(false);
+    }
+  }, [filtersOpen]);
+
+  const hasFiltersRow = (filters && filters.length > 0) || dateRange;
 
   // Count active filters for the badge
   const activeFilterCount = (() => {
@@ -109,174 +135,464 @@ export default function FilterToolbar({
     return count;
   })();
 
-  // Whether any filter (including search) is active
-  const hasActiveFilters = activeFilterCount > 0 || (search && search.value.length > 0);
-
-  const showFiltersRow = disclosure ? filtersOpen : true;
+  const hasActiveFilters =
+    activeFilterCount > 0 || (search && search.value.length > 0);
 
   return (
     <div
       className={cn(
-        "relative z-30 pt-2 lg:pt-4 pb-2 lg:pb-0",
+        "relative z-30",
         sticky && "sticky",
         className,
       )}
       style={sticky ? { top: stickyTop } : undefined}
     >
-      {/* Solid background — extends above to cover the gap behind navbar */}
-      <div className="absolute inset-x-0 -top-2 lg:-top-4 -bottom-2 lg:bottom-0 bg-white-1 rounded-b-[20px]" />
-      <div className="relative rounded-[20px] border border-white-2-5 bg-white-0 overflow-hidden shadow-[0px_8px_24px_rgba(0,0,0,0.06)]">
-        {/* Row 1: View toggle + Search + Filter button (disclosure mode) */}
-        {(viewModes || search || (disclosure && hasFiltersRow)) && (
-          <div
-            className={cn(
-              "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4",
-              !disclosure && hasFiltersRow && "border-b border-white-2/50",
-              disclosure && filtersOpen && hasFiltersRow && "border-b border-white-2/50",
-            )}
-          >
-            {/* Search — left side */}
-            {search && (
-              <div className="relative w-full sm:w-[400px]">
-                <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-black-3" />
-                <input
-                  type="text"
-                  placeholder={search.placeholder ?? "Search..."}
-                  value={search.value}
-                  onChange={(e) => search.onChange(e.target.value)}
-                  className="w-full rounded-full border border-white-2 bg-white-1-5 py-3 pl-10 pr-4 text-[14px] text-black-1 placeholder:text-black-3 outline-none transition-colors focus:border-black-2"
-                />
-              </div>
-            )}
+      {/* Row 1: Main bar — own positioning context so bg stays within this row */}
+      <div className="relative">
+        {/* Full-width background for top bar only */}
+        <div
+          className="absolute top-0 bottom-0 bg-white-1 border-b border-white-2-5 shadow-[0px_4px_12px_rgba(0,0,0,0.04)]"
+          style={{ left: "50%", marginLeft: "-50vw", width: "100vw" }}
+        />
+        <div className="relative flex justify-between gap-4 h-[59px]">
+          {/* Left: Tab navigation — buttons stretch full height */}
+          {tabs ? (
+            <TabBar tabs={tabs} />
+          ) : (
+            <div />
+          )}
 
-            {/* Right side — filter toggle + clear + view modes */}
-            <div className="flex items-center gap-3">
-              {/* Filter toggle button (disclosure mode only) */}
-              {disclosure && hasFiltersRow && (
-                <button
-                  onClick={() => setFiltersOpen((prev) => !prev)}
+          {/* Right: Filter controls — vertically centered with own padding */}
+          <div className="flex items-center gap-4 py-2.5">
+            <div className="flex items-center gap-2">
+              {/* Filter icon button */}
+              {hasFiltersRow && (
+                <FilterIconButton
+                active={filtersOpen}
+                count={activeFilterCount}
+                onClick={() => setFiltersOpen((prev) => !prev)}
+              />
+              )}
+
+              {/* Sort dropdown */}
+              {sort && <SortDropdown sort={sort} />}
+
+              {/* Search input */}
+              {search && (
+                <div
                   className={cn(
-                    "flex items-center gap-1.5 rounded-[10px] border px-4 py-2 text-[14px] font-medium transition-colors",
-                    filtersOpen
-                      ? "border-black-2 bg-black-1 text-white-0"
-                      : "border-white-2 bg-white-0 text-black-2 hover:border-black-2",
+                    "relative transition-all duration-300 ease-out",
+                    searchFocused || search.value ? "w-[280px]" : "w-[240px]",
                   )}
                 >
-                  <IconFilter className="size-4" />
-                  <span>Filter</span>
-                  {activeFilterCount > 0 && (
-                    <span className="ml-1 flex size-5 items-center justify-center rounded-full bg-accent-blue text-[11px] font-semibold text-white-0">
-                      {activeFilterCount}
-                    </span>
-                  )}
-                </button>
-              )}
-
-              {/* Clear all filters button */}
-              {onReset && hasActiveFilters && (
-                <button
-                  onClick={() => {
-                    onReset();
-                    setFiltersOpen(false);
-                  }}
-                  className="flex items-center gap-1.5 rounded-[10px] border border-white-2 px-4 py-2 text-[14px] font-medium text-black-3 transition-colors hover:border-black-2 hover:text-black-1"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-3.5">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  <span>Clear all</span>
-                </button>
-              )}
-
-              {/* View toggle */}
-              {viewModes && (
-                <div className="flex rounded-[14px] bg-white-1-5 p-1">
-                  {viewModes.options.map((mode) => (
+                  <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-black-3" />
+                  <input
+                    type="text"
+                    placeholder={search.placeholder ?? "Search..."}
+                    value={search.value}
+                    onChange={(e) => search.onChange(e.target.value)}
+                    onFocus={() => setSearchFocused(true)}
+                    onBlur={() => setSearchFocused(false)}
+                    className={cn(
+                      "w-full rounded-[14px] border bg-white-0 py-2 pl-9 text-[14px] text-black-1 placeholder:text-black-3 outline-none ring-0 focus:ring-0 focus:outline-none transition-colors",
+                      search.value ? "pr-9" : "pr-3",
+                      searchFocused
+                        ? "border-black-3/40"
+                        : "border-white-2",
+                    )}
+                  />
+                  {search.value && (
                     <button
-                      key={mode.value}
-                      onClick={() => viewModes.onChange(mode.value)}
-                      className={cn(
-                        "flex items-center gap-1.5 rounded-[10px] px-4 py-2 text-[14px] font-medium transition-colors",
-                        viewModes.active === mode.value
-                          ? "bg-white-0 text-black-1 shadow-sm"
-                          : "text-black-3 hover:text-black-2",
-                      )}
+                      onClick={() => search.onChange("")}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-black-3 hover:text-black-1 transition-colors"
                     >
-                      {mode.icon}
-                      <span className="hidden sm:inline">{mode.label}</span>
+                      <X className="size-4" />
                     </button>
-                  ))}
+                  )}
                 </div>
               )}
             </div>
-          </div>
-        )}
-
-        {/* Row 2: Filters + Date range */}
-        {hasFiltersRow && showFiltersRow && (
-          <div
-            className={cn(
-              "flex flex-wrap gap-4 p-4",
-              disclosure && "animate-in fade-in slide-in-from-top-2 duration-200",
+            
+            {/* Vertical divider */}
+            {viewModes && (
+              <div className="w-[2px] h-[29px] bg-white-2 shrink-0" />
             )}
-          >
-            {/* Dropdown filters */}
-            {filters?.map((filter) => (
-              <FilterDropdown key={filter.id} config={filter} />
-            ))}
 
-            {/* Date range */}
-            {dateRange && (
-              <>
-                <DatePickerField
-                  label={dateRange.fromLabel ?? "From"}
-                  value={dateRange.fromValue}
-                  onChange={dateRange.onFromChange}
-                />
-                <DatePickerField
-                  label={dateRange.toLabel ?? "To"}
-                  value={dateRange.toValue}
-                  onChange={dateRange.onToChange}
-                />
-              </>
+            {/* View mode toggle */}
+            {viewModes && (
+              <div className="flex rounded-[10px] bg-white-1-5 p-1">
+                {viewModes.options.map((mode) => (
+                  <button
+                    key={mode.value}
+                    onClick={() => viewModes.onChange(mode.value)}
+                    title={mode.label}
+                    className={cn(
+                      "flex items-center justify-center rounded-[8px] p-2 transition-colors",
+                      viewModes.active === mode.value
+                        ? "bg-white-0 text-black-1 shadow-sm"
+                        : "text-black-3 hover:text-black-2",
+                    )}
+                  >
+                    {mode.icon}
+                  </button>
+                ))}
+              </div>
             )}
           </div>
-        )}
+        </div>
       </div>
+
+      {/* Row 2: Filter panel (collapsible) — grid transition for smooth height animation */}
+      {hasFiltersRow && (
+        <div
+          className="grid transition-[grid-template-rows] duration-300 ease-out"
+          style={{ gridTemplateRows: filtersOpen ? "1fr" : "0fr" }}
+        >
+          <div className={filterAnimDone ? "overflow-visible" : "overflow-hidden"}>
+            <div className="relative">
+              {/* Full-width background for filter panel */}
+              <div
+                className={cn(
+                  "absolute inset-y-0 bg-white-1 transition-opacity duration-300",
+                  filtersOpen ? "opacity-100 border-b border-white-2-5" : "opacity-0",
+                )}
+                style={{ left: "50%", marginLeft: "-50vw", width: "100vw" }}
+              />
+              <div className="relative flex flex-wrap items-center gap-3 py-3 px-2">
+                {/* Dropdown filter buttons */}
+                {filters?.map((filter) => (
+                  <FilterDropdownButton key={filter.id} config={filter} />
+                ))}
+
+                {/* Date range buttons */}
+                {dateRange && (
+                  <>
+                    <DateFilterButton
+                      label={dateRange.fromLabel ?? "Date from"}
+                      value={dateRange.fromValue}
+                      onChange={dateRange.onFromChange}
+                    />
+                    <DateFilterButton
+                      label={dateRange.toLabel ?? "Date to"}
+                      value={dateRange.toValue}
+                      onChange={dateRange.onToChange}
+                    />
+                  </>
+                )}
+
+                {/* Clear all */}
+                {onReset && hasActiveFilters && (
+                  <button
+                    onClick={() => {
+                      onReset();
+                      setFiltersOpen(false);
+                    }}
+                    className="ml-auto flex items-center gap-1.5 rounded-[10px] px-4 py-2.5 text-[14px] font-medium text-black-3 transition-colors hover:text-black-1"
+                  >
+                    <IconX className="size-3.5" />
+                    <span>Clear all ({activeFilterCount})</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
 /* ── Sub-components ── */
 
-function FilterDropdown({ config }: { config: FilterDropdownConfig }) {
-  const selectId = `filter-${config.id}`;
+/** Tab bar with animated sliding underline */
+function TabBar({
+  tabs,
+}: {
+  tabs: NonNullable<FilterToolbarProps["tabs"]>;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
+  const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+
+  const updateIndicator = useCallback(() => {
+    const activeEl = tabRefs.current.get(tabs.active);
+    const container = containerRef.current;
+    if (activeEl && container) {
+      const containerRect = container.getBoundingClientRect();
+      const tabRect = activeEl.getBoundingClientRect();
+      setIndicator({
+        left: tabRect.left - containerRect.left + (tabRect.width - 56) / 2,
+        width: 56,
+      });
+    }
+  }, [tabs.active]);
+
+  useLayoutEffect(() => {
+    updateIndicator();
+  }, [updateIndicator]);
+
+  useEffect(() => {
+    window.addEventListener("resize", updateIndicator);
+    return () => window.removeEventListener("resize", updateIndicator);
+  }, [updateIndicator]);
+
   return (
-    <div className="flex flex-col gap-1 min-w-[180px]">
-      <label htmlFor={selectId} className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
-        {config.label}
-      </label>
-      <div className="relative">
-        <select
-          id={selectId}
-          value={config.value}
-          onChange={(e) => config.onChange(e.target.value)}
-          className="w-full appearance-none rounded-[10px] border border-white-2 bg-white-0 py-2.5 pl-3.5 pr-10 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
+    <div ref={containerRef} className="relative flex h-full">
+      {tabs.options.map((tab) => (
+        <button
+          key={tab.key}
+          ref={(el) => {
+            if (el) tabRefs.current.set(tab.key, el);
+          }}
+          onClick={() => {
+            tabs.onChange(tab.key);
+            window.scrollTo({ top: 0 });
+          }}
+          className={cn(
+            "relative flex items-end px-3 pb-4 text-[16px] font-medium transition-colors",
+            tabs.active === tab.key
+              ? "text-black-1"
+              : "text-black-3 hover:text-black-2",
+          )}
         >
-          {config.options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
-        <IconChevronDown className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 size-4 text-black-3" />
-      </div>
+          {tab.label}
+        </button>
+      ))}
+      {/* Animated underline */}
+      <span
+        className="absolute bottom-0 h-[3px] bg-black-1 rounded-full transition-all duration-300 ease-out"
+        style={{ left: indicator.left, width: indicator.width }}
+      />
     </div>
   );
 }
 
-function DatePickerField({
+/** Filter icon button — funnel icon with optional badge count */
+function FilterIconButton({
+  active,
+  count,
+  onClick,
+}: {
+  active: boolean;
+  count: number;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "relative flex items-center justify-center rounded-[10px] border h-[40px] transition-colors",
+        count > 0 ? "w-[72px]" : "w-[44px]",
+        active
+          ? "border-black-2 bg-black-1 text-white-0"
+          : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+      )}
+    >
+      <IconFilter className="size-4" />
+      {count > 0 && (
+        <span className="ml-1.5 flex items-center justify-center min-w-[20px] h-[20px] rounded-full bg-accent-blue text-[11px] font-semibold text-white-0 px-1">
+          {count}
+        </span>
+      )}
+    </button>
+  );
+}
+
+/** Sort dropdown — arrow icon + field label + chevron, custom dropdown */
+function SortDropdown({
+  sort,
+}: {
+  sort: NonNullable<FilterToolbarProps["sort"]>;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  const activeLabel =
+    sort.options.find((o) => o.value === sort.active)?.label ?? "Sort";
+
+  function handleOptionClick(value: string) {
+    if (value === sort.active) {
+      sort.onChange(value, sort.direction === "asc" ? "desc" : "asc");
+    } else {
+      sort.onChange(value, "desc");
+    }
+    setOpen(false);
+  }
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className={cn(
+          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-3 text-[14px] font-medium transition-colors",
+          open
+            ? "border-black-3/40 bg-white-0 text-black-1"
+            : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+        )}
+      >
+        {sort.direction === "asc" ? (
+          <IconArrowUp className="size-4" />
+        ) : (
+          <IconArrowDown className="size-4" />
+        )}
+        <span>{activeLabel}</span>
+        <IconChevronDown
+          className={cn(
+            "size-3.5 transition-transform",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute right-0 top-full mt-1 z-50 min-w-[180px] rounded-[12px] border border-white-2 bg-white-0 py-1 shadow-[0px_8px_24px_rgba(0,0,0,0.1)]">
+          {sort.options.map((option) => (
+            <button
+              key={option.value}
+              onClick={() => handleOptionClick(option.value)}
+              className={cn(
+                "flex items-center justify-between w-full px-4 py-2.5 text-[14px] transition-colors hover:bg-white-1-5",
+                sort.active === option.value
+                  ? "text-black-1 font-medium"
+                  : "text-black-3",
+              )}
+            >
+              <span>{option.label}</span>
+              {sort.active === option.value && (
+                <span className="text-[12px] text-black-3">
+                  {sort.direction === "asc" ? "A-Z" : "Z-A"}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Styled filter dropdown button with optional search — replaces native <select> */
+function FilterDropdownButton({ config }: { config: FilterDropdownConfig }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const searchable = config.searchable !== false;
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  useEffect(() => {
+    if (open && searchable) {
+      // Small delay to ensure the dropdown is rendered
+      requestAnimationFrame(() => searchInputRef.current?.focus());
+    }
+  }, [open, searchable]);
+
+  const activeLabel =
+    config.options.find((o) => o.value === config.value)?.label ?? config.label;
+  const isActive = config.value && config.value !== "all";
+
+  const filteredOptions = searchable && query
+    ? config.options.filter((o) =>
+        o.label.toLowerCase().includes(query.toLowerCase()),
+      )
+    : config.options;
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((prev) => !prev)}
+        className={cn(
+          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-4 text-[14px] transition-colors",
+          isActive
+            ? "border-black-2 bg-black-1 text-white-0"
+            : open
+              ? "border-black-3/40 bg-white-0 text-black-1"
+              : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+        )}
+      >
+        <span>{activeLabel}</span>
+        <IconChevronDown
+          className={cn(
+            "size-3.5 transition-transform",
+            open && "rotate-180",
+          )}
+        />
+      </button>
+
+      {open && (
+        <div className="absolute left-0 top-full mt-1 z-50 min-w-[220px] max-h-[320px] rounded-[12px] border border-white-2 bg-white-0 shadow-[0px_8px_24px_rgba(0,0,0,0.1)] overflow-hidden">
+          {/* Search input inside dropdown */}
+          {searchable && (
+            <div className="p-2 border-b border-white-2/50">
+              <div className="relative">
+                <IconSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-black-3" />
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  placeholder="Search..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="w-full rounded-[8px] border border-white-2 bg-white-1-5 py-1.5 pl-8 pr-3 text-[13px] text-black-1 placeholder:text-black-3 outline-none ring-0 focus:ring-0 focus:outline-none transition-colors focus:border-black-3/40"
+                />
+              </div>
+            </div>
+          )}
+          <div className="max-h-[260px] overflow-y-auto py-1">
+            {filteredOptions.length === 0 ? (
+              <p className="px-4 py-2.5 text-[13px] text-black-3">No results</p>
+            ) : (
+              filteredOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => {
+                    config.onChange(option.value);
+                    setOpen(false);
+                    setQuery("");
+                  }}
+                  className={cn(
+                    "flex items-center w-full px-4 py-2.5 text-[14px] transition-colors hover:bg-white-1-5 text-left",
+                    config.value === option.value
+                      ? "text-black-1 font-medium"
+                      : "text-black-3",
+                  )}
+                >
+                  {option.label}
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Date filter button — calendar icon + label, opens native date input */
+function DateFilterButton({
   label,
   value,
   onChange,
@@ -285,23 +601,40 @@ function DatePickerField({
   value: string;
   onChange: (value: string) => void;
 }) {
-  const inputId = `date-${label.toLowerCase().replace(/\s+/g, "-")}`;
+  const inputRef = useRef<HTMLInputElement>(null);
+  const isActive = !!value;
+
+  const displayLabel = value
+    ? new Date(value + "T00:00:00").toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : label;
+
   return (
-    <div className="flex flex-col gap-1 min-w-[180px]">
-      <label htmlFor={inputId} className="text-[11px] font-medium text-black-3 uppercase tracking-wider pl-1">
-        {label}
-      </label>
-      <div className="relative">
-        <IconCalendar className="absolute left-3.5 top-1/2 -translate-y-1/2 size-4 text-black-3 pointer-events-none" />
-        <input
-          id={inputId}
-          type="date"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="w-full rounded-[10px] border border-white-2 bg-white-0 py-2.5 pl-10 pr-4 text-[14px] text-black-2 outline-none transition-colors focus:border-black-2 cursor-pointer"
-          placeholder="Pick a date"
-        />
-      </div>
+    <div className="relative">
+      <button
+        onClick={() => inputRef.current?.showPicker()}
+        className={cn(
+          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-4 text-[14px] transition-colors",
+          isActive
+            ? "border-black-2 bg-black-1 text-white-0"
+            : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+        )}
+      >
+        <IconCalendar className="size-4" />
+        <span>{displayLabel}</span>
+        <IconChevronDown className="size-3.5" />
+      </button>
+      <input
+        ref={inputRef}
+        type="date"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="absolute inset-0 opacity-0 pointer-events-none"
+        tabIndex={-1}
+      />
     </div>
   );
 }

@@ -81,7 +81,7 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
         )}
         <div
           className={cn(
-            "container-nav relative z-10 flex items-center justify-between transition-[padding] duration-300 ease-smooth py-2",
+            "container-nav relative z-10 flex items-center justify-between transition-[padding] duration-300 ease-smooth py-1.5",
           )}
         >
           {/* Logo */}

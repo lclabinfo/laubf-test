@@ -67,7 +67,7 @@ export interface BaseSectionSettings {
   id: string;
   visible: boolean;
   colorScheme: SectionTheme;
-  paddingY?: "compact" | "default" | "spacious";
+  paddingY?: "none" | "compact" | "default" | "spacious";
   containerWidth?: "standard" | "narrow" | "full";
   enableAnimations?: boolean;
 }

@@ -35,7 +35,7 @@ const allStudiesData: AllBibleStudiesSectionProps = {
   id: "all-bible-studies",
   visible: true,
   colorScheme: "light",
-  paddingY: "compact",
+  paddingY: "none",
   content: {
     heading: "All Bible studies",
   },

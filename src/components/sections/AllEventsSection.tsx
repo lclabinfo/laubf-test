@@ -17,7 +17,6 @@
 
 import { useState, useMemo } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
-import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import EventListItem from "@/components/shared/EventListItem";
 import FilterToolbar from "@/components/shared/FilterToolbar";
 import { themeTokens } from "@/lib/theme";
@@ -52,20 +51,29 @@ export default function AllEventsSection(props: {
   events: Event[];
 }) {
   const { settings, events } = props;
-  const { content } = settings;
   const t = themeTokens[settings.colorScheme];
-  const animate = settings.enableAnimations !== false;
 
   /* ── State ── */
   const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<EventFilters>({});
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
+  const [sortField, setSortField] = useState("date");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
-  /* ── Filtering ── */
+  /* ── Filtering & Sorting ── */
   const filteredEvents = useMemo(() => {
-    return filterEvents(events, { ...filters, search: search || undefined });
-  }, [events, filters, search]);
+    const filtered = filterEvents(events, { ...filters, search: search || undefined });
+    return [...filtered].sort((a, b) => {
+      let cmp = 0;
+      if (sortField === "date") {
+        cmp = a.dateStart.localeCompare(b.dateStart);
+      } else {
+        cmp = a.title.localeCompare(b.title);
+      }
+      return sortDirection === "asc" ? cmp : -cmp;
+    });
+  }, [events, filters, search, sortField, sortDirection]);
 
   const visibleEvents = filteredEvents.slice(0, displayCount);
   const hasMore = displayCount < filteredEvents.length;
@@ -80,14 +88,8 @@ export default function AllEventsSection(props: {
 
   return (
     <SectionContainer settings={settings}>
-      {/* Section heading */}
-      <AnimateOnScroll animation="fade-up" enabled={animate}>
-        <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>{content.heading}</h2>
-      </AnimateOnScroll>
-
-      {/* Reusable filter toolbar */}
+      {/* Filter toolbar */}
       <FilterToolbar
-        disclosure
         viewModes={{
           options: [
             { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
@@ -158,17 +160,24 @@ export default function AllEventsSection(props: {
           onFromChange: (v) => updateFilter("dateFrom", v || undefined),
           onToChange: (v) => updateFilter("dateTo", v || undefined),
         }}
+        sort={{
+          options: [
+            { value: "date", label: "Date" },
+            { value: "title", label: "Title" },
+          ],
+          active: sortField,
+          direction: sortDirection,
+          onChange: (value, dir) => {
+            setSortField(value);
+            setSortDirection(dir);
+          },
+        }}
         onReset={() => {
           setSearch("");
           setFilters({});
           setDisplayCount(INITIAL_COUNT);
         }}
       />
-
-      {/* Results count */}
-      <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
-        Showing {visibleEvents.length} of {filteredEvents.length} events
-      </p>
 
       {/* Events display */}
       {filteredEvents.length === 0 ? (

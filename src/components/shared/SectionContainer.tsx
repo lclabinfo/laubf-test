@@ -15,6 +15,7 @@ const paddingYMap = {
   compact: "py-16 lg:py-20",
   default: "py-24 lg:py-30",
   spacious: "py-32 lg:py-40",
+  none: "py-0",
 } as const;
 
 interface SectionContainerProps {

@@ -40,7 +40,6 @@ import {
   IconFileText,
   IconChevronRight,
 } from "@/components/layout/icons";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 type TabView = "all" | "series";
@@ -72,6 +71,8 @@ export default function AllMessagesSection(props: {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<MessageFilters>({});
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
+  const [sortField, setSortField] = useState("date");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   /* ── Derived data ── */
   const seriesList = useMemo(() => deriveSeries(messages), [messages]);
@@ -87,11 +88,21 @@ export default function AllMessagesSection(props: {
     [speakerList],
   );
 
-  /* ── Filtering ── */
-  const filteredMessages = useMemo(
-    () => filterMessages(messages, { ...filters, search: search || undefined }),
-    [messages, filters, search],
-  );
+  /* ── Filtering & Sorting ── */
+  const filteredMessages = useMemo(() => {
+    const filtered = filterMessages(messages, { ...filters, search: search || undefined });
+    return [...filtered].sort((a, b) => {
+      let cmp = 0;
+      if (sortField === "date") {
+        cmp = a.dateFor.localeCompare(b.dateFor);
+      } else if (sortField === "speaker") {
+        cmp = a.speaker.localeCompare(b.speaker);
+      } else {
+        cmp = a.title.localeCompare(b.title);
+      }
+      return sortDirection === "asc" ? cmp : -cmp;
+    });
+  }, [messages, filters, search, sortField, sortDirection]);
 
   const visibleMessages = filteredMessages.slice(0, displayCount);
   const hasMore = displayCount < filteredMessages.length;
@@ -119,100 +130,89 @@ export default function AllMessagesSection(props: {
 
   return (
     <SectionContainer settings={settings}>
-      {/* Tab Navigation — matches events page view toggle style */}
-      <div className="flex rounded-[14px] bg-white-1-5 p-1 w-fit mb-10">
-        {tabs.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => {
-              setTab(t.key);
-              setFilters({});
-              setSearch("");
-              setDisplayCount(INITIAL_COUNT);
-            }}
-            className={cn(
-              "flex items-center gap-1.5 rounded-[10px] px-5 py-2.5 text-[14px] font-medium transition-colors",
-              tab === t.key
-                ? "bg-white-0 text-black-1 shadow-sm"
-                : "text-black-3 hover:text-black-2",
-            )}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      {/* ── Toolbar with tabs + filters ── */}
+      <FilterToolbar
+        tabs={{
+          options: tabs,
+          active: tab,
+          onChange: (key) => {
+            setTab(key as TabView);
+            setFilters({});
+            setSearch("");
+            setDisplayCount(INITIAL_COUNT);
+          },
+        }}
+        viewModes={tab === "all" ? {
+          options: [
+            { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
+            { value: "list", label: "List", icon: <IconListView className="size-4" /> },
+          ],
+          active: viewMode,
+          onChange: (v) => setViewMode(v as ViewMode),
+        } : undefined}
+        search={tab === "all" ? {
+          value: search,
+          onChange: (v) => {
+            setSearch(v);
+            setDisplayCount(INITIAL_COUNT);
+          },
+          placeholder: "Search messages, speakers, passages...",
+        } : undefined}
+        filters={tab === "all" ? [
+          {
+            id: "series",
+            label: "Series",
+            value: filters.series ?? "all",
+            options: [
+              { value: "all", label: "All Series" },
+              ...seriesOptions,
+            ],
+            onChange: (v) =>
+              updateFilter("series", v === "all" ? undefined : v),
+          },
+          {
+            id: "speaker",
+            label: "Speaker",
+            value: filters.speaker ?? "all",
+            options: [
+              { value: "all", label: "All Speakers" },
+              ...speakerOptions,
+            ],
+            onChange: (v) =>
+              updateFilter("speaker", v === "all" ? undefined : v),
+          },
+        ] : undefined}
+        dateRange={tab === "all" ? {
+          fromLabel: "From",
+          toLabel: "To",
+          fromValue: filters.dateFrom ?? "",
+          toValue: filters.dateTo ?? "",
+          onFromChange: (v) => updateFilter("dateFrom", v || undefined),
+          onToChange: (v) => updateFilter("dateTo", v || undefined),
+        } : undefined}
+        sort={tab === "all" ? {
+          options: [
+            { value: "date", label: "Date" },
+            { value: "title", label: "Title" },
+            { value: "speaker", label: "Speaker" },
+          ],
+          active: sortField,
+          direction: sortDirection,
+          onChange: (value, dir) => {
+            setSortField(value);
+            setSortDirection(dir);
+          },
+        } : undefined}
+        onReset={tab === "all" ? () => {
+          setSearch("");
+          setFilters({});
+          setDisplayCount(INITIAL_COUNT);
+        } : undefined}
+      />
 
       {/* ── All Messages Tab ── */}
       {tab === "all" && (
         <>
-          <AnimateOnScroll animation="fade-up" enabled={animate}>
-            <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>
-              All Messages
-            </h2>
-          </AnimateOnScroll>
-
-          <FilterToolbar
-            disclosure
-            viewModes={{
-              options: [
-                { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
-                { value: "list", label: "List", icon: <IconListView className="size-4" /> },
-              ],
-              active: viewMode,
-              onChange: (v) => setViewMode(v as ViewMode),
-            }}
-            search={{
-              value: search,
-              onChange: (v) => {
-                setSearch(v);
-                setDisplayCount(INITIAL_COUNT);
-              },
-              placeholder: "Search messages, speakers, passages...",
-            }}
-            filters={[
-              {
-                id: "series",
-                label: "Series",
-                value: filters.series ?? "all",
-                options: [
-                  { value: "all", label: "All Series" },
-                  ...seriesOptions,
-                ],
-                onChange: (v) =>
-                  updateFilter("series", v === "all" ? undefined : v),
-              },
-              {
-                id: "speaker",
-                label: "Speaker",
-                value: filters.speaker ?? "all",
-                options: [
-                  { value: "all", label: "All Speakers" },
-                  ...speakerOptions,
-                ],
-                onChange: (v) =>
-                  updateFilter("speaker", v === "all" ? undefined : v),
-              },
-            ]}
-            dateRange={{
-              fromLabel: "From",
-              toLabel: "To",
-              fromValue: filters.dateFrom ?? "",
-              toValue: filters.dateTo ?? "",
-              onFromChange: (v) => updateFilter("dateFrom", v || undefined),
-              onToChange: (v) => updateFilter("dateTo", v || undefined),
-            }}
-            onReset={() => {
-              setSearch("");
-              setFilters({});
-              setDisplayCount(INITIAL_COUNT);
-            }}
-          />
-
-          {/* Results count */}
-          <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
-            Showing {visibleMessages.length} of {filteredMessages.length} messages
-          </p>
-
           {/* Messages display */}
           {filteredMessages.length === 0 ? (
             <div className="flex flex-col items-center py-20">

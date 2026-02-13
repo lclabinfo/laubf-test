@@ -64,6 +64,8 @@ export default function AllBibleStudiesSection(props: {
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<BibleStudyFilters>({});
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
+  const [sortField, setSortField] = useState("date");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   /* ── Derived data ── */
   const seriesList = useMemo(() => deriveSeries(studies), [studies]);
@@ -82,11 +84,19 @@ export default function AllBibleStudiesSection(props: {
     }));
   }, [bookCounts]);
 
-  /* ── Filtering (All Studies tab) ── */
-  const filteredStudies = useMemo(
-    () => filterBibleStudies(studies, { ...filters, search: search || undefined }),
-    [studies, filters, search],
-  );
+  /* ── Filtering & Sorting (All Studies tab) ── */
+  const filteredStudies = useMemo(() => {
+    const filtered = filterBibleStudies(studies, { ...filters, search: search || undefined });
+    return [...filtered].sort((a, b) => {
+      let cmp = 0;
+      if (sortField === "date") {
+        cmp = a.dateFor.localeCompare(b.dateFor);
+      } else {
+        cmp = a.title.localeCompare(b.title);
+      }
+      return sortDirection === "asc" ? cmp : -cmp;
+    });
+  }, [studies, filters, search, sortField, sortDirection]);
 
   const visibleStudies = filteredStudies.slice(0, displayCount);
   const hasMore = displayCount < filteredStudies.length;
@@ -114,104 +124,93 @@ export default function AllBibleStudiesSection(props: {
   ];
 
   return (
-    <SectionContainer settings={settings}>
-      {/* Tab Navigation — matches events page view toggle style */}
-      <div className="flex rounded-[14px] bg-white-1-5 p-1 w-fit mb-10">
-        {tabs.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => {
-              setTab(t.key);
-              setFilters({});
-              setSearch("");
-              setDisplayCount(INITIAL_COUNT);
-            }}
-            className={cn(
-              "flex items-center gap-1.5 rounded-[10px] px-5 py-2.5 text-[14px] font-medium transition-colors",
-              tab === t.key
-                ? "bg-white-0 text-black-1 shadow-sm"
-                : "text-black-3 hover:text-black-2",
-            )}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+    <SectionContainer settings={settings} className="pt-0 py-30">
+      {/* ── Toolbar with tabs + filters ── */}
+      <FilterToolbar
+        tabs={{
+          options: tabs,
+          active: tab,
+          onChange: (key) => {
+            setTab(key as TabView);
+            setFilters({});
+            setSearch("");
+            setDisplayCount(INITIAL_COUNT);
+          },
+        }}
+        viewModes={tab === "all" ? {
+          options: [
+            { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
+            { value: "list", label: "List", icon: <IconListView className="size-4" /> },
+          ],
+          active: viewMode,
+          onChange: (v) => setViewMode(v as ViewMode),
+        } : undefined}
+        search={tab === "all" ? {
+          value: search,
+          onChange: (v) => {
+            setSearch(v);
+            setDisplayCount(INITIAL_COUNT);
+          },
+          placeholder: "Search studies, passages, series...",
+        } : undefined}
+        filters={tab === "all" ? [
+          {
+            id: "series",
+            label: "Series",
+            value: filters.series ?? "all",
+            options: [
+              { value: "all", label: "All Series" },
+              ...seriesOptions,
+            ],
+            onChange: (v) =>
+              updateFilter("series", v === "all" ? undefined : v),
+          },
+          {
+            id: "book",
+            label: "Book",
+            value: filters.book ?? "all",
+            options: [
+              { value: "all", label: "All Books" },
+              ...bookOptions,
+            ],
+            onChange: (v) =>
+              updateFilter(
+                "book",
+                v === "all" ? undefined : (v as BibleBook),
+              ),
+          },
+        ] : undefined}
+        dateRange={tab === "all" ? {
+          fromLabel: "From",
+          toLabel: "To",
+          fromValue: filters.dateFrom ?? "",
+          toValue: filters.dateTo ?? "",
+          onFromChange: (v) => updateFilter("dateFrom", v || undefined),
+          onToChange: (v) => updateFilter("dateTo", v || undefined),
+        } : undefined}
+        sort={tab === "all" ? {
+          options: [
+            { value: "date", label: "Date" },
+            { value: "title", label: "Title" },
+          ],
+          active: sortField,
+          direction: sortDirection,
+          onChange: (value, dir) => {
+            setSortField(value);
+            setSortDirection(dir);
+          },
+        } : undefined}
+        onReset={tab === "all" ? () => {
+          setSearch("");
+          setFilters({});
+          setDisplayCount(INITIAL_COUNT);
+        } : undefined}
+        className="mb-8"
+      />
 
       {/* ── All Studies Tab ── */}
       {tab === "all" && (
         <>
-          <AnimateOnScroll animation="fade-up" enabled={animate}>
-            <h2 className={`text-h2 ${t.textPrimary} mb-3 lg:mb-8`}>
-              All Bible studies
-            </h2>
-          </AnimateOnScroll>
-
-          <FilterToolbar
-            disclosure
-            viewModes={{
-              options: [
-                { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
-                { value: "list", label: "List", icon: <IconListView className="size-4" /> },
-              ],
-              active: viewMode,
-              onChange: (v) => setViewMode(v as ViewMode),
-            }}
-            search={{
-              value: search,
-              onChange: (v) => {
-                setSearch(v);
-                setDisplayCount(INITIAL_COUNT);
-              },
-              placeholder: "Search studies, passages, series...",
-            }}
-            filters={[
-              {
-                id: "series",
-                label: "Series",
-                value: filters.series ?? "all",
-                options: [
-                  { value: "all", label: "All Series" },
-                  ...seriesOptions,
-                ],
-                onChange: (v) =>
-                  updateFilter("series", v === "all" ? undefined : v),
-              },
-              {
-                id: "book",
-                label: "Book",
-                value: filters.book ?? "all",
-                options: [
-                  { value: "all", label: "All Books" },
-                  ...bookOptions,
-                ],
-                onChange: (v) =>
-                  updateFilter(
-                    "book",
-                    v === "all" ? undefined : (v as BibleBook),
-                  ),
-              },
-            ]}
-            dateRange={{
-              fromLabel: "From",
-              toLabel: "To",
-              fromValue: filters.dateFrom ?? "",
-              toValue: filters.dateTo ?? "",
-              onFromChange: (v) => updateFilter("dateFrom", v || undefined),
-              onToChange: (v) => updateFilter("dateTo", v || undefined),
-            }}
-            onReset={() => {
-              setSearch("");
-              setFilters({});
-              setDisplayCount(INITIAL_COUNT);
-            }}
-          />
-
-          {/* Results count */}
-          <p className={`text-body-3 ${t.textMuted} mt-5 mb-6`}>
-            Showing {visibleStudies.length} of {filteredStudies.length} studies
-          </p>
-
           {/* Studies display */}
           {filteredStudies.length === 0 ? (
             <div className="flex flex-col items-center py-20">
