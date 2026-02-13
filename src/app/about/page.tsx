@@ -3,6 +3,7 @@ import AboutDescriptionSection from "@/components/sections/AboutDescriptionSecti
 import PillarsSection from "@/components/sections/PillarsSection";
 import StatementSection from "@/components/sections/StatementSection";
 import PathwayCardSection from "@/components/sections/PathwayCardSection";
+import NewcomerSection from "@/components/sections/NewcomerSection";
 
 import type {
   TextImageHeroSectionProps,
@@ -10,6 +11,7 @@ import type {
   PillarsSectionProps,
   StatementSectionProps,
   PathwayCardSectionProps,
+  NewcomerSectionProps,
 } from "@/lib/types/sections";
 import type { Metadata } from "next";
 
@@ -131,7 +133,7 @@ const pathwayCardData: PathwayCardSectionProps = {
   content: {
     heading: "How to Get Started at LA UBF",
     description:
-      "We know that visiting a new church can be intimidating. We want to make your first experience as seamless and welcoming as possible. Here are the two best ways to connect with our community.",
+      "We know that visiting a new church can be intimidating. We want to make your first experience as seamless and welcoming as possible. Here are the some best ways to connect with our community.",
     cards: [
       {
         icon: "book-open",
@@ -164,6 +166,23 @@ const pathwayCardData: PathwayCardSectionProps = {
   },
 };
 
+const newcomerData: NewcomerSectionProps = {
+  id: "newcomer",
+  visible: true,
+  colorScheme: "dark",
+  content: {
+    heading: "Are you a newcomer?",
+    description:
+      "We know that visiting a new church can be intimidating. Learn more about our church and how you can take your next steps at LA UBF.",
+    buttonLabel: "I\u2019m new",
+    buttonHref: "/im-new",
+    image: {
+      src: "/images/home/sunday-worship.jpg",
+      alt: "Sunday worship at LA UBF",
+    },
+  },
+};
+
 /* ================================================================
  * WHO WE ARE PAGE
  * Section order: Light → Dark → Light → Light → Light
@@ -176,7 +195,7 @@ export default function AboutPage() {
       <AboutDescriptionSection settings={aboutDescriptionData} />
       <PillarsSection settings={pillarsData} />
       <StatementSection settings={statementData} />
-      <PathwayCardSection settings={pathwayCardData} />
+      <NewcomerSection settings={newcomerData} />
     </main>
   );
 }

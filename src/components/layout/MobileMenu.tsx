@@ -111,14 +111,14 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               >
                 <div className="overflow-hidden">
                   <div className="pl-4 flex flex-col gap-0.5 pb-2">
-                    {/* Ministry overview link for the ministries dropdown */}
-                    {dropdown.featuredCard && (
+                    {/* Direct link to hub page */}
+                    {dropdown.href && (
                       <Link
-                        href={dropdown.featuredCard.href}
+                        href={dropdown.href}
                         onClick={onClose}
                         className="flex items-center gap-3 px-4 py-3 rounded-lg text-body-1 font-medium text-black-1 transition-colors duration-150 hover:bg-white-1-5"
                       >
-                        Ministries Overview
+                        {dropdown.label} Hub
                       </Link>
                     )}
                     {dropdown.sections.map((section) => (

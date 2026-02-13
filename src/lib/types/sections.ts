@@ -281,6 +281,19 @@ export interface PathwayCardSectionProps extends BaseSectionSettings {
   content: PathwayCardContent;
 }
 
+/* ---- Newcomer CTA ---- */
+export interface NewcomerContent {
+  heading: string;
+  description: string;
+  buttonLabel: string;
+  buttonHref: string;
+  image?: SectionImage;
+}
+
+export interface NewcomerSectionProps extends BaseSectionSettings {
+  content: NewcomerContent;
+}
+
 /* ---- Timeline ---- */
 export interface TimelineItem {
   time: string;

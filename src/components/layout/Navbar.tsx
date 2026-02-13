@@ -116,38 +116,69 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
                 onMouseEnter={() => openDropdown(dropdown.id)}
                 onMouseLeave={scheduleClose}
               >
-                <button
-                  onClick={() =>
-                    setActiveDropdown((prev) =>
-                      prev === dropdown.id ? null : dropdown.id,
-                    )
-                  }
-                  className={cn(
-                    "flex items-center gap-1.5 pl-3 pr-2 py-3 rounded-xl text-nav transition-colors duration-150",
-                    isScrolled
-                      ? cn(
-                          "text-black-1",
-                          activeDropdown === dropdown.id
-                            ? "bg-white-1-5"
-                            : "hover:bg-white-1-5",
-                        )
-                      : cn(
-                          "text-white-1",
-                          activeDropdown === dropdown.id
-                            ? "bg-white-0/10"
-                            : "hover:bg-white-0/10",
-                        ),
-                  )}
-                >
-                  {dropdown.label}
-                  <ChevronDown
+                {dropdown.href ? (
+                  <Link
+                    href={dropdown.href}
                     className={cn(
-                      "size-[18px] transition-transform duration-200",
-                      activeDropdown === dropdown.id && "rotate-180",
+                      "flex items-center gap-1.5 pl-3 pr-2 py-3 rounded-xl text-nav transition-colors duration-150",
+                      isScrolled
+                        ? cn(
+                            "text-black-1",
+                            activeDropdown === dropdown.id
+                              ? "bg-white-1-5"
+                              : "hover:bg-white-1-5",
+                          )
+                        : cn(
+                            "text-white-1",
+                            activeDropdown === dropdown.id
+                              ? "bg-white-0/10"
+                              : "hover:bg-white-0/10",
+                          ),
                     )}
-                    strokeWidth={2}
-                  />
-                </button>
+                  >
+                    {dropdown.label}
+                    <ChevronDown
+                      className={cn(
+                        "size-[18px] transition-transform duration-200",
+                        activeDropdown === dropdown.id && "rotate-180",
+                      )}
+                      strokeWidth={2}
+                    />
+                  </Link>
+                ) : (
+                  <button
+                    onClick={() =>
+                      setActiveDropdown((prev) =>
+                        prev === dropdown.id ? null : dropdown.id,
+                      )
+                    }
+                    className={cn(
+                      "flex items-center gap-1.5 pl-3 pr-2 py-3 rounded-xl text-nav transition-colors duration-150",
+                      isScrolled
+                        ? cn(
+                            "text-black-1",
+                            activeDropdown === dropdown.id
+                              ? "bg-white-1-5"
+                              : "hover:bg-white-1-5",
+                          )
+                        : cn(
+                            "text-white-1",
+                            activeDropdown === dropdown.id
+                              ? "bg-white-0/10"
+                              : "hover:bg-white-0/10",
+                          ),
+                    )}
+                  >
+                    {dropdown.label}
+                    <ChevronDown
+                      className={cn(
+                        "size-[18px] transition-transform duration-200",
+                        activeDropdown === dropdown.id && "rotate-180",
+                      )}
+                      strokeWidth={2}
+                    />
+                  </button>
+                )}
                 {activeDropdown === dropdown.id && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 z-[100] pt-1">
                     <DropdownMenu

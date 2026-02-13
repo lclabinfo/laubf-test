@@ -6,7 +6,7 @@ import CampusCardGridSection from "@/components/sections/CampusCardGridSection";
 import MeetTeamSection from "@/components/sections/MeetTeamSection";
 import UpcomingEventsSection from "@/components/sections/UpcomingEventsSection";
 import FormSection from "@/components/sections/FormSection";
-import PathwayCardSection from "@/components/sections/PathwayCardSection";
+import NewcomerSection from "@/components/sections/NewcomerSection";
 import { getEventsByMinistry } from "@/lib/mock-data/events";
 
 import type {
@@ -18,7 +18,7 @@ import type {
   MeetTeamSectionProps,
   UpcomingEventsSectionProps,
   FormSectionProps,
-  PathwayCardSectionProps,
+  NewcomerSectionProps,
 } from "@/lib/types/sections";
 import type { Metadata } from "next";
 
@@ -232,43 +232,20 @@ const formData: FormSectionProps = {
   },
 };
 
-const pathwayData: PathwayCardSectionProps = {
-  id: "get-started",
+const newcomerData: NewcomerSectionProps = {
+  id: "newcomer",
   visible: true,
-  colorScheme: "light",
+  colorScheme: "dark",
   content: {
-    heading: "How to Get Started at LA UBF",
+    heading: "Are you a newcomer?",
     description:
-      "We know that visiting a new church can be intimidating. We want to make your first experience as seamless and welcoming as possible. Here are the best ways to connect with our community.",
-    cards: [
-      {
-        icon: "book-open",
-        title: "Join us on Sunday",
-        description:
-          "Experience our main worship service, where we gather to listen to the sermon and learn through the Word of God together.",
-        buttonLabel: "Service Info",
-        buttonHref: "/im-new#what-to-expect",
-        buttonVariant: "primary",
-      },
-      {
-        icon: "graduation-cap",
-        title: "Are you a\nCollege Student?",
-        description:
-          "Join one of our campus ministries to attend group Bible studies and grow in faith alongside fellow students.",
-        buttonLabel: "View Our Campuses",
-        buttonHref: "/ministries#campus-ministry",
-        buttonVariant: "primary",
-      },
-      {
-        icon: "calendar",
-        title: "Not sure\nwhere to start?",
-        description:
-          "Start with an upcoming event\u2014an easy way to join and get to know our community.",
-        buttonLabel: "View all events",
-        buttonHref: "/events",
-        buttonVariant: "secondary",
-      },
-    ],
+      "We know that visiting a new church can be intimidating. Learn more about our church and how you can take your next steps at LA UBF.",
+    buttonLabel: "I\u2019m new",
+    buttonHref: "/im-new",
+    image: {
+      src: "/images/home/sunday-worship.jpg",
+      alt: "Sunday worship at LA UBF",
+    },
   },
 };
 
@@ -288,7 +265,7 @@ export default function CollegePage() {
       <MeetTeamSection settings={teamData} />
       <UpcomingEventsSection settings={eventsData} events={collegeEvents} />
       <FormSection settings={formData} />
-      <PathwayCardSection settings={pathwayData} />
+      <NewcomerSection settings={newcomerData} />
     </main>
   );
 }

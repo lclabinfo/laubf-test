@@ -263,7 +263,7 @@
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: 500;
-    line-height: 1;
+    line-height: 1.2;
     letter-spacing: -0.02em;
   }
   @media (width >= 64rem) {

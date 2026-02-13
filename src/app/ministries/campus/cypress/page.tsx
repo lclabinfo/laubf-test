@@ -2,7 +2,6 @@ import MinistryHeroSection from "@/components/sections/MinistryHeroSection";
 import MinistryIntroSection from "@/components/sections/MinistryIntroSection";
 import MinistryScheduleSection from "@/components/sections/MinistryScheduleSection";
 import MeetTeamSection from "@/components/sections/MeetTeamSection";
-import FormSection from "@/components/sections/FormSection";
 import FAQSection from "@/components/sections/FAQSection";
 import CampusCardGridSection from "@/components/sections/CampusCardGridSection";
 
@@ -11,7 +10,6 @@ import type {
   MinistryIntroSectionProps,
   MinistryScheduleSectionProps,
   MeetTeamSectionProps,
-  FormSectionProps,
   FAQSectionProps,
   CampusCardGridSectionProps,
 } from "@/lib/types/sections";
@@ -113,44 +111,6 @@ const teamData: MeetTeamSectionProps = {
   },
 };
 
-const formData: FormSectionProps = {
-  id: "plan-visit",
-  visible: true,
-  colorScheme: "light",
-  content: {
-    overline: "Plan Your Visit",
-    heading: "Let us help you start",
-    description:
-      "Let us know you're coming and we'll save a seat for you! We can also help match you with a Bible teacher or answer any questions about our ministries.",
-    interestOptions: [
-      { label: "Sunday Service", value: "sunday-service" },
-      { label: "College Campus Group", value: "college-group" },
-      { label: "Personal Bible Study", value: "personal-bible-study" },
-      { label: "Group Bible Study", value: "group-bible-study" },
-      { label: "Giving", value: "giving" },
-      { label: "Other", value: "other" },
-    ],
-    campusOptions: [
-      { label: "LBCC", value: "lbcc" },
-      { label: "CSULB", value: "csulb" },
-      { label: "CSUF", value: "csuf" },
-      { label: "UCLA", value: "ucla" },
-      { label: "USC", value: "usc" },
-      { label: "CSUDH", value: "csudh" },
-      { label: "Cerritos Community College", value: "ccc" },
-      { label: "Mt. San Antonio College", value: "mt-sac" },
-      { label: "Golden West College", value: "golden-west" },
-      { label: "Cypress College", value: "cypress" },
-      { label: "Cal Poly Pomona", value: "cal-poly-pomona" },
-    ],
-    bibleTeacherLabel:
-      "I'd like to be matched with a personal bible teacher for bible studies or spiritual guidance",
-    submitLabel: "Submit",
-    successMessage:
-      "Thank you! We've received your message and will get back to you soon.",
-  },
-};
-
 const faqData: FAQSectionProps = {
   id: "faq",
   visible: true,
@@ -228,7 +188,6 @@ export default function CypressPage() {
       <MinistryIntroSection settings={introData} />
       <MinistryScheduleSection settings={scheduleData} />
       <MeetTeamSection settings={teamData} />
-      <FormSection settings={formData} />
       <FAQSection settings={faqData} />
       <CampusCardGridSection settings={campusGridData} />
     </main>

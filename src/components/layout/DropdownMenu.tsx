@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { SquareArrowOutUpRight, ArrowUpRight } from "lucide-react";
 import type { NavDropdown, NavSection } from "./nav-data";
+import { cn } from "@/lib/utils";
 
 interface DropdownMenuProps {
   dropdown: NavDropdown;
@@ -18,17 +19,25 @@ function SectionColumn({
   section: NavSection;
   onClose: () => void;
 }) {
+  const isGrid = section.columns && section.columns > 1;
+
   return (
-    <div className="flex flex-col gap-1.5 w-56 shrink-0">
+    <div className={cn("flex flex-col gap-1.5 shrink-0", isGrid ? "w-auto" : "w-56")}>
       {/* Section title */}
       <div className="px-1.5">
-        <p className="text-base font-medium leading-none text-black-3 tracking-[-0.03em]">
+        <p className="text-base font-medium leading-[1.2] text-black-3 tracking-[-0.03em]">
           {section.title}
         </p>
       </div>
 
       {/* Items */}
-      <div className="flex flex-col">
+      <div
+        className={cn(
+          isGrid
+            ? "grid grid-cols-2 auto-rows-min"
+            : "flex flex-col"
+        )}
+      >
         {section.items.map((item) => {
           const Icon = item.icon;
           return (
@@ -38,14 +47,14 @@ function SectionColumn({
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               onClick={onClose}
-              className="flex items-center gap-4 px-4 py-3.5 rounded-lg transition-colors hover:bg-white-1-5 group/item"
+              className="flex items-center gap-4 min-w-[200px] px-4 py-3.5 rounded-lg transition-colors hover:bg-white-1-5 group/item"
             >
               <Icon
                 className="size-6 text-black-1 shrink-0"
                 strokeWidth={1.5}
               />
               <div className="flex flex-col gap-1.5 min-w-0">
-                <span className="text-base font-medium leading-none text-black-1 tracking-[-0.03em]">
+                <span className="text-base font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
                   {item.label}
                 </span>
                 {item.description && (
@@ -72,7 +81,7 @@ function SectionColumn({
           onClick={onClose}
           className="flex items-center justify-between px-6 py-5 mt-3 bg-white-1-5 border border-white-2-5 rounded-lg transition-colors hover:bg-white-2"
         >
-          <span className="text-base font-medium leading-none text-black-2 tracking-[-0.03em]">
+          <span className="text-base font-medium leading-[1.2] text-black-2 tracking-[-0.03em]">
             {section.footerLink.label}
           </span>
           <div className="border border-black-3 rounded-full p-2">
@@ -86,7 +95,7 @@ function SectionColumn({
 
 export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
   return (
-    <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 animate-dropdown-in">
+    <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 w-max animate-dropdown-in">
       <div className="flex gap-5 items-stretch">
           {dropdown.sections.map((section, i) => (
             <Fragment key={section.title}>

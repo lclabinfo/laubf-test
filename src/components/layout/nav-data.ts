@@ -34,6 +34,7 @@ export interface NavSubItem {
 export interface NavSection {
   title: string;
   items: NavSubItem[];
+  columns?: number;
   footerLink?: {
     label: string;
     href: string;
@@ -43,6 +44,7 @@ export interface NavSection {
 export interface NavDropdown {
   id: string;
   label: string;
+  href?: string;
   sections: NavSection[];
   featuredCard?: {
     image: string;
@@ -110,6 +112,7 @@ export const dropdowns: NavDropdown[] = [
   {
     id: "ministries",
     label: "Ministries",
+    href: "/ministries",
     sections: [
       {
         title: "Ministry Groups",
@@ -125,12 +128,12 @@ export const dropdowns: NavDropdown[] = [
             icon: Users,
           },
           {
-            label: "Middle & High School (JBF / HBF)",
+            label: "Middle & High School (JBF & HBF)",
             href: "/ministries/high-school",
             icon: Landmark,
           },
           {
-            label: "Children (BBF /CBF)",
+            label: "Children (BBF & CBF)",
             href: "/ministries/children",
             icon: Baby,
           },
@@ -138,6 +141,7 @@ export const dropdowns: NavDropdown[] = [
       },
       {
         title: "Campus Ministries",
+        columns: 2,
         items: [
           {
             label: "LBCC",
@@ -163,21 +167,49 @@ export const dropdowns: NavDropdown[] = [
             href: "/ministries/campus/ucla",
             icon: MapPin,
           },
+          {
+            label: "USC",
+            description: "University of Southern California",
+            href: "/ministries/campus/usc",
+            icon: MapPin,
+          },
+          {
+            label: "CSUDH",
+            description: "Cal State Dominguez Hills",
+            href: "/ministries/campus/csudh",
+            icon: MapPin,
+          },
+          {
+            label: "CCC",
+            description: "Cerritos Community College",
+            href: "/ministries/campus/ccc",
+            icon: MapPin,
+          },
+          {
+            label: "MT. SAC",
+            description: "Mt. San Antonio College",
+            href: "/ministries/campus/mt-sac",
+            icon: MapPin,
+          },
+          {
+            label: "Golden State",
+            description: "Golden West College",
+            href: "/ministries/campus/golden-west",
+            icon: MapPin,
+          },
+          {
+            label: "Cypress College",
+            href: "/ministries/campus/cypress",
+            icon: MapPin,
+          },
+          {
+            label: "Cal Poly Pomona",
+            href: "/ministries/campus/cal-poly-pomona",
+            icon: MapPin,
+          },
         ],
-        footerLink: {
-          label: "View all campus ministries",
-          href: "/ministries#campus-ministry",
-        },
       },
     ],
-    featuredCard: {
-      image: "/pics-temp/csulb/waving.JPG",
-      imageAlt: "Students waving at campus ministry",
-      title: "Ministries\nOverview",
-      description:
-        "Learn about the ministries that shape our community",
-      href: "/ministries",
-    },
   },
   {
     id: "resources",
