@@ -36,7 +36,7 @@ const textImageHeroData: TextImageHeroSectionProps = {
     description:
       "Our main focus is to study the Bible and grow in the grace and knowledge of Jesus Christ as his disciples.",
     image: {
-      src: "/images/who%20we%20are/header.jpg",
+      src: "/images/compressed/who%20we%20are/compressed-header.jpg",
       alt: "LA UBF community gathering",
     },
   },
@@ -69,7 +69,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "We help students study the Bible so they may come to know God personally, understand themselves, and find purpose in Jesus Christ. Bible studies are offered one-to-one with a mentor or in small groups centered around campuses and shared interests.",
         images: [
-          { src: "/images/who%20we%20are/bible%20study.jpg", alt: "Bible study session" },
+          { src: "/images/compressed/who%20we%20are/compressed-bible%20study.jpg", alt: "Bible study session" },
         ],
       },
       {
@@ -77,7 +77,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "We walk with students as they grow as disciples of Jesus through shared life and discipleship training. Our goal is to equip students to mature in faith and become disciple makers who help others follow Christ.",
         images: [
-          { src: "/images/who%20we%20are/discipleship.jpg", alt: "Discipleship gathering" },
+          { src: "/images/compressed/who%20we%20are/compressed-discipleship.jpg", alt: "Discipleship gathering" },
         ],
       },
       {
@@ -85,7 +85,7 @@ const pillarsData: PillarsSectionProps = {
         description:
           "Fellowship is an essential part of our faith as we support and encourage one another in community. We share fellowship through Sunday worship, activities, and retreats as we grow together in Christ.",
         images: [
-          { src: "/images/who%20we%20are/fellowship.jpg", alt: "Fellowship meal" },
+          { src: "/images/compressed/who%20we%20are/compressed-fellowship.jpg", alt: "Fellowship meal" },
         ],
       },
     ],
@@ -177,7 +177,7 @@ const newcomerData: NewcomerSectionProps = {
     buttonLabel: "I\u2019m new",
     buttonHref: "/im-new",
     image: {
-      src: "/images/home/sunday-worship.jpg",
+      src: "/images/compressed/home/compressed-sunday-worship.jpg",
       alt: "Sunday worship at LA UBF",
     },
   },

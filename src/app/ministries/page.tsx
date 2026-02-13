@@ -32,7 +32,7 @@ const textImageHeroData: TextImageHeroSectionProps = {
     description:
       "At LA UBF, we believe that spiritual growth happens best in community. Whether you are a student, a working professional, or a parent, there is a place for you here.",
     image: {
-      src: "/images/ministries/congregation.jpg",
+      src: "/images/compressed/ministries/compressed-congregation.jpg",
       alt: "LA UBF community gathering",
     },
   },
@@ -50,7 +50,7 @@ const ageGroupsData: PillarsSectionProps = {
         title: "Young Adults",
         description:
           "A community of college students and young professionals growing together through campus Bible studies, fellowship, and shared worship.",
-        images: [{ src: "/images/ministries/young%20adults.jpg", alt: "Young adults Bible study" }],
+        images: [{ src: "/images/compressed/ministries/compressed-young%20adults.jpg", alt: "Young adults Bible study" }],
         button: { label: "Learn more", href: "/ministries/college" },
       },
       {
@@ -58,7 +58,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "Adults from many walks of life\u2014campus leaders, Bible teachers, parents, and missionaries\u2014growing in faith through personal and group Bible study, conferences, and outreach.",
         images: [
-          { src: "/images/ministries/adults.webp", alt: "Adult fellowship" },
+          { src: "/images/compressed/ministries/compressed-adults.webp", alt: "Adult fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/adults" },
       },
@@ -67,7 +67,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "Our youth ministries for middle and high school students, with engaging Bible studies, fun fellowship activities, and a supportive community during these formative years.",
         images: [
-          { src: "/images/ministries/middle%20n%20high.JPG", alt: "HBF JBF students" },
+          { src: "/images/compressed/ministries/compressed-middle%20n%20high.jpg", alt: "HBF JBF students" },
         ],
         button: { label: "Learn more", href: "/ministries/high-school" },
       },
@@ -76,7 +76,7 @@ const ageGroupsData: PillarsSectionProps = {
         description:
           "A safe, engaging, and age-appropriate environment where children can learn about God\u2019s Word and build friendships while growing in faith.",
         images: [
-          { src: "/images/ministries/children.webp", alt: "Children Bible fellowship" },
+          { src: "/images/compressed/ministries/compressed-children.webp", alt: "Children Bible fellowship" },
         ],
         button: { label: "Learn more", href: "/ministries/children" },
       },
@@ -94,9 +94,9 @@ const campusCardGridData: CampusCardGridSectionProps = {
     description:
       "We have bible study clubs all across different college campuses. Join us for weekly group bible studies and get to know each other through fellowship.",
     decorativeImages: [
-      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo" },
-      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors" },
-      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-1.jpg", alt: "Campus group photo" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-2.jpg", alt: "Bible study outdoors" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-3.png", alt: "Fellowship event" },
     ],
     campuses: [
       { id: "lbcc", abbreviation: "LBCC", fullName: "Long Beach City College", href: "/ministries/campus/lbcc" },
@@ -130,7 +130,7 @@ const newcomerData: NewcomerSectionProps = {
     buttonLabel: "I\u2019m new",
     buttonHref: "/im-new",
     image: {
-      src: "/images/home/sunday-worship.jpg",
+      src: "/images/compressed/home/compressed-sunday-worship.jpg",
       alt: "Sunday worship at LA UBF",
     },
   },

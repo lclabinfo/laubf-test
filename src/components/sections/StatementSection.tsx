@@ -127,11 +127,11 @@ export default function StatementSection(props: {
             role="img"
             aria-hidden="true"
             style={{
-              maskImage: "url(/images/cross.png)",
+              maskImage: "url(/images/compressed/compressed-cross.png)",
               maskSize: "contain",
               maskRepeat: "no-repeat",
               maskPosition: "center",
-              WebkitMaskImage: "url(/images/cross.png)",
+              WebkitMaskImage: "url(/images/compressed/compressed-cross.png)",
               WebkitMaskSize: "contain",
               WebkitMaskRepeat: "no-repeat",
               WebkitMaskPosition: "center",

@@ -63,12 +63,12 @@ const mediaTextData: MediaTextSectionProps = {
     body: "LA UBF (Los Angeles University Bible Fellowship) is an international, non-denominational evangelical church. We serve college students from diverse backgrounds, helping them to grow in faith, build community, and find purpose through the Word of God.",
     button: { label: "More about us", href: "/about", visible: true },
     images: [
-      { src: "/images/home/rotatingwheel/bible-study.png", alt: "Bible study" },
-      { src: "/images/home/rotatingwheel/campus-ministry-list.png", alt: "Campus ministry" },
-      { src: "/images/home/rotatingwheel/campus-ministry.JPG", alt: "Campus ministry" },
-      { src: "/images/home/rotatingwheel/event-christmas.png", alt: "Christmas event" },
-      { src: "/images/home/rotatingwheel/fellowship.jpg", alt: "Fellowship" },
-      { src: "/images/home/rotatingwheel/sunday-worship.jpg", alt: "Sunday worship" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-bible-study.png", alt: "Bible study" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-campus-ministry-list.png", alt: "Campus ministry" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-campus-ministry.jpg", alt: "Campus ministry" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-event-christmas.png", alt: "Christmas event" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-fellowship.jpg", alt: "Fellowship" },
+      { src: "/images/compressed/home/rotatingwheel/compressed-sunday-worship.jpg", alt: "Sunday worship" },
     ],
   },
 };
@@ -131,7 +131,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Sunday Worship",
         description:
           "Join us every Sunday for worship, teaching, and fellowship with believers.",
-        imageUrl: "/images/home/sunday-worship.jpg",
+        imageUrl: "/images/compressed/home/compressed-sunday-worship.jpg",
         imageAlt: "Sunday worship service",
       },
       {
@@ -139,7 +139,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "College Campus Ministries",
         description:
           "Connect with other students on your campus for Bible study and community.",
-        imageUrl: "/images/home/campus-ministry.JPG",
+        imageUrl: "/images/compressed/home/compressed-campus-ministry.jpg",
         imageAlt: "Campus ministry gathering",
       },
       {
@@ -147,7 +147,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Personal Bible Studies",
         description:
           "Study the Bible one-on-one with a mentor at a time that works for you.",
-        imageUrl: "/images/home/bible-study.png",
+        imageUrl: "/images/compressed/home/compressed-bible-study.png",
         imageAlt: "One-on-one Bible study",
       },
       {
@@ -155,7 +155,7 @@ const actionCardGridData: ActionCardGridSectionProps = {
         title: "Fellowship",
         description:
           "Build lasting friendships through shared meals, activities, and life together.",
-        imageUrl: "/images/home/fellowship.jpg",
+        imageUrl: "/images/compressed/home/compressed-fellowship.jpg",
         imageAlt: "Fellowship dinner",
       },
     ],
@@ -190,7 +190,7 @@ const directoryListData: DirectoryListSectionProps = {
       },
     ],
     image: {
-      src: "/images/home/campus-ministry-list.png",
+      src: "/images/compressed/home/compressed-campus-ministry-list.png",
       alt: "Campus ministry students",
     },
     ctaHeading: "Don't see your campus?",
@@ -257,7 +257,7 @@ const ctaBannerData: CTABannerSectionProps = {
       visible: true,
     },
     backgroundImage: {
-      src: "/images/home/visit-us.JPG",
+      src: "/images/compressed/home/compressed-visit-us.jpg",
       alt: "LA UBF community",
     },
   },

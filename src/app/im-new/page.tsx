@@ -47,12 +47,12 @@ const pageHeroData: PageHeroSectionProps = {
       visible: true,
     },
     floatingImages: [
-      { src: "/images/i'm%20new/header%20photos/baptism.JPG", alt: "Baptism", width: 219, height: 146 },
-      { src: "/images/i'm%20new/header%20photos/beach%20camp.jpg", alt: "Beach camp", width: 186, height: 133 },
-      { src: "/images/i'm%20new/header%20photos/face%20paint.JPG", alt: "Community event", width: 311, height: 249 },
-      { src: "/images/i'm%20new/header%20photos/josh.jpg", alt: "Fellowship", width: 133, height: 106 },
-      { src: "/images/i'm%20new/header%20photos/sports.jpg", alt: "Sports fellowship", width: 216, height: 144 },
-      { src: "/images/i'm%20new/header%20photos/worship.JPG", alt: "Worship service", width: 288, height: 199 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-baptism.jpg", alt: "Baptism", width: 219, height: 146 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-beach%20camp.jpg", alt: "Beach camp", width: 186, height: 133 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-face%20paint.jpg", alt: "Community event", width: 311, height: 249 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-josh.jpg", alt: "Fellowship", width: 133, height: 106 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-sports.jpg", alt: "Sports fellowship", width: 216, height: 144 },
+      { src: "/images/compressed/i'm%20new/header%20photos/compressed-worship.jpg", alt: "Worship service", width: 288, height: 199 },
     ],
   },
 };
@@ -118,7 +118,7 @@ const timelineData: TimelineSectionProps = {
     overline: "SUNDAY SERVICE",
     heading: "What to Expect on Sunday",
     // TODO: add youtube video here
-    imageSrc: "/images/home/visit-us.JPG",
+    imageSrc: "/images/compressed/home/compressed-visit-us.jpg",
     imageAlt: "LA UBF church building",
     items: [
       {
@@ -157,7 +157,7 @@ const locationDetailData: LocationDetailSectionProps = {
       "https://maps.google.com/?q=11625+Paramount+Blvd+Downey+CA+90241",
     directionsLabel: "Get Directions",
     images: [
-      { src: "/images/i'm%20new/laubf-location.png", alt: "LA UBF building exterior" },
+      { src: "/images/compressed/i'm%20new/compressed-laubf-location.png", alt: "LA UBF building exterior" },
     ],
   },
 };
@@ -172,9 +172,9 @@ const campusCardGridData: CampusCardGridSectionProps = {
     description:
       "We have bible study clubs all across different college campuses. Join us for weekly group bible studies and get to know each other through fellowship.",
     decorativeImages: [
-      { src: "/images/ministries/join-campus-ministry-section/1.JPG", alt: "Campus group photo" },
-      { src: "/images/ministries/join-campus-ministry-section/2.jpg", alt: "Bible study outdoors" },
-      { src: "/images/ministries/join-campus-ministry-section/3.png", alt: "Fellowship event" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-1.jpg", alt: "Campus group photo" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-2.jpg", alt: "Bible study outdoors" },
+      { src: "/images/compressed/ministries/join-campus-ministry-section/compressed-3.png", alt: "Fellowship event" },
     ],
     campuses: [
       { id: "lbcc", abbreviation: "LBCC", fullName: "Long Beach City College", href: "/ministries/campus/lbcc" },
