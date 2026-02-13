@@ -103,6 +103,8 @@ export default function FilterToolbar({
   sticky = true,
   stickyTop = "64px",
 }: FilterToolbarProps) {
+  const toolbarRef = useRef<HTMLDivElement>(null);
+  const scrollAnchorRef = useRef<HTMLDivElement>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   // Track when the open animation finishes so we can remove overflow:hidden
@@ -139,7 +141,11 @@ export default function FilterToolbar({
     activeFilterCount > 0 || (search && search.value.length > 0);
 
   return (
+    <>
+    {/* Invisible anchor for scroll position calculation — sits in normal document flow */}
+    <div ref={scrollAnchorRef} className="h-0 w-0" />
     <div
+      ref={toolbarRef}
       className={cn(
         "relative z-30",
         sticky && "sticky",
@@ -157,7 +163,7 @@ export default function FilterToolbar({
         <div className="relative flex justify-between gap-4 h-[59px]">
           {/* Left: Tab navigation — buttons stretch full height */}
           {tabs ? (
-            <TabBar tabs={tabs} />
+            <TabBar tabs={tabs} toolbarRef={toolbarRef} scrollAnchorRef={scrollAnchorRef} />
           ) : (
             <div />
           )}
@@ -182,10 +188,10 @@ export default function FilterToolbar({
                 <div
                   className={cn(
                     "relative transition-all duration-300 ease-out",
-                    searchFocused || search.value ? "w-[280px]" : "w-[240px]",
+                    searchFocused || search.value ? "w-[320px]" : "w-[240px]",
                   )}
                 >
-                  <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-black-3" />
+                  <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-black-3" />
                   <input
                     type="text"
                     placeholder={search.placeholder ?? "Search..."}
@@ -194,11 +200,11 @@ export default function FilterToolbar({
                     onFocus={() => setSearchFocused(true)}
                     onBlur={() => setSearchFocused(false)}
                     className={cn(
-                      "w-full rounded-[14px] border bg-white-0 py-2 pl-9 text-[14px] text-black-1 placeholder:text-black-3 outline-none ring-0 focus:ring-0 focus:outline-none transition-colors",
+                      "w-full rounded-[14px] bg-white-0 py-2.5 pl-[44px] text-[14px] text-black-1 placeholder:text-black-3 outline-none ring-0 focus:ring-0 focus:outline-none transition-colors border border-white-2-5 focus:border-white-3",
                       search.value ? "pr-9" : "pr-3",
                       searchFocused
                         ? "border-black-3/40"
-                        : "border-white-2",
+                        : "border-transparent",
                     )}
                   />
                   {search.value && (
@@ -215,21 +221,21 @@ export default function FilterToolbar({
             
             {/* Vertical divider */}
             {viewModes && (
-              <div className="w-[2px] h-[29px] bg-white-2 shrink-0" />
+              <div className="w-[2px] h-[29px] bg-white-2-5 rounded-full shrink-0" />
             )}
 
             {/* View mode toggle */}
             {viewModes && (
-              <div className="flex rounded-[10px] bg-white-1-5 p-1">
+              <div className="flex rounded-[14px] bg-white-2 p-1">
                 {viewModes.options.map((mode) => (
                   <button
                     key={mode.value}
                     onClick={() => viewModes.onChange(mode.value)}
                     title={mode.label}
                     className={cn(
-                      "flex items-center justify-center rounded-[8px] p-2 transition-colors",
+                      "flex items-center justify-center rounded-[10px] px-2.5 py-2 transition-colors",
                       viewModes.active === mode.value
-                        ? "bg-white-0 text-black-1 shadow-sm"
+                        ? "bg-white-1 text-black-1 shadow-[0px_1px_3px_rgba(0,0,0,0.1),0px_1px_2px_rgba(0,0,0,0.1)]"
                         : "text-black-3 hover:text-black-2",
                     )}
                   >
@@ -258,7 +264,7 @@ export default function FilterToolbar({
                 )}
                 style={{ left: "50%", marginLeft: "-50vw", width: "100vw" }}
               />
-              <div className="relative flex flex-wrap items-center gap-3 py-3 px-2">
+              <div className="relative flex flex-wrap items-center gap-3 py-4 px-2">
                 {/* Dropdown filter buttons */}
                 {filters?.map((filter) => (
                   <FilterDropdownButton key={filter.id} config={filter} />
@@ -283,13 +289,10 @@ export default function FilterToolbar({
                 {/* Clear all */}
                 {onReset && hasActiveFilters && (
                   <button
-                    onClick={() => {
-                      onReset();
-                      setFiltersOpen(false);
-                    }}
-                    className="ml-auto flex items-center gap-1.5 rounded-[10px] px-4 py-2.5 text-[14px] font-medium text-black-3 transition-colors hover:text-black-1"
+                    onClick={() => onReset()}
+                    className="ml-auto flex items-center gap-2 rounded-[12px] border border-white-3 h-[40px] px-3.5 text-[14px] font-medium text-black-3 transition-colors hover:text-black-1 hover:border-black-3/40"
                   >
-                    <IconX className="size-3.5" />
+                    <IconX className="size-4" />
                     <span>Clear all ({activeFilterCount})</span>
                   </button>
                 )}
@@ -299,6 +302,7 @@ export default function FilterToolbar({
         </div>
       )}
     </div>
+    </>
   );
 }
 
@@ -307,8 +311,12 @@ export default function FilterToolbar({
 /** Tab bar with animated sliding underline */
 function TabBar({
   tabs,
+  toolbarRef,
+  scrollAnchorRef,
 }: {
   tabs: NonNullable<FilterToolbarProps["tabs"]>;
+  toolbarRef: React.RefObject<HTMLDivElement | null>;
+  scrollAnchorRef: React.RefObject<HTMLDivElement | null>;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());
@@ -346,7 +354,16 @@ function TabBar({
           }}
           onClick={() => {
             tabs.onChange(tab.key);
-            window.scrollTo({ top: 0 });
+            if (scrollAnchorRef.current && toolbarRef.current) {
+              const stickyTopPx = parseFloat(toolbarRef.current.style.top || "0");
+              // Anchor sits in normal document flow — its position is always reliable
+              const anchorDocTop = scrollAnchorRef.current.getBoundingClientRect().top + window.scrollY;
+              const stickyThreshold = anchorDocTop - stickyTopPx;
+              // Only scroll if we're past the sticky threshold
+              if (window.scrollY > stickyThreshold) {
+                window.scrollTo({ top: stickyThreshold });
+              }
+            }
           }}
           className={cn(
             "relative flex items-end px-3 pb-4 text-[16px] font-medium transition-colors",
@@ -381,16 +398,15 @@ function FilterIconButton({
     <button
       onClick={onClick}
       className={cn(
-        "relative flex items-center justify-center rounded-[10px] border h-[40px] transition-colors",
-        count > 0 ? "w-[72px]" : "w-[44px]",
-        active
-          ? "border-black-2 bg-black-1 text-white-0"
-          : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+        "relative flex items-center justify-center gap-2 rounded-[12px] border bg-white-0 h-[40px] px-3.5 transition-colors",
+        count > 0 || active
+          ? "border-white-3"
+          : "border-white-2-5 hover:border-white-3",
       )}
     >
-      <IconFilter className="size-4" />
+      <IconFilter className="size-4 text-black-2" />
       {count > 0 && (
-        <span className="ml-1.5 flex items-center justify-center min-w-[20px] h-[20px] rounded-full bg-accent-blue text-[11px] font-semibold text-white-0 px-1">
+        <span className="flex items-center justify-center min-w-[20px] h-[20px] rounded-full bg-black-1 text-[12px] font-medium text-white-1 px-1">
           {count}
         </span>
       )}
@@ -436,10 +452,10 @@ function SortDropdown({
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-3 text-[14px] font-medium transition-colors",
+          "flex items-center gap-2 rounded-[12px] border h-[40px] px-3.5 text-[14px] font-medium transition-colors",
           open
-            ? "border-black-3/40 bg-white-0 text-black-1"
-            : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+            ? "border-white-3 bg-white-0 text-black-1"
+            : "border-white-2-5 bg-white-0 text-black-2 hover:border-white-3",
         )}
       >
         {sort.direction === "asc" ? (
@@ -526,12 +542,12 @@ function FilterDropdownButton({ config }: { config: FilterDropdownConfig }) {
       <button
         onClick={() => setOpen((prev) => !prev)}
         className={cn(
-          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-4 text-[14px] transition-colors",
+          "flex items-center gap-2 rounded-[12px] border h-[40px] px-3.5 text-[14px] font-medium transition-colors bg-white-0",
           isActive
-            ? "border-black-2 bg-black-1 text-white-0"
+            ? "border-white-3 text-black-1"
             : open
-              ? "border-black-3/40 bg-white-0 text-black-1"
-              : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+              ? "border-white-3 text-black-1"
+              : "border-white-2-5 text-black-3 hover:border-white-3",
         )}
       >
         <span>{activeLabel}</span>
@@ -617,10 +633,10 @@ function DateFilterButton({
       <button
         onClick={() => inputRef.current?.showPicker()}
         className={cn(
-          "flex items-center gap-1.5 rounded-[10px] border h-[40px] px-4 text-[14px] transition-colors",
+          "flex items-center gap-2 rounded-[12px] border h-[40px] px-3.5 text-[14px] font-medium transition-colors bg-white-0",
           isActive
-            ? "border-black-2 bg-black-1 text-white-0"
-            : "border-white-2 bg-white-0 text-black-2 hover:border-black-3/40",
+            ? "border-white-3 text-black-1"
+            : "border-white-2-5 text-black-3 hover:border-white-3",
         )}
       >
         <IconCalendar className="size-4" />
