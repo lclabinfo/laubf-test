@@ -192,9 +192,12 @@ export default function AllMessagesSection(props: {
         } : undefined}
         sort={tab === "all" ? {
           options: [
-            { value: "date", label: "Date" },
-            { value: "title", label: "Title" },
-            { value: "speaker", label: "Speaker" },
+            { value: "date", label: "Date (Newest)", direction: "desc" },
+            { value: "date", label: "Date (Oldest)", direction: "asc" },
+            { value: "title", label: "Title (A-Z)", direction: "asc" },
+            { value: "title", label: "Title (Z-A)", direction: "desc" },
+            { value: "speaker", label: "Speaker (A-Z)", direction: "asc" },
+            { value: "speaker", label: "Speaker (Z-A)", direction: "desc" },
           ],
           active: sortField,
           direction: sortDirection,

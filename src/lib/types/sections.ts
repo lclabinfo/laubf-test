@@ -574,6 +574,25 @@ export interface QuickLinksSectionProps extends BaseSectionSettings {
   content: QuickLinksContent;
 }
 
+/* ---- Recurring Schedule (weekly meetings) ---- */
+export interface WeeklyMeeting {
+  title: string;
+  description?: string;
+  time: string;
+  days: ("Mon" | "Tue" | "Wed" | "Thu" | "Fri" | "Sat" | "Sun")[];
+  location?: string;
+}
+
+export interface RecurringScheduleContent {
+  heading: string;
+  subtitle?: string;
+  meetings: WeeklyMeeting[];
+}
+
+export interface RecurringScheduleSectionProps extends BaseSectionSettings {
+  content: RecurringScheduleContent;
+}
+
 /* ---- All Events (filterable grid) ---- */
 export interface AllEventsContent {
   heading: string;

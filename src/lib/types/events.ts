@@ -66,6 +66,8 @@ export interface Event {
   links?: { label: string; href: string; external?: boolean }[];
   /** Featured for homepage highlight cards */
   isFeatured?: boolean;
+  /** For recurring meetings: display label like "MON - FRI @ 6:00 AM" */
+  recurrenceSchedule?: string;
 }
 
 /* ---- Filter Interface ---- */
@@ -156,6 +158,8 @@ export function toEventListItemData(event: Event): EventListItemData {
     type: event.type,
     location: event.location,
     href: `/events/${event.slug}`,
+    isRecurring: event.isRecurring,
+    recurrenceSchedule: event.recurrenceSchedule,
   };
 }
 

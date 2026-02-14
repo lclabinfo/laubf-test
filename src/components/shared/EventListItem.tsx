@@ -73,15 +73,23 @@ export default function EventListItem({
       <div className="flex flex-1 flex-col gap-1 min-w-0">
         <div className="flex items-center gap-2">
           <TypePill type={data.type} />
-          {/* Mobile inline date */}
-          <span className="sm:hidden text-body-3 text-black-3">
-            {formatMobileDate(data.dateStart, data.dateEnd ?? undefined)}
-          </span>
-          <span className="text-body-3 text-black-3">{data.time}</span>
+          {data.recurrenceSchedule ? (
+            <span className="text-body-3 text-black-3">
+              {data.recurrenceSchedule}
+            </span>
+          ) : (
+            <>
+              {/* Mobile inline date */}
+              <span className="sm:hidden text-body-3 text-black-3">
+                {formatMobileDate(data.dateStart, data.dateEnd ?? undefined)}
+              </span>
+              <span className="text-body-3 text-black-3">{data.time}</span>
+            </>
+          )}
         </div>
-        <h4 className="text-h4 font-medium text-black-1 line-clamp-1">
+        <p className="text-body-1 text-black-1 line-clamp-1">
           {data.title}
-        </h4>
+        </p>
       </div>
 
       {/* Arrow */}

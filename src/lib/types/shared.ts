@@ -84,6 +84,8 @@ export interface EventListItemData {
   type: EventType;
   location?: string;
   href?: string;
+  isRecurring?: boolean;
+  recurrenceSchedule?: string;
 }
 
 export interface EventListItemProps {

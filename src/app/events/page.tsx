@@ -49,7 +49,7 @@ const allEventsData: AllEventsSectionProps = {
   id: "all-events",
   visible: true,
   colorScheme: "light",
-  paddingY: "compact",
+  paddingY: "none",
   content: {
     heading: "All Events",
   },
@@ -60,9 +60,7 @@ export default function EventsPage() {
     <main>
       <EventsHeroSection settings={heroData} />
       <QuickLinksSection settings={quickLinksData} meetings={RECURRING_MEETINGS} />
-      <div className="container-standard">
-        <hr className="border-white-2" />
-      </div>
+      <hr className="border-white-2" />
       <AllEventsSection settings={allEventsData} events={MOCK_EVENTS} />
     </main>
   );

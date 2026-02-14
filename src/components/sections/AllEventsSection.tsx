@@ -41,6 +41,7 @@ import {
 } from "@/components/layout/icons";
 import EventGridCard from "@/components/shared/EventGridCard";
 
+type TabView = "all" | "event" | "meeting" | "program";
 type ViewMode = "card" | "list" | "calendar";
 
 const INITIAL_COUNT = 9;
@@ -54,6 +55,7 @@ export default function AllEventsSection(props: {
   const t = themeTokens[settings.colorScheme];
 
   /* ── State ── */
+  const [tab, setTab] = useState<TabView>("all");
   const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<EventFilters>({});
@@ -63,7 +65,12 @@ export default function AllEventsSection(props: {
 
   /* ── Filtering & Sorting ── */
   const filteredEvents = useMemo(() => {
-    const filtered = filterEvents(events, { ...filters, search: search || undefined });
+    const typeFilter: EventFilters = {
+      ...filters,
+      search: search || undefined,
+      type: tab === "all" ? filters.type : (tab as EventType),
+    };
+    const filtered = filterEvents(events, typeFilter);
     return [...filtered].sort((a, b) => {
       let cmp = 0;
       if (sortField === "date") {
@@ -73,7 +80,7 @@ export default function AllEventsSection(props: {
       }
       return sortDirection === "asc" ? cmp : -cmp;
     });
-  }, [events, filters, search, sortField, sortDirection]);
+  }, [events, filters, search, tab, sortField, sortDirection]);
 
   const visibleEvents = filteredEvents.slice(0, displayCount);
   const hasMore = displayCount < filteredEvents.length;
@@ -86,10 +93,27 @@ export default function AllEventsSection(props: {
     setDisplayCount(INITIAL_COUNT);
   }
 
+  const tabs: { key: TabView; label: string; mobileLabel?: string }[] = [
+    { key: "all", label: "Browse All", mobileLabel: "All" },
+    { key: "event", label: "Events" },
+    { key: "meeting", label: "Meetings" },
+    { key: "program", label: "Programs" },
+  ];
+
   return (
-    <SectionContainer settings={settings}>
+    <SectionContainer settings={settings} className="pt-0 py-30">
       {/* Filter toolbar */}
       <FilterToolbar
+        tabs={{
+          options: tabs,
+          active: tab,
+          onChange: (key) => {
+            setTab(key as TabView);
+            setFilters({});
+            setSearch("");
+            setDisplayCount(INITIAL_COUNT);
+          },
+        }}
         viewModes={{
           options: [
             { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
@@ -108,19 +132,6 @@ export default function AllEventsSection(props: {
           placeholder: "Search events, meetings, programs...",
         }}
         filters={[
-          {
-            id: "type",
-            label: "Type",
-            value: filters.type ?? "all",
-            options: [
-              { value: "all", label: "All Types" },
-              { value: "meeting", label: "Meeting" },
-              { value: "event", label: "Event" },
-              { value: "program", label: "Program" },
-            ],
-            onChange: (v) =>
-              updateFilter("type", v === "all" ? undefined : (v as EventType)),
-          },
           {
             id: "ministry",
             label: "Ministry",
@@ -162,8 +173,10 @@ export default function AllEventsSection(props: {
         }}
         sort={{
           options: [
-            { value: "date", label: "Date" },
-            { value: "title", label: "Title" },
+            { value: "date", label: "Date (Newest)", direction: "desc" },
+            { value: "date", label: "Date (Oldest)", direction: "asc" },
+            { value: "title", label: "Title (A-Z)", direction: "asc" },
+            { value: "title", label: "Title (Z-A)", direction: "desc" },
           ],
           active: sortField,
           direction: sortDirection,
@@ -177,6 +190,7 @@ export default function AllEventsSection(props: {
           setFilters({});
           setDisplayCount(INITIAL_COUNT);
         }}
+        className="mb-8"
       />
 
       {/* Events display */}

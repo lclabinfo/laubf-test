@@ -934,6 +934,48 @@ const MOCK_EVENTS: Event[] = [
     isRecurring: false,
     registrationUrl: "https://forms.google.com/evangelism-training-2026",
   },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // RECURRING: Daily Bread (Mon-Fri 6 AM)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "daily-bread",
+    title: "[Mock] Daily Bread",
+    type: "meeting",
+    dateStart: "2026-02-01",
+    time: "6:00 AM - 7:00 AM",
+    location: "LA UBF Main Center",
+    description:
+      "Start your morning in the Word. A short daily devotional and prayer time open to everyone.",
+    body: `<p>Daily Bread is a morning devotional gathering where we read a passage of Scripture together, share reflections, and pray to start the day grounded in God's word.</p>
+<p>No preparation is needed — just come with an open heart. Coffee is ready by 5:45 AM.</p>`,
+    image: { src: "", alt: "Morning devotional gathering" },
+    tags: ["#CHURCH-WIDE", "#RECURRING", "#DEVOTIONAL"],
+    ministry: "church-wide",
+    isRecurring: true,
+    recurrenceSchedule: "MON - FRI @ 6:00 AM - 7:00 AM",
+  },
+
+  // ──────────────────────────────────────────────────────────────────────────
+  // RECURRING: Men's Bible Study (Saturday)
+  // ──────────────────────────────────────────────────────────────────────────
+  {
+    slug: "mens-bible-study",
+    title: "[Mock] Men's Bible Study",
+    type: "meeting",
+    dateStart: "2026-02-01",
+    time: "7:00 AM - 8:30 AM",
+    location: "LA UBF Main Center",
+    description:
+      "A weekly gathering for men to study Scripture, share life, and hold one another accountable in faith.",
+    body: `<p>Men's Bible Study meets every Saturday morning for an in-depth study of God's word. We are currently working through the Book of Proverbs, exploring practical wisdom for daily life.</p>
+<p>Breakfast is provided. All men are welcome regardless of where you are in your faith journey.</p>`,
+    image: { src: "", alt: "Men's Bible study group" },
+    tags: ["#CHURCH-WIDE", "#RECURRING", "#BIBLE STUDY"],
+    ministry: "church-wide",
+    isRecurring: true,
+    recurrenceSchedule: "SAT @ 7:00 AM - 8:30 AM",
+  },
 ];
 
 /* ── Sort by dateStart descending (latest first) ──────────────────────────── */

@@ -138,8 +138,10 @@ export default function AllVideosSection(props: {
         }}
         sort={{
           options: [
-            { value: "date", label: "Date" },
-            { value: "title", label: "Title" },
+            { value: "date", label: "Date (Newest)", direction: "desc" },
+            { value: "date", label: "Date (Oldest)", direction: "asc" },
+            { value: "title", label: "Title (A-Z)", direction: "asc" },
+            { value: "title", label: "Title (Z-A)", direction: "desc" },
           ],
           active: sortField,
           direction: sortDirection,

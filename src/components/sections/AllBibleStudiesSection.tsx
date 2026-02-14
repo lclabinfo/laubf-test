@@ -91,6 +91,8 @@ export default function AllBibleStudiesSection(props: {
       let cmp = 0;
       if (sortField === "date") {
         cmp = a.dateFor.localeCompare(b.dateFor);
+      } else if (sortField === "book") {
+        cmp = a.book.localeCompare(b.book);
       } else {
         cmp = a.title.localeCompare(b.title);
       }
@@ -190,8 +192,12 @@ export default function AllBibleStudiesSection(props: {
         } : undefined}
         sort={tab === "all" ? {
           options: [
-            { value: "date", label: "Date" },
-            { value: "title", label: "Title" },
+            { value: "date", label: "Date (Newest)", direction: "desc" },
+            { value: "date", label: "Date (Oldest)", direction: "asc" },
+            { value: "title", label: "Title (A-Z)", direction: "asc" },
+            { value: "title", label: "Title (Z-A)", direction: "desc" },
+            { value: "book", label: "Book (A-Z)", direction: "asc" },
+            { value: "book", label: "Book (Z-A)", direction: "desc" },
           ],
           active: sortField,
           direction: sortDirection,

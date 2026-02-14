@@ -16,6 +16,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import Link from "next/link";
 import SectionContainer from "@/components/shared/SectionContainer";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import CTAButton from "@/components/shared/CTAButton";
@@ -67,17 +68,19 @@ export default function EventCalendarSection(props: {
     return filtered;
   }, [events, activeFilter]);
 
-  /* ── Events for current month (list view) ── */
+  /* ── Events for current month (list view), sorted ascending by date ── */
   const monthEvents = useMemo(() => {
     const monthStr = String(currentMonth + 1).padStart(2, "0");
     const yearStr = String(currentYear);
-    return filteredEvents.filter((e) => {
-      const start = e.dateStart;
-      const end = e.dateEnd || e.dateStart;
-      const monthStart = `${yearStr}-${monthStr}-01`;
-      const monthEnd = `${yearStr}-${monthStr}-31`;
-      return start <= monthEnd && end >= monthStart;
-    });
+    return filteredEvents
+      .filter((e) => {
+        const start = e.dateStart;
+        const end = e.dateEnd || e.dateStart;
+        const monthStart = `${yearStr}-${monthStr}-01`;
+        const monthEnd = `${yearStr}-${monthStr}-31`;
+        return start <= monthEnd && end >= monthStart;
+      })
+      .sort((a, b) => a.dateStart.localeCompare(b.dateStart));
   }, [filteredEvents, currentMonth, currentYear]);
 
   const monthLabel = new Date(currentYear, currentMonth, 1).toLocaleDateString(
@@ -203,20 +206,7 @@ export default function EventCalendarSection(props: {
 
           {/* Content: List or Calendar */}
           {viewMode === "list" ? (
-            <div className="flex flex-col">
-              {monthEvents.length === 0 ? (
-                <div className="flex items-center justify-center py-16">
-                  <p className="text-body-2 text-black-3">
-                    No events this month.
-                  </p>
-                </div>
-              ) : (
-                monthEvents.slice(0, 8).map((event) => {
-                  const data = toEventListItemData(event);
-                  return <EventListItem key={event.slug} data={data} />;
-                })
-              )}
-            </div>
+            <EventListView events={monthEvents} filteredAll={filteredEvents} />
           ) : (
             <EventCalendarGrid events={filteredEvents} month={currentMonth} year={currentYear} />
           )}
@@ -256,5 +246,129 @@ export default function EventCalendarSection(props: {
         </div>
       </div>
     </SectionContainer>
+  );
+}
+
+/* ── List view with UPCOMING / RECURRING groups ── */
+
+const UPCOMING_LIMIT = 5;
+const RECURRING_LIMIT = 3;
+
+function EventListView({
+  events,
+  filteredAll,
+}: {
+  events: Event[];
+  filteredAll: Event[];
+}) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayISO = today.toISOString().split("T")[0];
+
+  // Sort ascending by dateStart (soonest first), only future/today events
+  const upcomingEvents = events
+    .filter((e) => !e.isRecurring && e.dateStart >= todayISO)
+    .sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+
+  const recurringEvents = filteredAll
+    .filter((e) => e.isRecurring)
+    .sort((a, b) => a.dateStart.localeCompare(b.dateStart));
+
+  const totalUpcoming = upcomingEvents.length;
+  const totalRecurring = recurringEvents.length;
+  const shownUpcoming = upcomingEvents.slice(0, UPCOMING_LIMIT);
+  const shownRecurring = recurringEvents.slice(0, RECURRING_LIMIT);
+  const moreUpcoming = totalUpcoming - UPCOMING_LIMIT;
+  const moreRecurring = totalRecurring - RECURRING_LIMIT;
+
+  const hasUpcoming = upcomingEvents.length > 0;
+  const hasRecurring = recurringEvents.length > 0;
+
+  if (!hasUpcoming && !hasRecurring) {
+    return (
+      <div className="flex items-center justify-center py-16">
+        <p className="text-body-2 text-black-3">No events this month.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-6">
+      {/* UPCOMING group */}
+      {hasUpcoming && (
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <p className="text-body-1 text-black-3 uppercase tracking-wide">
+              Upcoming
+            </p>
+            <span className="flex size-[22px] items-center justify-center rounded-full bg-black-1 text-[11px] font-medium text-white-0">
+              {totalUpcoming}
+            </span>
+          </div>
+          <div className="relative">
+            <div className="flex flex-col border-t border-white-2-5">
+              {shownUpcoming.map((event) => {
+                const data = toEventListItemData(event);
+                return <EventListItem key={event.slug} data={data} />;
+              })}
+            </div>
+            {moreUpcoming > 0 && (
+              <div className="relative -mt-4">
+                <div className="absolute inset-x-0 -top-16 h-16 bg-gradient-to-t from-white-1 to-transparent pointer-events-none" />
+                <div className="relative flex items-center justify-between rounded-[12px] border border-white-2-5 bg-white-0 px-4 py-3">
+                  <span className="text-[14px] text-black-3">
+                    {moreUpcoming} more upcoming event{moreUpcoming !== 1 ? "s" : ""}
+                  </span>
+                  <Link
+                    href="/events"
+                    className="text-[14px] font-medium text-black-1 hover:underline"
+                  >
+                    View all
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* RECURRING group */}
+      {hasRecurring && (
+        <div className="flex flex-col gap-3">
+          <div className="flex items-center gap-2">
+            <p className="text-body-1 text-black-3 uppercase tracking-wide">
+              Recurring
+            </p>
+            <span className="flex size-[22px] items-center justify-center rounded-full bg-black-1 text-[11px] font-medium text-white-0">
+              {totalRecurring}
+            </span>
+          </div>
+          <div className="relative">
+            <div className="flex flex-col border-t border-white-2-5">
+              {shownRecurring.map((event) => {
+                const data = toEventListItemData(event);
+                return <EventListItem key={event.slug} data={data} />;
+              })}
+            </div>
+            {moreRecurring > 0 && (
+              <div className="relative -mt-4">
+                <div className="absolute inset-x-0 -top-16 h-16 bg-gradient-to-t from-white-1 to-transparent pointer-events-none" />
+                <div className="relative flex items-center justify-between rounded-[12px] border border-white-2-5 bg-white-0 px-4 py-3">
+                  <span className="text-[14px] text-black-3">
+                    {moreRecurring} more recurring event{moreRecurring !== 1 ? "s" : ""}
+                  </span>
+                  <Link
+                    href="/events"
+                    className="text-[14px] font-medium text-black-1 hover:underline"
+                  >
+                    View all
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
