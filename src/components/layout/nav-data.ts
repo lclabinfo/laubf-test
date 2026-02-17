@@ -75,13 +75,6 @@ export const dropdowns: NavDropdown[] = [
             href: "/im-new",
             icon: MapPin,
           },
-          {
-            label: "Livestream",
-            description: "Our mission & vision",
-            href: "https://youtube.com/@laubf",
-            icon: Youtube,
-            external: true,
-          },
         ],
       },
       {
@@ -89,9 +82,14 @@ export const dropdowns: NavDropdown[] = [
         items: [
           {
             label: "Events",
-            description: "Our mission & vision",
             href: "/events",
             icon: Calendar,
+          },
+          {
+            label: "Livestream",
+            href: "https://youtube.com/@laubf",
+            icon: Youtube,
+            external: true,
           },
           // {
           //   label: "Announcements",
@@ -226,7 +224,7 @@ export const dropdowns: NavDropdown[] = [
           },
           {
             label: "Bible Studies",
-            description: "Study questions & answers",
+            description: "Study Questions",
             href: "/bible-study",
             icon: BookOpen,
           },

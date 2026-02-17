@@ -47,18 +47,18 @@ function SectionColumn({
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               onClick={onClose}
-              className="flex items-center gap-4 min-w-[200px] px-4 py-3.5 rounded-lg transition-colors hover:bg-white-1-5 group/item"
+              className="flex items-center gap-4 min-w-[200px] min-h-[62px] px-4 py-3 rounded-lg transition-colors hover:bg-white-1-5 group/item"
             >
               <Icon
                 className="size-6 text-black-1 shrink-0"
                 strokeWidth={1.5}
               />
-              <div className="flex flex-col gap-1.5 min-w-0">
-                <span className="text-base font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
+              <div className="flex flex-col gap-1 min-w-0">
+                <span className="text-base font-medium leading-tight text-black-1 tracking-[-0.03em]">
                   {item.label}
                 </span>
                 {item.description && (
-                  <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em]">
+                  <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em] line-clamp-1">
                     {item.description}
                   </span>
                 )}
@@ -95,7 +95,7 @@ function SectionColumn({
 
 export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
   return (
-    <div className="bg-white-1 border border-white-2 rounded-2xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] p-7 w-max animate-dropdown-in">
+    <div className="bg-white-1 border border-white-2 rounded-xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] py-6 px-5 w-max animate-dropdown-in">
       <div className="flex gap-5 items-stretch">
           {dropdown.sections.map((section, i) => (
             <Fragment key={section.title}>

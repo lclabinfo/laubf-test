@@ -31,6 +31,7 @@ export type SectionType =
   | "media-text"
   | "highlight-cards"
   | "event-calendar"
+  | "recurring-meetings"
   | "quote-banner"
   | "action-card-grid"
   | "directory-list"
@@ -591,6 +592,19 @@ export interface RecurringScheduleContent {
 
 export interface RecurringScheduleSectionProps extends BaseSectionSettings {
   content: RecurringScheduleContent;
+}
+
+/* ---- Recurring Meetings ---- */
+export interface RecurringMeetingsContent {
+  heading: string;
+  /** Max items to show before "View all" overflow. Default 4. */
+  maxVisible?: number;
+  /** URL for "View all" link. Default "/events" */
+  viewAllHref?: string;
+}
+
+export interface RecurringMeetingsSectionProps extends BaseSectionSettings {
+  content: RecurringMeetingsContent;
 }
 
 /* ---- All Events (filterable grid) ---- */

@@ -66,7 +66,22 @@ export interface Event {
   links?: { label: string; href: string; external?: boolean }[];
   /** Featured for homepage highlight cards */
   isFeatured?: boolean;
-  /** For recurring meetings: display label like "MON - FRI @ 6:00 AM" */
+
+  /* ── Recurrence fields (PostgreSQL: recurrence_type, recurrence_days, recurrence_start, recurrence_end) ── */
+  /** Recurrence frequency: 'daily' | 'weekly' | 'biweekly' | 'monthly' */
+  recurrenceType?: "daily" | "weekly" | "biweekly" | "monthly";
+  /** Days of the week (for weekly/biweekly). PostgreSQL TEXT[] column. */
+  recurrenceDays?: ("MON" | "TUE" | "WED" | "THU" | "FRI" | "SAT" | "SUN")[];
+  /** Start date of the recurrence window (ISO). NULL = ongoing since inception. */
+  recurrenceStart?: string;
+  /** End date of the recurrence window (ISO). NULL = indefinite / ongoing. */
+  recurrenceEnd?: string;
+
+  /**
+   * Pre-computed display label for the schedule line.
+   * Derived from recurrenceType + recurrenceDays + start/end.
+   * Examples: "Weekly on MON - FRI", "Every Saturday", "Daily (2/16 - 3/8)"
+   */
   recurrenceSchedule?: string;
 }
 
@@ -175,6 +190,63 @@ export function toUpcomingEventItem(event: Event): UpcomingEventItem {
     badge: getEventBadge(event),
     tags: event.tags,
   };
+}
+
+/* ---- Recurrence Schedule Formatter ---- */
+
+const DAY_FULL: Record<string, string> = {
+  MON: "Monday",
+  TUE: "Tuesday",
+  WED: "Wednesday",
+  THU: "Thursday",
+  FRI: "Friday",
+  SAT: "Saturday",
+  SUN: "Sunday",
+};
+
+/** Short M/D format: "2026-02-16" → "2/16" */
+function shortDate(iso: string): string {
+  const d = new Date(iso + "T00:00:00");
+  return `${d.getMonth() + 1}/${d.getDate()}`;
+}
+
+/**
+ * Build a human-friendly recurrence label from structured fields.
+ * Falls back to event.recurrenceSchedule if already set.
+ */
+export function formatRecurrenceSchedule(event: Event): string | undefined {
+  if (event.recurrenceSchedule) return event.recurrenceSchedule;
+  if (!event.recurrenceType) return undefined;
+
+  const { recurrenceType, recurrenceDays, recurrenceStart, recurrenceEnd } = event;
+
+  // Date range suffix: " (2/16 - 3/8)" when bounded
+  const rangeSuffix =
+    recurrenceStart && recurrenceEnd
+      ? ` (${shortDate(recurrenceStart)} - ${shortDate(recurrenceEnd)})`
+      : "";
+
+  if (recurrenceType === "daily") {
+    return `Daily${rangeSuffix}`;
+  }
+
+  if (recurrenceType === "weekly" || recurrenceType === "biweekly") {
+    const prefix = recurrenceType === "biweekly" ? "Every other" : "";
+    if (!recurrenceDays?.length) return `Weekly${rangeSuffix}`;
+
+    // Single day → "Every Saturday"
+    if (recurrenceDays.length === 1) {
+      return `Every ${DAY_FULL[recurrenceDays[0]]}${rangeSuffix}`;
+    }
+    // Consecutive range → "Weekly on MON - FRI"
+    return `${prefix || "Weekly on"} ${recurrenceDays[0]} - ${recurrenceDays[recurrenceDays.length - 1]}${rangeSuffix}`;
+  }
+
+  if (recurrenceType === "monthly") {
+    return `Monthly${rangeSuffix}`;
+  }
+
+  return undefined;
 }
 
 /* ---- Ministry Display Labels ---- */

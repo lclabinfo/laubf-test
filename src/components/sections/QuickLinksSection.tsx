@@ -24,6 +24,7 @@ import type { QuickLinksSectionProps } from "@/lib/types/sections";
 import type { Event } from "@/lib/types/events";
 import {
   IconClock,
+  IconCalendar,
   IconLink,
   IconArrowRight,
   IconChevronLeft,
@@ -87,7 +88,7 @@ export default function QuickLinksSection(props: {
       {/* Desktop: Horizontal scrolling carousel */}
       <div
         ref={scrollRef}
-        className="hidden lg:flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2"
+        className="hidden lg:flex gap-5 overflow-x-auto scrollbar-hide snap-x snap-mandatory -mx-8 px-8 pt-4 -mt-4 pb-10 -mb-10"
       >
         {meetings.map((meeting) => (
           <DesktopMeetingCard key={meeting.slug} meeting={meeting} />
@@ -109,22 +110,30 @@ export default function QuickLinksSection(props: {
 function DesktopMeetingCard({ meeting }: { meeting: Event }) {
   return (
     <div className="min-w-[280px] max-w-[300px] shrink-0 snap-start bg-white-0 rounded-[20px] border border-white-2-5 shadow-[0px_12px_20px_0px_rgba(0,0,0,0.05)] p-6 flex flex-col">
-      {/* Type pill + title row */}
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-[18px] font-medium text-black-1 leading-snug">
-          {meeting.title}
-        </h3>
-        <span
-          className={`shrink-0 text-white-0 text-[11px] tracking-[0.24px] font-medium px-2.5 py-0.5 rounded-full uppercase ${eventTypeColors[meeting.type] ?? EVENT_TYPE_FALLBACK_COLOR}`}
-        >
-          {meeting.type}
-        </span>
-      </div>
+      {/* Type pill */}
+      <span
+        className={`self-start text-white-0 text-[11px] tracking-[0.24px] font-medium px-2.5 py-0.5 rounded-full uppercase mb-2 ${eventTypeColors[meeting.type] ?? EVENT_TYPE_FALLBACK_COLOR}`}
+      >
+        {meeting.type}
+      </span>
 
-      {/* Time */}
-      <div className="flex items-center gap-2 mb-5">
-        <IconClock className="size-4 text-black-3 shrink-0" />
-        <span className="text-[14px] text-black-2">{meeting.time}</span>
+      {/* Title — max 2 lines */}
+      <h3 className="text-[18px] font-medium text-black-1 leading-snug line-clamp-2 mb-3">
+        {meeting.title}
+      </h3>
+
+      {/* Date & time */}
+      <div className="flex flex-col gap-1.5 mb-5">
+        {meeting.recurrenceSchedule && (
+          <div className="flex items-center gap-2">
+            <IconCalendar className="size-4 text-black-3 shrink-0" />
+            <span className="text-[14px] text-black-2">{meeting.recurrenceSchedule}</span>
+          </div>
+        )}
+        <div className="flex items-center gap-2">
+          <IconClock className="size-4 text-black-3 shrink-0" />
+          <span className="text-[14px] text-black-2">{meeting.time}</span>
+        </div>
       </div>
 
       {/* Spacer + actions */}
@@ -166,36 +175,50 @@ function MobileQuickLinksList({ meetings }: { meetings: Event[] }) {
   return (
     <div className="flex flex-col gap-2">
       {visible.map((meeting) => (
-        <a
+        <div
           key={meeting.slug}
-          href={meeting.meetingUrl ?? `/events/${meeting.slug}`}
-          target={meeting.meetingUrl ? "_blank" : undefined}
-          rel={meeting.meetingUrl ? "noopener noreferrer" : undefined}
-          className="group flex items-center gap-4 rounded-2xl border border-white-2-5 bg-white-0 px-4 py-3.5 transition-colors hover:bg-white-1-5 active:bg-white-2"
+          className="flex items-center gap-4 rounded-2xl border border-white-2-5 bg-white-0 px-4 py-4"
         >
-          {/* Icon */}
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-black-1 text-white-0">
-            <IconLink className="size-4" />
-          </div>
+          {/* Left: pill, title, date & time — stacked vertically */}
+          <div className="flex-1 min-w-0 flex flex-col gap-1.5">
+            {/* Type pill */}
+            <span
+              className={`self-start text-white-0 text-[10px] tracking-[0.2px] font-medium px-2 py-0.5 rounded-full uppercase ${eventTypeColors[meeting.type] ?? EVENT_TYPE_FALLBACK_COLOR}`}
+            >
+              {meeting.type}
+            </span>
 
-          {/* Title + time */}
-          <div className="flex-1 min-w-0">
+            {/* Title */}
             <h3 className="text-[15px] font-medium text-black-1 leading-snug truncate">
               {meeting.title}
             </h3>
-            <div className="flex items-center gap-1.5 mt-0.5">
-              <IconClock className="size-3 text-black-3 shrink-0" />
-              <span className="text-[13px] text-black-3">{meeting.time}</span>
+
+            {/* Date & time row */}
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              {meeting.recurrenceSchedule && (
+                <span className="inline-flex items-center gap-1.5 text-[13px] text-black-3">
+                  <IconCalendar className="size-3 shrink-0" />
+                  {meeting.recurrenceSchedule}
+                </span>
+              )}
+              <span className="inline-flex items-center gap-1.5 text-[13px] text-black-3">
+                <IconClock className="size-3 shrink-0" />
+                {meeting.time}
+              </span>
             </div>
           </div>
 
-          {/* Type pill */}
-          <span
-            className={`shrink-0 text-white-0 text-[10px] tracking-[0.2px] font-medium px-2 py-0.5 rounded-full uppercase ${eventTypeColors[meeting.type] ?? EVENT_TYPE_FALLBACK_COLOR}`}
+          {/* Right: link button */}
+          <a
+            href={meeting.meetingUrl ?? `/events/${meeting.slug}`}
+            target={meeting.meetingUrl ? "_blank" : undefined}
+            rel={meeting.meetingUrl ? "noopener noreferrer" : undefined}
+            className="flex size-10 shrink-0 items-center justify-center rounded-full bg-black-1 text-white-0 transition-colors hover:bg-black-2"
+            aria-label={meeting.meetingUrl ? "Join online meeting" : "View event detail"}
           >
-            {meeting.type}
-          </span>
-        </a>
+            <IconLink className="size-4" />
+          </a>
+        </div>
       ))}
 
       {/* Show more / Show less toggle */}

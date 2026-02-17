@@ -34,7 +34,7 @@ export default function HighlightCardsSection(props: {
   const animate = settings.enableAnimations !== false;
 
   return (
-    <SectionContainer settings={settings} className="!pt-24 lg:!pt-25">
+    <SectionContainer settings={settings} className="!pt-24 lg:!pt-25 lg:!pb-10">
       <div className="flex flex-col gap-8 lg:gap-10">
         <AnimateOnScroll animation="fade-up" enabled={animate}>
           <SectionHeader

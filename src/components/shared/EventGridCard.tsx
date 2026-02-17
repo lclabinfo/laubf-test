@@ -39,9 +39,9 @@ export default function EventGridCard({ event }: { event: Event }) {
       </div>
 
       {/* Details */}
-      <div className="flex flex-col gap-4 pt-[18px] pb-5 px-7 flex-1">
+      <div className="flex flex-col gap-3 pt-[18px] pb-5 px-5 lg:px-7 flex-1">
         {/* Type + Title */}
-        <div className="flex flex-col gap-2 items-start">
+        <div className="flex flex-col gap-3 items-start">
           <span
             className={`text-white-1 text-[12px] tracking-[0.24px] font-medium leading-none px-2 py-1.5 rounded-lg uppercase ${
               event.type === "meeting"
@@ -54,16 +54,16 @@ export default function EventGridCard({ event }: { event: Event }) {
             {event.type}
           </span>
 
-          <h3 className="text-[20px] font-medium text-black-1 leading-none tracking-[-0.4px] truncate w-full pb-0.5">
+          <p className="text-[16px] lg:text-[20px] font-medium text-black-1 leading-none tracking-[-0.4px] truncate w-full pb-0.5">
             {event.title}
-          </h3>
+          </p>
         </div>
 
         {/* Time & Location */}
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <IconClock className="size-5 text-black-2 shrink-0" />
-            <span className="text-[14px] text-black-2 tracking-[-0.28px] leading-[1.4]">
+            <IconClock className="size-4 text-black-2 shrink-0" />
+            <span className="text-body-3 text-black-2">
               {new Date(event.dateStart + "T00:00:00").toLocaleDateString(
                 "en-US",
                 { weekday: "short", month: "short", day: "numeric" },
@@ -72,8 +72,8 @@ export default function EventGridCard({ event }: { event: Event }) {
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <IconMapPin className="size-5 text-black-2 shrink-0" />
-            <span className="text-[14px] text-black-2 tracking-[-0.28px] leading-[1.4] line-clamp-1">
+            <IconMapPin className="size-4 text-black-2 shrink-0" />
+            <span className="text-body-3 text-black-2 line-clamp-1">
               {event.location}
             </span>
           </div>
@@ -81,7 +81,7 @@ export default function EventGridCard({ event }: { event: Event }) {
 
         {/* Tags — pinned to bottom edge */}
         {event.tags.length > 0 && (
-          <div className="flex items-center justify-between mt-auto">
+          <div className="flex items-center justify-between mt-auto pt-1">
             <div className="flex gap-2 items-center overflow-clip flex-1 min-w-0">
               {visibleTags.map((tag) => (
                 <span
