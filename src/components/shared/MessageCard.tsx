@@ -66,14 +66,14 @@ export default function MessageCard({ message }: { message: Message }) {
               {message.series}
             </p>
           </div>
-          <p className="font-medium leading-none text-black-3 text-[14px] tracking-[-0.42px]">
+          <p className="font-medium leading-none text-black-3 text-[14px] tracking-[-0.42px] whitespace-nowrap">
             {formatDate(message.dateFor)}
           </p>
         </div>
 
         {/* Title */}
         <div className="w-full mb-[12px]">
-          <p className="font-medium leading-[1.2] text-black-1 text-[24px] tracking-[-0.72px] line-clamp-2">
+          <p className="font-medium leading-[1.2] text-black-1 text-[18px] sm:text-[24px] tracking-[-0.72px] line-clamp-2">
             {message.title}
           </p>
         </div>
@@ -82,13 +82,13 @@ export default function MessageCard({ message }: { message: Message }) {
         <div className="flex flex-col gap-[6px] w-full">
           <div className="flex gap-[8px] items-center">
             <IconUser className="shrink-0 size-[16px] text-black-3" />
-            <p className="leading-[1.4] text-black-3 text-[16px] tracking-[-0.32px]">
+            <p className="leading-[1.4] text-black-3 text-[14px] sm:text-[16px] tracking-[-0.32px]">
               {message.speaker}
             </p>
           </div>
           <div className="flex gap-[8px] items-center">
             <IconBookOpen className="shrink-0 size-[16px] text-black-3" />
-            <p className="leading-[1.4] text-black-3 text-[16px] tracking-[-0.32px]">
+            <p className="leading-[1.4] text-black-3 text-[14px] sm:text-[16px] tracking-[-0.32px]">
               {message.passage}
             </p>
           </div>

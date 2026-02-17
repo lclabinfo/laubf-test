@@ -255,9 +255,41 @@ export default function FilterToolbar({
     {/* Invisible anchor for scroll position calculation */}
     <div ref={scrollAnchorRef} className="h-0 w-0" />
 
-    {/* ══════════════════════════════════════════════════
-        DESKTOP LAYOUT (lg+) — unchanged from before
-       ══════════════════════════════════════════════════ */}
+    {/* ══════════════════════════════════════════════════════════════════════
+        DESKTOP LAYOUT (lg+ / ≥1024px)
+        ─────────────────────────────────────────────────────────────────────
+        RESPONSIVE RULES (designed for 1024px–1440px+ without breakpoint changes):
+        ─────────────────────────────────────────────────────────────────────
+        1. TABS (left side):
+           - `shrink-0 whitespace-nowrap` — tab labels never wrap to a second line.
+           - Each tab has compact horizontal padding (`px-3`) so many tabs fit.
+           - `min-w-0 overflow-hidden` on the tab container lets tabs shrink if
+             the right-side controls need space, preventing toolbar overflow.
+        2. SORT BUTTON:
+           - Label is capped at `max-w-[6ch]` (~6 characters) with `truncate`
+             so "Date (Newest)" renders as "Date (…". This keeps a fixed
+             compact width regardless of how long the sort label is.
+           - `whitespace-nowrap` prevents any two-line wrapping.
+        3. SEARCH BAR:
+           - Collapsed: `w-[180px]` (down from 240px for tighter viewports).
+           - Focused/active: `w-[260px]` (down from 320px).
+           - The search container uses `shrink` so it can compress further if
+             the toolbar is packed with tabs + filters + sort + view toggle.
+        4. VIEW MODE TOGGLE:
+           - Capped at max 3 options via `.slice(0, 3)` — guarantees the
+             toggle never grows beyond card / list / calendar.
+           - Each button is icon-only with tight `px-2.5 py-2` padding.
+        5. RIGHT-SIDE CONTROLS:
+           - `shrink-0` on filter icon, sort dropdown, and view toggle so they
+             never compress — only the search bar and tab area flex.
+           - `gap-2` between controls (compact) with `gap-3` to the view toggle.
+        6. OVERALL:
+           - The toolbar row is `flex justify-between gap-3 h-[59px]`.
+           - Left side (tabs) can shrink via `min-w-0`.
+           - Right side controls are `shrink-0` except search which flexes.
+           - This means at 1024px with 4 tabs + filter + sort + search + 3-way
+             view toggle, everything fits without overflow or wrapping.
+       ══════════════════════════════════════════════════════════════════════ */}
     <div
       ref={toolbarRef}
       className={cn(
@@ -273,15 +305,19 @@ export default function FilterToolbar({
           className="absolute top-0 bottom-0 bg-white-1 border-b border-white-2-5 shadow-[0px_4px_12px_rgba(0,0,0,0.04)]"
           style={fullWidthBgStyle}
         />
-        <div className="relative flex justify-between gap-4 h-[59px]">
+        {/* Rule 6: justify-between + gap-3 distributes space between tabs and controls */}
+        <div className="relative flex justify-between gap-3 h-[59px]">
+          {/* Rule 1: Tabs container — min-w-0 allows shrinking when controls need space */}
           {tabs ? (
             <TabBar tabs={tabs} toolbarRef={toolbarRef} scrollAnchorRef={scrollAnchorRef} />
           ) : (
             <div />
           )}
 
-          <div className="flex items-center gap-4 py-2.5">
+          {/* Right-side controls cluster */}
+          <div className="flex items-center gap-3 py-2.5 shrink-0">
             <div className="flex items-center gap-2">
+              {/* Rule 5: Filter icon — fixed size, never compresses */}
               {hasFiltersRow && (
                 <FilterIconButton
                   active={filtersOpen}
@@ -289,12 +325,14 @@ export default function FilterToolbar({
                   onClick={() => setFiltersOpen((prev) => !prev)}
                 />
               )}
+              {/* Rule 2: Sort dropdown — label truncated at ~6 chars */}
               {sort && <SortDropdown sort={sort} />}
+              {/* Rule 3: Search bar — w-[180px] collapsed, w-[260px] focused */}
               {search && (
                 <div
                   className={cn(
-                    "relative transition-all duration-300 ease-out",
-                    searchFocused || search.value ? "w-[320px]" : "w-[240px]",
+                    "relative transition-all duration-300 ease-out shrink",
+                    searchFocused || search.value ? "w-[260px]" : "w-[180px]",
                   )}
                 >
                   <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 size-4 text-black-3" />
@@ -323,13 +361,15 @@ export default function FilterToolbar({
               )}
             </div>
 
+            {/* Rule 4: View mode toggle — max 3 options, separated by a thin divider */}
             {viewModes && (
               <div className="w-[2px] h-[29px] bg-white-2-5 rounded-full shrink-0" />
             )}
 
             {viewModes && (
-              <div className="flex rounded-[14px] bg-white-2 p-1">
-                {viewModes.options.map((mode) => (
+              <div className="flex rounded-[14px] bg-white-2 p-1 shrink-0">
+                {/* Rule 4: .slice(0, 3) caps the toggle at 3 view modes max */}
+                {viewModes.options.slice(0, 3).map((mode) => (
                   <button
                     key={mode.value}
                     onClick={() => viewModes.onChange(mode.value)}
@@ -571,7 +611,8 @@ function TabBar({
   }, [updateIndicator]);
 
   return (
-    <div ref={containerRef} className="relative flex h-full">
+    /* Rule 1: min-w-0 lets the tab container shrink; overflow-hidden clips if needed */
+    <div ref={containerRef} className="relative flex h-full min-w-0 overflow-hidden">
       {tabs.options.map((tab) => (
         <button
           key={tab.key}
@@ -590,7 +631,8 @@ function TabBar({
             }
           }}
           className={cn(
-            "relative flex items-end px-3 pb-4 text-[16px] font-medium transition-colors",
+            /* Rule 1: shrink-0 + whitespace-nowrap — tab text never wraps or compresses */
+            "relative flex items-end shrink-0 whitespace-nowrap px-3 pb-4 text-[16px] font-medium transition-colors",
             tabs.active === tab.key
               ? "text-black-1"
               : "text-black-3 hover:text-black-2",
@@ -637,7 +679,13 @@ function FilterIconButton({
   );
 }
 
-/** Sort dropdown — arrow icon + field label + chevron, custom dropdown */
+/**
+ * Sort dropdown — arrow icon + truncated label + chevron, custom dropdown.
+ *
+ * Rule 2: The visible label is capped at `max-w-[6ch]` with `truncate` so it
+ * stays compact (e.g. "Date (…") regardless of the full label length.
+ * The full label is shown in the dropdown list and as a `title` tooltip.
+ */
 function SortDropdown({
   sort,
 }: {
@@ -664,25 +712,28 @@ function SortDropdown({
   const buttonLabel = activeOption?.label ?? "Sort";
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative shrink-0">
       <button
         onClick={() => setOpen((prev) => !prev)}
+        title={buttonLabel}
         className={cn(
-          "flex items-center gap-2 rounded-[12px] border h-[40px] px-3.5 text-[14px] font-medium transition-colors",
+          /* Rule 2: whitespace-nowrap prevents the sort label from ever wrapping */
+          "flex items-center gap-1.5 rounded-[12px] border h-[40px] px-3 text-[14px] font-medium whitespace-nowrap transition-colors",
           open
             ? "border-white-3 bg-white-0 text-black-1"
             : "border-white-2-5 bg-white-0 text-black-2 hover:border-white-3",
         )}
       >
         {sort.direction === "asc" ? (
-          <IconArrowUp className="size-4" />
+          <IconArrowUp className="size-4 shrink-0" />
         ) : (
-          <IconArrowDown className="size-4" />
+          <IconArrowDown className="size-4 shrink-0" />
         )}
-        <span>{buttonLabel}</span>
+        {/* Rule 2: max-w-[6ch] + truncate caps visible text to ~6 chars */}
+        <span className="max-w-[6ch] truncate">{buttonLabel}</span>
         <IconChevronDown
           className={cn(
-            "size-3.5 transition-transform",
+            "size-3.5 shrink-0 transition-transform",
             open && "rotate-180",
           )}
         />

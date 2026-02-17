@@ -94,7 +94,7 @@ export default function AllEventsSection(props: {
   }
 
   const tabs: { key: TabView; label: string; mobileLabel?: string }[] = [
-    { key: "all", label: "Browse All", mobileLabel: "All" },
+    { key: "all", label: "All" },
     { key: "event", label: "Events" },
     { key: "meeting", label: "Meetings" },
     { key: "program", label: "Programs" },

@@ -71,20 +71,25 @@ export default function EventListItem({
 
       {/* Info column */}
       <div className="flex flex-1 flex-col gap-1 min-w-0">
-        <div className="flex items-center gap-2">
-          <TypePill type={data.type} />
-          {data.recurrenceSchedule ? (
-            <span className="text-body-3 text-black-3">
-              {data.recurrenceSchedule}
-            </span>
-          ) : (
-            <>
-              {/* Mobile inline date */}
-              <span className="sm:hidden text-body-3 text-black-3">
-                {formatMobileDate(data.dateStart, data.dateEnd ?? undefined)}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+          <div className="flex items-center gap-2">
+            <TypePill type={data.type} />
+            {data.recurrenceSchedule ? (
+              <span className="text-body-3 text-black-3 whitespace-nowrap">
+                {data.recurrenceSchedule}
               </span>
-              <span className="text-body-3 text-black-3">{data.time}</span>
-            </>
+            ) : (
+              <>
+                {/* Mobile inline date */}
+                <span className="sm:hidden text-body-3 text-black-3 whitespace-nowrap">
+                  {formatMobileDate(data.dateStart, data.dateEnd ?? undefined)}
+                </span>
+              </>
+            )}
+          </div>
+          {/* Time — stacks below pill row on mobile */}
+          {!data.recurrenceSchedule && data.time && (
+            <span className="text-body-3 text-black-3 whitespace-nowrap">{data.time}</span>
           )}
         </div>
         <p className="text-body-1 text-black-1 line-clamp-1">

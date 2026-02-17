@@ -41,7 +41,7 @@ export default function BibleStudyCard({ study }: { study: BibleStudy }) {
                 {study.series}
               </p>
             </div>
-            <p className="font-medium leading-none text-black-3 text-[14px] tracking-[-0.42px]">
+            <p className="font-medium leading-none text-black-3 text-[14px] tracking-[-0.42px] whitespace-nowrap">
               {formatDate(study.dateFor)}
             </p>
           </div>
@@ -49,12 +49,12 @@ export default function BibleStudyCard({ study }: { study: BibleStudy }) {
           {/* Title and Passage */}
           <div className="w-full">
             <div className="flex flex-col gap-[8px] items-start px-[8px] w-full">
-              <p className="font-medium leading-[1.2] text-black-1 text-[24px] tracking-[-0.72px] w-full">
+              <p className="font-medium leading-[1.2] text-black-1 text-[18px] sm:text-[24px] tracking-[-0.72px] w-full">
                 {study.title}
               </p>
               <div className="flex gap-[8px] items-center w-full">
                 <IconBookOpen className="shrink-0 size-[16px] text-black-3" />
-                <p className="flex-1 leading-[1.4] text-black-3 text-[16px] tracking-[-0.32px]">
+                <p className="flex-1 leading-[1.4] text-black-3 text-[14px] sm:text-[16px] tracking-[-0.32px]">
                   {study.passage}
                 </p>
               </div>

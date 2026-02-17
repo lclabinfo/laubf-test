@@ -291,9 +291,9 @@ function MessageListView({ messages }: { messages: Message[] }) {
         <Link
           key={message.id}
           href={`/messages/${message.slug}`}
-          className="group flex items-center justify-between gap-6 py-5 transition-colors hover:bg-white-1-5 -mx-4 px-4 rounded-[12px]"
+          className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-6 py-5 transition-colors hover:bg-white-1-5 -mx-4 px-4 rounded-[12px]"
         >
-          {/* Mini YouTube thumbnail */}
+          {/* Mini YouTube thumbnail — desktop only */}
           <div className="relative w-[120px] aspect-video rounded-[8px] overflow-hidden bg-black-1 shrink-0 hidden sm:block">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -319,14 +319,14 @@ function MessageListView({ messages }: { messages: Message[] }) {
               <span className="bg-white-2 px-[8px] py-[4px] rounded-[6px] text-[11px] font-medium text-black-3 tracking-[0.22px] shrink-0">
                 {message.series}
               </span>
-              <span className="text-[13px] text-black-3">
+              <span className="text-[13px] text-black-3 whitespace-nowrap">
                 {formatDate(message.dateFor)}
               </span>
             </div>
-            <h3 className="text-[18px] font-medium text-black-1 mb-1 truncate">
+            <h3 className="text-[18px] font-medium text-black-1 mb-1 sm:truncate">
               {message.title}
             </h3>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
               <div className="flex items-center gap-2">
                 <IconUser className="size-[14px] text-black-3 shrink-0" />
                 <span className="text-[14px] text-black-3">{message.speaker}</span>
@@ -338,7 +338,8 @@ function MessageListView({ messages }: { messages: Message[] }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Icons + arrow — bottom row on mobile, right column on desktop */}
+          <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
             <div className="flex gap-1.5">
               <div className="bg-white-1-5 p-[6px] rounded-[6px]">
                 <IconVideo className="size-[14px] text-black-2" />

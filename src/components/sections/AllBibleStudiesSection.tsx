@@ -17,7 +17,7 @@
  */
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import SectionContainer from "@/components/shared/SectionContainer";
 import AnimateOnScroll from "@/components/shared/AnimateOnScroll";
 import FilterToolbar from "@/components/shared/FilterToolbar";
@@ -57,6 +57,16 @@ export default function AllBibleStudiesSection(props: {
   const { settings, studies } = props;
   const t = themeTokens[settings.colorScheme];
   const animate = settings.enableAnimations !== false;
+
+  /* ── Mobile detection ── */
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 639px)");
+    setIsMobile(mql.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mql.addEventListener("change", handler);
+    return () => mql.removeEventListener("change", handler);
+  }, []);
 
   /* ── State ── */
   const [tab, setTab] = useState<TabView>("all");
@@ -139,7 +149,7 @@ export default function AllBibleStudiesSection(props: {
             setDisplayCount(INITIAL_COUNT);
           },
         }}
-        viewModes={tab === "all" ? {
+        viewModes={tab === "all" && !isMobile ? {
           options: [
             { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
             { value: "list", label: "List", icon: <IconListView className="size-4" /> },
@@ -234,10 +244,10 @@ export default function AllBibleStudiesSection(props: {
                 Clear all filters
               </button>
             </div>
-          ) : viewMode === "card" ? (
-            <CardGrid studies={visibleStudies} />
-          ) : (
+          ) : (isMobile || viewMode === "list") ? (
             <StudyListView studies={visibleStudies} />
+          ) : (
+            <CardGrid studies={visibleStudies} />
           )}
 
           {/* Load more */}
@@ -304,14 +314,14 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
         <Link
           key={study.id}
           href={`/bible-study/${study.slug}`}
-          className="group flex items-center justify-between gap-6 py-5 transition-colors hover:bg-white-1-5 -mx-4 px-4 rounded-[12px]"
+          className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-6 py-5 transition-colors hover:bg-white-1-5 -mx-4 px-4 rounded-[12px]"
         >
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 mb-1">
               <span className="bg-white-2 px-[8px] py-[4px] rounded-[6px] text-[11px] font-medium text-black-3 tracking-[0.22px] shrink-0">
                 {study.series}
               </span>
-              <span className="text-[13px] text-black-3">
+              <span className="text-[13px] text-black-3 whitespace-nowrap">
                 {new Date(study.dateFor + "T00:00:00").toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
@@ -319,7 +329,7 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
                 })}
               </span>
             </div>
-            <h3 className="text-[18px] font-medium text-black-1 mb-1 truncate">
+            <h3 className="text-[18px] font-medium text-black-1 mb-1 sm:truncate">
               {study.title}
             </h3>
             <div className="flex items-center gap-2">
@@ -328,8 +338,8 @@ function StudyListView({ studies }: { studies: BibleStudy[] }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3 shrink-0">
-            {/* Resource indicators */}
+          {/* Icons + arrow — bottom row on mobile, right column on desktop */}
+          <div className="flex items-center justify-between sm:justify-end gap-3 shrink-0">
             <div className="flex gap-1.5">
               {study.hasQuestions && (
                 <div className="bg-white-1-5 p-[6px] rounded-[6px]">

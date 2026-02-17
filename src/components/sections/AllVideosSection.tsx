@@ -24,13 +24,6 @@ import { themeTokens } from "@/lib/theme";
 import type { AllVideosSectionProps } from "@/lib/types/sections";
 import type { Video, VideoFilters } from "@/lib/types/video";
 import { filterVideos, deriveCategories } from "@/lib/types/video";
-import {
-  IconGrid,
-  IconListView,
-} from "@/components/layout/icons";
-
-type ViewMode = "card" | "list";
-
 const INITIAL_COUNT = 9;
 const LOAD_MORE_COUNT = 9;
 
@@ -42,7 +35,6 @@ export default function AllVideosSection(props: {
   const t = themeTokens[settings.colorScheme];
 
   /* ── State ── */
-  const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<VideoFilters>({});
   const [displayCount, setDisplayCount] = useState(INITIAL_COUNT);
@@ -98,14 +90,6 @@ export default function AllVideosSection(props: {
             setSearch("");
             setDisplayCount(INITIAL_COUNT);
           },
-        }}
-        viewModes={{
-          options: [
-            { value: "card", label: "Card", icon: <IconGrid className="size-4" /> },
-            { value: "list", label: "List", icon: <IconListView className="size-4" /> },
-          ],
-          active: viewMode,
-          onChange: (v) => setViewMode(v as ViewMode),
         }}
         search={{
           value: search,
