@@ -245,7 +245,7 @@ export default function MediaTextSection(props: {
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3">
               <OverlineLabel text={content.overline} />
-              <h2 className={`text-h2 ${t.textPrimary} max-w-[656px]`}>
+              <h2 className={`text-h2 ${t.textPrimary} max-w-[656px] text-balance`}>
                 {content.heading}
               </h2>
             </div>
@@ -270,7 +270,7 @@ export default function MediaTextSection(props: {
         <div className="flex flex-col gap-6">
           <div className="flex flex-col gap-3">
             <OverlineLabel text={content.overline} />
-            <h2 className={`text-h2 ${t.textPrimary}`}>
+            <h2 className={`text-h2 ${t.textPrimary} text-balance`}>
               {content.heading}
             </h2>
           </div>

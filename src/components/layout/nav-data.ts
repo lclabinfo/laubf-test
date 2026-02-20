@@ -82,11 +82,22 @@ export const dropdowns: NavDropdown[] = [
         items: [
           {
             label: "Events",
-            href: "/events",
+            href: "/events?tab=event",
             icon: Calendar,
           },
           {
+            label: "Meetings",
+            href: "/events?tab=meeting",
+            icon: Users,
+          },
+          {
+            label: "Programs",
+            href: "/events?tab=program",
+            icon: BookOpen,
+          },
+          {
             label: "Livestream",
+            description: "Sunday worship",
             href: "https://youtube.com/@laubf",
             icon: Youtube,
             external: true,
