@@ -89,6 +89,12 @@ const quickLinksFABSettings: QuickLinksFABSettings = {
         icon: "users",
         description: "Sat @ 8 AM",
       },
+      {
+        label: "Sunday Livestream",
+        href: "https://www.youtube.com/@LAUBF/streams",
+        icon: "radio",
+        description: "Sun @ 11 AM",
+      },
     ],
   },
 };
