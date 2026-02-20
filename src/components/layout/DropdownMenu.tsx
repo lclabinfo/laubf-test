@@ -146,7 +146,7 @@ export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
         <Link
           href={dropdown.overviewLink.href}
           onClick={onClose}
-          className="flex items-center justify-between p-5 bg-white-1-5 border border-white-2-5 rounded-xl transition-colors hover:bg-white-2 group/overview"
+          className="flex items-center justify-between px-4 py-3.5 bg-white-1-5 border border-white-2-5 rounded-xl transition-colors hover:bg-white-2 group/overview"
         >
           <div className="flex flex-col gap-1.5">
             <span className="text-base font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
