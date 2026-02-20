@@ -27,17 +27,17 @@ const MOCK_EVENTS: Event[] = [
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // 2. Sunday Worship Service (RECURRING)
+  // 2. Sunday Livestream (RECURRING)
   // ──────────────────────────────────────────────────────────────────────────
   {
-    slug: "sunday-worship-service",
-    title: "[Mock] Sunday Worship Service",
+    slug: "sunday-livestream",
+    title: "Sunday Livestream",
     type: "meeting",
     dateStart: "2026-02-01",
-    time: "10:30 AM - 12:30 PM",
-    location: "LA UBF Main Center",
+    time: "11:00 AM",
+    location: "LA UBF Main Center / YouTube Live",
     description:
-      "Weekly Sunday worship with praise, message, and communion. All are welcome to join our congregation.",
+      "Join our Sunday worship service in person or watch the livestream on YouTube. All are welcome.",
     body: `<p>Our Sunday Worship Service is the heartbeat of LA UBF. We gather each Lord's Day to worship God through song, hear His word preached, and fellowship as the body of Christ.</p>
 <h3>Service Order</h3>
 <ul>
@@ -47,12 +47,15 @@ const MOCK_EVENTS: Event[] = [
 <li>Responsive prayer and benediction</li>
 </ul>
 <p>Communion is observed on the first Sunday of each month. Childcare and a children's program are available during the service. We look forward to welcoming you this Sunday.</p>`,
-    image: { src: "", alt: "Sunday worship service congregation" },
+    image: { src: "", alt: "Sunday worship livestream" },
     tags: ["#CHURCH-WIDE", "#RECURRING", "#WORSHIP", "#OPEN EVENT"],
     ministry: "church-wide",
     campus: "all",
-    isRecurring: false,
-    meetingUrl: "https://zoom.us/j/9876543210",
+    isRecurring: true,
+    meetingUrl: "https://www.youtube.com/@LAUBF/streams",
+    recurrenceType: "weekly" as const,
+    recurrenceDays: ["SUN"] as const,
+    recurrenceSchedule: "Every Sunday",
   },
 
   // ──────────────────────────────────────────────────────────────────────────
@@ -936,14 +939,14 @@ const MOCK_EVENTS: Event[] = [
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // RECURRING: Daily Bread Meeting (Mon-Fri, ongoing)
+  // RECURRING: Daily Bread & Prayer Meeting (Mon-Fri, ongoing)
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "daily-bread-meeting",
-    title: "Daily Bread Meeting",
+    title: "Daily Bread & Prayer Meeting",
     type: "meeting",
     dateStart: "2026-02-01",
-    time: "6:00 AM - 7:00 AM",
+    time: "6:00 AM",
     location: "LA UBF Main Center",
     description:
       "Start your morning in the Word. A short daily devotional and prayer time open to everyone, Monday through Friday.",
@@ -953,18 +956,18 @@ const MOCK_EVENTS: Event[] = [
     tags: ["#CHURCH-WIDE", "#RECURRING", "#DEVOTIONAL"],
     ministry: "church-wide",
     isRecurring: true,
-    meetingUrl: "https://zoom.us/j/1234500001",
+    meetingUrl: "https://us02web.zoom.us/j/86540458764?pwd=ZDVUUjZDOVZ4WlJFc1VvNVlzd2tkQT09",
     recurrenceType: "weekly" as const,
     recurrenceDays: ["MON", "TUE", "WED", "THU", "FRI"] as const,
-    recurrenceSchedule: "Weekly on MON - FRI",
+    recurrenceSchedule: "Mon\u2013Fri @ 6 AM",
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // RECURRING: Mens' Bible Study (Every Saturday, ongoing)
+  // RECURRING: Men's Bible Study (Every Saturday, ongoing)
   // ──────────────────────────────────────────────────────────────────────────
   {
     slug: "mens-bible-study",
-    title: "Mens\u2019 Bible Study",
+    title: "Men\u2019s Bible Study",
     type: "meeting",
     dateStart: "2026-02-01",
     time: "8:00 AM",
@@ -977,41 +980,34 @@ const MOCK_EVENTS: Event[] = [
     tags: ["#CHURCH-WIDE", "#RECURRING", "#BIBLE STUDY"],
     ministry: "church-wide",
     isRecurring: true,
-    meetingUrl: "https://zoom.us/j/1234500002",
+    meetingUrl: "https://zoom.us",
     recurrenceType: "weekly" as const,
     recurrenceDays: ["SAT"] as const,
-    recurrenceSchedule: "Every Saturday",
+    recurrenceSchedule: "Sat @ 8 AM",
   },
 
   // ──────────────────────────────────────────────────────────────────────────
-  // RECURRING: Not of the World Prayer Meeting (Daily, 2/16 - 3/8 bounded)
+  // RECURRING: Evening Prayer Meeting (Daily, ongoing)
   // ──────────────────────────────────────────────────────────────────────────
   {
-    slug: "not-of-the-world-prayer-meeting",
-    title: "Not of the World Prayer Meeting",
+    slug: "evening-prayer-meeting",
+    title: "Evening Prayer Meeting",
     type: "meeting",
-    dateStart: "2026-02-16",
-    dateEnd: "2026-03-08",
-    time: "6:30 AM (Morning) & 7:30 PM (Evening)",
+    dateStart: "2026-02-01",
+    time: "7:30 PM",
     location: "LA UBF Main Center",
-    meetingUrl: "https://zoom.us/j/1234500003",
+    meetingUrl: "https://meet.google.com/pgm-trah-moc",
     description:
-      "A special daily prayer meeting for our 2026 spiritual direction theme \u201CNot of the World.\u201D Runs from February 16 through March 8.",
-    body: `<p>As part of our 2026 spiritual direction theme, "Not of the World" (John 17:16-18), we gather twice daily for focused prayer.</p>
-<h3>Schedule</h3>
-<ul>
-<li><strong>Morning session:</strong> 6:30 AM — Scripture meditation and intercessory prayer</li>
-<li><strong>Evening session:</strong> 7:30 PM — Praise, reflection, and corporate prayer</li>
-</ul>
-<p>This is a 21-day prayer commitment running from February 16 through March 8. Join one or both sessions each day as you are able.</p>`,
-    image: { src: "", alt: "Not of the World prayer meeting" },
+      "A daily evening prayer meeting to close the day in worship, reflection, and corporate prayer.",
+    body: `<p>Join us every evening for a time of focused prayer. We gather to reflect on God's word, lift up prayer topics, and encourage one another in faith.</p>
+<p>This is a daily commitment open to all members. Come as you are — no preparation needed.</p>`,
+    image: { src: "", alt: "Evening prayer meeting" },
     tags: ["#CHURCH-WIDE", "#RECURRING", "#WORSHIP", "#PRAYER"],
     ministry: "church-wide",
     isRecurring: true,
     recurrenceType: "daily" as const,
-    recurrenceStart: "2026-02-16",
-    recurrenceEnd: "2026-03-08",
-    recurrenceSchedule: "Daily (2/16 - 3/8)",
+    recurrenceDays: ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"] as const,
+    recurrenceSchedule: "Every Day @ 7:30 PM",
   },
 ];
 
@@ -1024,11 +1020,12 @@ MOCK_EVENTS.sort(
 export const RECURRING_MEETINGS = MOCK_EVENTS.filter((e) => e.isRecurring);
 export const FEATURED_EVENTS = MOCK_EVENTS.filter((e) => e.isFeatured);
 
-/** Curated homepage recurring meetings in Figma order */
+/** Curated homepage recurring meetings — matches Quick Links FAB order */
 const HOMEPAGE_RECURRING_SLUGS = [
   "daily-bread-meeting",
+  "evening-prayer-meeting",
   "mens-bible-study",
-  "not-of-the-world-prayer-meeting",
+  "sunday-livestream",
 ];
 export const HOMEPAGE_RECURRING = HOMEPAGE_RECURRING_SLUGS
   .map((slug) => MOCK_EVENTS.find((e) => e.slug === slug)!)

@@ -92,7 +92,7 @@ const recurringMeetingsData: RecurringMeetingsSectionProps = {
   colorScheme: "light",
   content: {
     heading: "Recurring Meetings & Programs",
-    maxVisible: 3,
+    maxVisible: 4,
     viewAllHref: "/events",
   },
 };

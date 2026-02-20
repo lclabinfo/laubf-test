@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, SquareArrowOutUpRight } from "lucide-react";
+import { ChevronDown, SquareArrowOutUpRight, ArrowUpRight } from "lucide-react";
 import { dropdowns, directLinks } from "./nav-data";
 import { IconClose } from "./icons";
 import CTAButton from "@/components/shared/CTAButton";
@@ -165,6 +165,26 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         )}
                       </div>
                     ))}
+                    {/* Overview link */}
+                    {dropdown.overviewLink && (
+                      <Link
+                        href={dropdown.overviewLink.href}
+                        onClick={onClose}
+                        className="flex items-center justify-between mx-2 mt-2 px-4 py-4 bg-white-1-5 border border-white-2-5 rounded-lg transition-colors hover:bg-white-2"
+                      >
+                        <div className="flex flex-col gap-1">
+                          <span className="text-sm font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
+                            {dropdown.overviewLink.label}
+                          </span>
+                          <span className="text-xs font-normal leading-none text-black-3 tracking-[-0.03em]">
+                            {dropdown.overviewLink.description}
+                          </span>
+                        </div>
+                        <div className="border border-black-3 rounded-full p-1.5 shrink-0">
+                          <ArrowUpRight className="size-2.5 text-black-3" strokeWidth={2} />
+                        </div>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

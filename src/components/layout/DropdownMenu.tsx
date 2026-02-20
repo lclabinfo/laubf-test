@@ -95,7 +95,7 @@ function SectionColumn({
 
 export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
   return (
-    <div className="bg-white-1 border border-white-2 rounded-xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] py-6 px-5 w-max animate-dropdown-in">
+    <div className="bg-white-1 border border-white-2 rounded-xl shadow-[0px_12px_20px_0px_rgba(0,0,0,0.03)] py-6 px-5 w-max animate-dropdown-in flex flex-col gap-5">
       <div className="flex gap-5 items-stretch">
           {dropdown.sections.map((section, i) => (
             <Fragment key={section.title}>
@@ -140,6 +140,27 @@ export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
             </>
           )}
         </div>
+
+      {/* Overview link at bottom of dropdown */}
+      {dropdown.overviewLink && (
+        <Link
+          href={dropdown.overviewLink.href}
+          onClick={onClose}
+          className="flex items-center justify-between p-5 bg-white-1-5 border border-white-2-5 rounded-xl transition-colors hover:bg-white-2 group/overview"
+        >
+          <div className="flex flex-col gap-1.5">
+            <span className="text-base font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
+              {dropdown.overviewLink.label}
+            </span>
+            <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em]">
+              {dropdown.overviewLink.description}
+            </span>
+          </div>
+          <div className="border border-black-3 rounded-full p-2 transition-colors group-hover/overview:border-black-1">
+            <ArrowUpRight className="size-3 text-black-3 group-hover/overview:text-black-1" strokeWidth={2} />
+          </div>
+        </Link>
+      )}
       </div>
   );
 }
