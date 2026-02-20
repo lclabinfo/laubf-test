@@ -174,25 +174,25 @@ export default function EventCalendarSection(props: {
             </div>
           </div>
 
-          {/* Filter pills + upcoming count (list view only) */}
-          {viewMode === "list" && (
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex flex-wrap gap-2">
-                {FILTERS.map((filter) => (
-                  <button
-                    key={filter.value}
-                    onClick={() => setActiveFilter(filter.value)}
-                    className={cn(
-                      "rounded-full px-3 py-1.5 text-[12px] font-medium tracking-wide transition-colors",
-                      activeFilter === filter.value
-                        ? "bg-black-1 text-white-0"
-                        : "bg-white-2 text-black-3 hover:bg-white-2-5 hover:text-black-2",
-                    )}
-                  >
-                    {filter.label}
-                  </button>
-                ))}
-              </div>
+          {/* Filter pills + upcoming count */}
+          <div className="relative z-10 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap gap-2">
+              {FILTERS.map((filter) => (
+                <button
+                  key={filter.value}
+                  onClick={() => setActiveFilter(filter.value)}
+                  className={cn(
+                    "rounded-full px-3 py-1.5 text-[12px] font-medium tracking-wide transition-colors",
+                    activeFilter === filter.value
+                      ? "bg-black-1 text-white-0"
+                      : "bg-white-2 text-black-3 hover:bg-white-2-5 hover:text-black-2",
+                  )}
+                >
+                  {filter.label}
+                </button>
+              ))}
+            </div>
+            {viewMode === "list" && (
               <div className="hidden sm:flex items-center gap-2">
                 <span className="text-[14px] text-black-3">
                   Upcoming in {upcomingMonthName}
@@ -201,8 +201,8 @@ export default function EventCalendarSection(props: {
                   {monthEvents.length}
                 </span>
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           {/* Content: List or Calendar */}
           {viewMode === "list" ? (

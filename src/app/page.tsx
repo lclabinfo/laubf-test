@@ -1,7 +1,7 @@
 import HeroBannerSection from "@/components/sections/HeroBannerSection";
 import MediaTextSection from "@/components/sections/MediaTextSection";
 import HighlightCardsSection from "@/components/sections/HighlightCardsSection";
-import RecurringMeetingsSection from "@/components/sections/RecurringMeetingsSection";
+import EventCalendarSection from "@/components/sections/EventCalendarSection";
 import QuoteBannerSection from "@/components/sections/QuoteBannerSection";
 import ActionCardGridSection from "@/components/sections/ActionCardGridSection";
 import DirectoryListSection from "@/components/sections/DirectoryListSection";
@@ -9,15 +9,15 @@ import SpotlightMediaSection from "@/components/sections/SpotlightMediaSection";
 import MediaGridSection from "@/components/sections/MediaGridSection";
 import CTABannerSection from "@/components/sections/CTABannerSection";
 
-import { FEATURED_EVENTS, HOMEPAGE_RECURRING } from "@/lib/mock-data/events";
+import { FEATURED_EVENTS, MOCK_EVENTS } from "@/lib/mock-data/events";
 import { MOCK_VIDEOS } from "@/lib/mock-data/videos";
-import { toEventCardData } from "@/lib/types/events";
+import { toEventCardData, toEventListItemData } from "@/lib/types/events";
 
 import type {
   HeroBannerSectionProps,
   MediaTextSectionProps,
   HighlightCardsSectionProps,
-  RecurringMeetingsSectionProps,
+  EventCalendarSectionProps,
   QuoteBannerSectionProps,
   ActionCardGridSectionProps,
   DirectoryListSectionProps,
@@ -86,14 +86,19 @@ const highlightCardsData: HighlightCardsSectionProps = {
   },
 };
 
-const recurringMeetingsData: RecurringMeetingsSectionProps = {
-  id: "recurring-meetings",
+const eventCalendarData: EventCalendarSectionProps = {
+  id: "schedule",
   visible: true,
   colorScheme: "light",
   content: {
-    heading: "Recurring Meetings & Programs",
-    maxVisible: 4,
-    viewAllHref: "/events",
+    heading: "Schedule",
+    currentMonth: "FEBRUARY 2026",
+    filters: ["ALL", "Events", "Meetings", "Programs"],
+    events: MOCK_EVENTS.slice(0, 5).map(toEventListItemData),
+    ctaButtons: [
+      { label: "2026 LA UBF Calendar", href: "https://laubf.org/calendar?month=2", icon: true },
+      { label: "View all events", href: "/events" },
+    ],
   },
 };
 
@@ -269,7 +274,7 @@ export default function HomePage() {
       <HeroBannerSection settings={heroBannerData} />
       <MediaTextSection settings={mediaTextData} />
       <HighlightCardsSection settings={highlightCardsData} />
-      <RecurringMeetingsSection settings={recurringMeetingsData} events={HOMEPAGE_RECURRING} />
+      <EventCalendarSection settings={eventCalendarData} events={MOCK_EVENTS} />
       <QuoteBannerSection settings={quoteBannerData} />
       <ActionCardGridSection settings={actionCardGridData} />
       <DirectoryListSection settings={directoryListData} />
