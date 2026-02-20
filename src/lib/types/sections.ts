@@ -575,6 +575,25 @@ export interface QuickLinksSectionProps extends BaseSectionSettings {
   content: QuickLinksContent;
 }
 
+/* ---- Quick Links FAB (floating action button) ---- */
+export interface QuickLinksFABItem {
+  label: string;
+  href: string;
+  /** Lucide icon name: "book-open" | "users" | "radio" etc. */
+  icon: string;
+  description: string;
+}
+
+export interface QuickLinksFABContent {
+  title: string;
+  links: QuickLinksFABItem[];
+}
+
+export interface QuickLinksFABSettings {
+  visible: boolean;
+  content: QuickLinksFABContent;
+}
+
 /* ---- Recurring Schedule (weekly meetings) ---- */
 export interface WeeklyMeeting {
   title: string;

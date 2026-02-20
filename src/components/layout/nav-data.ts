@@ -53,6 +53,11 @@ export interface NavDropdown {
     description: string;
     href: string;
   };
+  overviewLink?: {
+    label: string;
+    description: string;
+    href: string;
+  };
 }
 
 export const dropdowns: NavDropdown[] = [
@@ -208,6 +213,11 @@ export const dropdowns: NavDropdown[] = [
         ],
       },
     ],
+    overviewLink: {
+      label: "Ministry Overview",
+      description: "Learn about the ministries that shape our community",
+      href: "/ministries",
+    },
   },
   {
     id: "resources",
