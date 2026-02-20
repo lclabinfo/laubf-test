@@ -15,7 +15,8 @@
  */
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import SectionContainer from "@/components/shared/SectionContainer";
 import EventListItem from "@/components/shared/EventListItem";
 import FilterToolbar from "@/components/shared/FilterToolbar";
@@ -41,21 +42,31 @@ import {
 } from "@/components/layout/icons";
 import EventGridCard from "@/components/shared/EventGridCard";
 
-type TabView = "all" | "event" | "meeting" | "program";
+type TabView = "event" | "meeting" | "program";
 type ViewMode = "card" | "list" | "calendar";
 
+const VALID_TABS: TabView[] = ["event", "meeting", "program"];
 const INITIAL_COUNT = 9;
 const LOAD_MORE_COUNT = 9;
 
 export default function AllEventsSection(props: {
   settings: AllEventsSectionProps;
   events: Event[];
+  initialTab?: TabView;
 }) {
   const { settings, events } = props;
   const t = themeTokens[settings.colorScheme];
 
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  /* ── Derive tab from URL so navbar clicks always sync ── */
+  const urlTab = searchParams.get("tab");
+  const activeTab: TabView =
+    VALID_TABS.includes(urlTab as TabView) ? (urlTab as TabView) : (props.initialTab ?? "event");
+
   /* ── State ── */
-  const [tab, setTab] = useState<TabView>("all");
+  const [tab, setTab] = useState<TabView>(activeTab);
   const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [search, setSearch] = useState("");
   const [filters, setFilters] = useState<EventFilters>({});
@@ -63,12 +74,32 @@ export default function AllEventsSection(props: {
   const [sortField, setSortField] = useState("date");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
+  /* ── Sync tab when URL changes (e.g. navbar click while already on page) ── */
+  useEffect(() => {
+    if (activeTab !== tab) {
+      setTab(activeTab);
+      setFilters({});
+      setSearch("");
+      setDisplayCount(INITIAL_COUNT);
+    }
+  }, [activeTab]);
+
+  /* ── URL sync ── */
+  const updateTabInUrl = useCallback(
+    (newTab: TabView) => {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("tab", newTab);
+      router.replace(`?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router],
+  );
+
   /* ── Filtering & Sorting ── */
   const filteredEvents = useMemo(() => {
     const typeFilter: EventFilters = {
       ...filters,
       search: search || undefined,
-      type: tab === "all" ? filters.type : (tab as EventType),
+      type: tab as EventType,
     };
     const filtered = filterEvents(events, typeFilter);
     return [...filtered].sort((a, b) => {
@@ -94,7 +125,6 @@ export default function AllEventsSection(props: {
   }
 
   const tabs: { key: TabView; label: string; mobileLabel?: string }[] = [
-    { key: "all", label: "All" },
     { key: "event", label: "Events" },
     { key: "meeting", label: "Meetings" },
     { key: "program", label: "Programs" },
@@ -108,7 +138,9 @@ export default function AllEventsSection(props: {
           options: tabs,
           active: tab,
           onChange: (key) => {
-            setTab(key as TabView);
+            const newTab = key as TabView;
+            setTab(newTab);
+            updateTabInUrl(newTab);
             setFilters({});
             setSearch("");
             setDisplayCount(INITIAL_COUNT);

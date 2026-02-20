@@ -30,7 +30,7 @@ export default function EventsHeroSection(props: {
     <SectionContainer settings={settings}>
       <div className="flex flex-col items-start">
         <h1 className={cn(`text-h1 ${t.textPrimary}`, animate && "animate-hero-fade-up")}>{content.heading}</h1>
-        <p className={cn(`text-body-1 ${t.textSecondary} mt-4 max-w-[600px]`, animate && "animate-hero-fade-up-delayed")}>
+        <p className={cn(`text-body-1 ${t.textSecondary} mt-4 max-w-[600px] text-balance`, animate && "animate-hero-fade-up-delayed")}>
           {content.subtitle}
         </p>
       </div>
