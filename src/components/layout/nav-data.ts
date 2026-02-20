@@ -38,6 +38,8 @@ export interface NavSection {
   items: NavSubItem[];
   columns?: number;
   width?: string;
+  /** Compact mode: hides icons, smaller text, external arrow on hover only */
+  compact?: boolean;
   footerLink?: {
     label: string;
     href: string;
@@ -48,6 +50,8 @@ export interface NavDropdown {
   id: string;
   label: string;
   href?: string;
+  /** CSS translate-x offset for the dropdown panel (e.g. "10%" to shift right) */
+  offsetX?: string;
   sections: NavSection[];
   featuredCard?: {
     image: string;
@@ -67,6 +71,7 @@ export const dropdowns: NavDropdown[] = [
   {
     id: "our-church",
     label: "Our Church",
+    offsetX: "-35%",
     sections: [
       {
         title: "About",
@@ -103,13 +108,13 @@ export const dropdowns: NavDropdown[] = [
             href: "/events?tab=program",
             icon: BookOpen,
           },
-          {
-            label: "Livestream",
-            description: "Sunday worship",
-            href: "https://youtube.com/@laubf",
-            icon: Youtube,
-            external: true,
-          },
+          // {
+          //   label: "Livestream",
+          //   description: "Sunday worship",
+          //   href: "https://youtube.com/@laubf",
+          //   icon: Youtube,
+          //   external: true,
+          // },
           // {
           //   label: "Announcements",
           //   description: "Latest updates",
@@ -126,7 +131,7 @@ export const dropdowns: NavDropdown[] = [
       },
       {
         title: "Quick Links",
-        width: "w-72",
+        compact: true,
         items: [
           {
             label: "Daily Bread & Prayer",
@@ -149,13 +154,13 @@ export const dropdowns: NavDropdown[] = [
             icon: Users,
             external: true,
           },
-          // {
-          //   label: "Sunday Livestream",
-          //   description: "Sun @ 11 AM",
-          //   href: "https://www.youtube.com/@LAUBF/streams",
-          //   icon: Radio,
-          //   external: true,
-          // },
+          {
+            label: "Sunday Livestream",
+            description: "Sun @ 11 AM",
+            href: "https://www.youtube.com/@LAUBF/streams",
+            icon: Radio,
+            external: true,
+          },
         ],
       },
     ],
@@ -276,19 +281,19 @@ export const dropdowns: NavDropdown[] = [
         items: [
           {
             label: "Messages",
-            description: "Sermon Videos",
+            // description: "Sermon Videos",
             href: "/messages",
             icon: Video,
           },
           {
             label: "Bible Studies",
-            description: "Study Questions",
+            // description: "Study Questions",
             href: "/bible-study",
             icon: BookOpen,
           },
           {
             label: "Daily Bread",
-            description: "Daily Devotionals",
+            // description: "Daily Devotionals",
             href: "/daily-bread",
             icon: BookText,
           },

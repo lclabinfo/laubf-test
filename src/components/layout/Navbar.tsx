@@ -180,7 +180,10 @@ export default function Navbar({ settings }: { settings: NavbarSettings }) {
                   </button>
                 )}
                 {activeDropdown === dropdown.id && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 z-[100] pt-1">
+                  <div
+                    className="absolute top-full left-1/2 z-[100] pt-1"
+                    style={{ transform: `translateX(${dropdown.offsetX ?? "-50%"})` }}
+                  >
                     <DropdownMenu
                       dropdown={dropdown}
                       onClose={closeDropdown}
