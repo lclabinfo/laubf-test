@@ -225,7 +225,6 @@ export default function HighSchoolPage() {
       <PhotoGallerySection settings={galleryData} />
       <MeetTeamSection settings={teamData} />
       <UpcomingEventsSection settings={eventsData} events={highSchoolEvents} />
-      <FormSection settings={formData} />
       <NewcomerSection settings={newcomerData} />
     </main>
   );

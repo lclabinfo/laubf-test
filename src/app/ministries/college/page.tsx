@@ -264,7 +264,6 @@ export default function CollegePage() {
       <CampusCardGridSection settings={campusGridData} />
       <MeetTeamSection settings={teamData} />
       <UpcomingEventsSection settings={eventsData} events={collegeEvents} />
-      <FormSection settings={formData} />
       <NewcomerSection settings={newcomerData} />
     </main>
   );

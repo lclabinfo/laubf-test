@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import { DM_Serif_Display } from "next/font/google";
 import { Agentation } from "agentation";
 import Navbar from "@/components/layout/Navbar";
+import QuickLinksFAB from "@/components/layout/QuickLinksFAB";
 import FooterSection from "@/components/sections/FooterSection";
-import type { NavbarSettings, FooterSectionProps } from "@/lib/types/sections";
+import type {
+  NavbarSettings,
+  FooterSectionProps,
+  QuickLinksFABSettings,
+} from "@/lib/types/sections";
 import "./globals.css";
 
 const dmSerifDisplay = DM_Serif_Display({
@@ -58,6 +63,39 @@ const navbarSettings: NavbarSettings = {
       href: "/member-login",
       visible: false,
     },
+  },
+};
+
+const quickLinksFABSettings: QuickLinksFABSettings = {
+  visible: true,
+  content: {
+    title: "Quick Links",
+    links: [
+      {
+        label: "Daily Bread & Prayer Meeting",
+        href: "https://us02web.zoom.us/j/86540458764?pwd=ZDVUUjZDOVZ4WlJFc1VvNVlzd2tkQT09",
+        icon: "book-open",
+        description: "Mon\u2013Fri @ 6 AM",
+      },
+      {
+        label:'Evening Prayer Meeting',
+        href: "https://meet.google.com/pgm-trah-moc",
+        icon: "hand-heart",
+        description: "Every Day @ 7:30pm",
+      },
+      {
+        label: "Men\u2019s Bible Study",
+        href: "https://zoom.us",
+        icon: "users",
+        description: "Sat @ 8 AM",
+      },
+      {
+        label: "Sunday Livestream",
+        href: "https://www.youtube.com/@LAUBF/streams",
+        icon: "radio",
+        description: "Sun @ 11 AM",
+      },
+    ],
   },
 };
 
@@ -139,6 +177,7 @@ export default function RootLayout({
       <body className="bg-white-1 text-black-1 font-sans antialiased">
         <Navbar settings={navbarSettings} />
         {children}
+        <QuickLinksFAB settings={quickLinksFABSettings} />
         <FooterSection settings={footerData} />
         {process.env.NODE_ENV === "development" && <Agentation />}
       </body>

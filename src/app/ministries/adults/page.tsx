@@ -206,7 +206,6 @@ export default function AdultsPage() {
       <PillarsSection settings={whatWeDoData} />
       <MeetTeamSection settings={teamData} />
       <UpcomingEventsSection settings={eventsData} events={adultEvents} />
-      <FormSection settings={formData} />
       <NewcomerSection settings={newcomerData} />
     </main>
   );

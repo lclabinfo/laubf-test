@@ -227,7 +227,6 @@ export default function ChildrenPage() {
       <PillarsSection settings={whatWeDoData} />
       <MeetTeamSection settings={teamData} />
       <UpcomingEventsSection settings={eventsData} events={childrenEvents} />
-      <FormSection settings={formData} />
       <NewcomerSection settings={newcomerData} />
     </main>
   );
