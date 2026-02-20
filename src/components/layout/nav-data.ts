@@ -103,13 +103,13 @@ export const dropdowns: NavDropdown[] = [
             href: "/events?tab=program",
             icon: BookOpen,
           },
-          {
-            label: "Livestream",
-            description: "Sunday worship",
-            href: "https://youtube.com/@laubf",
-            icon: Youtube,
-            external: true,
-          },
+          // {
+          //   label: "Livestream",
+          //   description: "Sunday worship",
+          //   href: "https://youtube.com/@laubf",
+          //   icon: Youtube,
+          //   external: true,
+          // },
           // {
           //   label: "Announcements",
           //   description: "Latest updates",
@@ -276,19 +276,19 @@ export const dropdowns: NavDropdown[] = [
         items: [
           {
             label: "Messages",
-            description: "Sermon Videos",
+            // description: "Sermon Videos",
             href: "/messages",
             icon: Video,
           },
           {
             label: "Bible Studies",
-            description: "Study Questions",
+            // description: "Study Questions",
             href: "/bible-study",
             icon: BookOpen,
           },
           {
             label: "Daily Bread",
-            description: "Daily Devotionals",
+            // description: "Daily Devotionals",
             href: "/daily-bread",
             icon: BookText,
           },
