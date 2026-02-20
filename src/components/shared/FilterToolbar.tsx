@@ -14,13 +14,13 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   IconSearch,
   IconChevronDown,
-  IconCalendar,
   IconFilter,
   IconArrowDown,
   IconArrowUp,
   IconX,
   IconCheck,
 } from "@/components/layout/icons";
+import { DatePicker } from "@/components/ui/date-picker";
 
 /* ── Types ── */
 
@@ -411,12 +411,12 @@ export default function FilterToolbar({
                 ))}
                 {dateRange && (
                   <>
-                    <DateFilterButton
+                    <DatePicker
                       label={dateRange.fromLabel ?? "Date from"}
                       value={dateRange.fromValue}
                       onChange={dateRange.onFromChange}
                     />
-                    <DateFilterButton
+                    <DatePicker
                       label={dateRange.toLabel ?? "Date to"}
                       value={dateRange.toValue}
                       onChange={dateRange.onToChange}
@@ -872,53 +872,6 @@ function FilterDropdownButton({ config }: { config: FilterDropdownConfig }) {
   );
 }
 
-/** Date filter button — calendar icon + label, opens native date input */
-function DateFilterButton({
-  label,
-  value,
-  onChange,
-}: {
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const isActive = !!value;
-
-  const displayLabel = value
-    ? new Date(value + "T00:00:00").toLocaleDateString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-      })
-    : label;
-
-  return (
-    <div className="relative">
-      <button
-        onClick={() => inputRef.current?.showPicker()}
-        className={cn(
-          "flex items-center gap-2 rounded-[12px] border h-[40px] px-3.5 text-[14px] font-medium transition-colors bg-white-0",
-          isActive
-            ? "border-white-3 text-black-1"
-            : "border-white-2-5 text-black-3 hover:border-white-3",
-        )}
-      >
-        <IconCalendar className="size-4" />
-        <span>{displayLabel}</span>
-        <IconChevronDown className="size-3.5" />
-      </button>
-      <input
-        ref={inputRef}
-        type="date"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="absolute inset-0 opacity-0 pointer-events-none"
-        tabIndex={-1}
-      />
-    </div>
-  );
-}
 
 /* ══════════════════════════════════════════════════════════
    MOBILE SUB-COMPONENTS
@@ -1198,22 +1151,22 @@ function MobileBottomSheet({
                   <label className="text-[12px] text-black-3 mb-1.5 block">
                     {dateRange.fromLabel ?? "From"}
                   </label>
-                  <input
-                    type="date"
+                  <DatePicker
+                    label={dateRange.fromLabel ?? "From"}
                     value={dateRange.fromValue}
-                    onChange={(e) => dateRange.onFromChange(e.target.value)}
-                    className="w-full rounded-[10px] border border-white-2-5 bg-white-0 px-3 py-2.5 text-[14px] text-black-1 outline-none"
+                    onChange={dateRange.onFromChange}
+                    className="w-full justify-between"
                   />
                 </div>
                 <div className="flex-1">
                   <label className="text-[12px] text-black-3 mb-1.5 block">
                     {dateRange.toLabel ?? "To"}
                   </label>
-                  <input
-                    type="date"
+                  <DatePicker
+                    label={dateRange.toLabel ?? "To"}
                     value={dateRange.toValue}
-                    onChange={(e) => dateRange.onToChange(e.target.value)}
-                    className="w-full rounded-[10px] border border-white-2-5 bg-white-0 px-3 py-2.5 text-[14px] text-black-1 outline-none"
+                    onChange={dateRange.onToChange}
+                    className="w-full justify-between"
                   />
                 </div>
               </div>

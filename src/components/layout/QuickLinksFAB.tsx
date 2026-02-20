@@ -124,7 +124,6 @@ export default function QuickLinksFAB({
     <div
       ref={containerRef}
       className="fixed bottom-6 right-4 lg:bottom-8 lg:right-8 z-40 flex flex-col items-end gap-3"
-      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       {/* Expanded link list */}
@@ -182,6 +181,7 @@ export default function QuickLinksFAB({
       {/* FAB trigger */}
       <button
         onClick={handleToggle}
+        onMouseEnter={handleMouseEnter}
         aria-label={isOpen ? "Close quick links" : "Open quick links"}
         aria-expanded={isOpen}
         className={cn(

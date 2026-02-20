@@ -22,7 +22,7 @@ function SectionColumn({
   const isGrid = section.columns && section.columns > 1;
 
   return (
-    <div className={cn("flex flex-col gap-1.5 shrink-0", isGrid ? "w-auto" : "w-56")}>
+    <div className={cn("flex flex-col gap-1.5 shrink-0", isGrid ? "w-auto" : section.width ?? "w-56")}>
       {/* Section title */}
       <div className="px-1.5">
         <p className="text-base font-medium leading-[1.2] text-black-3 tracking-[-0.03em]">
@@ -58,7 +58,7 @@ function SectionColumn({
                   {item.label}
                 </span>
                 {item.description && (
-                  <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em] line-clamp-1">
+                  <span className="text-[14px] font-normal leading-none text-black-3 tracking-[-0.03em] line-clamp-1">
                     {item.description}
                   </span>
                 )}
@@ -152,7 +152,7 @@ export default function DropdownMenu({ dropdown, onClose }: DropdownMenuProps) {
             <span className="text-base font-medium leading-[1.2] text-black-1 tracking-[-0.03em]">
               {dropdown.overviewLink.label}
             </span>
-            <span className="text-sm font-normal leading-none text-black-3 tracking-[-0.03em]">
+            <span className="text-base font-normal leading-none text-black-3 tracking-[-0.03em]">
               {dropdown.overviewLink.description}
             </span>
           </div>

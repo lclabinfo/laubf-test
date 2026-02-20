@@ -15,6 +15,8 @@ import {
   BookOpen,
   BookText,
   MonitorPlay,
+  Radio,
+  HandHeart,
 } from "lucide-react";
 
 export interface NavLink {
@@ -35,6 +37,7 @@ export interface NavSection {
   title: string;
   items: NavSubItem[];
   columns?: number;
+  width?: string;
   footerLink?: {
     label: string;
     href: string;
@@ -118,6 +121,40 @@ export const dropdowns: NavDropdown[] = [
           //   description: "Prayer requests",
           //   href: "/prayer",
           //   icon: Heart,
+          // },
+        ],
+      },
+      {
+        title: "Quick Links",
+        width: "w-72",
+        items: [
+          {
+            label: "Daily Bread & Prayer",
+            description: "Mon–Fri @ 6 AM",
+            href: "https://us02web.zoom.us/j/86540458764?pwd=ZDVUUjZDOVZ4WlJFc1VvNVlzd2tkQT09",
+            icon: BookOpen,
+            external: true,
+          },
+          {
+            label: "Evening Prayer",
+            description: "Every Day @ 7:30 PM",
+            href: "https://meet.google.com/pgm-trah-moc",
+            icon: HandHeart,
+            external: true,
+          },
+          {
+            label: "Men's Bible Study",
+            description: "Sat @ 8 AM",
+            href: "https://zoom.us",
+            icon: Users,
+            external: true,
+          },
+          // {
+          //   label: "Sunday Livestream",
+          //   description: "Sun @ 11 AM",
+          //   href: "https://www.youtube.com/@LAUBF/streams",
+          //   icon: Radio,
+          //   external: true,
           // },
         ],
       },
