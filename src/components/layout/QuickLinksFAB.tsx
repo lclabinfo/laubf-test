@@ -37,6 +37,7 @@ import {
   Music,
   Heart,
   HandHeart,
+  ArrowUp,
   Link as LinkIcon,
   X,
   SquareArrowOutUpRight,
@@ -69,6 +70,7 @@ export default function QuickLinksFAB({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -78,6 +80,22 @@ export default function QuickLinksFAB({
     mq.addEventListener("change", handler);
     return () => mq.removeEventListener("change", handler);
   }, []);
+
+  // Track scroll position on mobile — show scroll-to-top after 300px
+  useEffect(() => {
+    if (!isMobile) {
+      setShowScrollTop(false);
+      return;
+    }
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 300;
+      setShowScrollTop(scrolled);
+      if (scrolled) setIsOpen(false);
+    };
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isMobile]);
 
   // Close on Escape (project convention — MobileMenu, VideoModal)
   useEffect(() => {
@@ -105,8 +123,13 @@ export default function QuickLinksFAB({
   }, [isMobile, isOpen]);
 
   const handleToggle = useCallback(() => {
+    if (isMobile && showScrollTop) {
+      setIsOpen(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     if (isMobile) setIsOpen((prev) => !prev);
-  }, [isMobile]);
+  }, [isMobile, showScrollTop]);
 
   const handleMouseEnter = useCallback(() => {
     if (!isMobile) setIsOpen(true);
@@ -182,8 +205,14 @@ export default function QuickLinksFAB({
       <button
         onClick={handleToggle}
         onMouseEnter={handleMouseEnter}
-        aria-label={isOpen ? "Close quick links" : "Open quick links"}
-        aria-expanded={isOpen}
+        aria-label={
+          isMobile && showScrollTop
+            ? "Scroll to top"
+            : isOpen
+              ? "Close quick links"
+              : "Open quick links"
+        }
+        aria-expanded={isMobile && showScrollTop ? undefined : isOpen}
         className={cn(
           "relative flex items-center justify-center size-14 rounded-full transition-all duration-300 ease-smooth",
           "bg-black-1 text-white-1",
@@ -192,21 +221,36 @@ export default function QuickLinksFAB({
           "active:scale-95",
         )}
       >
-        {/* Link icon → X crossfade */}
-        <LinkIcon
+        {/* Arrow-up icon (mobile scroll-to-top) */}
+        <ArrowUp
           className={cn(
             CROSSFADE_BASE,
-            isOpen
-              ? "opacity-0 rotate-90 scale-75"
-              : "opacity-100 rotate-0 scale-100",
+            isMobile && showScrollTop
+              ? "opacity-100 rotate-0 scale-100"
+              : "opacity-0 rotate-180 scale-75",
           )}
           strokeWidth={2}
         />
+        {/* Link icon (default state) */}
+        <LinkIcon
+          className={cn(
+            CROSSFADE_BASE,
+            !isMobile || !showScrollTop
+              ? isOpen
+                ? "opacity-0 rotate-90 scale-75"
+                : "opacity-100 rotate-0 scale-100"
+              : "opacity-0 rotate-90 scale-75",
+          )}
+          strokeWidth={2}
+        />
+        {/* X icon (panel open state) */}
         <X
           className={cn(
             CROSSFADE_BASE,
-            isOpen
-              ? "opacity-100 rotate-0 scale-100"
+            !isMobile || !showScrollTop
+              ? isOpen
+                ? "opacity-100 rotate-0 scale-100"
+                : "opacity-0 -rotate-90 scale-75"
               : "opacity-0 -rotate-90 scale-75",
           )}
           strokeWidth={2}
