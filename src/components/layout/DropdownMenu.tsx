@@ -47,25 +47,41 @@ function SectionColumn({
               target={item.external ? "_blank" : undefined}
               rel={item.external ? "noopener noreferrer" : undefined}
               onClick={onClose}
-              className="flex items-center gap-4 min-w-[200px] min-h-[62px] px-4 py-3 rounded-lg transition-colors hover:bg-white-1-5 group/item"
+              className={cn(
+                "flex items-center rounded-lg transition-colors hover:bg-white-1-5 group/item",
+                section.compact
+                  ? "gap-3 px-3 py-2.5 min-h-0"
+                  : "gap-4 min-w-[200px] min-h-[62px] px-4 py-3",
+              )}
             >
-              <Icon
-                className="size-6 text-black-1 shrink-0"
-                strokeWidth={1.5}
-              />
-              <div className="flex flex-col gap-1 min-w-0">
-                <span className="text-base font-medium leading-tight text-black-1 tracking-[-0.03em]">
+              {!section.compact && (
+                <Icon
+                  className="size-6 text-black-1 shrink-0"
+                  strokeWidth={1.5}
+                />
+              )}
+              <div className="flex flex-col gap-1 min-w-0 flex-1">
+                <span className={cn(
+                  "font-medium leading-tight text-black-1 tracking-[-0.03em]",
+                  section.compact ? "text-[14px]" : "text-base",
+                )}>
                   {item.label}
                 </span>
                 {item.description && (
-                  <span className="text-[14px] font-normal leading-none text-black-3 tracking-[-0.03em] line-clamp-1">
+                  <span className={cn(
+                    "font-normal leading-none text-black-3 tracking-[-0.03em] line-clamp-1",
+                    section.compact ? "text-[12px]" : "text-[14px]",
+                  )}>
                     {item.description}
                   </span>
                 )}
               </div>
               {item.external && (
                 <SquareArrowOutUpRight
-                  className="size-[18px] text-black-3 shrink-0 ml-auto"
+                  className={cn(
+                    "size-[16px] text-black-3 shrink-0 ml-auto",
+                    section.compact && "opacity-0 transition-opacity duration-150 group-hover/item:opacity-100",
+                  )}
                   strokeWidth={1.5}
                 />
               )}

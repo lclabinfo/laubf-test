@@ -38,6 +38,8 @@ export interface NavSection {
   items: NavSubItem[];
   columns?: number;
   width?: string;
+  /** Compact mode: hides icons, smaller text, external arrow on hover only */
+  compact?: boolean;
   footerLink?: {
     label: string;
     href: string;
@@ -48,6 +50,8 @@ export interface NavDropdown {
   id: string;
   label: string;
   href?: string;
+  /** CSS translate-x offset for the dropdown panel (e.g. "10%" to shift right) */
+  offsetX?: string;
   sections: NavSection[];
   featuredCard?: {
     image: string;
@@ -67,6 +71,7 @@ export const dropdowns: NavDropdown[] = [
   {
     id: "our-church",
     label: "Our Church",
+    offsetX: "-35%",
     sections: [
       {
         title: "About",
@@ -122,6 +127,40 @@ export const dropdowns: NavDropdown[] = [
           //   href: "/prayer",
           //   icon: Heart,
           // },
+        ],
+      },
+      {
+        title: "Quick Links",
+        compact: true,
+        items: [
+          {
+            label: "Daily Bread & Prayer",
+            description: "Mon–Fri @ 6 AM",
+            href: "https://us02web.zoom.us/j/86540458764?pwd=ZDVUUjZDOVZ4WlJFc1VvNVlzd2tkQT09",
+            icon: BookOpen,
+            external: true,
+          },
+          {
+            label: "Evening Prayer",
+            description: "Every Day @ 7:30 PM",
+            href: "https://meet.google.com/pgm-trah-moc",
+            icon: HandHeart,
+            external: true,
+          },
+          {
+            label: "Men's Bible Study",
+            description: "Sat @ 8 AM",
+            href: "https://zoom.us",
+            icon: Users,
+            external: true,
+          },
+          {
+            label: "Sunday Livestream",
+            description: "Sun @ 11 AM",
+            href: "https://www.youtube.com/@LAUBF/streams",
+            icon: Radio,
+            external: true,
+          },
         ],
       },
     ],
@@ -267,46 +306,6 @@ export const dropdowns: NavDropdown[] = [
             label: "Videos",
             href: "/videos",
             icon: MonitorPlay,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "quick-links",
-    label: "Quick Links",
-    sections: [
-      {
-        title: "Quick Links",
-        width: "w-72",
-        items: [
-          {
-            label: "Daily Bread & Prayer",
-            description: "Mon–Fri @ 6 AM",
-            href: "https://us02web.zoom.us/j/86540458764?pwd=ZDVUUjZDOVZ4WlJFc1VvNVlzd2tkQT09",
-            icon: BookOpen,
-            external: true,
-          },
-          {
-            label: "Evening Prayer",
-            description: "Every Day @ 7:30 PM",
-            href: "https://meet.google.com/pgm-trah-moc",
-            icon: HandHeart,
-            external: true,
-          },
-          {
-            label: "Men's Bible Study",
-            description: "Sat @ 8 AM",
-            href: "https://zoom.us",
-            icon: Users,
-            external: true,
-          },
-          {
-            label: "Sunday Livestream",
-            description: "Sun @ 11 AM",
-            href: "https://www.youtube.com/@LAUBF/streams",
-            icon: Radio,
-            external: true,
           },
         ],
       },
